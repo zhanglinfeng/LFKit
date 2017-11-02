@@ -44,7 +44,6 @@
 		D1AC22201FA3290C0039A2C2 /* LFJsonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22181FA3290B0039A2C2 /* LFJsonUtil.m */; };
 		D1AC22211FA3290C0039A2C2 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221A1FA3290B0039A2C2 /* SFHFKeychainUtils.m */; };
 		D1AC22221FA3290C0039A2C2 /* LFFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221B1FA3290B0039A2C2 /* LFFileUtil.m */; };
-		D1AC22231FA3290C0039A2C2 /* LFEncryptDecryptUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221C1FA3290B0039A2C2 /* LFEncryptDecryptUtil.m */; };
 		D1AC22241FA3290C0039A2C2 /* LFTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221D1FA3290B0039A2C2 /* LFTimeUtil.m */; };
 		D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */; };
 		D1AC22291FA32F010039A2C2 /* NSDate+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22281FA32F010039A2C2 /* NSDate+LF.m */; };
@@ -123,10 +122,8 @@
 		D1AC22161FA3290B0039A2C2 /* LFJsonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFJsonUtil.h; sourceTree = "<group>"; };
 		D1AC22171FA3290B0039A2C2 /* LFFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFFileUtil.h; sourceTree = "<group>"; };
 		D1AC22181FA3290B0039A2C2 /* LFJsonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFJsonUtil.m; sourceTree = "<group>"; };
-		D1AC22191FA3290B0039A2C2 /* LFEncryptDecryptUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFEncryptDecryptUtil.h; sourceTree = "<group>"; };
 		D1AC221A1FA3290B0039A2C2 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		D1AC221B1FA3290B0039A2C2 /* LFFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFFileUtil.m; sourceTree = "<group>"; };
-		D1AC221C1FA3290B0039A2C2 /* LFEncryptDecryptUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFEncryptDecryptUtil.m; sourceTree = "<group>"; };
 		D1AC221D1FA3290B0039A2C2 /* LFTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFTimeUtil.m; sourceTree = "<group>"; };
 		D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFDeviceInfo.m; sourceTree = "<group>"; };
 		D1AC221F1FA3290B0039A2C2 /* LFTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFTimeUtil.h; sourceTree = "<group>"; };
@@ -290,8 +287,6 @@
 			children = (
 				D1AC22151FA3290B0039A2C2 /* LFDeviceInfo.h */,
 				D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */,
-				D1AC22191FA3290B0039A2C2 /* LFEncryptDecryptUtil.h */,
-				D1AC221C1FA3290B0039A2C2 /* LFEncryptDecryptUtil.m */,
 				D1AC22171FA3290B0039A2C2 /* LFFileUtil.h */,
 				D1AC221B1FA3290B0039A2C2 /* LFFileUtil.m */,
 				D1AC22161FA3290B0039A2C2 /* LFJsonUtil.h */,
@@ -658,7 +653,6 @@
 				D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */,
 				D1AC22201FA3290C0039A2C2 /* LFJsonUtil.m in Sources */,
 				D1AC22631FA348750039A2C2 /* UIColor+LF.m in Sources */,
-				D1AC22231FA3290C0039A2C2 /* LFEncryptDecryptUtil.m in Sources */,
 				D1AC21D11FA3258A0039A2C2 /* main.m in Sources */,
 				D1AC22211FA3290C0039A2C2 /* SFHFKeychainUtils.m in Sources */,
 				D1AC21C31FA3258A0039A2C2 /* AppDelegate.m in Sources */,
