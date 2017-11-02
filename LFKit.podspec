@@ -14,5 +14,9 @@ Pod::Spec.new do |s|
   s.source_files = 'LFKit/LFKit/**/*'
   # s.resources = 'xxx/Resources/**/*.{png}'
   s.dependency 'YYWebImage'
+  s.dependency 'AFNetworking'
+  s.dependency 'FMDB'
+  s.dependency 'MBProgressHUD'
+  s.dependency 'MJRefresh'
   
 end
