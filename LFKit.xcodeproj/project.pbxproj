@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
+		D14ADDFB1FAAC2EB00951E26 /* NSData+SBMODULE.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADDFA1FAAC2EB00951E26 /* NSData+SBMODULE.m */; };
 		D18628FD1FA8777900780629 /* NSLayoutConstraint+LFXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22041FA328920039A2C2 /* NSLayoutConstraint+LFXIB.m */; };
 		D18628FE1FA8777900780629 /* NSString+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC220B1FA328930039A2C2 /* NSString+LF.m */; };
 		D18628FF1FA8777900780629 /* NSTimer+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22121FA328930039A2C2 /* NSTimer+LF.m */; };
@@ -44,7 +45,6 @@
 		D1AC22201FA3290C0039A2C2 /* LFJsonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22181FA3290B0039A2C2 /* LFJsonUtil.m */; };
 		D1AC22211FA3290C0039A2C2 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221A1FA3290B0039A2C2 /* SFHFKeychainUtils.m */; };
 		D1AC22221FA3290C0039A2C2 /* LFFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221B1FA3290B0039A2C2 /* LFFileUtil.m */; };
-		D1AC22231FA3290C0039A2C2 /* LFEncryptDecryptUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221C1FA3290B0039A2C2 /* LFEncryptDecryptUtil.m */; };
 		D1AC22241FA3290C0039A2C2 /* LFTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221D1FA3290B0039A2C2 /* LFTimeUtil.m */; };
 		D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */; };
 		D1AC22291FA32F010039A2C2 /* NSDate+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22281FA32F010039A2C2 /* NSDate+LF.m */; };
@@ -72,6 +72,8 @@
 		1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.debug.xcconfig"; sourceTree = "<group>"; };
 		5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.release.xcconfig"; sourceTree = "<group>"; };
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D14ADDF91FAAC2EB00951E26 /* NSData+SBMODULE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+SBMODULE.h"; sourceTree = "<group>"; };
+		D14ADDFA1FAAC2EB00951E26 /* NSData+SBMODULE.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+SBMODULE.m"; sourceTree = "<group>"; };
 		D18628FB1FA8772B00780629 /* RotationMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotationMenu.h; sourceTree = "<group>"; };
 		D18628FC1FA8772B00780629 /* RotationMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotationMenu.m; sourceTree = "<group>"; };
 		D18629141FA877A700780629 /* LFPopupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPopupMenu.h; sourceTree = "<group>"; };
@@ -123,10 +125,8 @@
 		D1AC22161FA3290B0039A2C2 /* LFJsonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFJsonUtil.h; sourceTree = "<group>"; };
 		D1AC22171FA3290B0039A2C2 /* LFFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFFileUtil.h; sourceTree = "<group>"; };
 		D1AC22181FA3290B0039A2C2 /* LFJsonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFJsonUtil.m; sourceTree = "<group>"; };
-		D1AC22191FA3290B0039A2C2 /* LFEncryptDecryptUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFEncryptDecryptUtil.h; sourceTree = "<group>"; };
 		D1AC221A1FA3290B0039A2C2 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		D1AC221B1FA3290B0039A2C2 /* LFFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFFileUtil.m; sourceTree = "<group>"; };
-		D1AC221C1FA3290B0039A2C2 /* LFEncryptDecryptUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFEncryptDecryptUtil.m; sourceTree = "<group>"; };
 		D1AC221D1FA3290B0039A2C2 /* LFTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFTimeUtil.m; sourceTree = "<group>"; };
 		D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFDeviceInfo.m; sourceTree = "<group>"; };
 		D1AC221F1FA3290B0039A2C2 /* LFTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFTimeUtil.h; sourceTree = "<group>"; };
@@ -290,8 +290,6 @@
 			children = (
 				D1AC22151FA3290B0039A2C2 /* LFDeviceInfo.h */,
 				D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */,
-				D1AC22191FA3290B0039A2C2 /* LFEncryptDecryptUtil.h */,
-				D1AC221C1FA3290B0039A2C2 /* LFEncryptDecryptUtil.m */,
 				D1AC22171FA3290B0039A2C2 /* LFFileUtil.h */,
 				D1AC221B1FA3290B0039A2C2 /* LFFileUtil.m */,
 				D1AC22161FA3290B0039A2C2 /* LFJsonUtil.h */,
@@ -325,6 +323,8 @@
 		D1AC21F91FA328830039A2C2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D14ADDF91FAAC2EB00951E26 /* NSData+SBMODULE.h */,
+				D14ADDFA1FAAC2EB00951E26 /* NSData+SBMODULE.m */,
 				D1AC22611FA348740039A2C2 /* UIColor+LF.h */,
 				D1AC22621FA348750039A2C2 /* UIColor+LF.m */,
 				D1AC21FE1FA328910039A2C2 /* NSLayoutConstraint+LFXIB.h */,
@@ -654,11 +654,11 @@
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,
 				D18629121FA8777900780629 /* LFPickerView.m in Sources */,
+				D14ADDFB1FAAC2EB00951E26 /* NSData+SBMODULE.m in Sources */,
 				D1AC21C61FA3258A0039A2C2 /* ViewController.m in Sources */,
 				D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */,
 				D1AC22201FA3290C0039A2C2 /* LFJsonUtil.m in Sources */,
 				D1AC22631FA348750039A2C2 /* UIColor+LF.m in Sources */,
-				D1AC22231FA3290C0039A2C2 /* LFEncryptDecryptUtil.m in Sources */,
 				D1AC21D11FA3258A0039A2C2 /* main.m in Sources */,
 				D1AC22211FA3290C0039A2C2 /* SFHFKeychainUtils.m in Sources */,
 				D1AC21C31FA3258A0039A2C2 /* AppDelegate.m in Sources */,
