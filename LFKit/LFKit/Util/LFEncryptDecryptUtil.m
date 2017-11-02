@@ -7,6 +7,7 @@
 //
 
 #import "LFEncryptDecryptUtil.h"
+#import <CommonCrypto/CommonCryptor.h>
 
 @implementation LFEncryptDecryptUtil
 

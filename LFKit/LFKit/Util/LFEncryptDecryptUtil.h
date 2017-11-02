@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonCryptor.h>
 
 @interface LFEncryptDecryptUtil : NSObject
 
