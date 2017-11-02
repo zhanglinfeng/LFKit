@@ -348,7 +348,7 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 }
 
 //字符串DES加密  C#/iOS/Android通用DES加密解密方法
-+(NSString*)encryptWithContent:(NSString*)content type:(CCOperation)type key:(NSString*)aKey
++(NSString*)encryptWithContent:(NSString*)content type:(uint32_t)type key:(NSString*)aKey
 {
     const char * contentChar =[content UTF8String];
     char * keyChar =(char*)[aKey UTF8String];
@@ -358,7 +358,7 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 }
 
 
-+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key
++ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(uint32_t)encryptOperation key:(NSString *)key
 {
     const void *dataIn;
     size_t dataInLength;

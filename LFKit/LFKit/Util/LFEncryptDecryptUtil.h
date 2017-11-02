@@ -45,24 +45,24 @@
  *  字符串DES加密、解密  C#/iOS/Android通用DES加密解密方法,有base64
  *
  *  @param content 需要加密解密内容
- *  @param type    kCCEncrypt 加密,kCCDecrypt 解密
+ *  @param type    0 kCCEncrypt 加密,1 kCCDecrypt 解密
  *  @param aKey    密钥
  *
  *  @return 结果
  */
-+(NSString*)encryptWithContent:(NSString*)content type:(CCOperation)type key:(NSString*)aKey;
++(NSString*)encryptWithContent:(NSString*)content type:(uint32_t)type key:(NSString*)aKey;
 
 /**
  *  字符串DES加密、解密
  *
  *  @param sText            需要加密解密内容
- *  @param encryptOperation kCCEncrypt 加密,kCCDecrypt 解密
+ *  @param encryptOperation 0 kCCEncrypt 加密,1 kCCDecrypt 解密
  
  *  @param key              密钥
  *
  *  @return 结果
  */
-+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key;
++ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(uint32_t)encryptOperation key:(NSString *)key;
 
 
 
