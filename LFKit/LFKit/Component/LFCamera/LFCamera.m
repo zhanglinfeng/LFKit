@@ -407,7 +407,7 @@
 
 //裁剪
 - (UIImage *)cutImage:(UIImage *)image {
-    
+    NSLog(@"图片朝向%@",@(image.imageOrientation));
 //    image = [LFCamera fixOrientation:image];
     //图片缩放比例
     float imageZoomRate = 1;//预览视图相对图片大小的缩放比例
@@ -443,7 +443,7 @@
         orignX = (self.effectiveRect.origin.y)/imageZoomRate + offsetH/2;
         
         //手机顶部朝右
-        if (image.imageOrientation == 1) {
+        if (image.imageOrientation == 1 || image.imageOrientation == 4) {
             offsetH = image.size.width-self.frame.size.height/imageZoomRate;
             offsetW = image.size.height-self.frame.size.width/imageZoomRate;
             orignY = (self.effectiveRect.origin.x)/imageZoomRate + offsetW/2;
