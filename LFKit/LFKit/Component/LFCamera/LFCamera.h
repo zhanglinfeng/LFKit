@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, LFCaptureFlashMode) {
 
 @property (nonatomic) UIView *focusView;//聚焦的view
 
+/**一定要调这个方法初始化*/
 - (instancetype)initWithFrame:(CGRect)frame;
 
 /**获取摄像头方向*/

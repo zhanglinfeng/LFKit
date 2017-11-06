@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
 		D14ADDFE1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADDFD1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m */; };
+		D14ADE051FAC54D000951E26 /* ComponentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE041FAC54D000951E26 /* ComponentListController.m */; };
+		D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE0B1FAC5D6200951E26 /* LFCameraViewController.m */; };
+		D14ADE0E1FAC5D6200951E26 /* LFCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14ADE0C1FAC5D6200951E26 /* LFCameraViewController.xib */; };
+		D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE111FAC5F8300951E26 /* BaseViewController.m */; };
+		D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */; };
+		D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */; };
 		D18628FD1FA8777900780629 /* NSLayoutConstraint+LFXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22041FA328920039A2C2 /* NSLayoutConstraint+LFXIB.m */; };
 		D18628FE1FA8777900780629 /* NSString+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC220B1FA328930039A2C2 /* NSString+LF.m */; };
 		D18628FF1FA8777900780629 /* NSTimer+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22121FA328930039A2C2 /* NSTimer+LF.m */; };
@@ -35,7 +41,6 @@
 		D18629191FA877CB00780629 /* LFOptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22321FA345320039A2C2 /* LFOptionTableView.m */; };
 		D186291A1FA877CB00780629 /* LFErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC222F1FA345250039A2C2 /* LFErrorView.m */; };
 		D1AC21C31FA3258A0039A2C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC21C21FA3258A0039A2C2 /* AppDelegate.m */; };
-		D1AC21C61FA3258A0039A2C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC21C51FA3258A0039A2C2 /* ViewController.m */; };
 		D1AC21C91FA3258A0039A2C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AC21C71FA3258A0039A2C2 /* Main.storyboard */; };
 		D1AC21CB1FA3258A0039A2C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1AC21CA1FA3258A0039A2C2 /* Assets.xcassets */; };
 		D1AC21CE1FA3258A0039A2C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AC21CC1FA3258A0039A2C2 /* LaunchScreen.storyboard */; };
@@ -74,6 +79,16 @@
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D14ADDFC1FAAC6DB00951E26 /* LFEncryptDecryptUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFEncryptDecryptUtil.h; sourceTree = "<group>"; };
 		D14ADDFD1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFEncryptDecryptUtil.m; sourceTree = "<group>"; };
+		D14ADE031FAC54D000951E26 /* ComponentListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentListController.h; sourceTree = "<group>"; };
+		D14ADE041FAC54D000951E26 /* ComponentListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComponentListController.m; sourceTree = "<group>"; };
+		D14ADE0A1FAC5D6200951E26 /* LFCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFCameraViewController.h; sourceTree = "<group>"; };
+		D14ADE0B1FAC5D6200951E26 /* LFCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCameraViewController.m; sourceTree = "<group>"; };
+		D14ADE0C1FAC5D6200951E26 /* LFCameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraViewController.xib; sourceTree = "<group>"; };
+		D14ADE101FAC5F8300951E26 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		D14ADE111FAC5F8300951E26 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFCameraResultViewController.h; sourceTree = "<group>"; };
+		D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCameraResultViewController.m; sourceTree = "<group>"; };
+		D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraResultViewController.xib; sourceTree = "<group>"; };
 		D18628FB1FA8772B00780629 /* RotationMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotationMenu.h; sourceTree = "<group>"; };
 		D18628FC1FA8772B00780629 /* RotationMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotationMenu.m; sourceTree = "<group>"; };
 		D18629141FA877A700780629 /* LFPopupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPopupMenu.h; sourceTree = "<group>"; };
@@ -81,8 +96,6 @@
 		D1AC21BE1FA3258A0039A2C2 /* LFKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LFKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AC21C11FA3258A0039A2C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1AC21C21FA3258A0039A2C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D1AC21C41FA3258A0039A2C2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D1AC21C51FA3258A0039A2C2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D1AC21C81FA3258A0039A2C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D1AC21CA1FA3258A0039A2C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1AC21CD1FA3258A0039A2C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -199,6 +212,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D14ADDFF1FAC52F700951E26 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				D14ADE0F1FAC5F5600951E26 /* Base */,
+				D14ADE001FAC545600951E26 /* Component */,
+				D14ADE011FAC548C00951E26 /* Module */,
+				D14ADE021FAC549200951E26 /* Other */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		D14ADE001FAC545600951E26 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				D14ADE031FAC54D000951E26 /* ComponentListController.h */,
+				D14ADE041FAC54D000951E26 /* ComponentListController.m */,
+				D14ADE0A1FAC5D6200951E26 /* LFCameraViewController.h */,
+				D14ADE0B1FAC5D6200951E26 /* LFCameraViewController.m */,
+				D14ADE0C1FAC5D6200951E26 /* LFCameraViewController.xib */,
+				D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */,
+				D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */,
+				D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		D14ADE011FAC548C00951E26 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		D14ADE021FAC549200951E26 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		D14ADE0F1FAC5F5600951E26 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D14ADE101FAC5F8300951E26 /* BaseViewController.h */,
+				D14ADE111FAC5F8300951E26 /* BaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		D18628FA1FA8772B00780629 /* RotationMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,10 +306,9 @@
 			isa = PBXGroup;
 			children = (
 				D1AC21F31FA326F90039A2C2 /* LFKit */,
+				D14ADDFF1FAC52F700951E26 /* Demo */,
 				D1AC21C11FA3258A0039A2C2 /* AppDelegate.h */,
 				D1AC21C21FA3258A0039A2C2 /* AppDelegate.m */,
-				D1AC21C41FA3258A0039A2C2 /* ViewController.h */,
-				D1AC21C51FA3258A0039A2C2 /* ViewController.m */,
 				D1AC21C71FA3258A0039A2C2 /* Main.storyboard */,
 				D1AC21CA1FA3258A0039A2C2 /* Assets.xcassets */,
 				D1AC21CC1FA3258A0039A2C2 /* LaunchScreen.storyboard */,
@@ -551,7 +612,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */,
 				D1AC21CE1FA3258A0039A2C2 /* LaunchScreen.storyboard in Resources */,
+				D14ADE0E1FAC5D6200951E26 /* LFCameraViewController.xib in Resources */,
 				D1AC21CB1FA3258A0039A2C2 /* Assets.xcassets in Resources */,
 				D1AC21C91FA3258A0039A2C2 /* Main.storyboard in Resources */,
 			);
@@ -644,17 +707,20 @@
 				D18629051FA8777900780629 /* UITabBarController+HideTabBar.m in Sources */,
 				D18629061FA8777900780629 /* UITextField+LF.m in Sources */,
 				D18629071FA8777900780629 /* UIView+LF.m in Sources */,
+				D14ADE051FAC54D000951E26 /* ComponentListController.m in Sources */,
 				D18629161FA877AB00780629 /* LFPopupMenu.m in Sources */,
 				D18629081FA8777900780629 /* UIView+LFXIB.m in Sources */,
 				D18629091FA8777900780629 /* UIViewController+FullScreenScroll.m in Sources */,
+				D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */,
 				D186290A1FA8777900780629 /* RotationMenu.m in Sources */,
 				D186290B1FA8777900780629 /* LFBubbleView.m in Sources */,
+				D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */,
 				D186290C1FA8777900780629 /* LFCamera.m in Sources */,
 				D186290D1FA8777900780629 /* LFCycleScrollView.m in Sources */,
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
+				D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,
 				D18629121FA8777900780629 /* LFPickerView.m in Sources */,
-				D1AC21C61FA3258A0039A2C2 /* ViewController.m in Sources */,
 				D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */,
 				D1AC22201FA3290C0039A2C2 /* LFJsonUtil.m in Sources */,
 				D1AC22631FA348750039A2C2 /* UIColor+LF.m in Sources */,

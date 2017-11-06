@@ -8,6 +8,7 @@
 
 #import "LFCamera.h"
 #import <AVFoundation/AVFoundation.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface LFCamera () <UIGestureRecognizerDelegate>
 
@@ -34,6 +35,9 @@
 /** 最后的缩放比例*/
 @property(nonatomic,assign) CGFloat effectiveScale;
 
+@property(nonatomic, strong) CMMotionManager * motionManager;
+@property(nonatomic, assign) UIDeviceOrientation deviceOrientation;
+
 @property (nonatomic, strong) CAShapeLayer * maskLayer;//半透明黑色遮罩
 @property (nonatomic, strong) CAShapeLayer * effectiveRectLayer;//有效区域框
 @property (nonatomic) BOOL isAuthorized;
@@ -47,6 +51,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isAuthorized = [self canUseCamear];
+        [self configCotionManager];
         if (self.isAuthorized) {
             [self configCamera];
         }
@@ -62,6 +67,25 @@
         [self addGestureRecognizer:pinch];
     }
     return self;
+}
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    self.isAuthorized = [self canUseCamear];
+    [self configCotionManager];
+    if (self.isAuthorized) {
+        [self configCamera];
+    }
+    self.effectiveRectBorderColor = [UIColor orangeColor];
+    self.maskColor = [UIColor colorWithWhite: 0 alpha: 0.75];
+    //聚焦视图
+    [self addSubview:self.focusView];
+    
+    //缩放手势
+    self.effectiveScale = self.beginGestureScale = 1.0f;
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
+    pinch.delegate = self;
+    [self addGestureRecognizer:pinch];
 }
 
 - (void)dealloc {
@@ -80,6 +104,39 @@
     }
 }
 
+- (void)configCotionManager {
+    _motionManager = [[CMMotionManager alloc] init];
+    _motionManager.deviceMotionUpdateInterval = 1/15.0;
+    if (!_motionManager.deviceMotionAvailable) {
+        _motionManager = nil;
+    }
+    [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler: ^(CMDeviceMotion *motion, NSError *error){
+        [self performSelectorOnMainThread:@selector(handleDeviceMotion:) withObject:motion waitUntilDone:YES];
+    }];
+}
+
+- (void)handleDeviceMotion:(CMDeviceMotion *)deviceMotion{
+    double x = deviceMotion.gravity.x;
+    double y = deviceMotion.gravity.y;
+    if (fabs(y) >= fabs(x))
+    {
+        if (y >= 0){
+            _deviceOrientation = UIDeviceOrientationPortraitUpsideDown;
+        }
+        else{
+            _deviceOrientation = UIDeviceOrientationPortrait;
+        }
+    }
+    else{
+        if (x >= 0){
+            _deviceOrientation = UIDeviceOrientationLandscapeRight;
+        }
+        else{
+            _deviceOrientation = UIDeviceOrientationLandscapeLeft;
+        }
+    }
+}
+
 - (void)configCamera{
     
     //使用AVMediaTypeVideo 指明self.device代表视频，默认使用后置摄像头进行初始化
@@ -93,9 +150,9 @@
     
     //生成会话，用来结合输入输出
     self.session = [[AVCaptureSession alloc]init];
-    if ([self.session canSetSessionPreset:AVCaptureSessionPreset1920x1080]) {
-        self.session.sessionPreset = AVCaptureSessionPreset1920x1080;
-    }
+//    if ([self.session canSetSessionPreset:AVCaptureSessionPreset1280x720]) {
+//        self.session.sessionPreset = AVCaptureSessionPreset1280x720;
+//    }
     if ([self.session canAddInput:self.input]) {
         [self.session addInput:self.input];
     }
@@ -182,16 +239,20 @@
 
 /**切换摄像头*/
 - (void)switchCamera:(BOOL)isFront {
+//    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+//    if (authStatus != AVAuthorizationStatusAuthorized) {
+//        return;
+//    }
     //前后摄像头像素不一样，所以这里要处理下
-    if (isFront) {
-        if ([self.session canSetSessionPreset:AVCaptureSessionPreset1280x720]) {
-            self.session.sessionPreset = AVCaptureSessionPreset1280x720;
-        }
-    } else {
-        if ([self.session canSetSessionPreset:AVCaptureSessionPreset1920x1080]) {
-            self.session.sessionPreset = AVCaptureSessionPreset1920x1080;
-        }
-    }
+//    if (isFront) {
+//        if ([self.session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
+//            self.session.sessionPreset = AVCaptureSessionPreset640x480;
+//        }
+//    } else {
+//        if ([self.session canSetSessionPreset:AVCaptureSessionPreset1920x1080]) {
+//            self.session.sessionPreset = AVCaptureSessionPreset1920x1080;
+//        }
+//    } 
     
     NSArray *inputs = self.session.inputs;
     for (AVCaptureDeviceInput *input in inputs ) {
@@ -204,7 +265,9 @@
             [self.session beginConfiguration];
             
             [self.session removeInput:input];
-            [self.session addInput:newInput];
+            if (newInput) {
+                [self.session addInput:newInput];
+            }
             
             // Changes take effect once the outermost commitConfiguration is invoked.
             [self.session commitConfiguration];
@@ -221,20 +284,33 @@
         return;
     }
     
+    if (videoConnection.isVideoOrientationSupported) {
+        videoConnection.videoOrientation = [self currentVideoOrientation];
+    }
+    
+    //如果是前摄像头，则加镜像
+    if (self.isFront) {
+        videoConnection.videoMirrored = YES;
+    } else {
+        videoConnection.videoMirrored = NO;
+    }
+    __weak typeof(self) weakSelf = self;
     [self.ImageOutPut captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
         if (imageDataSampleBuffer == NULL) {
             return;
         }
         NSData * imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
         UIImage *img = [UIImage imageWithData:imageData];
-        [self.session stopRunning];
-        if (self.effectiveRect.size.width > 0) {
-            img = [self cutImage:img];
-        }
-        if (resultBlock) {
-            resultBlock(img);
-        }
-        
+        [weakSelf.session stopRunning];
+        __block UIImage *wImage = img;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (weakSelf.effectiveRect.size.width > 0) {
+                wImage = [weakSelf cutImage:wImage];
+            }
+            if (resultBlock) {
+                resultBlock(wImage);
+            }
+        });
     }];
 }
 
@@ -243,11 +319,11 @@
 //相机是否可用
 - (BOOL)canUseCamear{
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if (authStatus == AVAuthorizationStatusDenied) {
-        return NO;
+    if (authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
+        return YES;
     }
     else{
-        return YES;
+        return NO;
     }
     return YES;
 }
@@ -297,6 +373,26 @@
     return nil;
 }
 
+// 调整设备取向
+- (AVCaptureVideoOrientation)currentVideoOrientation{
+    AVCaptureVideoOrientation orientation;
+    switch (self.deviceOrientation) {
+        case UIDeviceOrientationPortrait:
+            orientation = AVCaptureVideoOrientationPortrait;
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            orientation = AVCaptureVideoOrientationLandscapeRight;
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+        default:
+            orientation = AVCaptureVideoOrientationLandscapeLeft;
+            break;
+    }
+    return orientation;
+}
+
 /**获取摄像头方向*/
 - (BOOL)isCameraFront {
     return self.isFront;
@@ -309,15 +405,28 @@
 
 //裁剪
 - (UIImage *)cutImage:(UIImage *)image {
-    
-    //起点x轴比例
-    float orignXRate = self.effectiveRect.origin.x/self.frame.size.width;
-    //起点y轴比例
-    float orignYRate = self.effectiveRect.origin.y/self.frame.size.height;
     //图片缩放比例
-    float imageZoomRate = self.frame.size.width/image.size.width;
-    float orignX = image.size.width*orignXRate;
-    float orignY = image.size.height*orignYRate;
+    float imageZoomRate = 1;//预览视图相对图片大小的缩放比例
+    //相对图片高宽比例修正裁剪区（因为本控件高宽比不一定等于图片高宽比，而用户看到的裁剪框是相对本控件的）
+    if (image.size.height > image.size.width) {//竖着拍
+        if ((self.frame.size.height/self.frame.size.width) < (image.size.height/image.size.width)) {//本控件宽度刚好填满，高度超出
+            imageZoomRate = self.frame.size.width/image.size.width;
+        } else {//本控件高度刚好填满，宽度超出
+            imageZoomRate = self.frame.size.height/image.size.height;
+        }
+    } else {//横着拍，图片的宽对应本控件的高
+        if ((self.frame.size.height/self.frame.size.width) < (image.size.width/image.size.height)) {//本控件宽度刚好填满，高度超出
+            imageZoomRate = self.frame.size.width/image.size.height;
+        } else {//本控件高度刚好填满，宽度超出
+            imageZoomRate = self.frame.size.height/image.size.width;
+        }
+        NSLog(@"暂不支持横着拍裁剪");
+    }
+    
+    CGFloat offsetH = image.size.height-self.frame.size.height/imageZoomRate;
+    CGFloat offsetW = image.size.width-self.frame.size.width/imageZoomRate;
+    float orignY = self.effectiveRect.origin.y/imageZoomRate + offsetH/2;
+    float orignX = self.effectiveRect.origin.x/imageZoomRate + offsetW/2;
     
     CGRect cutImageRect = CGRectZero;
     cutImageRect.origin.x = orignX;
@@ -325,37 +434,28 @@
     cutImageRect.size.width = self.effectiveRect.size.width/imageZoomRate;
     cutImageRect.size.height = self.effectiveRect.size.height/imageZoomRate;
     
-    //下面代码百度的 不晓得什么意思。解决上面方法拍照会旋转90度
-    CGFloat (^rad)(CGFloat) = ^CGFloat(CGFloat deg) {
-        return deg / 180.0f * (CGFloat) M_PI;
-    };
+    // 得到图片上下文，指定绘制范围
+    UIGraphicsBeginImageContext(image.size);
     
-    CGAffineTransform rectTransform;
-    switch (image.imageOrientation) {
-        case UIImageOrientationLeft:
-            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(90)), 0, -image.size.height);
-            break;
-        case UIImageOrientationRight:
-            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-90)), -image.size.width, 0);
-            break;
-        case UIImageOrientationDown:
-            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-180)), -image.size.width, -image.size.height);
-            break;
-        default:
-            rectTransform = CGAffineTransformIdentity;
-    };
+    // 将图片按照指定大小绘制
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     
-    // adjust the transformation scale based on the image scale
-    rectTransform = CGAffineTransformScale(rectTransform, image.scale, image.scale);
+    // 从当前图片上下文中导出图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    // apply the transformation to the rect to create a new, shifted rect
-    CGRect transformedCropSquare = CGRectApplyAffineTransform(cutImageRect, rectTransform);
+    // 当前图片上下文出栈
+    UIGraphicsEndImageContext();
     
+    //将UIImage转换成CGImageRef
+    CGImageRef sourceImageRef = [scaledImage CGImage];
     
-    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, transformedCropSquare);
-    UIImage *result = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
-    CGImageRelease(imageRef);
-    return result;
+    //按照给定的矩形区域进行剪裁
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, cutImageRect);
+    
+    //将CGImageRef转换成UIImage
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    return newImage;
+
 }
 
 - (void)restart {
