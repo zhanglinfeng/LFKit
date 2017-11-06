@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.camera.effectiveRect = CGRectMake(0, 64, 100, 100);
+    self.camera.effectiveRect = CGRectMake(0, 64, 100, 100);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

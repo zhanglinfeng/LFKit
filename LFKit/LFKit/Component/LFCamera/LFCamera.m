@@ -285,7 +285,9 @@
     }
     
     if (videoConnection.isVideoOrientationSupported) {
-        videoConnection.videoOrientation = [self currentVideoOrientation];
+//        if (self.effectiveRect.size.width < 1) {//无裁剪才支持方向，因为其他方向裁剪有问题
+            videoConnection.videoOrientation = [self currentVideoOrientation];
+//        }
     }
     
     //如果是前摄像头，则加镜像
@@ -381,13 +383,13 @@
             orientation = AVCaptureVideoOrientationPortrait;
             break;
         case UIDeviceOrientationLandscapeRight:
-            orientation = AVCaptureVideoOrientationLandscapeRight;
+            orientation = AVCaptureVideoOrientationLandscapeLeft;
             break;
         case UIDeviceOrientationPortraitUpsideDown:
             orientation = AVCaptureVideoOrientationPortraitUpsideDown;
             break;
         default:
-            orientation = AVCaptureVideoOrientationLandscapeLeft;
+            orientation = AVCaptureVideoOrientationLandscapeRight;
             break;
     }
     return orientation;
@@ -405,8 +407,14 @@
 
 //裁剪
 - (UIImage *)cutImage:(UIImage *)image {
+    
+//    image = [LFCamera fixOrientation:image];
     //图片缩放比例
     float imageZoomRate = 1;//预览视图相对图片大小的缩放比例
+    CGFloat offsetH = 0;
+    CGFloat offsetW = 0;
+    float orignY = self.effectiveRect.origin.y;
+    float orignX = self.effectiveRect.origin.x;
     //相对图片高宽比例修正裁剪区（因为本控件高宽比不一定等于图片高宽比，而用户看到的裁剪框是相对本控件的）
     if (image.size.height > image.size.width) {//竖着拍
         if ((self.frame.size.height/self.frame.size.width) < (image.size.height/image.size.width)) {//本控件宽度刚好填满，高度超出
@@ -414,19 +422,34 @@
         } else {//本控件高度刚好填满，宽度超出
             imageZoomRate = self.frame.size.height/image.size.height;
         }
+        offsetH = image.size.height-self.frame.size.height/imageZoomRate;
+        offsetW = image.size.width-self.frame.size.width/imageZoomRate;
+        orignY = self.effectiveRect.origin.y/imageZoomRate + offsetH/2;
+        orignX = self.effectiveRect.origin.x/imageZoomRate + offsetW/2;
+        
+        //当然这里可以写手机朝下的算法，但我拒绝为这种愚蠢行为写算法
+        
     } else {//横着拍，图片的宽对应本控件的高
         if ((self.frame.size.height/self.frame.size.width) < (image.size.width/image.size.height)) {//本控件宽度刚好填满，高度超出
             imageZoomRate = self.frame.size.width/image.size.height;
         } else {//本控件高度刚好填满，宽度超出
             imageZoomRate = self.frame.size.height/image.size.width;
         }
-        NSLog(@"暂不支持横着拍裁剪");
+        
+        //手机顶部朝左
+        offsetH = image.size.width-self.frame.size.height/imageZoomRate;
+        offsetW = image.size.height-self.frame.size.width/imageZoomRate;
+        orignY = (self.frame.size.width - self.effectiveRect.origin.x - self.effectiveRect.size.width)/imageZoomRate + offsetW/2;
+        orignX = (self.effectiveRect.origin.y)/imageZoomRate + offsetH/2;
+        
+        //手机顶部朝右
+        if (image.imageOrientation == 1) {
+            offsetH = image.size.width-self.frame.size.height/imageZoomRate;
+            offsetW = image.size.height-self.frame.size.width/imageZoomRate;
+            orignY = (self.effectiveRect.origin.x)/imageZoomRate + offsetW/2;
+            orignX = (self.frame.size.height - self.effectiveRect.origin.y - self.effectiveRect.size.height)/imageZoomRate + offsetH/2;
+        }
     }
-    
-    CGFloat offsetH = image.size.height-self.frame.size.height/imageZoomRate;
-    CGFloat offsetW = image.size.width-self.frame.size.width/imageZoomRate;
-    float orignY = self.effectiveRect.origin.y/imageZoomRate + offsetH/2;
-    float orignX = self.effectiveRect.origin.x/imageZoomRate + offsetW/2;
     
     CGRect cutImageRect = CGRectZero;
     cutImageRect.origin.x = orignX;
@@ -456,6 +479,83 @@
     UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
     return newImage;
 
+}
+
++ (UIImage *)fixOrientation:(UIImage *)aImage {
+    
+    // No-op if the orientation is already correct
+    if (aImage.imageOrientation ==UIImageOrientationUp)
+    return aImage;
+    
+    // We need to calculate the proper transformation to make the image upright.
+    // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+    CGAffineTransform transform =CGAffineTransformIdentity;
+    
+    switch (aImage.imageOrientation) {
+            case UIImageOrientationDown:
+            case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, aImage.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+            case UIImageOrientationLeft:
+            case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width,0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+            
+            case UIImageOrientationRight:
+            case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, aImage.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        default:
+            break;
+    }
+    
+    switch (aImage.imageOrientation) {
+            case UIImageOrientationUpMirrored:
+            case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width,0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+            case UIImageOrientationLeftMirrored:
+            case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.height,0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+        default:
+            break;
+    }
+    
+    // Now we draw the underlying CGImage into a new context, applying the transform
+    // calculated above.
+    CGContextRef ctx =CGBitmapContextCreate(NULL, aImage.size.width, aImage.size.height,
+                                            CGImageGetBitsPerComponent(aImage.CGImage),0,
+                                            CGImageGetColorSpace(aImage.CGImage),
+                                            CGImageGetBitmapInfo(aImage.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (aImage.imageOrientation) {
+            case UIImageOrientationLeft:
+            case UIImageOrientationLeftMirrored:
+            case UIImageOrientationRight:
+            case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx,CGRectMake(0,0,aImage.size.height,aImage.size.width), aImage.CGImage);
+            break;
+            
+        default:
+            CGContextDrawImage(ctx,CGRectMake(0,0,aImage.size.width,aImage.size.height), aImage.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg =CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
 }
 
 - (void)restart {
