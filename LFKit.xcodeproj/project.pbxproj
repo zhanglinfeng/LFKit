@@ -35,7 +35,6 @@
 		D186290E1FA8777900780629 /* LFImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22601FA348170039A2C2 /* LFImagePicker.m */; };
 		D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC223A1FA348160039A2C2 /* LFLocalMusicPicker.m */; };
 		D18629121FA8777900780629 /* LFPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC224F1FA348170039A2C2 /* LFPickerView.m */; };
-		D18629161FA877AB00780629 /* LFPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D18629151FA877A700780629 /* LFPopupMenu.m */; };
 		D18629171FA877CB00780629 /* LFQRCodeScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22351FA348160039A2C2 /* LFQRCodeScanner.m */; };
 		D18629181FA877CB00780629 /* LFQRCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22371FA348160039A2C2 /* LFQRCodeUtil.m */; };
 		D18629191FA877CB00780629 /* LFOptionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22321FA345320039A2C2 /* LFOptionTableView.m */; };
@@ -54,6 +53,7 @@
 		D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC221E1FA3290B0039A2C2 /* LFDeviceInfo.m */; };
 		D1AC22291FA32F010039A2C2 /* NSDate+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22281FA32F010039A2C2 /* NSDate+LF.m */; };
 		D1AC22631FA348750039A2C2 /* UIColor+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22621FA348750039A2C2 /* UIColor+LF.m */; };
+		D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,8 +91,6 @@
 		D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraResultViewController.xib; sourceTree = "<group>"; };
 		D18628FB1FA8772B00780629 /* RotationMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotationMenu.h; sourceTree = "<group>"; };
 		D18628FC1FA8772B00780629 /* RotationMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotationMenu.m; sourceTree = "<group>"; };
-		D18629141FA877A700780629 /* LFPopupMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPopupMenu.h; sourceTree = "<group>"; };
-		D18629151FA877A700780629 /* LFPopupMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPopupMenu.m; sourceTree = "<group>"; };
 		D1AC21BE1FA3258A0039A2C2 /* LFKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LFKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AC21C11FA3258A0039A2C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1AC21C21FA3258A0039A2C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -167,6 +165,8 @@
 		D1AC22601FA348170039A2C2 /* LFImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFImagePicker.m; sourceTree = "<group>"; };
 		D1AC22611FA348740039A2C2 /* UIColor+LF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+LF.h"; sourceTree = "<group>"; };
 		D1AC22621FA348750039A2C2 /* UIColor+LF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LF.m"; sourceTree = "<group>"; };
+		D1AE0D1E1FB45E79004605E7 /* LFPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPopupMenu.h; sourceTree = "<group>"; };
+		D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFPopupMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,16 +270,6 @@
 			path = RotationMenu;
 			sourceTree = "<group>";
 		};
-		D18629131FA877A700780629 /* LFPopupMenu */ = {
-			isa = PBXGroup;
-			children = (
-				D18629141FA877A700780629 /* LFPopupMenu.h */,
-				D18629151FA877A700780629 /* LFPopupMenu.m */,
-			);
-			name = LFPopupMenu;
-			path = ../../../../LFPopupMenu/LFPopupMenu/LFPopupMenu;
-			sourceTree = "<group>";
-		};
 		D1AC21B51FA3258A0039A2C2 = {
 			isa = PBXGroup;
 			children = (
@@ -368,7 +358,7 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				D18629131FA877A700780629 /* LFPopupMenu */,
+				D1AE0D1D1FB45E79004605E7 /* LFPopupMenu */,
 				D18628FA1FA8772B00780629 /* RotationMenu */,
 				D1AC22501FA348170039A2C2 /* LFBubbleView */,
 				D1AC223B1FA348170039A2C2 /* LFCamera */,
@@ -501,6 +491,15 @@
 				D1AC22601FA348170039A2C2 /* LFImagePicker.m */,
 			);
 			path = LFImagePicker;
+			sourceTree = "<group>";
+		};
+		D1AE0D1D1FB45E79004605E7 /* LFPopupMenu */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE0D1E1FB45E79004605E7 /* LFPopupMenu.h */,
+				D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */,
+			);
+			path = LFPopupMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -708,7 +707,6 @@
 				D18629061FA8777900780629 /* UITextField+LF.m in Sources */,
 				D18629071FA8777900780629 /* UIView+LF.m in Sources */,
 				D14ADE051FAC54D000951E26 /* ComponentListController.m in Sources */,
-				D18629161FA877AB00780629 /* LFPopupMenu.m in Sources */,
 				D18629081FA8777900780629 /* UIView+LFXIB.m in Sources */,
 				D18629091FA8777900780629 /* UIViewController+FullScreenScroll.m in Sources */,
 				D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */,
@@ -719,6 +717,7 @@
 				D186290D1FA8777900780629 /* LFCycleScrollView.m in Sources */,
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
 				D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */,
+				D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,
 				D18629121FA8777900780629 /* LFPickerView.m in Sources */,
 				D1AC22251FA3290C0039A2C2 /* LFDeviceInfo.m in Sources */,
