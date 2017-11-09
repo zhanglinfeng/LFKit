@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Component' do |ss|
     # ss.dependency 'CocoaLumberjack/Default'
-  ss.source_files         = 'LFKit/LFKit/Component/*'
+  ss.source_files         = 'LFKit/LFKit/Component/**/*'
     # ss.public_header_files  = 'Classes/Extensions/*.h'
   end
 
