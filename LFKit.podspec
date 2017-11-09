@@ -11,8 +11,28 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   # s.prefix_header_file = "xxx/xxx-prefix.pch"
   s.ios.deployment_target = '8.0'
-  s.source_files = 'LFKit/LFKit/**/*'
+
+  s.subspec 'Category' do |ss|
+    # ss.dependency 'CocoaLumberjack/Default'
+  ss.source_files         = 'LFKit/LFKit/Category/*'
+    # ss.public_header_files  = 'Classes/Extensions/*.h'
+  end
+
+  s.subspec 'Util' do |ss|
+    # ss.dependency 'CocoaLumberjack/Default'
+  ss.source_files         = 'LFKit/LFKit/Util/*'
+    # ss.public_header_files  = 'Classes/Extensions/*.h'
+  end
+
+  s.subspec 'Component' do |ss|
+    # ss.dependency 'CocoaLumberjack/Default'
+  ss.source_files         = 'LFKit/LFKit/Component/*'
+    # ss.public_header_files  = 'Classes/Extensions/*.h'
+  end
+
+  # s.source_files = 'LFKit/LFKit/**/*'
   # s.resources = 'xxx/Resources/**/*.{png}'
+
   s.dependency 'YYWebImage'
   
 end
