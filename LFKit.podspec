@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -15,19 +15,19 @@ Pod::Spec.new do |s|
   s.subspec 'Category' do |ss|
     # ss.dependency 'CocoaLumberjack/Default'
   ss.source_files         = 'LFKit/LFKit/Category/*'
-    # ss.public_header_files  = 'Classes/Extensions/*.h'
+    # ss.public_header_files  = 'LFKit/LFKit/Category/*.h'
   end
 
   s.subspec 'Util' do |ss|
     # ss.dependency 'CocoaLumberjack/Default'
   ss.source_files         = 'LFKit/LFKit/Util/*'
-    # ss.public_header_files  = 'Classes/Extensions/*.h'
+    # ss.public_header_files  = 'LFKit/LFKit/Util/*.h'
   end
 
   s.subspec 'Component' do |ss|
     # ss.dependency 'CocoaLumberjack/Default'
   ss.source_files         = 'LFKit/LFKit/Component/**/*'
-    # ss.public_header_files  = 'Classes/Extensions/*.h'
+    # ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
   end
 
   # s.source_files = 'LFKit/LFKit/**/*'
