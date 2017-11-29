@@ -38,7 +38,8 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, assign) CGFloat arrowW;//箭头形宽,默认9
 @property (nonatomic, assign) CGFloat minWidth;//弹窗最小宽度，默认0
 @property (nonatomic, assign) CGFloat popupMargin;//窗口距屏幕边缘最小距离，默认5
-@property (nonatomic, assign) CGFloat edgeMargin;//图标和文字距窗口的距离，默认16
+@property (nonatomic, assign) CGFloat leftEdgeMargin;//左边距窗口的距离，默认16
+@property (nonatomic, assign) CGFloat rightEdgeMargin;//右边距窗口的距离，默认16
 @property (nonatomic, assign) CGFloat textMargin;//文字距图标的距离，默认8
 @property (nonatomic, assign) CGFloat lineMargin;//分割线左边距，默认0
 @property (nonatomic, assign) CGFloat cornerRadius;//弹窗圆角,默认6
@@ -53,7 +54,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, strong) UIView *menuSuperView;//本菜单弹窗的父视图，默认在Window上
 @property (nonatomic, assign) PopupMenuDirection direction;
 
-@property (nonatomic, copy) void(^dismissComplete)();//消失的回调
+@property (nonatomic, copy) void(^dismissComplete)(void);//消失的回调
 
 /**
  配置选项，注意：设置上面属性之后调用
@@ -81,7 +82,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 
 /**
  显示菜单窗，无imgBG的情况下调用（推荐）
-
+ 
  @param view 箭头对准的view
  */
 - (void)showArrowToView:(UIView*)view;
@@ -89,3 +90,4 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 - (void)dismiss;
 
 @end
+

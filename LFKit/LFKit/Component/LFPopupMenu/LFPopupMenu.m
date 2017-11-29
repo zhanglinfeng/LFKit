@@ -43,7 +43,8 @@
         self.arrowH = 9;
         self.arrowW = 9;
         self.popupMargin = 5;
-        self.edgeMargin = 16;
+        self.leftEdgeMargin = 16;
+        self.rightEdgeMargin = 16;
         self.textMargin = 8;
         self.lineMargin = 0;
         self.cornerRadius = 6;
@@ -76,12 +77,12 @@
         LFPopupMenuItem *item = self.menuItems[i];
         CGFloat imgH = item.image.size.height;
         CGFloat imgW = item.image.size.width;
-        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(self.edgeMargin, (self.rowHeight - imgH)/2 + self.rowHeight*i, imgW, imgH)];
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(self.leftEdgeMargin, (self.rowHeight - imgH)/2 + self.rowHeight*i, imgW, imgH)];
         iv.image = item.image;
         [self.containerView addSubview:iv];
         
-        CGFloat lbX = imgW > 0 ? (self.edgeMargin + imgW + self.textMargin) : self.edgeMargin;
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(lbX, i*self.rowHeight, self.frame.size.width - lbX - self.edgeMargin, self.rowHeight)];
+        CGFloat lbX = imgW > 0 ? (self.leftEdgeMargin + imgW + self.textMargin) : self.leftEdgeMargin;
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(lbX, i*self.rowHeight, self.frame.size.width - lbX - self.rightEdgeMargin, self.rowHeight)];
         lb.textColor = self.textColor;
         lb.text = item.title;
         lb.font = [UIFont systemFontOfSize:15];
@@ -198,16 +199,16 @@
         LFPopupMenuItem *item = self.menuItems[i];
         NSStringDrawingOptions opts = NSStringDrawingTruncatesLastVisibleLine |NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading;
         CGRect rect = [item.title boundingRectWithSize:CGSizeZero
-                                         options:opts
-                                      attributes:@{NSFontAttributeName: self.textFont}
-                                         context:nil];
+                                               options:opts
+                                            attributes:@{NSFontAttributeName: self.textFont}
+                                               context:nil];
         
         textW = textW > rect.size.width ? textW : rect.size.width;
         
         
         imageW = imageW > item.image.size.width ? imageW : item.image.size.width;
     }
-    CGFloat totalMargin = (textW > 0 && imageW > 0) ? (self.edgeMargin * 2 + self.textMargin) : self.edgeMargin * 2;
+    CGFloat totalMargin = (textW > 0 && imageW > 0) ? (self.leftEdgeMargin + self.rightEdgeMargin + self.textMargin) : (self.leftEdgeMargin + self.rightEdgeMargin);
     CGFloat totalWidth = textW + imageW + totalMargin;
     totalWidth = totalWidth > self.minWidth ? totalWidth : self.minWidth;
     self.frame = CGRectMake(0, 0, totalWidth, self.rowHeight * self.menuItems.count + self.arrowH);
@@ -347,3 +348,4 @@
 }
 
 @end
+
