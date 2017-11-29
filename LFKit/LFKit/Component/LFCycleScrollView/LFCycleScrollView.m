@@ -7,7 +7,6 @@
 //
 
 #import "LFCycleScrollView.h"
-#import "NSTimer+LF.h"
 #import <YYWebImage/UIImageView+YYWebImage.h>
 
 @interface LFCycleScrollView ()<UIScrollViewDelegate>
@@ -68,8 +67,10 @@
                                                                   repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:self.animationTimer forMode:NSRunLoopCommonModes];
             
-            [self.animationTimer pauseTimer];
-            [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+            if ([self.animationTimer isValid]) {
+                [self.animationTimer setFireDate:[NSDate distantFuture]];//暂停， distantFuture（不可达到的未来的某个时间点）
+                [self.animationTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:self.animationDuration]];//在某个时间点继续
+            }
         }
     }
     return self;
@@ -127,10 +128,15 @@
         _totalPages = self.arrayImage.count;
     }
     
-    [self.animationTimer pauseTimer];
+
+    if ([self.animationTimer isValid]) {
+        [self.animationTimer setFireDate:[NSDate distantFuture]];//暂停， distantFuture（不可达到的未来的某个时间点）
+    }
     
     if(_totalPages > 1){
-        [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+        if ([self.animationTimer isValid]) {
+            [self.animationTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:self.animationDuration]];//在某个时间点继续
+        }
     }
     
     if (_totalPages == 1) {
@@ -321,8 +327,8 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (self.animationTimer) {
-        [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+    if ([self.animationTimer isValid]) {
+        [self.animationTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:self.animationDuration]];//在某个时间点继续
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
@@ -333,8 +339,8 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if (self.animationTimer) {
-        [self.animationTimer pauseTimer];
+    if ([self.animationTimer isValid]) {
+        [self.animationTimer setFireDate:[NSDate distantFuture]];//暂停， distantFuture（不可达到的未来的某个时间点）
     }
     if ([_delegate respondsToSelector:@selector(cycleScrollView:beginScrollAtIndex:)]) {
         [_delegate cycleScrollView:self beginScrollAtIndex:_curPage];
@@ -420,8 +426,10 @@
                                                              userInfo:nil
                                                               repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.animationTimer forMode:NSRunLoopCommonModes];
-        [self.animationTimer pauseTimer];
-        [self.animationTimer resumeTimerAfterTimeInterval:self.animationDuration];
+        if ([self.animationTimer isValid]) {
+            [self.animationTimer setFireDate:[NSDate distantFuture]];//暂停， distantFuture（不可达到的未来的某个时间点）
+            [self.animationTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:self.animationDuration]];//在某个时间点继续
+        }
     }
 }
 

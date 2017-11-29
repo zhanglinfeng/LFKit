@@ -16,8 +16,8 @@
 #include <net/if.h>
 #include <net/if_dl.h>
 #import "SFHFKeychainUtils.h"
+#import <CommonCrypto/CommonDigest.h>
 
-#import "NSString+LF.h"
 
 @implementation LFDeviceInfo
 
@@ -103,7 +103,7 @@
             NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
             
             NSString *stringToHash = [NSString stringWithFormat:@"%@%@", macaddress, bundleIdentifier];
-            identifier = [stringToHash getMD5];
+            identifier = [self getMD5WithString:stringToHash];
             
         }
         
@@ -159,6 +159,23 @@
     }
     
     return carrierName;
+}
+
+#pragma mark - 私有方法
+- (NSString *)getMD5WithString:(NSString *)string {
+    if(self == nil || [string length] == 0){
+        return nil;
+    }
+    
+    const char *src = [string UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    
+    CC_MD5(src, (unsigned int)strlen(src), result);
+    
+    return [NSString stringWithFormat:@"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]
+            ];
 }
 
 @end

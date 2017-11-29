@@ -7,7 +7,6 @@
 //
 
 #import "LFTimeUtil.h"
-#import "NSDate+LF.h"
 
 @implementation LFTimeUtil
 
@@ -135,15 +134,37 @@
         [formatterFullDate setLocale:[NSLocale currentLocale]];
     });
     
-    if ([date lf_isToday]) {
+    if ([self isToday:date]) {
         return [formatterToday stringFromDate:date];
-    } else if ([date lf_isYesterday]) {
+    } else if ([self isYesterday:date]) {
         return [formatterYesterday stringFromDate:date];
-    } else if ([date lf_isSameYearAsDate:[NSDate date]]) {
+    } else if ([self isSameYear:[NSDate date] date2:date]) {
         return [formatterSameYear stringFromDate:date];
     } else {
         return [formatterFullDate stringFromDate:date];
     }
+}
+
+- (BOOL)isToday:(NSDate*)date {
+    if (fabs(date.timeIntervalSinceNow) >= 60 * 60 * 24) return NO;
+    NSInteger day = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date] day];
+    NSInteger nowDay = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate new]] day];
+    return nowDay == day;
+}
+
+- (BOOL)isYesterday:(NSDate*)date {
+    NSTimeInterval aTimeInterval = [date timeIntervalSinceReferenceDate] + 86400 * 1;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+    return [self isToday:newDate];
+}
+
+- (BOOL)isSameYear:(NSDate *)date1 date2:(NSDate*)date2 {
+    NSInteger year1 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date1] year];
+    NSInteger year2 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date2] year];
+    if (year1 != year2) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
