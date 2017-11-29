@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
+		D142B0B11FC83857008C032A /* LFBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D142B0B01FC83857008C032A /* LFBadge.m */; };
+		D142B0B61FC83B00008C032A /* LFBadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D142B0B41FC83AFF008C032A /* LFBadgeViewController.xib */; };
+		D142B0B71FC83ECD008C032A /* LFBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D142B0B31FC83AFF008C032A /* LFBadgeViewController.m */; };
 		D14ADDFE1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADDFD1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m */; };
 		D14ADE051FAC54D000951E26 /* ComponentListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE041FAC54D000951E26 /* ComponentListController.m */; };
 		D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE0B1FAC5D6200951E26 /* LFCameraViewController.m */; };
@@ -77,6 +80,11 @@
 		1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.debug.xcconfig"; sourceTree = "<group>"; };
 		5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.release.xcconfig"; sourceTree = "<group>"; };
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D142B0AF1FC83857008C032A /* LFBadge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBadge.h; sourceTree = "<group>"; };
+		D142B0B01FC83857008C032A /* LFBadge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBadge.m; sourceTree = "<group>"; };
+		D142B0B21FC83AFF008C032A /* LFBadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBadgeViewController.h; sourceTree = "<group>"; };
+		D142B0B31FC83AFF008C032A /* LFBadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBadgeViewController.m; sourceTree = "<group>"; };
+		D142B0B41FC83AFF008C032A /* LFBadgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFBadgeViewController.xib; sourceTree = "<group>"; };
 		D14ADDFC1FAAC6DB00951E26 /* LFEncryptDecryptUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFEncryptDecryptUtil.h; sourceTree = "<group>"; };
 		D14ADDFD1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFEncryptDecryptUtil.m; sourceTree = "<group>"; };
 		D14ADE031FAC54D000951E26 /* ComponentListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentListController.h; sourceTree = "<group>"; };
@@ -212,6 +220,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D142B0AE1FC83832008C032A /* LFBadge */ = {
+			isa = PBXGroup;
+			children = (
+				D142B0AF1FC83857008C032A /* LFBadge.h */,
+				D142B0B01FC83857008C032A /* LFBadge.m */,
+			);
+			path = LFBadge;
+			sourceTree = "<group>";
+		};
 		D14ADDFF1FAC52F700951E26 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +251,9 @@
 				D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */,
 				D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */,
 				D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */,
+				D142B0B21FC83AFF008C032A /* LFBadgeViewController.h */,
+				D142B0B31FC83AFF008C032A /* LFBadgeViewController.m */,
+				D142B0B41FC83AFF008C032A /* LFBadgeViewController.xib */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -358,6 +378,7 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D142B0AE1FC83832008C032A /* LFBadge */,
 				D1AE0D1D1FB45E79004605E7 /* LFPopupMenu */,
 				D18628FA1FA8772B00780629 /* RotationMenu */,
 				D1AC22501FA348170039A2C2 /* LFBubbleView */,
@@ -615,6 +636,7 @@
 				D1AC21CE1FA3258A0039A2C2 /* LaunchScreen.storyboard in Resources */,
 				D14ADE0E1FAC5D6200951E26 /* LFCameraViewController.xib in Resources */,
 				D1AC21CB1FA3258A0039A2C2 /* Assets.xcassets in Resources */,
+				D142B0B61FC83B00008C032A /* LFBadgeViewController.xib in Resources */,
 				D1AC21C91FA3258A0039A2C2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,12 +732,14 @@
 				D18629081FA8777900780629 /* UIView+LFXIB.m in Sources */,
 				D18629091FA8777900780629 /* UIViewController+FullScreenScroll.m in Sources */,
 				D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */,
+				D142B0B71FC83ECD008C032A /* LFBadgeViewController.m in Sources */,
 				D186290A1FA8777900780629 /* RotationMenu.m in Sources */,
 				D186290B1FA8777900780629 /* LFBubbleView.m in Sources */,
 				D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */,
 				D186290C1FA8777900780629 /* LFCamera.m in Sources */,
 				D186290D1FA8777900780629 /* LFCycleScrollView.m in Sources */,
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
+				D142B0B11FC83857008C032A /* LFBadge.m in Sources */,
 				D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */,
 				D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,

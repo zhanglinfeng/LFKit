@@ -15,19 +15,19 @@ Pod::Spec.new do |s|
   s.subspec 'Category' do |ss|
     # ss.dependency 'CocoaLumberjack/Default'
   ss.source_files         = 'LFKit/LFKit/Category/*'
-    # ss.public_header_files  = 'LFKit/LFKit/Category/*.h'
+  ss.public_header_files  = 'LFKit/LFKit/Category/*.h'
   end
 
   s.subspec 'Util' do |ss|
   ss.dependency 'LFKit/LFKit/Category'
   ss.source_files         = 'LFKit/LFKit/Util/*'
-    # ss.public_header_files  = 'LFKit/LFKit/Util/*.h'
+  ss.public_header_files  = 'LFKit/LFKit/Util/*.h'
   end
 
   s.subspec 'Component' do |ss|
   ss.dependency 'LFKit/LFKit/Category'
   ss.source_files         = 'LFKit/LFKit/Component/**/*'
-    # ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
+  ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
   end
 
   # s.source_files = 'LFKit/LFKit/**/*'

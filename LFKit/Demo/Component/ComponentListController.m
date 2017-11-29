@@ -8,6 +8,7 @@
 
 #import "ComponentListController.h"
 #import "LFCameraViewController.h"
+#import "LFBadgeViewController.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -47,7 +48,12 @@
     _arrayData = @[@{@"title":@"相机",@"action":^{
         LFCameraViewController *vc = [[LFCameraViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }}];
+    }},
+                   @{@"title":@"角标",@"action":^{
+                       LFBadgeViewController *vc = [[LFBadgeViewController alloc] init];
+                       [self.navigationController pushViewController:vc animated:YES];
+                   }}
+                   ];
     [_tableView reloadData];
 }
 
