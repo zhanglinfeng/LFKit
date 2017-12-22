@@ -37,7 +37,7 @@
 @property (copy, nonatomic) void(^dateComplete)(LFPickerView * picker, NSString *strDate);
 
 /**取消回调*/
-@property (copy, nonatomic) void(^cancelBlock)();
+@property (copy, nonatomic) void(^cancelBlock)(void);
 
 /**
  *  一般picker

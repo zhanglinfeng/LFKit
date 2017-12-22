@@ -42,7 +42,7 @@
                         <constraint firstAttribute="bottom" secondItem="zfs-1P-T9l" secondAttribute="bottom" id="LwF-QT-enG"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kqa-XE-RHF">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入未读消息数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kqa-XE-RHF">
                     <rect key="frame" x="20" y="212" width="280" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="0XH-9t-EPQ"/>
