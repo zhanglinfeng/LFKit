@@ -26,20 +26,59 @@ Pod::Spec.new do |s|
 
   s.subspec 'Component' do |ss|
   # ss.dependency 'LFKit/Category'
-  ss.source_files         = 'LFKit/LFKit/Component/**/*'
+  # ss.source_files         = 'LFKit/LFKit/Component/**/*'
   # ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
 
-  	s.subspec 'LFBadge' do |ss|
-	# ss.dependency 'LFKit/Category'
-	ss.source_files         = 'LFKit/LFKit/Component/LFBadge/*'
-	# ss.public_header_files  = 'LFKit/LFKit/Util/*.h'
+    s.subspec 'LFBadge' do |ss|
+	  ss.source_files         = 'LFKit/LFKit/Component/LFBadge/*'
   	end
+
+    s.subspec 'LFBubbleView' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFBubbleView/*'
+    s.dependency 'YYWebImage'
+    end
+
+    s.subspec 'LFCycleScrollView' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFCycleScrollView/*'
+    end
+
+    s.subspec 'LFErrorView' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFErrorView/*'
+    end
+
+    s.subspec 'LFPickerView' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFPickerView/*'
+    end
+
+    s.subspec 'LFPopupMenu' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFPopupMenu/*'
+    end
+
+    s.subspec 'LFQRCode' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFQRCode/*'
+    end
+
+    s.subspec 'LFCamera' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFCamera/*'
+    end
+
+    s.subspec 'LFImagePicker' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFImagePicker/*'
+    end
+
+    s.subspec 'LFOptionTableView' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFOptionTableView/*'
+    end
+
+    s.subspec 'RotationMenu' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/RotationMenu/*'
+    end
 
   end
 
   # s.source_files = 'LFKit/LFKit/**/*'
   # s.resources = 'xxx/Resources/**/*.{png}'
 
-  s.dependency 'YYWebImage'
+  
   
 end
