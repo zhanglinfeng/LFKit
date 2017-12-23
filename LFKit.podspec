@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Component' do |ss|
   # ss.dependency 'LFKit/Category'
-  # ss.source_files         = 'LFKit/LFKit/Component/**/*'
+  ss.source_files         = 'LFKit/LFKit/Component/**/*'
   # ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
 
     s.subspec 'LFBadge' do |ss|
@@ -35,11 +35,11 @@ Pod::Spec.new do |s|
 
     s.subspec 'LFBubbleView' do |ss|
     ss.source_files         = 'LFKit/LFKit/Component/LFBubbleView/*'
-    s.dependency 'YYWebImage'
     end
 
     s.subspec 'LFCycleScrollView' do |ss|
     ss.source_files         = 'LFKit/LFKit/Component/LFCycleScrollView/*'
+    s.dependency 'YYWebImage'
     end
 
     s.subspec 'LFErrorView' do |ss|
