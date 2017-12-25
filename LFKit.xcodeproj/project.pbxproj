@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
+		D13B092B1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */; };
+		D13B092E1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B092D1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m */; };
+		D13B09321FF0E5DA00D8BFE1 /* LFStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B09311FF0E5DA00D8BFE1 /* LFStarsView.m */; };
+		D13B09361FF0F6E300D8BFE1 /* LFStarsViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B09341FF0F6E300D8BFE1 /* LFStarsViewVC.m */; };
+		D13B09371FF0F6E300D8BFE1 /* LFStarsViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13B09351FF0F6E300D8BFE1 /* LFStarsViewVC.xib */; };
+		D13B093B1FF0FA9200D8BFE1 /* star_highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = D13B09391FF0FA9200D8BFE1 /* star_highlight.png */; };
+		D13B093C1FF0FA9200D8BFE1 /* star_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D13B093A1FF0FA9200D8BFE1 /* star_gray.png */; };
 		D142B0B11FC83857008C032A /* LFBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = D142B0B01FC83857008C032A /* LFBadge.m */; };
 		D142B0B61FC83B00008C032A /* LFBadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D142B0B41FC83AFF008C032A /* LFBadgeViewController.xib */; };
 		D142B0B71FC83ECD008C032A /* LFBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D142B0B31FC83AFF008C032A /* LFBadgeViewController.m */; };
@@ -80,6 +87,17 @@
 		1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.debug.xcconfig"; sourceTree = "<group>"; };
 		5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.release.xcconfig"; sourceTree = "<group>"; };
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D13B09291FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAlignCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAlignCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		D13B092C1FF0E1BF00D8BFE1 /* LFAnnulusProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAnnulusProgress.h; sourceTree = "<group>"; };
+		D13B092D1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAnnulusProgress.m; sourceTree = "<group>"; };
+		D13B09301FF0E5DA00D8BFE1 /* LFStarsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFStarsView.h; sourceTree = "<group>"; };
+		D13B09311FF0E5DA00D8BFE1 /* LFStarsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFStarsView.m; sourceTree = "<group>"; };
+		D13B09331FF0F6E300D8BFE1 /* LFStarsViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFStarsViewVC.h; sourceTree = "<group>"; };
+		D13B09341FF0F6E300D8BFE1 /* LFStarsViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFStarsViewVC.m; sourceTree = "<group>"; };
+		D13B09351FF0F6E300D8BFE1 /* LFStarsViewVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFStarsViewVC.xib; sourceTree = "<group>"; };
+		D13B09391FF0FA9200D8BFE1 /* star_highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_highlight.png; sourceTree = "<group>"; };
+		D13B093A1FF0FA9200D8BFE1 /* star_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_gray.png; sourceTree = "<group>"; };
 		D142B0AF1FC83857008C032A /* LFBadge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBadge.h; sourceTree = "<group>"; };
 		D142B0B01FC83857008C032A /* LFBadge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBadge.m; sourceTree = "<group>"; };
 		D142B0B21FC83AFF008C032A /* LFBadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBadgeViewController.h; sourceTree = "<group>"; };
@@ -220,6 +238,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D13B09271FF0E0D400D8BFE1 /* LFAlignCollectionViewFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				D13B09291FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.h */,
+				D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */,
+			);
+			path = LFAlignCollectionViewFlowLayout;
+			sourceTree = "<group>";
+		};
+		D13B09281FF0E0D500D8BFE1 /* LFAnnulusProgress */ = {
+			isa = PBXGroup;
+			children = (
+				D13B092C1FF0E1BF00D8BFE1 /* LFAnnulusProgress.h */,
+				D13B092D1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m */,
+			);
+			path = LFAnnulusProgress;
+			sourceTree = "<group>";
+		};
+		D13B092F1FF0E5C100D8BFE1 /* LFStarsView */ = {
+			isa = PBXGroup;
+			children = (
+				D13B09301FF0E5DA00D8BFE1 /* LFStarsView.h */,
+				D13B09311FF0E5DA00D8BFE1 /* LFStarsView.m */,
+			);
+			path = LFStarsView;
+			sourceTree = "<group>";
+		};
+		D13B09381FF0FA4F00D8BFE1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D13B093A1FF0FA9200D8BFE1 /* star_gray.png */,
+				D13B09391FF0FA9200D8BFE1 /* star_highlight.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		D142B0AE1FC83832008C032A /* LFBadge */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +308,9 @@
 				D142B0B21FC83AFF008C032A /* LFBadgeViewController.h */,
 				D142B0B31FC83AFF008C032A /* LFBadgeViewController.m */,
 				D142B0B41FC83AFF008C032A /* LFBadgeViewController.xib */,
+				D13B09331FF0F6E300D8BFE1 /* LFStarsViewVC.h */,
+				D13B09341FF0F6E300D8BFE1 /* LFStarsViewVC.m */,
+				D13B09351FF0F6E300D8BFE1 /* LFStarsViewVC.xib */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -317,6 +374,7 @@
 			children = (
 				D1AC21F31FA326F90039A2C2 /* LFKit */,
 				D14ADDFF1FAC52F700951E26 /* Demo */,
+				D13B09381FF0FA4F00D8BFE1 /* Resource */,
 				D1AC21C11FA3258A0039A2C2 /* AppDelegate.h */,
 				D1AC21C21FA3258A0039A2C2 /* AppDelegate.m */,
 				D1AC21C71FA3258A0039A2C2 /* Main.storyboard */,
@@ -378,6 +436,8 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D13B09271FF0E0D400D8BFE1 /* LFAlignCollectionViewFlowLayout */,
+				D13B09281FF0E0D500D8BFE1 /* LFAnnulusProgress */,
 				D142B0AE1FC83832008C032A /* LFBadge */,
 				D1AE0D1D1FB45E79004605E7 /* LFPopupMenu */,
 				D18628FA1FA8772B00780629 /* RotationMenu */,
@@ -390,6 +450,7 @@
 				D1AC22331FA348160039A2C2 /* LFQRCode */,
 				D1AC22301FA345320039A2C2 /* LFOptionTableView */,
 				D1AC222D1FA345250039A2C2 /* LFErrorView */,
+				D13B092F1FF0E5C100D8BFE1 /* LFStarsView */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -634,9 +695,12 @@
 			files = (
 				D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */,
 				D1AC21CE1FA3258A0039A2C2 /* LaunchScreen.storyboard in Resources */,
+				D13B09371FF0F6E300D8BFE1 /* LFStarsViewVC.xib in Resources */,
+				D13B093C1FF0FA9200D8BFE1 /* star_gray.png in Resources */,
 				D14ADE0E1FAC5D6200951E26 /* LFCameraViewController.xib in Resources */,
 				D1AC21CB1FA3258A0039A2C2 /* Assets.xcassets in Resources */,
 				D142B0B61FC83B00008C032A /* LFBadgeViewController.xib in Resources */,
+				D13B093B1FF0FA9200D8BFE1 /* star_highlight.png in Resources */,
 				D1AC21C91FA3258A0039A2C2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,9 +783,12 @@
 				D186291A1FA877CB00780629 /* LFErrorView.m in Sources */,
 				D18628FD1FA8777900780629 /* NSLayoutConstraint+LFXIB.m in Sources */,
 				D18628FE1FA8777900780629 /* NSString+LF.m in Sources */,
+				D13B092B1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m in Sources */,
 				D18628FF1FA8777900780629 /* NSTimer+LF.m in Sources */,
 				D18629001FA8777900780629 /* UIBarButtonItem+LF.m in Sources */,
 				D18629011FA8777900780629 /* UIButton+LF.m in Sources */,
+				D13B09361FF0F6E300D8BFE1 /* LFStarsViewVC.m in Sources */,
+				D13B09321FF0E5DA00D8BFE1 /* LFStarsView.m in Sources */,
 				D18629021FA8777900780629 /* UIImage+LF.m in Sources */,
 				D18629031FA8777900780629 /* UIImageView+LF.m in Sources */,
 				D18629041FA8777900780629 /* UILabel+LF.m in Sources */,
@@ -749,6 +816,7 @@
 				D1AC22631FA348750039A2C2 /* UIColor+LF.m in Sources */,
 				D1AC21D11FA3258A0039A2C2 /* main.m in Sources */,
 				D1AC22211FA3290C0039A2C2 /* SFHFKeychainUtils.m in Sources */,
+				D13B092E1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m in Sources */,
 				D1AC21C31FA3258A0039A2C2 /* AppDelegate.m in Sources */,
 				D1AC22241FA3290C0039A2C2 /* LFTimeUtil.m in Sources */,
 				D14ADDFE1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m in Sources */,
