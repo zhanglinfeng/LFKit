@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.0.6'
+  s.version          = '1.0.7'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -72,6 +72,18 @@ Pod::Spec.new do |s|
 
     s.subspec 'RotationMenu' do |ss|
     ss.source_files         = 'LFKit/LFKit/Component/RotationMenu/*'
+    end
+
+    s.subspec 'LFAnnulusProgress' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFAnnulusProgress/*'
+    end
+
+    s.subspec 'LFStarsView' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFStarsView/*'
+    end
+
+    s.subspec 'LFAlignCollectionViewFlowLayout' do |ss|
+    ss.source_files         = 'LFKit/LFKit/Component/LFAlignCollectionViewFlowLayout/*'
     end
 
   end
