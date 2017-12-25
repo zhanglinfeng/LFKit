@@ -274,7 +274,7 @@
     CGPoint bigCenter = bigCirCleView.center;
     CGFloat x2 = bigCenter.x;
     CGFloat y2 = bigCenter.y;
-    CGFloat r2 = bigCirCleView.bounds.size.width / 2;
+    CGFloat r2 = bigCirCleView.bounds.size.height / 2;
     
     CGPoint smallCenter = smallCirCleView.center;
     CGFloat x1 = smallCenter.x;
