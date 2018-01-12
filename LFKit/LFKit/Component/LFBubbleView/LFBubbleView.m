@@ -8,6 +8,27 @@
 
 #import "LFBubbleView.h"
 
+@implementation LFBubbleViewDefaultConfig
+
+static LFBubbleViewDefaultConfig *_instance = nil;
++ (instancetype)sharedInstance {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+        _instance.color = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
+        _instance.textColor = [UIColor whiteColor];
+        _instance.font = [UIFont systemFontOfSize:12];
+        _instance.cornerRadius = 5;
+        _instance.triangleH = 7;
+        _instance.triangleW = 7;
+        _instance.edgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    });
+    return _instance;
+}
+
+@end
+
+
 @implementation LFBubbleView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -16,13 +37,12 @@
         self.backgroundColor = [UIColor clearColor];
         _contentView = [[UIView alloc] init];
         self.contentView.backgroundColor = [UIColor clearColor];
-        self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self addSubview:self.contentView];
         
         self.lbTitle = [[UILabel alloc] init];
         self.lbTitle.backgroundColor = [UIColor clearColor];
-        self.lbTitle.font = [UIFont systemFontOfSize:kELBubbleViewFont];
-        self.lbTitle.textColor = kELBubbleViewTextColor;
+        self.lbTitle.font = [LFBubbleViewDefaultConfig sharedInstance].font;
+        self.lbTitle.textColor = [LFBubbleViewDefaultConfig sharedInstance].textColor;
         self.lbTitle.textAlignment = NSTextAlignmentCenter;
         self.lbTitle.numberOfLines = 0;
         [_contentView addSubview:self.lbTitle];
@@ -32,10 +52,12 @@
 
 //数据配置
 - (void)initData {
-    self.color = self.color ? self.color : kLFBubbleViewColor;
-    self.cornerRadius = self.cornerRadius > 0 ? self.cornerRadius : kLFBubbleViewCornerRadius;
-    self.triangleH = self.triangleH > 0 ? self.triangleH : kLFBubbleViewTriangleH;
-    self.triangleW = self.triangleW > 0 ? self.triangleW : kLFBubbleViewTriangleW;
+    self.color = self.color ? self.color : [LFBubbleViewDefaultConfig sharedInstance].color;
+    self.borderColor = self.borderColor ? self.borderColor : [LFBubbleViewDefaultConfig sharedInstance].borderColor;
+    self.borderWidth = self.borderWidth > 0 ? self.borderWidth : [LFBubbleViewDefaultConfig sharedInstance].borderWidth;
+    self.cornerRadius = self.cornerRadius > 0 ? self.cornerRadius : [LFBubbleViewDefaultConfig sharedInstance].cornerRadius;
+    self.triangleH = self.triangleH > 0 ? self.triangleH : [LFBubbleViewDefaultConfig sharedInstance].triangleH;
+    self.triangleW = self.triangleW > 0 ? self.triangleW : [LFBubbleViewDefaultConfig sharedInstance].triangleW;
     if (self.triangleXY < 1) {
         if (self.triangleXYScale == 0) {
             self.triangleXYScale = 0.5;
@@ -258,7 +280,11 @@
             break;
     }
     
-    self.lbTitle.frame = CGRectMake(5, 5, self.contentView.frame.size.width - 10, self.contentView.frame.size.height - 10);
+    CGFloat top = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.top;
+    CGFloat left = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.left;
+    CGFloat right = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.right;
+    CGFloat bottom = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.bottom;
+    self.lbTitle.frame = CGRectMake(left - padding, top - padding, self.frame.size.width - left - right, self.frame.size.height - top - bottom);
 }
 
 /**来回平移动画*/
