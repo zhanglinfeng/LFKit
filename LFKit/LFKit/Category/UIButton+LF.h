@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, LFButtonStyle) {
-    LFButtonStyleTitleDown, //图上字下
-    LFButtonStyleTitleRight, //图左字右
-    LFButtonStyleTitleLeft //图右字左
+// 定义一个排列样式枚举（包含了四种类型的button）
+typedef NS_ENUM(NSUInteger, LFButtonArrangeStyle) {
+    LFButtonStyleImageTop, // image在上，label在下
+    LFButtonStyleImageLeft, // image在左，label在右
+    LFButtonStyleImageRight, // image在右，label在左
+    LFButtonStyleImageBottom // image在下，label在上
 };
 
 #define kDefaultSubTitle @"ss秒后重试"
@@ -25,12 +27,8 @@ typedef void(^LFBtnAction)(UIButton *button);
 @property (nonatomic, copy) LFBtnAction btnAction;
 
 
-/**
- 设置文字和图标的排列样式
- @param style 排列顺序
- @param space 图文间距
- */
-- (void)setStyle:(LFButtonStyle)style space:(CGFloat)space;
+/** 设置图文排列样式及间距 **/
+- (void)el_setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space;
 
 /*
  *    倒计时按钮

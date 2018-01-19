@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface LFStarsViewVC : UIViewController
+#import "BaseViewController.h"
+@interface LFStarsViewVC : BaseViewController
 
 @end

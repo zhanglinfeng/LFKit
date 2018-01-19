@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 
 /**
  显示菜单窗，有imgBG的情况下调用
- @param point 本控件左上角位置,相对window
+ @param point 本控件“左上角”位置,相对window
  */
 - (void)showInPoint:(CGPoint)point;
 

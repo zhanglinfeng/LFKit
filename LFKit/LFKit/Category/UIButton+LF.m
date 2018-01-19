@@ -43,26 +43,35 @@ static void *btnActionKey = &btnActionKey;
     [self addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)setStyle:(LFButtonStyle)style space:(CGFloat)space {
-    if (!space) {
-        space = 6;
+- (void)el_setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space {
+    CGFloat imageWith = self.imageView.image.size.width;
+    CGFloat imageHeight = self.imageView.image.size.height;
+    CGFloat labelWidth = 0.0;
+    CGFloat labelHeight = 0.0;
+    
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        // 由于iOS8中titleLabel的size为0，用下面的这种设置
+        labelWidth = self.titleLabel.intrinsicContentSize.width;
+        labelHeight = self.titleLabel.intrinsicContentSize.height;
+    } else {
+        labelWidth = self.titleLabel.frame.size.width;
+        labelHeight = self.titleLabel.frame.size.height;
     }
-
-    [self.titleLabel sizeToFit];
-    if (style == LFButtonStyleTitleDown) {
-        space = space - self.titleLabel.font.pointSize * 0.2;
+    
+    if (style == LFButtonStyleImageTop) {
+        self.imageEdgeInsets = UIEdgeInsetsMake(-(labelHeight + space)/2, labelWidth/2, (labelHeight + space)/2, -labelWidth/2);
+        self.titleEdgeInsets = UIEdgeInsetsMake((imageHeight+space)/2, -imageWith/2, -(imageHeight + space)/2, imageWith/2);
         
-        [self setImageEdgeInsets:UIEdgeInsetsMake(-(self.titleLabel.frame.size.height+space)/2, self.titleLabel.frame.size.width/2, (self.titleLabel.frame.size.height+space)/2, -self.titleLabel.frame.size.width/2)];
-        [self setTitleEdgeInsets:UIEdgeInsetsMake((self.imageView.frame.size.height+space)/2, -self.imageView.frame.size.width/2, -(self.imageView.frame.size.height+space)/2, self.imageView.frame.size.width/2)];
+    } else if (style == LFButtonStyleImageLeft) {
+        self.imageEdgeInsets = UIEdgeInsetsMake(0, -space/2, 0, space/2);
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, space/2, 0, -space/2);
+    } else if (style == LFButtonStyleImageRight) {
+        self.imageEdgeInsets = UIEdgeInsetsMake(0, labelWidth + space/2, 0, -labelWidth - space/2);
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, -imageWith - space/2, 0, imageWith + space/2);
         
-    } else if (style == LFButtonStyleTitleRight) {
-        [self setImageEdgeInsets:UIEdgeInsetsMake(0, -space/2, 0, space/2)];
-        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, space/2, 0, -space/2)];
-        
-    } else if (style == LFButtonStyleTitleLeft) {
-        [self setImageEdgeInsets:UIEdgeInsetsMake(0, self.titleLabel.frame.size.width + space/2, 0, -self.titleLabel.frame.size.width - space/2)];
-        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.imageView.frame.size.width - space/2, 0, self.imageView.frame.size.width + space/2)];
-        
+    } else if (style == LFButtonStyleImageBottom) {
+        self.imageEdgeInsets = UIEdgeInsetsMake((labelHeight + space)/2, labelWidth/2, -(labelHeight + space)/2, -labelWidth/2);
+        self.titleEdgeInsets = UIEdgeInsetsMake(-(imageHeight+space)/2, -imageWith/2, (imageHeight + space)/2, imageWith/2);
     }
 }
 

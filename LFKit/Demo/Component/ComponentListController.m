@@ -10,6 +10,7 @@
 #import "LFCameraViewController.h"
 #import "LFBadgeViewController.h"
 #import "LFStarsViewVC.h"
+#import "LFPopupMenuTestVC.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -58,7 +59,11 @@
                    @{@"title":@"星级",@"action":^{
                        LFStarsViewVC *vc = [[LFStarsViewVC alloc] init];
                        [self.navigationController pushViewController:vc animated:YES];
-                   }}
+                   }},
+                  @{@"title":@"带三角选项弹窗",@"action":^{
+                      LFPopupMenuTestVC *vc = [[LFPopupMenuTestVC alloc] init];
+                      [self.navigationController pushViewController:vc animated:YES];
+                  }}
                    ];
     [_tableView reloadData];
 }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LFPopupMenuTestVC">
+            <connections>
+                <outlet property="contentView" destination="udg-Lz-r3b" id="Mgf-hB-A3D"/>
+                <outlet property="view" destination="lK8-Ig-Xbs" id="4qe-Lw-kaE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lK8-Ig-Xbs">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-Lz-r3b">
+                    <rect key="frame" x="0.0" y="157" width="375" height="510"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ao-Pj-m8p">
+                    <rect key="frame" x="0.0" y="90" width="31" height="30"/>
+                    <state key="normal" title="阴影"/>
+                    <connections>
+                        <action selector="action1:" destination="-1" eventType="touchUpInside" id="0Eh-Pf-LwH"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upw-9X-Zn3">
+                    <rect key="frame" x="242" y="90" width="92" height="30"/>
+                    <state key="normal" title="自定义背景图"/>
+                    <connections>
+                        <action selector="action2:" destination="-1" eventType="touchUpInside" id="eJT-0h-w6Q"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1g-Up-ecj">
+                    <rect key="frame" x="5" y="281" width="31" height="30"/>
+                    <state key="normal" title="边框"/>
+                    <connections>
+                        <action selector="action3:" destination="-1" eventType="touchUpInside" id="ipA-Ec-hfK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7U-3W-j2n">
+                    <rect key="frame" x="334" y="366" width="31" height="30"/>
+                    <state key="normal" title="遮罩"/>
+                    <connections>
+                        <action selector="action4:" destination="-1" eventType="touchUpInside" id="jEk-ph-wX5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jE3-dQ-yKD">
+                    <rect key="frame" x="15" y="598" width="71" height="30"/>
+                    <state key="normal" title="阴影+边框"/>
+                    <connections>
+                        <action selector="action5:" destination="-1" eventType="touchUpInside" id="WBh-c0-Co8"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zME-mX-03X">
+                    <rect key="frame" x="288" y="598" width="71" height="30"/>
+                    <state key="normal" title="边框+遮罩"/>
+                    <connections>
+                        <action selector="action6:" destination="-1" eventType="touchUpInside" id="UaL-eV-UNg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iht-Xq-HdT">
+                    <rect key="frame" x="164" y="131" width="46" height="30"/>
+                    <state key="normal" title="仅图标"/>
+                    <connections>
+                        <action selector="action7:" destination="-1" eventType="touchUpInside" id="cCK-HM-FLp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoC-uJ-Fah">
+                    <rect key="frame" x="164" y="294" width="46" height="30"/>
+                    <state key="normal" title="仅文字"/>
+                    <connections>
+                        <action selector="action8:" destination="-1" eventType="touchUpInside" id="RUv-45-HTz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bua-pP-DY6">
+                    <rect key="frame" x="164" y="359" width="62" height="30"/>
+                    <state key="normal" title="黑底白字"/>
+                    <connections>
+                        <action selector="action9:" destination="-1" eventType="touchUpInside" id="0bJ-or-kG0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siz-l8-bYe">
+                    <rect key="frame" x="172" y="425" width="46" height="30"/>
+                    <state key="normal" title="自定义"/>
+                    <connections>
+                        <action selector="action10:" destination="-1" eventType="touchUpInside" id="TfX-VT-ZVr"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Bua-pP-DY6" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" constant="164" id="8Ec-is-XWD"/>
+                <constraint firstItem="Iht-Xq-HdT" firstAttribute="top" secondItem="lK8-Ig-Xbs" secondAttribute="top" constant="131" id="At0-ru-aXl"/>
+                <constraint firstItem="5ao-Pj-m8p" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" id="Dqr-0p-OFT"/>
+                <constraint firstAttribute="trailing" secondItem="upw-9X-Zn3" secondAttribute="trailing" constant="41" id="FhL-eb-zcY"/>
+                <constraint firstAttribute="trailing" secondItem="zME-mX-03X" secondAttribute="trailing" constant="16" id="Lj5-7a-P6I"/>
+                <constraint firstItem="upw-9X-Zn3" firstAttribute="top" secondItem="lK8-Ig-Xbs" secondAttribute="top" constant="90" id="M4b-y7-umB"/>
+                <constraint firstItem="M1g-Up-ecj" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" constant="5" id="NRd-55-JG9"/>
+                <constraint firstItem="siz-l8-bYe" firstAttribute="top" secondItem="Bua-pP-DY6" secondAttribute="bottom" constant="36" id="NmL-lp-5LR"/>
+                <constraint firstAttribute="trailing" secondItem="f7U-3W-j2n" secondAttribute="trailing" constant="10" id="SWi-1A-ua5"/>
+                <constraint firstItem="M1g-Up-ecj" firstAttribute="top" secondItem="5ao-Pj-m8p" secondAttribute="bottom" constant="161" id="UuM-qX-QUu"/>
+                <constraint firstAttribute="bottom" secondItem="jE3-dQ-yKD" secondAttribute="bottom" constant="39" id="VyR-qF-5wa"/>
+                <constraint firstItem="udg-Lz-r3b" firstAttribute="top" secondItem="upw-9X-Zn3" secondAttribute="bottom" constant="37" id="XhP-eq-vf4"/>
+                <constraint firstAttribute="trailing" secondItem="udg-Lz-r3b" secondAttribute="trailing" id="Xr0-Zl-4ao"/>
+                <constraint firstAttribute="bottom" secondItem="zME-mX-03X" secondAttribute="bottom" constant="39" id="ZyT-7g-99c"/>
+                <constraint firstItem="Iht-Xq-HdT" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" constant="164" id="dH5-8I-7k6"/>
+                <constraint firstItem="EoC-uJ-Fah" firstAttribute="top" secondItem="Iht-Xq-HdT" secondAttribute="bottom" constant="133" id="fbI-jt-3aI"/>
+                <constraint firstItem="udg-Lz-r3b" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" id="fhD-GI-vJH"/>
+                <constraint firstItem="f7U-3W-j2n" firstAttribute="top" secondItem="upw-9X-Zn3" secondAttribute="bottom" constant="246" id="fsA-m1-aj0"/>
+                <constraint firstAttribute="bottom" secondItem="udg-Lz-r3b" secondAttribute="bottom" id="iIs-2c-SOc"/>
+                <constraint firstItem="jE3-dQ-yKD" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" constant="15" id="mLa-7K-T3a"/>
+                <constraint firstItem="Bua-pP-DY6" firstAttribute="top" secondItem="EoC-uJ-Fah" secondAttribute="bottom" constant="35" id="t6O-bk-ceR"/>
+                <constraint firstItem="siz-l8-bYe" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" constant="172" id="xvn-Rj-9dx"/>
+                <constraint firstItem="EoC-uJ-Fah" firstAttribute="leading" secondItem="lK8-Ig-Xbs" secondAttribute="leading" constant="164" id="yn2-IW-qkw"/>
+                <constraint firstItem="5ao-Pj-m8p" firstAttribute="top" secondItem="lK8-Ig-Xbs" secondAttribute="top" constant="90" id="zCe-W3-juD"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

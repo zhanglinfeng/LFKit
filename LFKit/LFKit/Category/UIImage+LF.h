@@ -29,6 +29,14 @@ typedef NS_ENUM(NSInteger, TriangleDirection) {
 /**生成截屏图片*/
 + (UIImage *)captureWithView:(UIView *)view;
 
+/**获取图片某位置的颜色*/
+- (UIColor *)colorAtPoint:(CGPoint)point;
+
+/**压缩图片到指定内存大小*/
+- (UIImage *)compressToByte:(NSUInteger)maxLength;
+
+/**压缩图片到指定尺寸*/
+- (UIImage *)compressToSize:(CGSize)size;
 
 #pragma mark - 毛玻璃效果
 -(UIImage*)applyLightEffect;
