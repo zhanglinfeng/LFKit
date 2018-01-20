@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
 @property (nonatomic, assign) CGFloat cornerRadius;//圆角
 @property (nonatomic, assign) CGFloat triangleH;//三角形高
 @property (nonatomic, assign) CGFloat triangleW;//三角形底边长
+
 @property (nonatomic, strong) UIView *contentView;//容器，可放自定义视图，默认装文字
 @property (nonatomic, strong) UILabel *lbTitle;//提示文字
 @property (nonatomic) LFTriangleDirection direction;//三角方向，默认朝下

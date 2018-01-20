@@ -20,9 +20,39 @@
 @end
 
 
+@implementation LFPopupMenuDefaultConfig
+
+
++ (instancetype)sharedInstance {
+    static LFPopupMenuDefaultConfig *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+        instance.rowHeight = 60;
+        instance.arrowH = 9;
+        instance.arrowW = 9;
+        instance.popupMargin = 5;
+        instance.leftEdgeMargin = 16;
+        instance.rightEdgeMargin = 16;
+        instance.textMargin = 8;
+        instance.cornerRadius = 6;
+        instance.arrowCornerRadius = 0;
+        instance.lineColor = [UIColor grayColor];
+        instance.textFont = [UIFont systemFontOfSize:15];
+        instance.textColor = [UIColor blackColor];
+        instance.fillColor = [UIColor whiteColor];
+        instance.needBorder =NO;
+    });
+    return instance;
+}
+
+@end
+
+
 
 @interface LFPopupMenu ()
 
+@property (nonatomic, strong) UIView *containerView;//容器，用于自定义弹窗内视图
 @property (nonatomic, strong) UIImageView *ivBG;
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, assign) BOOL isUp;
@@ -39,19 +69,19 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = NO;
-        self.rowHeight = 60;
-        self.arrowH = 9;
-        self.arrowW = 9;
-        self.popupMargin = 5;
-        self.leftEdgeMargin = 16;
-        self.rightEdgeMargin = 16;
-        self.textMargin = 8;
-        self.lineMargin = 0;
-        self.cornerRadius = 6;
-        self.lineColor = [UIColor grayColor];
-        self.textFont = [UIFont systemFontOfSize:15];
-        self.textColor = [UIColor blackColor];
-        self.fillColor = [UIColor whiteColor];
+        self.rowHeight = [LFPopupMenuDefaultConfig sharedInstance].rowHeight;
+        self.arrowH = [LFPopupMenuDefaultConfig sharedInstance].arrowH;
+        self.arrowW = [LFPopupMenuDefaultConfig sharedInstance].arrowW;
+        self.popupMargin = [LFPopupMenuDefaultConfig sharedInstance].popupMargin;
+        self.leftEdgeMargin = [LFPopupMenuDefaultConfig sharedInstance].leftEdgeMargin;
+        self.rightEdgeMargin = [LFPopupMenuDefaultConfig sharedInstance].rightEdgeMargin;
+        self.textMargin = [LFPopupMenuDefaultConfig sharedInstance].textMargin;
+        self.lineMargin = [LFPopupMenuDefaultConfig sharedInstance].lineMargin;
+        self.cornerRadius = [LFPopupMenuDefaultConfig sharedInstance].cornerRadius;
+        self.lineColor = [LFPopupMenuDefaultConfig sharedInstance].lineColor;
+        self.textFont = [LFPopupMenuDefaultConfig sharedInstance].textFont;
+        self.textColor = [LFPopupMenuDefaultConfig sharedInstance].textColor;
+        self.fillColor = [LFPopupMenuDefaultConfig sharedInstance].fillColor;
         self.direction = PopupMenuDirection_Auto;
         self.menuSuperView = [UIApplication sharedApplication].keyWindow;
         

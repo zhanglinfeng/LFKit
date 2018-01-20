@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.0.7'
+  s.version          = '1.0.8'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -29,60 +29,60 @@ Pod::Spec.new do |s|
   ss.source_files         = 'LFKit/LFKit/Component/**/*'
   # ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
 
-    s.subspec 'LFBadge' do |ss|
+    s.subspec 'LFBadge' do |sss|
 	  ss.source_files         = 'LFKit/LFKit/Component/LFBadge/*'
   	end
 
-    s.subspec 'LFBubbleView' do |ss|
+    s.subspec 'LFBubbleView' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFBubbleView/*'
     end
 
-    s.subspec 'LFCycleScrollView' do |ss|
+    s.subspec 'LFCycleScrollView' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFCycleScrollView/*'
     s.dependency 'YYWebImage'
     end
 
-    s.subspec 'LFErrorView' do |ss|
+    s.subspec 'LFErrorView' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFErrorView/*'
     end
 
-    s.subspec 'LFPickerView' do |ss|
+    s.subspec 'LFPickerView' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFPickerView/*'
     end
 
-    s.subspec 'LFPopupMenu' do |ss|
+    s.subspec 'LFPopupMenu' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFPopupMenu/*'
     end
 
-    s.subspec 'LFQRCode' do |ss|
+    s.subspec 'LFQRCode' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFQRCode/*'
     end
 
-    s.subspec 'LFCamera' do |ss|
+    s.subspec 'LFCamera' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFCamera/*'
     end
 
-    s.subspec 'LFImagePicker' do |ss|
+    s.subspec 'LFImagePicker' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFImagePicker/*'
     end
 
-    s.subspec 'LFOptionTableView' do |ss|
+    s.subspec 'LFOptionTableView' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFOptionTableView/*'
     end
 
-    s.subspec 'RotationMenu' do |ss|
+    s.subspec 'RotationMenu' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/RotationMenu/*'
     end
 
-    s.subspec 'LFAnnulusProgress' do |ss|
+    s.subspec 'LFAnnulusProgress' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFAnnulusProgress/*'
     end
 
-    s.subspec 'LFStarsView' do |ss|
+    s.subspec 'LFStarsView' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFStarsView/*'
     end
 
-    s.subspec 'LFAlignCollectionViewFlowLayout' do |ss|
+    s.subspec 'LFAlignCollectionViewFlowLayout' do |sss|
     ss.source_files         = 'LFKit/LFKit/Component/LFAlignCollectionViewFlowLayout/*'
     end
 

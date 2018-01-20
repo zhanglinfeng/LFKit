@@ -14,6 +14,33 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
     PopupMenuDirection_Down     //箭头朝下
 };
 
+/**
+ （可选）配置LFPopupMenu默认样式的单例，只需应用启动时配置一次即可
+ 作用：如果多处使用LFPopupMenu，配置默认样式，就不用繁琐的设置那些属性
+ */
+@interface LFPopupMenuDefaultConfig : NSObject
+
+@property (nonatomic, assign) CGFloat rowHeight;//行高,默认60
+@property (nonatomic, assign) CGFloat arrowH;//箭头形高,默认9
+@property (nonatomic, assign) CGFloat arrowW;//箭头形宽,默认9
+@property (nonatomic, assign) CGFloat minWidth;//弹窗最小宽度，默认0
+@property (nonatomic, assign) CGFloat popupMargin;//窗口距屏幕边缘最小距离，默认5
+@property (nonatomic, assign) CGFloat leftEdgeMargin;//左边距窗口的距离，默认16
+@property (nonatomic, assign) CGFloat rightEdgeMargin;//右边距窗口的距离，默认16
+@property (nonatomic, assign) CGFloat textMargin;//文字距图标的距离，默认8
+@property (nonatomic, assign) CGFloat lineMargin;//分割线左边距，默认0
+@property (nonatomic, assign) CGFloat cornerRadius;//弹窗圆角,默认6
+@property (nonatomic, assign) CGFloat arrowCornerRadius;//箭头的圆角，默认0
+@property (nonatomic, strong) UIColor *lineColor;//分割线颜色、边框色，默认系统灰色
+@property (nonatomic, strong) UIFont *textFont;//默认15
+@property (nonatomic, strong) UIColor *textColor;//默认黑色
+@property (nonatomic, strong) UIColor *fillColor;//带箭头框的填充色，默认白色
+@property (nonatomic, assign) BOOL needBorder;//是否要边框
+
++ (instancetype)sharedInstance;
+
+@end
+
 
 @interface LFPopupMenuItem : NSObject
 
@@ -32,7 +59,6 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 /*******下面全是可选属性，都有默认值**********/
 @property (nonatomic, strong) UIView *maskView;//半透明遮罩层,默认透明，可自行设置
 @property (nonatomic, strong) UIImage *imgBG;//背景图，设置了这个就不用画带箭头的框了。
-@property (nonatomic, strong) UIView *containerView;//容器，用于自定义弹窗内视图
 @property (nonatomic, assign) CGFloat rowHeight;//行高,默认60
 @property (nonatomic, assign) CGFloat arrowH;//箭头形高,默认9
 @property (nonatomic, assign) CGFloat arrowW;//箭头形宽,默认9
@@ -49,8 +75,9 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, strong) UIColor *textColor;//默认黑色
 @property (nonatomic, strong) UIColor *fillColor;//带箭头框的填充色，默认白色
 @property (nonatomic, assign) BOOL needBorder;//是否要边框
-@property (nonatomic, assign) CGPoint anchorPoint;//设置背景图的情况使用，背景图的三角在背景图的位置比例，如左上角(0,0),右下角(1,1),下边中间(0.5,1)以此类推
 
+
+@property (nonatomic, assign) CGPoint anchorPoint;//设置背景图的情况使用，背景图的三角在背景图的位置比例，如左上角(0,0),右下角(1,1),下边中间(0.5,1)以此类推
 @property (nonatomic, strong) UIView *menuSuperView;//本菜单弹窗的父视图，默认在Window上
 @property (nonatomic, assign) PopupMenuDirection direction;
 
