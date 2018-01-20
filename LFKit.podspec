@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.0.9'
+  s.version          = '1.1.0'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Component' do |ss|
   # ss.dependency 'LFKit/Category'
-  ss.source_files         = 'LFKit/LFKit/Component/**/*'
+  # ss.source_files         = 'LFKit/LFKit/Component/**/*'
   # ss.public_header_files  = 'LFKit/LFKit/Component/**/*.h'
 
     ss.subspec 'LFBadge' do |sss|
