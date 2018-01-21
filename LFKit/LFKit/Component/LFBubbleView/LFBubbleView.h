@@ -15,11 +15,7 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
     LFTriangleDirection_Up
 };
 
-/**
- （可选）配置LFBubbleView默认样式的单例，只需应用启动时配置一次即可
- 作用：如果多处使用LFBubbleView，配置默认样式，就不用繁琐的设置那些属性
- */
-@interface LFBubbleViewDefaultConfig : NSObject
+@interface LFBubbleViewConfig : NSObject <NSCopying>
 
 @property (nonatomic, strong) UIColor *color;//背景色，默认红色半透明
 @property (nonatomic, strong) UIColor *textColor;//字体颜色，默认白色
@@ -31,10 +27,20 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
 @property (nonatomic, assign) CGFloat triangleW;//三角形底边长默认7
 @property (nonatomic) UIEdgeInsets edgeInsets;//label四周边距，默认(5,5,5,5)
 
+@end
+
+
+/**
+ （可选）配置LFBubbleView默认样式的单例，只需应用启动时配置一次即可
+ 作用：如果多处使用LFBubbleView，配置默认样式，就不用繁琐的设置那些属性
+ */
+@interface LFBubbleViewDefaultConfig : NSObject
+
+@property (nonatomic, strong) LFBubbleViewConfig *config;
+
 + (instancetype)sharedInstance;
 
 @end
-
 
 
 /**
@@ -42,13 +48,7 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
  */
 @interface LFBubbleView : UIView
 
-@property (nonatomic, strong) UIColor *color;
-@property (nonatomic, strong) UIColor *borderColor;
-@property (nonatomic, assign) CGFloat borderWidth;
-@property (nonatomic, assign) CGFloat cornerRadius;//圆角
-@property (nonatomic, assign) CGFloat triangleH;//三角形高
-@property (nonatomic, assign) CGFloat triangleW;//三角形底边长
-
+@property (nonatomic, strong) LFBubbleViewConfig *config;
 @property (nonatomic, strong) UIView *contentView;//容器，可放自定义视图，默认装文字
 @property (nonatomic, strong) UILabel *lbTitle;//提示文字
 @property (nonatomic) LFTriangleDirection direction;//三角方向，默认朝下

@@ -24,17 +24,19 @@
     [self.view addSubview:_starsView];
 }
 
+//是否允许用户点击、滑动星星
 - (IBAction)change:(id)sender {
     UISwitch *sw = (UISwitch *)sender;
-    if (sw.isOn) {
+    if (sw.isOn) {//给selectBlock则允许点击滑动
         __weak typeof(self) weakSelf = self;
         _starsView.selectBlock = ^(CGFloat value) {
             weakSelf.tf.text = [NSString stringWithFormat:@"%f",value];
         };
-    } else {
+    } else {//selectBlock = nil则不允许
         _starsView.selectBlock = nil;
     }
 }
+
 - (IBAction)OK:(id)sender {
     [self.view endEditing:YES];
     _starsView.value = _tf.text.floatValue;

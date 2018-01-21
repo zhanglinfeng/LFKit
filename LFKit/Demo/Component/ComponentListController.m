@@ -11,6 +11,7 @@
 #import "LFBadgeViewController.h"
 #import "LFStarsViewVC.h"
 #import "LFPopupMenuTestVC.h"
+#import "LFSegmentTestVC.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -62,6 +63,10 @@
                    }},
                   @{@"title":@"带三角选项弹窗",@"action":^{
                       LFPopupMenuTestVC *vc = [[LFPopupMenuTestVC alloc] init];
+                      [self.navigationController pushViewController:vc animated:YES];
+                  }},
+                  @{@"title":@"LFSegmentTest",@"action":^{
+                      LFSegmentTestVC *vc = [[LFSegmentTestVC alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
                   }}
                    ];

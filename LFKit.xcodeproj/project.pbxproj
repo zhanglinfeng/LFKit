@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
+		D12FBBE120146F1300814195 /* LFSegmentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D12FBBE020146F1300814195 /* LFSegmentScrollView.m */; };
+		D12FBBE420146F4000814195 /* LFSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D12FBBE320146F4000814195 /* LFSegmentView.m */; };
+		D12FBBE72014B91E00814195 /* LFSegmentTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12FBBE62014B91E00814195 /* LFSegmentTestVC.m */; };
 		D13B092B1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */; };
 		D13B092E1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B092D1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m */; };
 		D13B09321FF0E5DA00D8BFE1 /* LFStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B09311FF0E5DA00D8BFE1 /* LFStarsView.m */; };
@@ -99,6 +102,12 @@
 		1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.debug.xcconfig"; sourceTree = "<group>"; };
 		5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.release.xcconfig"; sourceTree = "<group>"; };
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D12FBBDF20146F1300814195 /* LFSegmentScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentScrollView.h; sourceTree = "<group>"; };
+		D12FBBE020146F1300814195 /* LFSegmentScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSegmentScrollView.m; sourceTree = "<group>"; };
+		D12FBBE220146F4000814195 /* LFSegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentView.h; sourceTree = "<group>"; };
+		D12FBBE320146F4000814195 /* LFSegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSegmentView.m; sourceTree = "<group>"; };
+		D12FBBE52014B91E00814195 /* LFSegmentTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentTestVC.h; sourceTree = "<group>"; };
+		D12FBBE62014B91E00814195 /* LFSegmentTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSegmentTestVC.m; sourceTree = "<group>"; };
 		D13B09291FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAlignCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAlignCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		D13B092C1FF0E1BF00D8BFE1 /* LFAnnulusProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAnnulusProgress.h; sourceTree = "<group>"; };
@@ -263,6 +272,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D12FBBDE20146ED300814195 /* LFSegment */ = {
+			isa = PBXGroup;
+			children = (
+				D12FBBDF20146F1300814195 /* LFSegmentScrollView.h */,
+				D12FBBE020146F1300814195 /* LFSegmentScrollView.m */,
+				D12FBBE220146F4000814195 /* LFSegmentView.h */,
+				D12FBBE320146F4000814195 /* LFSegmentView.m */,
+			);
+			path = LFSegment;
+			sourceTree = "<group>";
+		};
 		D13B09271FF0E0D400D8BFE1 /* LFAlignCollectionViewFlowLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +369,8 @@
 				D1D977372004BABC0053AE92 /* LFPopupMenuTestVC.h */,
 				D1D977382004BABC0053AE92 /* LFPopupMenuTestVC.m */,
 				D1D977392004BABC0053AE92 /* LFPopupMenuTestVC.xib */,
+				D12FBBE52014B91E00814195 /* LFSegmentTestVC.h */,
+				D12FBBE62014B91E00814195 /* LFSegmentTestVC.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -474,6 +496,7 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D12FBBDE20146ED300814195 /* LFSegment */,
 				D13B09271FF0E0D400D8BFE1 /* LFAlignCollectionViewFlowLayout */,
 				D13B09281FF0E0D500D8BFE1 /* LFAnnulusProgress */,
 				D142B0AE1FC83832008C032A /* LFBadge */,
@@ -868,7 +891,10 @@
 				D1AC22211FA3290C0039A2C2 /* SFHFKeychainUtils.m in Sources */,
 				D13B092E1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m in Sources */,
 				D1AC21C31FA3258A0039A2C2 /* AppDelegate.m in Sources */,
+				D12FBBE420146F4000814195 /* LFSegmentView.m in Sources */,
+				D12FBBE72014B91E00814195 /* LFSegmentTestVC.m in Sources */,
 				D1AC22241FA3290C0039A2C2 /* LFTimeUtil.m in Sources */,
+				D12FBBE120146F1300814195 /* LFSegmentScrollView.m in Sources */,
 				D14ADDFE1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m in Sources */,
 				D1AC22291FA32F010039A2C2 /* NSDate+LF.m in Sources */,
 				D1AC22221FA3290C0039A2C2 /* LFFileUtil.m in Sources */,

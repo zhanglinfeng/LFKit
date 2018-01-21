@@ -7,6 +7,48 @@
 //
 
 #import "LFBubbleView.h"
+#import <objc/runtime.h>
+
+@implementation LFBubbleViewConfig
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.color = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
+        self.textColor = [UIColor whiteColor];
+        self.font = [UIFont systemFontOfSize:12];
+        self.cornerRadius = 5;
+        self.triangleH = 7;
+        self.triangleW = 7;
+        self.edgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    id obj = [[[self class] allocWithZone:zone] init];
+    
+    Class class = [self class];
+    unsigned int count = 0;
+    //获取类中所有成员变量名
+    Ivar *ivar = class_copyIvarList(class, &count);
+    for (int i = 0; i < count; i++) {
+        Ivar iva = ivar[i];
+        const char *name = ivar_getName(iva);
+        NSString *strName = [NSString stringWithUTF8String:name];
+        //进行解档取值
+        //            id value = [decoder decodeObjectForKey:strName];
+        id value = [self valueForKey:strName];
+        //利用KVC对属性赋值
+        [obj setValue:value forKey:strName];
+    }
+    free(ivar);
+    
+    return obj;
+}
+
+@end
+
 
 @implementation LFBubbleViewDefaultConfig
 
@@ -15,13 +57,7 @@ static LFBubbleViewDefaultConfig *_instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [[self alloc] init];
-        _instance.color = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
-        _instance.textColor = [UIColor whiteColor];
-        _instance.font = [UIFont systemFontOfSize:12];
-        _instance.cornerRadius = 5;
-        _instance.triangleH = 7;
-        _instance.triangleW = 7;
-        _instance.edgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        _instance.config = [[LFBubbleViewConfig alloc] init];
     });
     return _instance;
 }
@@ -34,6 +70,8 @@ static LFBubbleViewDefaultConfig *_instance = nil;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.config = [[LFBubbleViewDefaultConfig sharedInstance].config copy];
+        
         self.backgroundColor = [UIColor clearColor];
         _contentView = [[UIView alloc] init];
         self.contentView.backgroundColor = [UIColor clearColor];
@@ -41,8 +79,8 @@ static LFBubbleViewDefaultConfig *_instance = nil;
         
         self.lbTitle = [[UILabel alloc] init];
         self.lbTitle.backgroundColor = [UIColor clearColor];
-        self.lbTitle.font = [LFBubbleViewDefaultConfig sharedInstance].font;
-        self.lbTitle.textColor = [LFBubbleViewDefaultConfig sharedInstance].textColor;
+        self.lbTitle.font = self.config.font;
+        self.lbTitle.textColor = self.config.textColor;
         self.lbTitle.textAlignment = NSTextAlignmentCenter;
         self.lbTitle.numberOfLines = 0;
         [_contentView addSubview:self.lbTitle];
@@ -52,12 +90,7 @@ static LFBubbleViewDefaultConfig *_instance = nil;
 
 //数据配置
 - (void)initData {
-    self.color = self.color ? self.color : [LFBubbleViewDefaultConfig sharedInstance].color;
-    self.borderColor = self.borderColor ? self.borderColor : [LFBubbleViewDefaultConfig sharedInstance].borderColor;
-    self.borderWidth = self.borderWidth > 0 ? self.borderWidth : [LFBubbleViewDefaultConfig sharedInstance].borderWidth;
-    self.cornerRadius = self.cornerRadius > 0 ? self.cornerRadius : [LFBubbleViewDefaultConfig sharedInstance].cornerRadius;
-    self.triangleH = self.triangleH > 0 ? self.triangleH : [LFBubbleViewDefaultConfig sharedInstance].triangleH;
-    self.triangleW = self.triangleW > 0 ? self.triangleW : [LFBubbleViewDefaultConfig sharedInstance].triangleW;
+    
     if (self.triangleXY < 1) {
         if (self.triangleXYScale == 0) {
             self.triangleXYScale = 0.5;
@@ -79,113 +112,113 @@ static LFBubbleViewDefaultConfig *_instance = nil;
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    rect.origin.x = rect.origin.x + self.borderWidth;
-    rect.origin.y = rect.origin.y + self.borderWidth;
-    rect.size.width = rect.size.width - 2*self.borderWidth;
-    rect.size.height = rect.size.height - 2*self.borderWidth;
+    rect.origin.x = rect.origin.x + self.config.borderWidth;
+    rect.origin.y = rect.origin.y + self.config.borderWidth;
+    rect.size.width = rect.size.width - 2*self.config.borderWidth;
+    rect.size.height = rect.size.height - 2*self.config.borderWidth;
     
     switch (self.direction) {
         case LFTriangleDirection_Down:
         {
-            CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + self.cornerRadius);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - self.triangleH - self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + rect.size.height - self.triangleH - self.cornerRadius,
-                         self.cornerRadius, M_PI, M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY - self.triangleW/2,
-                                 rect.origin.y + rect.size.height - self.triangleH);
+            CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + self.config.cornerRadius);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - self.config.triangleH - self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + rect.size.height - self.config.triangleH - self.config.cornerRadius,
+                         self.config.cornerRadius, M_PI, M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY - self.config.triangleW/2,
+                                 rect.origin.y + rect.size.height - self.config.triangleH);
             CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY,
                                  rect.origin.y + rect.size.height);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY + self.triangleW/2,
-                                 rect.origin.y + rect.size.height - self.triangleH);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius,
-                                 rect.origin.y + rect.size.height - self.triangleH);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius,
-                         rect.origin.y + rect.size.height - self.triangleH - self.cornerRadius, self.cornerRadius, M_PI / 2, 0.0f, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius, rect.origin.y + self.cornerRadius,
-                         self.cornerRadius, 0.0f, -M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y);
-            CGPathAddArc(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + self.cornerRadius, self.cornerRadius,
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY + self.config.triangleW/2,
+                                 rect.origin.y + rect.size.height - self.config.triangleH);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius,
+                                 rect.origin.y + rect.size.height - self.config.triangleH);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius,
+                         rect.origin.y + rect.size.height - self.config.triangleH - self.config.cornerRadius, self.config.cornerRadius, M_PI / 2, 0.0f, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius, rect.origin.y + self.config.cornerRadius,
+                         self.config.cornerRadius, 0.0f, -M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y);
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + self.config.cornerRadius, self.config.cornerRadius,
                          -M_PI / 2, M_PI, 1);
         }
             break;
         case LFTriangleDirection_Up:
         {
-            CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + self.cornerRadius + self.triangleH);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + rect.size.height - self.cornerRadius,
-                         self.cornerRadius, M_PI, M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius,
+            CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + self.config.cornerRadius + self.config.triangleH);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + rect.size.height - self.config.cornerRadius,
+                         self.config.cornerRadius, M_PI, M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius,
                                  rect.origin.y + rect.size.height);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius,
-                         rect.origin.y + rect.size.height - self.cornerRadius, self.cornerRadius, M_PI / 2, 0.0f, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + self.triangleH + self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius, rect.origin.y + self.triangleH + self.cornerRadius,
-                         self.cornerRadius, 0.0f, -M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY + self.triangleW/2,
-                                 rect.origin.y + self.triangleH);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius,
+                         rect.origin.y + rect.size.height - self.config.cornerRadius, self.config.cornerRadius, M_PI / 2, 0.0f, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width, rect.origin.y + self.config.triangleH + self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius, rect.origin.y + self.config.triangleH + self.config.cornerRadius,
+                         self.config.cornerRadius, 0.0f, -M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY + self.config.triangleW/2,
+                                 rect.origin.y + self.config.triangleH);
             CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY,
                                  rect.origin.y);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY - self.triangleW/2,
-                                 rect.origin.y + self.triangleH);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + self.triangleH);
-            CGPathAddArc(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + self.triangleH + self.cornerRadius, self.cornerRadius,
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleXY - self.config.triangleW/2,
+                                 rect.origin.y + self.config.triangleH);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + self.config.triangleH);
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + self.config.triangleH + self.config.cornerRadius, self.config.cornerRadius,
                          -M_PI / 2, M_PI, 1);
             
         }
             break;
         case LFTriangleDirection_Left:
         {
-            CGPathMoveToPoint(path, NULL, rect.origin.x + self.triangleH, rect.origin.y + self.cornerRadius);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleH, rect.origin.y + self.triangleXY - self.triangleW/2);
+            CGPathMoveToPoint(path, NULL, rect.origin.x + self.config.triangleH, rect.origin.y + self.config.cornerRadius);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.triangleH, rect.origin.y + self.triangleXY - self.config.triangleW/2);
             CGPathAddLineToPoint(path, NULL, rect.origin.x,
                                  rect.origin.y + self.triangleXY);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleH,
-                                 rect.origin.y + self.triangleXY + self.triangleW/2);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleH,
-                                 rect.origin.y + rect.size.height - self.cornerRadius);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.triangleH,
+                                 rect.origin.y + self.triangleXY + self.config.triangleW/2);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.triangleH,
+                                 rect.origin.y + rect.size.height - self.config.cornerRadius);
             
-            CGPathAddArc(path, NULL, rect.origin.x + self.triangleH + self.cornerRadius, rect.origin.y + rect.size.height - self.cornerRadius,
-                         self.cornerRadius, M_PI, M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius,
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.triangleH + self.config.cornerRadius, rect.origin.y + rect.size.height - self.config.cornerRadius,
+                         self.config.cornerRadius, M_PI, M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius,
                                  rect.origin.y + rect.size.height);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius,
-                         rect.origin.y + rect.size.height - self.cornerRadius, self.cornerRadius, M_PI / 2, 0.0f, 1);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius,
+                         rect.origin.y + rect.size.height - self.config.cornerRadius, self.config.cornerRadius, M_PI / 2, 0.0f, 1);
             CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width,
-                                 rect.origin.y + self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.cornerRadius, rect.origin.y + self.cornerRadius,
-                         self.cornerRadius, 0.0f, -M_PI / 2, 1);
+                                 rect.origin.y + self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.cornerRadius, rect.origin.y + self.config.cornerRadius,
+                         self.config.cornerRadius, 0.0f, -M_PI / 2, 1);
             
             
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.triangleH + self.cornerRadius, rect.origin.y);
-            CGPathAddArc(path, NULL, rect.origin.x + self.triangleH + self.cornerRadius, rect.origin.y + self.cornerRadius, self.cornerRadius,
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.triangleH + self.config.cornerRadius, rect.origin.y);
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.triangleH + self.config.cornerRadius, rect.origin.y + self.config.cornerRadius, self.config.cornerRadius,
                          -M_PI / 2, M_PI, 1);
             
         }
             break;
         case LFTriangleDirection_Right:
         {
-            CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + self.cornerRadius);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + rect.size.height - self.cornerRadius,
-                         self.cornerRadius, M_PI, M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.triangleH - self.cornerRadius,
+            CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + self.config.cornerRadius);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x, rect.origin.y + rect.size.height - self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + rect.size.height - self.config.cornerRadius,
+                         self.config.cornerRadius, M_PI, M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.triangleH - self.config.cornerRadius,
                                  rect.origin.y + rect.size.height);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.triangleH - self.cornerRadius,
-                         rect.origin.y + rect.size.height - self.cornerRadius, self.cornerRadius, M_PI / 2, 0.0f, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.triangleH,
-                                 rect.origin.y + self.triangleXY + self.triangleW/2);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.triangleH - self.config.cornerRadius,
+                         rect.origin.y + rect.size.height - self.config.cornerRadius, self.config.cornerRadius, M_PI / 2, 0.0f, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.triangleH,
+                                 rect.origin.y + self.triangleXY + self.config.triangleW/2);
             CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width,
                                  rect.origin.y + self.triangleXY);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.triangleH,
-                                 rect.origin.y + self.triangleXY - self.triangleW/2);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.triangleH,
-                                 rect.origin.y + self.cornerRadius);
-            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.triangleH - self.cornerRadius, rect.origin.y + self.cornerRadius,
-                         self.cornerRadius, 0.0f, -M_PI / 2, 1);
-            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.cornerRadius,
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.triangleH,
+                                 rect.origin.y + self.triangleXY - self.config.triangleW/2);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + rect.size.width - self.config.triangleH,
+                                 rect.origin.y + self.config.cornerRadius);
+            CGPathAddArc(path, NULL, rect.origin.x + rect.size.width - self.config.triangleH - self.config.cornerRadius, rect.origin.y + self.config.cornerRadius,
+                         self.config.cornerRadius, 0.0f, -M_PI / 2, 1);
+            CGPathAddLineToPoint(path, NULL, rect.origin.x + self.config.cornerRadius,
                                  rect.origin.y);
-            CGPathAddArc(path, NULL, rect.origin.x + self.cornerRadius, rect.origin.y + self.cornerRadius, self.cornerRadius,
+            CGPathAddArc(path, NULL, rect.origin.x + self.config.cornerRadius, rect.origin.y + self.config.cornerRadius, self.config.cornerRadius,
                          -M_PI / 2, M_PI, 1);
             
             
@@ -199,7 +232,7 @@ static LFBubbleViewDefaultConfig *_instance = nil;
     CGPathCloseSubpath(path);
     
     //填充气泡
-    [self.color setFill];
+    [self.config.color setFill];
     CGContextAddPath(context, path);
     CGContextSaveGState(context);
     //    CGContextSetShadowWithColor(context, CGSizeMake (0, self.yShadowOffset), 6, [UIColor colorWithWhite:0 alpha:.5].CGColor);
@@ -207,9 +240,9 @@ static LFBubbleViewDefaultConfig *_instance = nil;
     CGContextRestoreGState(context);
     
     // 边缘线
-    if (self.borderColor && self.borderWidth > 0) {
-        [self.borderColor setStroke];
-        CGContextSetLineWidth(context, self.borderWidth);
+    if (self.config.borderColor && self.config.borderWidth > 0) {
+        [self.config.borderColor setStroke];
+        CGContextSetLineWidth(context, self.config.borderWidth);
         CGContextSetLineCap(context, kCGLineCapSquare);
         CGContextAddPath(context, path);
         CGContextStrokePath(context);
@@ -249,41 +282,41 @@ static LFBubbleViewDefaultConfig *_instance = nil;
     //数据配置
     [self initData];
     //contentView与self的边距
-    CGFloat padding = self.cornerRadius - self.cornerRadius/M_SQRT2 + self.borderWidth;
+    CGFloat padding = self.config.cornerRadius - self.config.cornerRadius/M_SQRT2 + self.config.borderWidth;
     switch (self.direction) {
         case LFTriangleDirection_Down:
         {
             self.frame = CGRectMake(point.x - self.triangleXY, point.y - self.frame.size.height, self.frame.size.width, self.frame.size.height);
-            self.contentView.frame = CGRectMake(padding, padding, self.frame.size.width - 2 * padding, self.frame.size.height - 2 * padding - self.triangleH);
+            self.contentView.frame = CGRectMake(padding, padding, self.frame.size.width - 2 * padding, self.frame.size.height - 2 * padding - self.config.triangleH);
             
         }
             break;
         case LFTriangleDirection_Up:
         {
             self.frame = CGRectMake(point.x - self.triangleXY, point.y, self.frame.size.width, self.frame.size.height);
-            self.contentView.frame = CGRectMake(padding, padding + self.triangleH, self.frame.size.width - 2 * padding, self.frame.size.height - 2 * padding - self.triangleH);
+            self.contentView.frame = CGRectMake(padding, padding + self.config.triangleH, self.frame.size.width - 2 * padding, self.frame.size.height - 2 * padding - self.config.triangleH);
         }
             break;
         case LFTriangleDirection_Left:
         {
             self.frame = CGRectMake(point.x, point.y - self.triangleXY, self.frame.size.width, self.frame.size.height);
-            self.contentView.frame = CGRectMake(self.triangleH + padding, padding, self.frame.size.width - 2 * padding - self.triangleH, self.frame.size.height - 2 * padding);
+            self.contentView.frame = CGRectMake(self.config.triangleH + padding, padding, self.frame.size.width - 2 * padding - self.config.triangleH, self.frame.size.height - 2 * padding);
         }
             break;
         case LFTriangleDirection_Right:
         {
             self.frame = CGRectMake(point.x - self.frame.size.width, point.y - self.triangleXY, self.frame.size.width, self.frame.size.height);
-            self.contentView.frame = CGRectMake(padding, padding, self.frame.size.width - 2 * padding - self.triangleH, self.frame.size.height - 2 * padding);
+            self.contentView.frame = CGRectMake(padding, padding, self.frame.size.width - 2 * padding - self.config.triangleH, self.frame.size.height - 2 * padding);
         }
             break;
         default:
             break;
     }
     
-    CGFloat top = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.top;
-    CGFloat left = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.left;
-    CGFloat right = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.right;
-    CGFloat bottom = [LFBubbleViewDefaultConfig sharedInstance].edgeInsets.bottom;
+    CGFloat top = self.config.edgeInsets.top;
+    CGFloat left = self.config.edgeInsets.left;
+    CGFloat right = self.config.edgeInsets.right;
+    CGFloat bottom = self.config.edgeInsets.bottom;
     self.lbTitle.frame = CGRectMake(left - padding, top - padding, self.frame.size.width - left - right, self.frame.size.height - top - bottom);
 }
 

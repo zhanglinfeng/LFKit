@@ -25,7 +25,9 @@
     LFPopupMenuItem *item2 = [LFPopupMenuItem createWithTitle:@"拍照" image:[UIImage imageNamed:@"icon_menu_shoot_normal"]];
     LFPopupMenuItem *item3 = [LFPopupMenuItem createWithTitle:@"相册" image:[UIImage imageNamed:@"icon_menu_album_normal"]];
     self.items = @[item1, item2, item3];
+    
 }
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -60,16 +62,17 @@
                        NSLog(@"点击了第%zi个",index);
                    }];
     
+    CGRect pointViewRect = [sender.superview convertRect:sender.frame toView:[UIApplication sharedApplication].keyWindow];
     [menu showInPoint:CGPointMake(CGRectGetMidX(sender.frame) - (menu.frame.size.width - 12), CGRectGetMaxY(sender.frame))];
 }
 
 //加边框的弹窗
 - (IBAction)action3:(id)sender {
     LFPopupMenu *menu = [[LFPopupMenu alloc] init];
-    menu.needBorder = YES;
-    menu.leftEdgeMargin = 10;
-    menu.rightEdgeMargin = 30;
-    menu.textMargin = 4;
+    menu.config.needBorder = YES;
+    menu.config.leftEdgeMargin = 10;
+    menu.config.rightEdgeMargin = 30;
+    menu.config.textMargin = 2;
     menu.direction = PopupMenuDirection_Down;
     menu.dismissComplete = ^{
         NSLog(@"消失了");
@@ -99,7 +102,7 @@
     menu.layer.shadowColor = [UIColor blackColor].CGColor;
     menu.layer.shadowOffset = CGSizeMake(2, 2);
     menu.layer.shadowOpacity = 0.5;
-    menu.needBorder = YES;
+    menu.config.needBorder = YES;
     [menu configWithItems:self.items
                    action:^(NSInteger index) {
                        NSLog(@"点击了第%zi个",index);
@@ -125,8 +128,8 @@
 //边框+遮罩的弹窗
 - (IBAction)action6:(id)sender {
     LFPopupMenu *menu = [[LFPopupMenu alloc] init];
-    menu.needBorder = YES;
-    menu.lineColor = [UIColor redColor];
+    menu.config.needBorder = YES;
+    menu.config.lineColor = [UIColor redColor];
     menu.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     [menu configWithItems:self.items
                    action:^(NSInteger index) {
@@ -171,9 +174,9 @@
 //黑底白字
 - (IBAction)action9:(id)sender {
     LFPopupMenu *menu = [[LFPopupMenu alloc] init];
-    menu.fillColor = [UIColor blackColor];
-    menu.textColor = [UIColor whiteColor];
-    menu.lineColor = [UIColor lightGrayColor];
+    menu.config.fillColor = [UIColor blackColor];
+    menu.config.textColor = [UIColor whiteColor];
+    menu.config.lineColor = [UIColor lightGrayColor];
     [menu configWithItems:self.items
                    action:^(NSInteger index) {
                        NSLog(@"点击了第%zi个",index);
@@ -183,7 +186,7 @@
 - (IBAction)action10:(UIButton *)sender {
     UIView *customView = [self getCustomView];
     LFPopupMenu *menu = [[LFPopupMenu alloc] init];
-    menu.fillColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    menu.config.fillColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     [menu configWithCustomView:customView];
     [menu showArrowToView:sender];
     
