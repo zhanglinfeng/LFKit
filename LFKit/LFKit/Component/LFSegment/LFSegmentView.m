@@ -159,29 +159,33 @@
 
 - (void)adjustLinePosition:(CGFloat)offsetX {
     NSInteger currentIndex = _selectedButton.tag;
-    
-    // 当当前的偏移量大于被选中index的偏移量的时候，就是在右侧
-    CGFloat offset; // 在同一侧的偏移量
-    NSInteger buttonIndex = currentIndex;
-    if (offsetX >= _selectedButton.tag * self.frame.size.width) {
-        offset = offsetX - _selectedButton.tag * self.frame.size.width;
-        buttonIndex += 1;
+    NSInteger targetIndex = currentIndex;
+    //偏移量
+    CGFloat offset = offsetX - _selectedButton.tag * self.frame.size.width;
+    if (offset >= 0) {
+        targetIndex += 1;
     } else {
-        offset = _selectedButton.tag * self.frame.size.width - offsetX;
-        buttonIndex -= 1;
-        currentIndex -= 1;
+        targetIndex -= 1;
     }
     
-    CGFloat originMovedX = self.config.indicateStyle == LFSegmentIndicateStyleAlignText? (CGRectGetMinX(_selectedButton.frame) + self.textMargin) : CGRectGetMinX(_selectedButton.frame);
-    CGFloat targetMovedWidth = [self widthAtIndex:currentIndex];//需要移动的距离
+    //指示线原始X
+    CGFloat originX = self.config.indicateStyle == LFSegmentIndicateStyleAlignText? (CGRectGetMinX(_selectedButton.frame) + self.textMargin) : CGRectGetMinX(_selectedButton.frame);
     
-    CGFloat targetButtonWidth = self.config.indicateStyle == LFSegmentIndicateStyleAlignText? ([self widthAtIndex:buttonIndex] - 2 * self.textMargin) : [self widthAtIndex:buttonIndex]; // 这个会影响width
-    CGFloat originButtonWidth = self.config.indicateStyle == LFSegmentIndicateStyleAlignText? ([self widthAtIndex:_selectedButton.tag] - 2 * self.textMargin) : [self widthAtIndex:_selectedButton.tag];
+    //需要移动的距离
+    CGFloat targetMovedWidth = 0;
+    if (offset >= 0) {
+        targetMovedWidth = [self widthAtIndex:currentIndex];
+    } else {
+        targetMovedWidth = [self widthAtIndex:targetIndex];
+    }
     
+    //指示线目标宽度
+    CGFloat targetWidth = self.config.indicateStyle == LFSegmentIndicateStyleAlignText? ([self widthAtIndex:targetIndex] - 2 * self.textMargin) : [self widthAtIndex:targetIndex];
     
-    CGFloat moved; // 移动的距离
-    moved = offsetX - _selectedButton.tag * self.frame.size.width;
-    _indicateView.frame = CGRectMake(originMovedX + targetMovedWidth / self.frame.size.width * moved, _indicateView.frame.origin.y,  originButtonWidth + (targetButtonWidth - originButtonWidth) / self.frame.size.width * offset, _indicateView.frame.size.height);
+    //指示线原始宽度
+    CGFloat originWidth = self.config.indicateStyle == LFSegmentIndicateStyleAlignText? ([self widthAtIndex:_selectedButton.tag] - 2 * self.textMargin) : [self widthAtIndex:_selectedButton.tag];
+    
+    _indicateView.frame = CGRectMake(originX + targetMovedWidth / self.frame.size.width * offset, _indicateView.frame.origin.y,  originWidth + (targetWidth - originWidth) / self.frame.size.width * fabs(offset), _indicateView.frame.size.height);
 }
 
 

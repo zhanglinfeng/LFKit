@@ -12,6 +12,7 @@
 #import "LFStarsViewVC.h"
 #import "LFPopupMenuTestVC.h"
 #import "LFSegmentTestVC.h"
+#import "LFBubbleViewTestVC.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -65,8 +66,12 @@
                       LFPopupMenuTestVC *vc = [[LFPopupMenuTestVC alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
                   }},
-                  @{@"title":@"LFSegmentTest",@"action":^{
+                  @{@"title":@"分页控制器",@"action":^{
                       LFSegmentTestVC *vc = [[LFSegmentTestVC alloc] init];
+                      [self.navigationController pushViewController:vc animated:YES];
+                  }},
+                  @{@"title":@"气泡",@"action":^{
+                      LFBubbleViewTestVC *vc = [[LFBubbleViewTestVC alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
                   }}
                    ];

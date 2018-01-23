@@ -28,6 +28,8 @@
 		D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE111FAC5F8300951E26 /* BaseViewController.m */; };
 		D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */; };
 		D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */; };
+		D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */; };
+		D16C28732015EF1700E3E4F7 /* LFBaseCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D16C28722015EF1700E3E4F7 /* LFBaseCardView.m */; };
 		D18628FD1FA8777900780629 /* NSLayoutConstraint+LFXIB.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22041FA328920039A2C2 /* NSLayoutConstraint+LFXIB.m */; };
 		D18628FE1FA8777900780629 /* NSString+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC220B1FA328930039A2C2 /* NSString+LF.m */; };
 		D18628FF1FA8777900780629 /* NSTimer+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22121FA328930039A2C2 /* NSTimer+LF.m */; };
@@ -136,6 +138,10 @@
 		D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFCameraResultViewController.h; sourceTree = "<group>"; };
 		D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCameraResultViewController.m; sourceTree = "<group>"; };
 		D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraResultViewController.xib; sourceTree = "<group>"; };
+		D16C286D2015CAE300E3E4F7 /* LFBubbleViewTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBubbleViewTestVC.h; sourceTree = "<group>"; };
+		D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBubbleViewTestVC.m; sourceTree = "<group>"; };
+		D16C28712015EF1700E3E4F7 /* LFBaseCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBaseCardView.h; sourceTree = "<group>"; };
+		D16C28722015EF1700E3E4F7 /* LFBaseCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBaseCardView.m; sourceTree = "<group>"; };
 		D18628FB1FA8772B00780629 /* RotationMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotationMenu.h; sourceTree = "<group>"; };
 		D18628FC1FA8772B00780629 /* RotationMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotationMenu.m; sourceTree = "<group>"; };
 		D1AC21BE1FA3258A0039A2C2 /* LFKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LFKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -371,6 +377,8 @@
 				D1D977392004BABC0053AE92 /* LFPopupMenuTestVC.xib */,
 				D12FBBE52014B91E00814195 /* LFSegmentTestVC.h */,
 				D12FBBE62014B91E00814195 /* LFSegmentTestVC.m */,
+				D16C286D2015CAE300E3E4F7 /* LFBubbleViewTestVC.h */,
+				D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -396,6 +404,15 @@
 				D14ADE111FAC5F8300951E26 /* BaseViewController.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		D16C28702015EEFA00E3E4F7 /* LFBaseCardView */ = {
+			isa = PBXGroup;
+			children = (
+				D16C28712015EF1700E3E4F7 /* LFBaseCardView.h */,
+				D16C28722015EF1700E3E4F7 /* LFBaseCardView.m */,
+			);
+			path = LFBaseCardView;
 			sourceTree = "<group>";
 		};
 		D18628FA1FA8772B00780629 /* RotationMenu */ = {
@@ -496,6 +513,7 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D16C28702015EEFA00E3E4F7 /* LFBaseCardView */,
 				D12FBBDE20146ED300814195 /* LFSegment */,
 				D13B09271FF0E0D400D8BFE1 /* LFAlignCollectionViewFlowLayout */,
 				D13B09281FF0E0D500D8BFE1 /* LFAnnulusProgress */,
@@ -868,6 +886,8 @@
 				D18629051FA8777900780629 /* UITabBarController+HideTabBar.m in Sources */,
 				D18629061FA8777900780629 /* UITextField+LF.m in Sources */,
 				D18629071FA8777900780629 /* UIView+LF.m in Sources */,
+				D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */,
+				D16C28732015EF1700E3E4F7 /* LFBaseCardView.m in Sources */,
 				D14ADE051FAC54D000951E26 /* ComponentListController.m in Sources */,
 				D18629081FA8777900780629 /* UIView+LFXIB.m in Sources */,
 				D18629091FA8777900780629 /* UIViewController+FullScreenScroll.m in Sources */,

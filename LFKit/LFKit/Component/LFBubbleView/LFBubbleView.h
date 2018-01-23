@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
     LFTriangleDirection_Up
 };
 
+/**样式配置*/
 @interface LFBubbleViewConfig : NSObject <NSCopying>
 
 @property (nonatomic, strong) UIColor *color;//背景色，默认红色半透明
@@ -36,7 +37,7 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
  */
 @interface LFBubbleViewDefaultConfig : NSObject
 
-@property (nonatomic, strong) LFBubbleViewConfig *config;
+@property (nonatomic, strong) LFBubbleViewConfig *config;//有默认值
 
 + (instancetype)sharedInstance;
 
@@ -48,7 +49,7 @@ typedef NS_ENUM(NSInteger, LFTriangleDirection) {
  */
 @interface LFBubbleView : UIView
 
-@property (nonatomic, strong) LFBubbleViewConfig *config;
+@property (nonatomic, strong) LFBubbleViewConfig *config;//设置样式bubble.config = config或bubble.config.xx = xx。有默认值
 @property (nonatomic, strong) UIView *contentView;//容器，可放自定义视图，默认装文字
 @property (nonatomic, strong) UILabel *lbTitle;//提示文字
 @property (nonatomic) LFTriangleDirection direction;//三角方向，默认朝下

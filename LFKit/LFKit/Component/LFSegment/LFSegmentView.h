@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
     LFSegmentIndicateStyleAlignFull, //指示线对齐整个
 };
 
+/**样式配置*/
 @interface LFSegmentConfig : NSObject <NSCopying>
 
 @property (nonatomic) LFSegmentIndicateStyle indicateStyle;
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
  */
 @interface LFSegmentDefaultConfig : NSObject
 
-@property (nonatomic, strong) LFSegmentConfig * _Nonnull config;
+@property (nonatomic, strong) LFSegmentConfig * _Nonnull config;//有默认值
 
 + (instancetype _Nullable )sharedInstance;
 

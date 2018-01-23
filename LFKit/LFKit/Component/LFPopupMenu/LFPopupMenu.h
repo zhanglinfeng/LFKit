@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 
 @end
 
+
+/**样式配置*/
 @interface LFPopupMenuConfig : NSObject <NSCopying>
 
 @property (nonatomic, assign) CGFloat rowHeight;//行高,默认60
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
  */
 @interface LFPopupMenuDefaultConfig : NSObject
 
-@property (nonatomic, strong) LFPopupMenuConfig *config;
+@property (nonatomic, strong) LFPopupMenuConfig *config;//有默认值
 
 + (instancetype)sharedInstance;
 
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 
 @interface LFPopupMenu : UIView
 
-@property (nonatomic, strong) LFPopupMenuConfig *config;
+@property (nonatomic, strong) LFPopupMenuConfig *config;//设置样式popupMenu.config = config或popupMenu.config.xx = xx。有默认值
 @property (nonatomic, strong) UIView *maskView;//半透明遮罩层,默认透明，可自行设置
 @property (nonatomic, strong) UIImage *imgBG;//背景图，设置了这个就不用画带箭头的框了。
 @property (nonatomic, assign) CGPoint anchorPoint;//设置背景图的情况使用，背景图的三角在背景图的位置比例，如左上角(0,0),右下角(1,1),下边中间(0.5,1)以此类推

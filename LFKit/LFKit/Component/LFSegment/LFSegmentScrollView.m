@@ -39,7 +39,7 @@
     };
 }
 
-#pragma mark ---- scrollView delegate
+#pragma mark - scrollView delegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger index = round(scrollView.contentOffset.x / self.frame.size.width);
@@ -53,7 +53,7 @@
     [_segmentView adjustLinePosition:offsetX];
 }
 
-#pragma mark ---- index
+#pragma mark - index
 
 - (void)setSelectedAtIndex:(NSUInteger)index {
     [_segmentView setSelectedIndex:index];
@@ -81,17 +81,15 @@
 }
 
 
-#pragma mark ---- scroll
 
-
-#pragma mark ---- set
+#pragma mark - set
 
 - (void)setViewControllers:(NSArray *)viewControllers {
     _viewControllers = viewControllers;
     self.contentSize = CGSizeMake(viewControllers.count * self.frame.size.width, self.frame.size.height);
 }
 
-#pragma mark ---- get
+#pragma mark - get
 
 - (NSUInteger)currentIndex {
     return self.segmentView.currentIndex;
