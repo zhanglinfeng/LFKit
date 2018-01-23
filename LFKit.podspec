@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'LFCycleScrollView' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFCycleScrollView/*'
-    s.dependency 'YYWebImage'
+    sss.dependency 'YYWebImage'
     end
 
     ss.subspec 'LFErrorView' do |sss|
