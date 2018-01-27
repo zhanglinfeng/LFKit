@@ -86,6 +86,14 @@ Pod::Spec.new do |s|
     sss.source_files         = 'LFKit/LFKit/Component/LFAlignCollectionViewFlowLayout/*'
     end
 
+    ss.subspec 'LFSegment' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFSegment/*'
+    end
+
+    ss.subspec 'LFBaseCardView' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFBaseCardView/*'
+    end
+
   end
 
   # s.source_files = 'LFKit/LFKit/**/*'
