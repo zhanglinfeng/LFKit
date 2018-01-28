@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIColor *bgColor;//背景色,默认白色。不要设置透明色，可设置跟父视图一样的颜色替代透明色。
 @property (nonatomic, copy) void(^selectBlock)(CGFloat value);//设置了回调则可点击或滑动选择星级，不设置则不可点击、滑动
 
-- (instancetype)initWithFrame:(CGRect)frame starNumber:(NSInteger)number image:(UIImage *)image highlightImage:(UIImage *)hImage;
+- (instancetype)initWithFrame:(CGRect)frame;
+
+- (void)configWithStarNumber:(NSInteger)number image:(UIImage *)image highlightImage:(UIImage *)hImage;
 
 @end

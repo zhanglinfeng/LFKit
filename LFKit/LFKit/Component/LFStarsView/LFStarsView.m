@@ -18,18 +18,29 @@
 
 @implementation LFStarsView
 
-- (instancetype)initWithFrame:(CGRect)frame starNumber:(NSInteger)number image:(UIImage *)image highlightImage:(UIImage *)hImage {
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        _number = number;
-        self.backgroundColor = [UIColor whiteColor];
-        self.starBackgroundView = [self buidlStarViewWithImage:image];
-        self.starForegroundView = [self buidlStarViewWithImage:hImage];
-        [self addSubview:self.starBackgroundView];
-        [self addSubview:self.starForegroundView];
-        self.value = 0;
     }
     return self;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+}
+
+- (void)configWithStarNumber:(NSInteger)number image:(UIImage *)image highlightImage:(UIImage *)hImage {
+    _number = number;
+    self.backgroundColor = [UIColor whiteColor];
+    self.starBackgroundView = [self buidlStarViewWithImage:image];
+    self.starForegroundView = [self buidlStarViewWithImage:hImage];
+    [self addSubview:self.starBackgroundView];
+    [self addSubview:self.starForegroundView];
+    self.value = 0;
+}
+
+- (void)initUI {
+    
 }
 
 - (UIView *)buidlStarViewWithImage:(UIImage *)image {
