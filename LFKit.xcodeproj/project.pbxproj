@@ -69,6 +69,7 @@
 		D1AC22291FA32F010039A2C2 /* NSDate+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22281FA32F010039A2C2 /* NSDate+LF.m */; };
 		D1AC22631FA348750039A2C2 /* UIColor+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22621FA348750039A2C2 /* UIColor+LF.m */; };
 		D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */; };
+		D1C01AF62020B3A80009AE0E /* FMDatabase+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C01AF52020B3A80009AE0E /* FMDatabase+LF.m */; };
 		D1D9773A2004BABC0053AE92 /* LFPopupMenuTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D977382004BABC0053AE92 /* LFPopupMenuTestVC.m */; };
 		D1D9773B2004BABC0053AE92 /* LFPopupMenuTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D977392004BABC0053AE92 /* LFPopupMenuTestVC.xib */; };
 		D1D9773E2004C0160053AE92 /* icon_menu_shoot_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1D9773C2004C0160053AE92 /* icon_menu_shoot_normal@3x.png */; };
@@ -220,6 +221,8 @@
 		D1AC22621FA348750039A2C2 /* UIColor+LF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LF.m"; sourceTree = "<group>"; };
 		D1AE0D1E1FB45E79004605E7 /* LFPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPopupMenu.h; sourceTree = "<group>"; };
 		D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFPopupMenu.m; sourceTree = "<group>"; };
+		D1C01AF42020B3A80009AE0E /* FMDatabase+LF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+LF.h"; sourceTree = "<group>"; };
+		D1C01AF52020B3A80009AE0E /* FMDatabase+LF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+LF.m"; sourceTree = "<group>"; };
 		D1D977372004BABC0053AE92 /* LFPopupMenuTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPopupMenuTestVC.h; sourceTree = "<group>"; };
 		D1D977382004BABC0053AE92 /* LFPopupMenuTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPopupMenuTestVC.m; sourceTree = "<group>"; };
 		D1D977392004BABC0053AE92 /* LFPopupMenuTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFPopupMenuTestVC.xib; sourceTree = "<group>"; };
@@ -513,6 +516,7 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D1C01AF32020B3260009AE0E /* LFFMDB */,
 				D16C28702015EEFA00E3E4F7 /* LFBaseCardView */,
 				D12FBBDE20146ED300814195 /* LFSegment */,
 				D13B09271FF0E0D400D8BFE1 /* LFAlignCollectionViewFlowLayout */,
@@ -661,6 +665,15 @@
 				D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */,
 			);
 			path = LFPopupMenu;
+			sourceTree = "<group>";
+		};
+		D1C01AF32020B3260009AE0E /* LFFMDB */ = {
+			isa = PBXGroup;
+			children = (
+				D1C01AF42020B3A80009AE0E /* FMDatabase+LF.h */,
+				D1C01AF52020B3A80009AE0E /* FMDatabase+LF.m */,
+			);
+			path = LFFMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -874,6 +887,7 @@
 				D18628FD1FA8777900780629 /* NSLayoutConstraint+LFXIB.m in Sources */,
 				D18628FE1FA8777900780629 /* NSString+LF.m in Sources */,
 				D13B092B1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m in Sources */,
+				D1C01AF62020B3A80009AE0E /* FMDatabase+LF.m in Sources */,
 				D18628FF1FA8777900780629 /* NSTimer+LF.m in Sources */,
 				D18629001FA8777900780629 /* UIBarButtonItem+LF.m in Sources */,
 				D18629011FA8777900780629 /* UIButton+LF.m in Sources */,
