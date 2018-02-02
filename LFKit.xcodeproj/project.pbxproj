@@ -31,7 +31,6 @@
 		D1554D7C2024255F00AEAB8D /* LFLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D702024255F00AEAB8D /* LFLogFormatter.m */; };
 		D1554D7D2024255F00AEAB8D /* LFSelectLogLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D732024255F00AEAB8D /* LFSelectLogLevelVC.m */; };
 		D1554D7E2024255F00AEAB8D /* LFLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D742024255F00AEAB8D /* LFLogManager.m */; };
-		D1554D7F2024255F00AEAB8D /* LFExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D762024255F00AEAB8D /* LFExceptionHandler.m */; };
 		D1554D802024255F00AEAB8D /* LFLogListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D792024255F00AEAB8D /* LFLogListController.m */; };
 		D1554D812024255F00AEAB8D /* LFLogDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D7B2024255F00AEAB8D /* LFLogDetailController.m */; };
 		D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */; };
@@ -145,12 +144,10 @@
 		D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCameraResultViewController.m; sourceTree = "<group>"; };
 		D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraResultViewController.xib; sourceTree = "<group>"; };
 		D1554D702024255F00AEAB8D /* LFLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogFormatter.m; sourceTree = "<group>"; };
-		D1554D712024255F00AEAB8D /* LFExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFExceptionHandler.h; sourceTree = "<group>"; };
 		D1554D722024255F00AEAB8D /* LFLogListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogListController.h; sourceTree = "<group>"; };
 		D1554D732024255F00AEAB8D /* LFSelectLogLevelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSelectLogLevelVC.m; sourceTree = "<group>"; };
 		D1554D742024255F00AEAB8D /* LFLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogManager.m; sourceTree = "<group>"; };
 		D1554D752024255F00AEAB8D /* LFLogDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogDetailController.h; sourceTree = "<group>"; };
-		D1554D762024255F00AEAB8D /* LFExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFExceptionHandler.m; sourceTree = "<group>"; };
 		D1554D772024255F00AEAB8D /* LFLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogFormatter.h; sourceTree = "<group>"; };
 		D1554D782024255F00AEAB8D /* LFSelectLogLevelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSelectLogLevelVC.h; sourceTree = "<group>"; };
 		D1554D792024255F00AEAB8D /* LFLogListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogListController.m; sourceTree = "<group>"; };
@@ -431,8 +428,6 @@
 				D1554D742024255F00AEAB8D /* LFLogManager.m */,
 				D1554D772024255F00AEAB8D /* LFLogFormatter.h */,
 				D1554D702024255F00AEAB8D /* LFLogFormatter.m */,
-				D1554D712024255F00AEAB8D /* LFExceptionHandler.h */,
-				D1554D762024255F00AEAB8D /* LFExceptionHandler.m */,
 				D1554D722024255F00AEAB8D /* LFLogListController.h */,
 				D1554D792024255F00AEAB8D /* LFLogListController.m */,
 				D1554D752024255F00AEAB8D /* LFLogDetailController.h */,
@@ -918,7 +913,6 @@
 				D13B09361FF0F6E300D8BFE1 /* LFStarsViewVC.m in Sources */,
 				D13B09321FF0E5DA00D8BFE1 /* LFStarsView.m in Sources */,
 				D18629021FA8777900780629 /* UIImage+LF.m in Sources */,
-				D1554D7F2024255F00AEAB8D /* LFExceptionHandler.m in Sources */,
 				D1554D7D2024255F00AEAB8D /* LFSelectLogLevelVC.m in Sources */,
 				D18629031FA8777900780629 /* UIImageView+LF.m in Sources */,
 				D1D9773A2004BABC0053AE92 /* LFPopupMenuTestVC.m in Sources */,
