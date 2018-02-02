@@ -10,7 +10,8 @@
 #import "LFLogFormatter.h"
 #import "LFExceptionHandler.h"
 
-#define DefaultLogLevelKey @"DefaultLogLevelKey"
+#define DefaultLogLevelKey @"DefaultLogLevelKey"//默认等级的key
+#define isSetLevelKey @"isSetLevelKey"//是否设置过日志等级的key
 
 #ifdef DEBUG
 DDLogLevel ddLogLevel = DDLogLevelInfo;
@@ -30,7 +31,11 @@ DDLogLevel ddLogLevel = DDLogLevelError;
 }
 
 + (void)install {
-    ddLogLevel = [[NSUserDefaults standardUserDefaults] integerForKey:DefaultLogLevelKey];
+    BOOL isSetLevel = [[NSUserDefaults standardUserDefaults] boolForKey:isSetLevelKey];
+    if (isSetLevel) {
+        ddLogLevel = [[NSUserDefaults standardUserDefaults] integerForKey:DefaultLogLevelKey];
+    }
+    
     [[LFLogManager shareInstance] configureLog];
     [LFExceptionHandler installExceptionHandler];
 }
@@ -55,7 +60,9 @@ DDLogLevel ddLogLevel = DDLogLevelError;
 - (void)setLogLevel:(DDLogLevel)level {
     ddLogLevel = level;
     [[NSUserDefaults standardUserDefaults] setInteger:ddLogLevel forKey:DefaultLogLevelKey];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:isSetLevelKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 - (DDFileLogger *)fileLogger
