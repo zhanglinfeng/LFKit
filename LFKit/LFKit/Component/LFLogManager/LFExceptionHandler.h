@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ 用法：
+app启动是调用[LFExceptionHandler installExceptionHandler];
+ */
+
 /**异常捕获*/
 @interface LFExceptionHandler : NSObject
 

@@ -8,7 +8,7 @@
 
 #import "LFLogManager.h"
 #import "LFLogFormatter.h"
-#import "LFExceptionHandler.h"
+//#import "LFExceptionHandler.h"
 
 #define DefaultLogLevelKey @"DefaultLogLevelKey"//默认等级的key
 #define isSetLevelKey @"isSetLevelKey"//是否设置过日志等级的key
@@ -37,7 +37,7 @@ DDLogLevel ddLogLevel = DDLogLevelError;
     }
     
     [[LFLogManager shareInstance] configureLog];
-    [LFExceptionHandler installExceptionHandler];
+//    [LFExceptionHandler installExceptionHandler];
 }
 
 - (void)configureLog
