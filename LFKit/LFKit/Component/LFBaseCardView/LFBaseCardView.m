@@ -28,6 +28,12 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    self.windowY = -1;
+}
+
 - (void)tapAction:(UITapGestureRecognizer *)gesture {
     if (self.tapBlankBlock) {
         self.tapBlankBlock();

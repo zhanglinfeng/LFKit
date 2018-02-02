@@ -42,6 +42,11 @@ Pod::Spec.new do |s|
     sss.dependency 'YYWebImage'
     end
 
+    ss.subspec 'LFLogManager' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFLogManager/*'
+    sss.dependency 'CocoaLumberjack'
+    end
+
     ss.subspec 'LFErrorView' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFErrorView/*'
     end
