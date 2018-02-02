@@ -10,6 +10,7 @@
 #import "LFLogDetailController.h"
 #import "LFLogManager.h"
 #import "LFSelectLogLevelVC.h"
+#import "CocoaLumberjack.h"
 
 extern DDLogLevel ddLogLevel;
 
@@ -65,7 +66,7 @@ extern DDLogLevel ddLogLevel;
 
 //读取日志的文件个数
 - (void)loadLogFiles {
-    self.logFiles = [LFLogManager shareInstance].fileLogger.logFileManager.sortedLogFileInfos;
+    self.logFiles = [[LFLogManager shareInstance] getLogFiles];
 }
 
 //时间格式

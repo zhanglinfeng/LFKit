@@ -28,7 +28,6 @@
 		D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE111FAC5F8300951E26 /* BaseViewController.m */; };
 		D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */; };
 		D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */; };
-		D1554D7C2024255F00AEAB8D /* LFLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D702024255F00AEAB8D /* LFLogFormatter.m */; };
 		D1554D7D2024255F00AEAB8D /* LFSelectLogLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D732024255F00AEAB8D /* LFSelectLogLevelVC.m */; };
 		D1554D7E2024255F00AEAB8D /* LFLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D742024255F00AEAB8D /* LFLogManager.m */; };
 		D1554D802024255F00AEAB8D /* LFLogListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D792024255F00AEAB8D /* LFLogListController.m */; };
@@ -143,12 +142,10 @@
 		D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFCameraResultViewController.h; sourceTree = "<group>"; };
 		D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCameraResultViewController.m; sourceTree = "<group>"; };
 		D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraResultViewController.xib; sourceTree = "<group>"; };
-		D1554D702024255F00AEAB8D /* LFLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogFormatter.m; sourceTree = "<group>"; };
 		D1554D722024255F00AEAB8D /* LFLogListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogListController.h; sourceTree = "<group>"; };
 		D1554D732024255F00AEAB8D /* LFSelectLogLevelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSelectLogLevelVC.m; sourceTree = "<group>"; };
 		D1554D742024255F00AEAB8D /* LFLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogManager.m; sourceTree = "<group>"; };
 		D1554D752024255F00AEAB8D /* LFLogDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogDetailController.h; sourceTree = "<group>"; };
-		D1554D772024255F00AEAB8D /* LFLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogFormatter.h; sourceTree = "<group>"; };
 		D1554D782024255F00AEAB8D /* LFSelectLogLevelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSelectLogLevelVC.h; sourceTree = "<group>"; };
 		D1554D792024255F00AEAB8D /* LFLogListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogListController.m; sourceTree = "<group>"; };
 		D1554D7A2024255F00AEAB8D /* LFLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogManager.h; sourceTree = "<group>"; };
@@ -426,8 +423,6 @@
 			children = (
 				D1554D7A2024255F00AEAB8D /* LFLogManager.h */,
 				D1554D742024255F00AEAB8D /* LFLogManager.m */,
-				D1554D772024255F00AEAB8D /* LFLogFormatter.h */,
-				D1554D702024255F00AEAB8D /* LFLogFormatter.m */,
 				D1554D722024255F00AEAB8D /* LFLogListController.h */,
 				D1554D792024255F00AEAB8D /* LFLogListController.m */,
 				D1554D752024255F00AEAB8D /* LFLogDetailController.h */,
@@ -951,7 +946,6 @@
 				D12FBBE420146F4000814195 /* LFSegmentView.m in Sources */,
 				D12FBBE72014B91E00814195 /* LFSegmentTestVC.m in Sources */,
 				D1AC22241FA3290C0039A2C2 /* LFTimeUtil.m in Sources */,
-				D1554D7C2024255F00AEAB8D /* LFLogFormatter.m in Sources */,
 				D12FBBE120146F1300814195 /* LFSegmentScrollView.m in Sources */,
 				D14ADDFE1FAAC6DC00951E26 /* LFEncryptDecryptUtil.m in Sources */,
 				D1AC22291FA32F010039A2C2 /* NSDate+LF.m in Sources */,

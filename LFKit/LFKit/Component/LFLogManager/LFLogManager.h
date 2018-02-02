@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CocoaLumberjack.h"
 
 /**
  用法：
@@ -18,14 +17,15 @@
 /**日志管理（自己打印的日志+崩溃日志+设置打印级别）*/
 @interface LFLogManager : NSObject
 
-@property (nonatomic, strong) DDFileLogger *fileLogger;
-
 + (instancetype)shareInstance;
 
 + (void)install;
 
+/**获取日志文件，数组中元素DDLogFileInfo*/
+- (NSArray *)getLogFiles;
+
 /**设置打印级别*/
-- (void)setLogLevel:(DDLogLevel)level;
+- (void)setLogLevel:(NSInteger)level;
 
 
 @end

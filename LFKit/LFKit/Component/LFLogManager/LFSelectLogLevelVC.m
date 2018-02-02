@@ -8,6 +8,7 @@
 
 #import "LFSelectLogLevelVC.h"
 #import "LFLogManager.h"
+#import "DDLog.h"
 
 extern DDLogLevel ddLogLevel;
 
