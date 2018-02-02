@@ -180,9 +180,9 @@ extern DDLogLevel ddLogLevel;
     }  else if (indexPath.section == 1) {
         for (DDLogFileInfo *logFileInfo in self.logFiles) {
             //除了当前 其它进行清除
-            if (logFileInfo.isArchived) {
+//            if (logFileInfo.isArchived) {
                 [[NSFileManager defaultManager] removeItemAtPath:logFileInfo.filePath error:nil];
-            }
+//            }
         }
         
         [self loadLogFiles];
