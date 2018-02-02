@@ -43,7 +43,7 @@ static void *btnActionKey = &btnActionKey;
     [self addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)el_setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space {
+- (void)setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space {
     CGFloat imageWith = self.imageView.image.size.width;
     CGFloat imageHeight = self.imageView.image.size.height;
     CGFloat labelWidth = 0.0;

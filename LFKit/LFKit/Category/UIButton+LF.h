@@ -28,7 +28,7 @@ typedef void(^LFBtnAction)(UIButton *button);
 
 
 /** 设置图文排列样式及间距 **/
-- (void)el_setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space;
+- (void)setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space;
 
 /*
  *    倒计时按钮

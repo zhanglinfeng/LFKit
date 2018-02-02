@@ -71,6 +71,10 @@ Pod::Spec.new do |s|
     sss.source_files         = 'LFKit/LFKit/Component/LFImagePicker/*'
     end
 
+    ss.subspec 'LFLocalMusicPicker' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFLocalMusicPicker/*'
+    end
+
     ss.subspec 'LFOptionTableView' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFOptionTableView/*'
     end
