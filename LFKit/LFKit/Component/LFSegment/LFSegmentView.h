@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LFSegmentDefaultConfig.h"
 
-typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
-    LFSegmentIndicateStyleAlignText, //指示线对齐文字
-    LFSegmentIndicateStyleAlignFull, //指示线对齐整个
-};
 
-/**样式配置*/
-@interface LFSegmentConfig : NSObject <NSCopying>
+@interface LFSegmentView : UIView
 
 @property (nonatomic) LFSegmentIndicateStyle indicateStyle;
 @property (nonatomic, strong) UIFont * _Nonnull font;//字体，默认16
@@ -23,24 +19,6 @@ typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
 @property (nonatomic, strong, nullable) UIColor *indicateColor;//指示线颜色,默认和字体颜色一样
 @property (nonatomic, assign) CGFloat indicateHeight;//指示线高，默认2
 @property (nonatomic, assign) CGFloat minItemSpace;//最小间距，默认20
-
-@end
-
-
-/**
- （可选）配置LFSegmentView默认样式的单例，只需应用启动时配置一次即可
- 作用：如果多处使用LFSegmentView，配置默认样式，就不用繁琐的设置那些属性
- */
-@interface LFSegmentDefaultConfig : NSObject
-
-@property (nonatomic, strong) LFSegmentConfig * _Nonnull config;//有默认值
-
-+ (instancetype _Nullable )sharedInstance;
-
-@end
-
-
-@interface LFSegmentView : UIView
 
 @property (nonatomic, strong, nullable) UIImage *backgroundImage;//背景图
 @property (nonatomic, readonly) UIView * _Nonnull indicateView; //指示杆
@@ -53,9 +31,6 @@ typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
 @property (nonatomic, copy) void(^ _Nullable selectedBlock)(NSInteger index, UIButton * _Nullable button);
 
 - (__nullable instancetype)initWithFrame:(CGRect)frame titles:(NSArray <NSString *>*_Nonnull)titles;
-
-/**设置样式*/
-- (void)setConfig:(LFSegmentConfig *_Nonnull)config;
 
 - (void)setSelectedIndex:(NSInteger)index;
 

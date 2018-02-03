@@ -84,6 +84,9 @@
 		D1E5A7C22025745200401E3B /* UIBarButtonItem+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7AE2025745100401E3B /* UIBarButtonItem+LF.m */; };
 		D1E5A7C32025745200401E3B /* UIButton+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7B22025745200401E3B /* UIButton+LF.m */; };
 		D1E5A7C42025745200401E3B /* UIViewController+FullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7B52025745200401E3B /* UIViewController+FullScreenScroll.m */; };
+		D1E5A7CA2025CFFD00401E3B /* LFPopupMenuDefaultConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7C92025CFFD00401E3B /* LFPopupMenuDefaultConfig.m */; };
+		D1E5A7CD2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7CC2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m */; };
+		D1E5A7D02025DC6C00401E3B /* LFSegmentDefaultConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7CF2025DC6C00401E3B /* LFSegmentDefaultConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +245,12 @@
 		D1E5A7B22025745200401E3B /* UIButton+LF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LF.m"; sourceTree = "<group>"; };
 		D1E5A7B42025745200401E3B /* UIViewController+FullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FullScreenScroll.h"; sourceTree = "<group>"; };
 		D1E5A7B52025745200401E3B /* UIViewController+FullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FullScreenScroll.m"; sourceTree = "<group>"; };
+		D1E5A7C82025CFFD00401E3B /* LFPopupMenuDefaultConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPopupMenuDefaultConfig.h; sourceTree = "<group>"; };
+		D1E5A7C92025CFFD00401E3B /* LFPopupMenuDefaultConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPopupMenuDefaultConfig.m; sourceTree = "<group>"; };
+		D1E5A7CB2025D9BD00401E3B /* LFBubbleViewDefaultConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBubbleViewDefaultConfig.h; sourceTree = "<group>"; };
+		D1E5A7CC2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBubbleViewDefaultConfig.m; sourceTree = "<group>"; };
+		D1E5A7CE2025DC6C00401E3B /* LFSegmentDefaultConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentDefaultConfig.h; sourceTree = "<group>"; };
+		D1E5A7CF2025DC6C00401E3B /* LFSegmentDefaultConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSegmentDefaultConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +303,8 @@
 				D12FBBE020146F1300814195 /* LFSegmentScrollView.m */,
 				D12FBBE220146F4000814195 /* LFSegmentView.h */,
 				D12FBBE320146F4000814195 /* LFSegmentView.m */,
+				D1E5A7CE2025DC6C00401E3B /* LFSegmentDefaultConfig.h */,
+				D1E5A7CF2025DC6C00401E3B /* LFSegmentDefaultConfig.m */,
 			);
 			path = LFSegment;
 			sourceTree = "<group>";
@@ -635,6 +646,8 @@
 			children = (
 				D1AC22511FA348170039A2C2 /* LFBubbleView.h */,
 				D1AC22521FA348170039A2C2 /* LFBubbleView.m */,
+				D1E5A7CB2025D9BD00401E3B /* LFBubbleViewDefaultConfig.h */,
+				D1E5A7CC2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m */,
 			);
 			path = LFBubbleView;
 			sourceTree = "<group>";
@@ -662,6 +675,8 @@
 			children = (
 				D1AE0D1E1FB45E79004605E7 /* LFPopupMenu.h */,
 				D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */,
+				D1E5A7C82025CFFD00401E3B /* LFPopupMenuDefaultConfig.h */,
+				D1E5A7C92025CFFD00401E3B /* LFPopupMenuDefaultConfig.m */,
 			);
 			path = LFPopupMenu;
 			sourceTree = "<group>";
@@ -1052,10 +1067,12 @@
 			files = (
 				D18629171FA877CB00780629 /* LFQRCodeScanner.m in Sources */,
 				D18629181FA877CB00780629 /* LFQRCodeUtil.m in Sources */,
+				D1E5A7CD2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m in Sources */,
 				D18629191FA877CB00780629 /* LFOptionTableView.m in Sources */,
 				D1E5A7BB2025745200401E3B /* UIView+LFXIB.m in Sources */,
 				D186291A1FA877CB00780629 /* LFErrorView.m in Sources */,
 				D13B092B1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m in Sources */,
+				D1E5A7D02025DC6C00401E3B /* LFSegmentDefaultConfig.m in Sources */,
 				D1E5A7BE2025745200401E3B /* NSTimer+LF.m in Sources */,
 				D1E5A78520256E7100401E3B /* LFJsonUtil.m in Sources */,
 				D13B09361FF0F6E300D8BFE1 /* LFStarsViewVC.m in Sources */,
@@ -1079,6 +1096,7 @@
 				D1554D7E2024255F00AEAB8D /* LFLogManager.m in Sources */,
 				D186290B1FA8777900780629 /* LFBubbleView.m in Sources */,
 				D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */,
+				D1E5A7CA2025CFFD00401E3B /* LFPopupMenuDefaultConfig.m in Sources */,
 				D1E5A7BA2025745200401E3B /* UIView+LF.m in Sources */,
 				D1554D812024255F00AEAB8D /* LFLogDetailController.m in Sources */,
 				D186290C1FA8777900780629 /* LFCamera.m in Sources */,

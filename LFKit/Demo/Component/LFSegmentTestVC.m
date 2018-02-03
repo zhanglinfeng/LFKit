@@ -23,6 +23,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.segmentView = [[LFSegmentView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 44) titles:@[@"热门",@"推荐",@"精品系列"]];
+    self.segmentView.indicateHeight = 4;
+    self.segmentView.indicateColor = [UIColor orangeColor];
+    self.segmentView.selectedColor = [UIColor purpleColor];
     [self.view addSubview:self.segmentView];
     
     

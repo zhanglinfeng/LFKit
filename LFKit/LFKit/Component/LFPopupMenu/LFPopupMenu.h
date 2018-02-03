@@ -25,8 +25,11 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @end
 
 
-/**样式配置*/
-@interface LFPopupMenuConfig : NSObject <NSCopying>
+
+
+
+
+@interface LFPopupMenu : UIView
 
 @property (nonatomic, assign) CGFloat rowHeight;//行高,默认60
 @property (nonatomic, assign) CGFloat arrowH;//箭头形高,默认9
@@ -45,24 +48,6 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, strong) UIColor *fillColor;//带箭头框的填充色，默认白色
 @property (nonatomic, assign) BOOL needBorder;//是否要边框
 
-@end
-
-/**
- （可选）配置LFPopupMenu默认样式的单例，只需应用启动时配置一次即可
- 作用：如果多处使用LFPopupMenu，配置默认样式，就不用繁琐的设置那些属性
- */
-@interface LFPopupMenuDefaultConfig : NSObject
-
-@property (nonatomic, strong) LFPopupMenuConfig *config;//有默认值
-
-+ (instancetype)sharedInstance;
-
-@end
-
-
-@interface LFPopupMenu : UIView
-
-@property (nonatomic, strong) LFPopupMenuConfig *config;//设置样式popupMenu.config = config或popupMenu.config.xx = xx。有默认值
 @property (nonatomic, strong) UIView *maskView;//半透明遮罩层,默认透明，可自行设置
 @property (nonatomic, strong) UIImage *imgBG;//背景图，设置了这个就不用画带箭头的框了。
 @property (nonatomic, assign) CGPoint anchorPoint;//设置背景图的情况使用，背景图的三角在背景图的位置比例，如左上角(0,0),右下角(1,1),下边中间(0.5,1)以此类推

@@ -7,7 +7,7 @@
 //
 
 #import "LFPopupMenu.h"
-#import <objc/runtime.h>
+#import "LFPopupMenuDefaultConfig.h"
 
 @implementation LFPopupMenuItem
 
@@ -21,67 +21,7 @@
 @end
 
 
-@implementation LFPopupMenuConfig
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.rowHeight = 60;
-        self.arrowH = 9;
-        self.arrowW = 9;
-        self.popupMargin = 5;
-        self.leftEdgeMargin = 16;
-        self.rightEdgeMargin = 16;
-        self.textMargin = 8;
-        self.cornerRadius = 6;
-        self.arrowCornerRadius = 0;
-        self.lineColor = [UIColor grayColor];
-        self.textFont = [UIFont systemFontOfSize:15];
-        self.textColor = [UIColor blackColor];
-        self.fillColor = [UIColor whiteColor];
-        self.needBorder =NO;
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    id obj = [[[self class] allocWithZone:zone] init];
-    
-    Class class = [self class];
-    unsigned int count = 0;
-    //获取类中所有成员变量名
-    Ivar *ivar = class_copyIvarList(class, &count);
-    for (int i = 0; i < count; i++) {
-        Ivar iva = ivar[i];
-        const char *name = ivar_getName(iva);
-        NSString *strName = [NSString stringWithUTF8String:name];
-        //进行解档取值
-//            id value = [decoder decodeObjectForKey:strName];
-        id value = [self valueForKey:strName];
-        //利用KVC对属性赋值
-        [obj setValue:value forKey:strName];
-    }
-    free(ivar);
-    
-    return obj;
-}
-
-@end
-
-
-@implementation LFPopupMenuDefaultConfig
-
-+ (instancetype)sharedInstance {
-    static LFPopupMenuDefaultConfig *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[self alloc] init];
-        instance.config = [[LFPopupMenuConfig alloc] init];
-    });
-    return instance;
-}
-
-@end
 
 
 @interface LFPopupMenu ()
@@ -103,7 +43,24 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = NO;
-        self.config = [[LFPopupMenuDefaultConfig sharedInstance].config copy];
+        self.rowHeight = [LFPopupMenuDefaultConfig sharedInstance].rowHeight;
+        self.arrowH = [LFPopupMenuDefaultConfig sharedInstance].arrowH;
+        self.arrowW = [LFPopupMenuDefaultConfig sharedInstance].arrowW;
+        self.minWidth = [LFPopupMenuDefaultConfig sharedInstance].minWidth;
+        self.popupMargin = [LFPopupMenuDefaultConfig sharedInstance].popupMargin;
+        self.leftEdgeMargin = [LFPopupMenuDefaultConfig sharedInstance].leftEdgeMargin;
+        self.rightEdgeMargin = [LFPopupMenuDefaultConfig sharedInstance].rightEdgeMargin;
+        self.textMargin = [LFPopupMenuDefaultConfig sharedInstance].textMargin;
+        self.lineMargin = [LFPopupMenuDefaultConfig sharedInstance].lineMargin;
+        self.cornerRadius = [LFPopupMenuDefaultConfig sharedInstance].cornerRadius;
+        self.arrowCornerRadius = [LFPopupMenuDefaultConfig sharedInstance].arrowCornerRadius;
+        self.lineColor = [LFPopupMenuDefaultConfig sharedInstance].lineColor;
+        self.textFont = [LFPopupMenuDefaultConfig sharedInstance].textFont;
+        self.textColor = [LFPopupMenuDefaultConfig sharedInstance].textColor;
+        self.fillColor = [LFPopupMenuDefaultConfig sharedInstance].fillColor;
+        self.needBorder = [LFPopupMenuDefaultConfig sharedInstance].needBorder;
+
+        
         self.direction = PopupMenuDirection_Auto;
         self.menuSuperView = [UIApplication sharedApplication].keyWindow;
         
@@ -118,7 +75,7 @@
     self.menuItems = items;
     self.action = action;
     [self adjustMaxWidth];
-    self.containerView.frame = CGRectMake(0, self.config.arrowH, self.frame.size.width, self.frame.size.height - self.config.arrowH);
+    self.containerView.frame = CGRectMake(0, self.arrowH, self.frame.size.width, self.frame.size.height - self.arrowH);
     if (self.imgBG) {
         self.ivBG = [[UIImageView alloc] initWithFrame:self.bounds];
         self.ivBG.image = self.imgBG;
@@ -129,26 +86,26 @@
         LFPopupMenuItem *item = self.menuItems[i];
         CGFloat imgH = item.image.size.height;
         CGFloat imgW = item.image.size.width;
-        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(self.config.leftEdgeMargin, (self.config.rowHeight - imgH)/2 + self.config.rowHeight*i, imgW, imgH)];
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(self.leftEdgeMargin, (self.rowHeight - imgH)/2 + self.rowHeight*i, imgW, imgH)];
         iv.image = item.image;
         [self.containerView addSubview:iv];
         
-        CGFloat lbX = imgW > 0 ? (self.config.leftEdgeMargin + imgW + self.config.textMargin) : self.config.leftEdgeMargin;
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(lbX, i*self.config.rowHeight, self.frame.size.width - lbX - self.config.rightEdgeMargin, self.config.rowHeight)];
-        lb.textColor = self.config.textColor;
+        CGFloat lbX = imgW > 0 ? (self.leftEdgeMargin + imgW + self.textMargin) : self.leftEdgeMargin;
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(lbX, i*self.rowHeight, self.frame.size.width - lbX - self.rightEdgeMargin, self.rowHeight)];
+        lb.textColor = self.textColor;
         lb.text = item.title;
         lb.font = [UIFont systemFontOfSize:15];
         [self.containerView addSubview:lb];
         
-        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, i*self.config.rowHeight, self.frame.size.width, self.config.rowHeight)];
+        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, i*self.rowHeight, self.frame.size.width, self.rowHeight)];
         bt.backgroundColor = [UIColor clearColor];
         bt.tag = i;
         [bt addTarget:self action:@selector(selectItem:) forControlEvents:UIControlEventTouchUpInside];
         [self.containerView addSubview:bt];
         
         if (i > 0) {
-            UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(self.config.lineMargin, i*self.config.rowHeight, self.frame.size.width - self.config.lineMargin, 1.0f/[UIScreen mainScreen].scale)];
-            viewLine.backgroundColor = self.config.lineColor;
+            UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(self.lineMargin, i*self.rowHeight, self.frame.size.width - self.lineMargin, 1.0f/[UIScreen mainScreen].scale)];
+            viewLine.backgroundColor = self.lineColor;
             [self.containerView addSubview:viewLine];
         }
     }
@@ -157,7 +114,7 @@
 /**完全自定义菜单弹窗*/
 - (void)configWithCustomView:(UIView *)customView{
     self.containerView.frame = CGRectMake(self.containerView.frame.origin.x, self.containerView.frame.origin.y, customView.frame.size.width, customView.frame.size.height);
-    self.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height + self.config.arrowH);
+    self.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height + self.arrowH);
     [self.containerView addSubview:customView];
     if (self.imgBG) {
         self.ivBG = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -185,7 +142,7 @@
     
     self.frame = CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height);
     if (self.anchorPoint.y > 0.5) {
-        self.containerView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - self.config.arrowH);
+        self.containerView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - self.arrowH);
     }
     // 弹出动画
     self.maskView.alpha = 0;
@@ -252,7 +209,7 @@
         NSStringDrawingOptions opts = NSStringDrawingTruncatesLastVisibleLine |NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading;
         CGRect rect = [item.title boundingRectWithSize:CGSizeZero
                                                options:opts
-                                            attributes:@{NSFontAttributeName: self.config.textFont}
+                                            attributes:@{NSFontAttributeName: self.textFont}
                                                context:nil];
         
         textW = textW > rect.size.width ? textW : rect.size.width;
@@ -260,10 +217,10 @@
         
         imageW = imageW > item.image.size.width ? imageW : item.image.size.width;
     }
-    CGFloat totalMargin = (textW > 0 && imageW > 0) ? (self.config.leftEdgeMargin + self.config.rightEdgeMargin + self.config.textMargin) : (self.config.leftEdgeMargin + self.config.rightEdgeMargin);
+    CGFloat totalMargin = (textW > 0 && imageW > 0) ? (self.leftEdgeMargin + self.rightEdgeMargin + self.textMargin) : (self.leftEdgeMargin + self.rightEdgeMargin);
     CGFloat totalWidth = textW + imageW + totalMargin;
-    totalWidth = totalWidth > self.config.minWidth ? totalWidth : self.config.minWidth;
-    self.frame = CGRectMake(0, 0, totalWidth, self.config.rowHeight * self.menuItems.count + self.config.arrowH);
+    totalWidth = totalWidth > self.minWidth ? totalWidth : self.minWidth;
+    self.frame = CGRectMake(0, 0, totalWidth, self.rowHeight * self.menuItems.count + self.arrowH);
 }
 
 //私有的显示
@@ -273,7 +230,7 @@
     CGFloat popupY;//窗口y
     
     // 如果箭头指向的点过于偏左或者过于偏右则需要重新调整箭头 x 轴的坐标
-    CGFloat minHorizontalEdge = self.config.popupMargin + self.config.cornerRadius + self.config.arrowW/2;
+    CGFloat minHorizontalEdge = self.popupMargin + self.cornerRadius + self.arrowW/2;
     if (point.x < minHorizontalEdge) {
         point.x = minHorizontalEdge;
     }
@@ -285,17 +242,17 @@
     popupX = point.x - self.frame.size.width/2;
     popupY = point.y;
     //窗口靠左
-    if (point.x <= self.frame.size.width/2 + self.config.popupMargin) {
-        popupX = self.config.popupMargin;
+    if (point.x <= self.frame.size.width/2 + self.popupMargin) {
+        popupX = self.popupMargin;
     }
     //窗口靠右
-    if (self.maskView.frame.size.width - point.x <= self.frame.size.width/2 + self.config.popupMargin) {
-        popupX = self.maskView.frame.size.width - self.config.popupMargin - self.frame.size.width;
+    if (self.maskView.frame.size.width - point.x <= self.frame.size.width/2 + self.popupMargin) {
+        popupX = self.maskView.frame.size.width - self.popupMargin - self.frame.size.width;
     }
     //箭头向下
     if (!self.isUp) {
         popupY = point.y - self.frame.size.height;
-        self.containerView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - self.config.arrowH);
+        self.containerView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - self.arrowH);
     }
     
     self.frame = CGRectMake(popupX, popupY, self.frame.size.width, self.frame.size.height);
@@ -303,54 +260,54 @@
     // 箭头相对本窗口的坐标
     CGPoint arrowPoint = CGPointMake(point.x - CGRectGetMinX(self.frame), self.isUp ? 0 : self.frame.size.height);
     
-    CGFloat maskTop = self.isUp ? self.config.arrowH : 0; // 顶部Y值
-    CGFloat maskBottom = self.isUp ? self.frame.size.height : self.frame.size.height - self.config.arrowH; // 底部Y值
+    CGFloat maskTop = self.isUp ? self.arrowH : 0; // 顶部Y值
+    CGFloat maskBottom = self.isUp ? self.frame.size.height : self.frame.size.height - self.arrowH; // 底部Y值
     UIBezierPath *maskPath = [UIBezierPath bezierPath];
     // 左上圆角
-    [maskPath moveToPoint:CGPointMake(0, self.config.cornerRadius + maskTop)];
-    [maskPath addArcWithCenter:CGPointMake(self.config.cornerRadius, self.config.cornerRadius + maskTop)
-                        radius:self.config.cornerRadius
+    [maskPath moveToPoint:CGPointMake(0, self.cornerRadius + maskTop)];
+    [maskPath addArcWithCenter:CGPointMake(self.cornerRadius, self.cornerRadius + maskTop)
+                        radius:self.cornerRadius
                     startAngle:M_PI
                       endAngle:1.5*M_PI
                      clockwise:YES];
     // 箭头朝上
     if (self.isUp) {
-        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - self.config.arrowW/2, self.config.arrowH)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - self.config.arrowCornerRadius, self.config.arrowCornerRadius)
-                         controlPoint:CGPointMake(arrowPoint.x - self.config.arrowW/2 + self.config.arrowCornerRadius, self.config.arrowH)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + self.config.arrowCornerRadius, self.config.arrowCornerRadius)
+        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - self.arrowW/2, self.arrowH)];
+        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - self.arrowCornerRadius, self.arrowCornerRadius)
+                         controlPoint:CGPointMake(arrowPoint.x - self.arrowW/2 + self.arrowCornerRadius, self.arrowH)];
+        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + self.arrowCornerRadius, self.arrowCornerRadius)
                          controlPoint:arrowPoint];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + self.config.arrowW/2, self.config.arrowH)
-                         controlPoint:CGPointMake(arrowPoint.x + self.config.arrowW/2 - self.config.arrowCornerRadius, self.config.arrowH)];
+        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + self.arrowW/2, self.arrowH)
+                         controlPoint:CGPointMake(arrowPoint.x + self.arrowW/2 - self.arrowCornerRadius, self.arrowH)];
     }
     // 右上圆角
-    [maskPath addLineToPoint:CGPointMake(self.frame.size.width - self.config.cornerRadius, maskTop)];
-    [maskPath addArcWithCenter:CGPointMake(self.frame.size.width - self.config.cornerRadius, maskTop + self.config.cornerRadius)
-                        radius:self.config.cornerRadius
+    [maskPath addLineToPoint:CGPointMake(self.frame.size.width - self.cornerRadius, maskTop)];
+    [maskPath addArcWithCenter:CGPointMake(self.frame.size.width - self.cornerRadius, maskTop + self.cornerRadius)
+                        radius:self.cornerRadius
                     startAngle:1.5*M_PI
                       endAngle:0
                      clockwise:YES];
     // 右下圆角
-    [maskPath addLineToPoint:CGPointMake(self.frame.size.width, maskBottom - self.config.cornerRadius)];
-    [maskPath addArcWithCenter:CGPointMake(self.frame.size.width - self.config.cornerRadius, maskBottom - self.config.cornerRadius)
-                        radius:self.config.cornerRadius
+    [maskPath addLineToPoint:CGPointMake(self.frame.size.width, maskBottom - self.cornerRadius)];
+    [maskPath addArcWithCenter:CGPointMake(self.frame.size.width - self.cornerRadius, maskBottom - self.cornerRadius)
+                        radius:self.cornerRadius
                     startAngle:0
                       endAngle:0.5*M_PI
                      clockwise:YES];
     // 箭头朝下
     if (!self.isUp) {
-        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + self.config.arrowW/2, self.frame.size.height - self.config.arrowH)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + self.config.arrowCornerRadius, self.frame.size.height - self.config.arrowCornerRadius)
-                         controlPoint:CGPointMake(arrowPoint.x + self.config.arrowW/2 - self.config.arrowCornerRadius, self.frame.size.height - self.config.arrowH)];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - self.config.arrowCornerRadius, self.frame.size.height - self.config.arrowCornerRadius)
+        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + self.arrowW/2, self.frame.size.height - self.arrowH)];
+        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + self.arrowCornerRadius, self.frame.size.height - self.arrowCornerRadius)
+                         controlPoint:CGPointMake(arrowPoint.x + self.arrowW/2 - self.arrowCornerRadius, self.frame.size.height - self.arrowH)];
+        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - self.arrowCornerRadius, self.frame.size.height - self.arrowCornerRadius)
                          controlPoint:arrowPoint];
-        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - self.config.arrowW/2, self.frame.size.height - self.config.arrowH)
-                         controlPoint:CGPointMake(arrowPoint.x - self.config.arrowW/2 + self.config.arrowCornerRadius, self.frame.size.height - self.config.arrowH)];
+        [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - self.arrowW/2, self.frame.size.height - self.arrowH)
+                         controlPoint:CGPointMake(arrowPoint.x - self.arrowW/2 + self.arrowCornerRadius, self.frame.size.height - self.arrowH)];
     }
     // 左下圆角
-    [maskPath addLineToPoint:CGPointMake(self.config.cornerRadius, maskBottom)];
-    [maskPath addArcWithCenter:CGPointMake(self.config.cornerRadius, maskBottom - self.config.cornerRadius)
-                        radius:self.config.cornerRadius
+    [maskPath addLineToPoint:CGPointMake(self.cornerRadius, maskBottom)];
+    [maskPath addArcWithCenter:CGPointMake(self.cornerRadius, maskBottom - self.cornerRadius)
+                        radius:self.cornerRadius
                     startAngle:0.5*M_PI
                       endAngle:M_PI
                      clockwise:YES];
@@ -360,8 +317,8 @@
     shapeLayer.frame = self.bounds;
     shapeLayer.path = maskPath.CGPath;
     shapeLayer.lineWidth = 1/[UIScreen mainScreen].scale;
-    shapeLayer.fillColor = self.config.fillColor.CGColor;
-    shapeLayer.strokeColor = self.config.needBorder ? self.config.lineColor.CGColor : [UIColor clearColor].CGColor;
+    shapeLayer.fillColor = self.fillColor.CGColor;
+    shapeLayer.strokeColor = self.needBorder ? self.lineColor.CGColor : [UIColor clearColor].CGColor;
     [self.layer insertSublayer:shapeLayer atIndex:0];
     
     // 弹出动画
