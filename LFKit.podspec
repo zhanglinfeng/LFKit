@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'UIBarButtonItem+LF' do |sss|
     sss.source_files         = 'LFKit/LFKit/Category/UIBarButtonItem+LF/*'
-    sss.dependency 'LFKit/LFKit/Category/UIButton+LF'
+    sss.dependency 'LFKit/Category/UIButton+LF'
     end
 
     ss.subspec 'UIButton+LF' do |sss|
@@ -72,7 +72,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'UIViewController+FullScreenScroll' do |sss|
     sss.source_files         = 'LFKit/LFKit/Category/UIViewController+FullScreenScroll/*'
-    sss.dependency 'LFKit/LFKit/Category/UITabBarController+HideTabBar'
+    sss.dependency 'LFKit/Category/UITabBarController+HideTabBar'
     end
 
     ss.subspec 'NSDate+LF' do |sss|
