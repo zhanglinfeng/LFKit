@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'UIBarButtonItem+LF' do |sss|
     sss.source_files         = 'LFKit/LFKit/Category/UIBarButtonItem+LF/*'
-    sss.dependency 'UIButton+LF'
+    sss.dependency 'LFKit/LFKit/Category/UIButton+LF'
     end
 
     ss.subspec 'UIButton+LF' do |sss|
