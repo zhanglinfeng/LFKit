@@ -129,7 +129,7 @@ static void *btnActionKey = &btnActionKey;
 
 - (void)onClick {
     if (self.btnAction) {
-        self.btnAction(self);
+        self.btnAction();
     }
 }
 

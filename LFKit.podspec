@@ -13,15 +13,98 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.subspec 'Category' do |ss|
-    # ss.dependency 'CocoaLumberjack/Default'
-  ss.source_files         = 'LFKit/LFKit/Category/*'
+  # ss.dependency 'CocoaLumberjack/Default'
+  # ss.source_files         = 'LFKit/LFKit/Category/*'
   # ss.public_header_files  = 'LFKit/LFKit/Category/*.h'
+
+    ss.subspec 'UIColor+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIColor+LF/*'
+    end
+
+    ss.subspec 'NSLayoutConstraint+LFXIB' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/NSLayoutConstraint+LFXIB/*'
+    end
+
+    ss.subspec 'NSString+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/NSString+LF/*'
+    end
+
+    ss.subspec 'NSTimer+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/NSTimer+LF/*'
+    end
+
+    ss.subspec 'UIBarButtonItem+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIBarButtonItem+LF/*'
+    sss.dependency 'UIButton+LF'
+    end
+
+    ss.subspec 'UIButton+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIButton+LF/*'
+    end
+
+    ss.subspec 'UIImage+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIImage+LF/*'
+    end
+
+    ss.subspec 'UIImageView+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIImageView+LF/*'
+    end
+
+    ss.subspec 'UILabel+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UILabel+LF/*'
+    end
+
+    ss.subspec 'UITabBarController+HideTabBar' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UITabBarController+HideTabBar/*'
+    end
+
+    ss.subspec 'UITextField+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UITextField+LF/*'
+    end
+
+    ss.subspec 'UIView+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIView+LF/*'
+    end
+
+    ss.subspec 'UIView+LFXIB' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIView+LFXIB/*'
+    end
+
+    ss.subspec 'UIViewController+FullScreenScroll' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIViewController+FullScreenScroll/*'
+    sss.dependency 'UITabBarController+HideTabBar'
+    end
+
+    ss.subspec 'NSDate+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/NSDate+LF/*'
+    end
+
   end
 
   s.subspec 'Util' do |ss|
   # ss.dependency 'LFKit/Category'
-  ss.source_files         = 'LFKit/LFKit/Util/*'
+  # ss.source_files         = 'LFKit/LFKit/Util/*'
   # ss.public_header_files  = 'LFKit/LFKit/Util/*.h'
+    ss.subspec 'LFDeviceInfo' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Util/LFDeviceInfo/*'
+    end
+
+    ss.subspec 'LFEncryptDecryptUtil' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Util/LFEncryptDecryptUtil/*'
+    end
+
+    ss.subspec 'LFJsonUtil' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Util/LFJsonUtil/*'
+    end
+
+    ss.subspec 'LFTimeUtil' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Util/LFTimeUtil/*'
+    end
+
+    ss.subspec 'LFFileUtil' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Util/LFFileUtil/*'
+    end
+
   end
 
   s.subspec 'Component' do |ss|

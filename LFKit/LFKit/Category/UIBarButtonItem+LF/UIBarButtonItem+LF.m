@@ -12,7 +12,7 @@
 @implementation UIBarButtonItem (LF)
 
 /**导航上的图片按钮*/
-+ (UIBarButtonItem *)itemWithImage:(UIImage *)image action:(void (^)())action {
++ (UIBarButtonItem *)itemWithImage:(UIImage *)image action:(void (^)(void))action {
     UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [itemBtn setImage:image forState:UIControlStateNormal];
     [itemBtn sizeToFit];
@@ -22,7 +22,7 @@
 }
 
 /**导航上的文字按钮*/
-+ (UIBarButtonItem *)itemWithTitle:(NSString*)title action:(void (^)())action {
++ (UIBarButtonItem *)itemWithTitle:(NSString*)title action:(void (^)(void))action {
     UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [itemBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [itemBtn setTitle:title forState:UIControlStateNormal];
@@ -33,7 +33,7 @@
 }
 
 /**导航上的图片+文字按钮*/
-+ (UIBarButtonItem *)itemWithmage:(UIImage *)image title:(NSString *)title action:(void (^)())action {
++ (UIBarButtonItem *)itemWithmage:(UIImage *)image title:(NSString *)title action:(void (^)(void))action {
     UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [itemBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [itemBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];

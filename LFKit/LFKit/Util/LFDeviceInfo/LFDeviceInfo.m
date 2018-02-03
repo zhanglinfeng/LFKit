@@ -15,8 +15,9 @@
 #include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/if_dl.h>
-#import "SFHFKeychainUtils.h"
+//#import "SFHFKeychainUtils.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <UIKit/UIKit.h>
 
 
 @implementation LFDeviceInfo
@@ -35,7 +36,6 @@
     
     self.mac = [self macString];/** 获取设备的mac地址 */
 
-    self.keychainId = [self keychainIdString];   /** 保存在钥匙串中的唯一标识 */
     self.clientOS = [self getOS];/** 获取本地设备的操作系统及版本 */
     self.clientMachine = [self getMachine];/** 获取设备的类型 */
 
@@ -82,34 +82,6 @@
                            *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
     free(buf);
     return macString;
-}
-
-/** 手机唯一码 */
-- (NSString *)keychainIdString {
-    NSString *userName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-    NSString *servername = [[NSBundle mainBundle] bundleIdentifier];
-    
-    NSString* identifier = [SFHFKeychainUtil getPasswordForUsername:userName andServiceName:servername error:nil];
-    
-    //先获取钥匙串中的
-    if(identifier && identifier.length > 0) {
-        return identifier;
-    }
-    else {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-            identifier = [self idfvString];
-        } else {
-            NSString *macaddress = [LFDeviceInfo shareInstance].mac;
-            NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-            
-            NSString *stringToHash = [NSString stringWithFormat:@"%@%@", macaddress, bundleIdentifier];
-            identifier = [self getMD5WithString:stringToHash];
-            
-        }
-        
-        [SFHFKeychainUtil storeUsername:userName andPassword:identifier forServiceName:servername updateExisting:YES error:nil];
-        return identifier;
-    }
 }
 
 - (NSString *)idfvString {

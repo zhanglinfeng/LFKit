@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, LFButtonArrangeStyle) {
 
 #define kDefaultSubTitle @"ss秒后重试"
 
-typedef void(^LFBtnAction)(UIButton *button);
+typedef void(^LFBtnAction)(void);
 
 @interface UIButton (LF)
 

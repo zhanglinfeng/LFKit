@@ -11,13 +11,16 @@
 
 @interface LFJsonUtil : NSObject
 
-// json字符串转dict或array
+/**json字符串转dict或array*/
 + (id)objectFromJSONString:(NSString *)string;
 
-// json的NSData转dict或array
+/**json的NSData转dict或array*/
 + (id)objectFromJSONData:(NSData *)data;
 
-// json的NSData转dict或array,带编码参数
+/**json的NSData转dict或array,带编码参数*/ 
 + (id)objectFromJSONData:(NSData *)data UsingEncoding:(NSStringEncoding)encoding;
+
+/**dict或arrayz转json */
+- (NSString *)jsonFromObject:(id)object;
 
 @end

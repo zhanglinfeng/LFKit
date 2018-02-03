@@ -75,4 +75,15 @@
     return [self objectFromJSONData:transformedData];
 }
 
+/**dict或arrayz转json */
+- (NSString *)jsonFromObject:(id)object {
+    NSError *error;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&error];
+    if (!error) {
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        return jsonString;
+    }
+    return @"";
+}
+
 @end
