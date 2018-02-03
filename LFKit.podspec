@@ -72,7 +72,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'UIViewController+FullScreenScroll' do |sss|
     sss.source_files         = 'LFKit/LFKit/Category/UIViewController+FullScreenScroll/*'
-    sss.dependency 'UITabBarController+HideTabBar'
+    sss.dependency 'LFKit/LFKit/Category/UITabBarController+HideTabBar'
     end
 
     ss.subspec 'NSDate+LF' do |sss|
