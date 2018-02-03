@@ -21,6 +21,6 @@
 + (id)objectFromJSONData:(NSData *)data UsingEncoding:(NSStringEncoding)encoding;
 
 /**dict或arrayz转json */
-- (NSString *)jsonFromObject:(id)object;
++ (NSString *)jsonFromObject:(id)object;
 
 @end

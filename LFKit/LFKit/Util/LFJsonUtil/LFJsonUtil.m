@@ -76,7 +76,7 @@
 }
 
 /**dict或arrayz转json */
-- (NSString *)jsonFromObject:(id)object {
++ (NSString *)jsonFromObject:(id)object {
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&error];
     if (!error) {
