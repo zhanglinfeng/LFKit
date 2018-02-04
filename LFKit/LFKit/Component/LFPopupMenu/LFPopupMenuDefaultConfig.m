@@ -14,7 +14,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.rowHeight = 60;
+        self.rowHeight = 50;
         self.arrowH = 9;
         self.arrowW = 9;
         self.popupMargin = 5;

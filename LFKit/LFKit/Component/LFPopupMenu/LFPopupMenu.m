@@ -164,7 +164,7 @@
     } else if (self.direction == PopupMenuDirection_Down) {
         self.isUp = NO;
     } else {
-        self.isUp = point.y < self.maskView.frame.size.height/2;
+        self.isUp = point.y < self.menuSuperView.frame.size.height/2;
     }
     
     [self private_showArrowInPoint:point];
@@ -351,7 +351,7 @@
 - (UIView *)maskView {
     if (!_maskView) {
         _maskView = [[UIView alloc] init];
-        _maskView.backgroundColor = [UIColor clearColor];
+        _maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
     }
     return _maskView;
 }
