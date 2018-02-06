@@ -20,11 +20,16 @@
 NSString * const UncaughtExceptionHandlerSignalKey = @"UncaughtExceptionHandlerSignalKey";
 NSString * const UncaughtExceptionHandlerAddressesKey = @"UncaughtExceptionHandlerAddressesKey";
 
+#ifndef ddlogLevelCreated
+#define ddlogLevelCreated
 #ifdef DEBUG
 DDLogLevel ddLogLevel = DDLogLevelInfo;
 #else
 DDLogLevel ddLogLevel = DDLogLevelError;
 #endif
+#endif
+
+
 
 
 #pragma mark - 日志格式
