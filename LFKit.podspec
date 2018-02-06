@@ -127,7 +127,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'LFLogManager' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFLogManager/*'
-    sss.dependency 'CocoaLumberjack'
+    sss.dependency 'CocoaLumberjack', '~> 3.4.1'
     end
 
     ss.subspec 'LFErrorView' do |sss|
