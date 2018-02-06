@@ -207,10 +207,8 @@ URL解码
 
 ### 1.LFEncryptDecryptUtil
 
-//NSData AES加密
-+ (NSData \*)AES256EncryptPlainData:(NSData \*)plainData Key:(NSString \*)key;
-//NSData AES解密
-+ (NSData \*)AES256DecryptCipherData:(NSData\*)cipherData Key:(NSString \*)key;
++ (NSData *)AES256EncryptPlainData:(NSData *)plainData Key:(NSString *)key;//NSData AES加密
++ (NSData *)AES256DecryptCipherData:(NSData*)cipherData Key:(NSString *)key;//NSData AES解密
 //NSData DES加密
 + (NSData *)DESEncryptPlainData:(NSData *)plainData Key:(NSString *)key;
 //NSData DES解密
