@@ -207,70 +207,70 @@ URL解码
 
 ### 1.LFEncryptDecryptUtil
 
-/**NSData AES加密*/
+//NSData AES加密
 + (NSData *)AES256EncryptPlainData:(NSData *)plainData Key:(NSString *)key;
-/**NSData AES解密*/
+//NSData AES解密
 + (NSData *)AES256DecryptCipherData:(NSData*)cipherData Key:(NSString *)key;
-/**NSData DES加密*/
+//NSData DES加密
 + (NSData *)DESEncryptPlainData:(NSData *)plainData Key:(NSString *)key;
-/**NSData DES解密*/
+//NSData DES解密
 + (NSData *)DESDecryptCipherData:(NSData*)cipherData Key:(NSString *)key;
-/**NSString AES加密*/
+//NSString AES加密
 + (NSString *)AES256EncryptPlainText:(NSString *)plainText Key:(NSString *)key;
-/**NSString AES解密*/
+//NSString AES解密
 + (NSString *)AES256DecryptCipherText:(NSString*)cipherText Key:(NSString *)key;
-/**字符串DES加密*/
+//字符串DES加密
 + (NSString *)DESEncryptPlainText:(NSString *)plainText key:(NSString *)key;
-/**字符串DES解密*/
+//字符串DES解密
 + (NSString *)DESDecryptCipherText:(NSString*)cipherText key:(NSString*)key;
-/**字符串DES加密用到Base64*/
+//字符串DES加密用到Base64
 + (NSString *)DESEncryptBase64PlainText:(NSString *)plainText key:(NSString *)key;
-/**字符串DES解密用到Base64*/
+//字符串DES解密用到Base64
 + (NSString *)DESDecryptBase64CipherText:(NSString*)cipherText key:(NSString*)key;
-/**字符串DES加密、解密*/
+//字符串DES加密、解密
 +(NSString*)encryptWithContent:(NSString*)content type:(uint32_t)type key:(NSString*)aKey
 ### 2.LFFileUtil
-/**获取Document文件路径*/
+//获取Document文件路径
 + (NSString*)getDocumentFilePathWithName:(NSString*)name;
-/**获取Temp文件路径*/
+//获取Temp文件路径
 + (NSString*)getTempFilePathWithName:(NSString*)name;
-/**获取Home文件路径*/
+//获取Home文件路径
 + (NSString*)getHomeFilePathWithName:(NSString*)name;
-/**获取Cache文件路径*/
+//获取Cache文件路径
 + (NSString*)getCacheFilePathWithName:(NSString*)name;
-/**创建目录(已判断是否存在，无脑用就行)*/
+//创建目录(已判断是否存在，无脑用就行)
 + (BOOL)creatDirectory:(NSString *)path;
-/**删除目录或文件*/
+//删除目录或文件
 + (BOOL)deleteItemAtPath:(NSString *)path;
-/**移动文件*/
+//移动文件
 + (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString*)dstPath;
 
 ### 3.LFJsonUtil
 
-/**json字符串转dict或array*/
+//json字符串转dict或array
 + (id)objectFromJSONString:(NSString *)string;
-/**json的NSData转dict或array*/
+//json的NSData转dict或array
 + (id)objectFromJSONData:(NSData *)data;
-/**json的NSData转dict或array,带编码参数*/ 
+//json的NSData转dict或array,带编码参数
 + (id)objectFromJSONData:(NSData *)data UsingEncoding:(NSStringEncoding)encoding;
-/**dict或arrayz转json */
+//dict或arrayz转json
 + (NSString \*)jsonFromObject:(id)object;
 
 ### 4.LFTimeUtil
 
-/**秒数转为时长字符串,format 格式如@"HH:mm:ss" @"mm分ss秒"*/
+//秒数转为时长字符串,format 格式如@"HH:mm:ss" @"mm分ss秒"
 + (NSString *)getTimeStringFromSecond:(NSInteger)second format:(NSString *)format;
-/**时间戳(毫秒)转时间字符串*/
+//时间戳(毫秒)转时间字符串
 + (NSString *)getDateTimeStringFromTimestamp:(NSString *)timestamp formatter:(NSString *)formatter;
-/**Date转时间字符串*/
+//Date转时间字符串
 + (NSString *)getDateTimeStringFromDate:(NSDate *)date formatter:(NSString *)formatter;
-/**时间字符串转时间戳（毫秒）*/
+//时间字符串转时间戳（毫秒
 + (NSString *)getTimestampFromDateTimeString:(NSString *)string formatter:(NSString *)formatter;
-/**时间字符串转NSDate*/
+//时间字符串转NSDate*/
 + (NSDate *)getDateFromDateTimeString:(NSString *)string formatter:(NSString *)formatter;
-/**NSDate 转 时间戳（毫秒）*/ 
+//NSDate 转 时间戳（毫秒）
 + (NSString *)getTimestampStringFromDate:(NSDate *)date;
-/**时间戳（毫秒）转n小时、分钟、秒前 或者yyyy-MM-dd HH:mm:ss*/
+//时间戳（毫秒）转n小时、分钟、秒前 或者yyyy-MM-dd HH:mm:ss
 + (NSString *)getBeforeTimeFromDate:(NSString*)strDate;
-/**时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/
+//时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)
 - (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
