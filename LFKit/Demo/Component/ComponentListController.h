@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/**UI组件*/
 @interface ComponentListController : UIViewController
 
 @end

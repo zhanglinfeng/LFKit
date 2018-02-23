@@ -17,7 +17,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [LFLogManager install];
+   
+
+    [[LFLogManager shareInstance] install];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *baseDir = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    NSString *filePath = [baseDir stringByAppendingPathComponent:@"Logs/LFLog"];
+    [[LFLogManager shareInstance] installWithLevels:@[@(LFLOG_LEVEL1),@(LFLOG_LEVEL2)] path:filePath];
+
+    NSArray *paths2 = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *baseDir2 = ([paths2 count] > 0) ? [paths2 objectAtIndex:0] : nil;
+    NSString *filePath2 = [baseDir2 stringByAppendingPathComponent:@"Logs/LFLog2"];
+    [[LFLogManager shareInstance] installWithLevels:@[@(XXLOG_LEVEL1),@(XXLOG_LEVEL2)] path:filePath2];
+    
     return YES;
 }
 

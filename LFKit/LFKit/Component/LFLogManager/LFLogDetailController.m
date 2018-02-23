@@ -26,4 +26,13 @@
     [self.view addSubview:self.textView];
 }
 
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (@available(iOS 11.0, *)) {
+        self.textView.frame = CGRectMake(0, self.view.safeAreaInsets.top, self.view.frame.size.width, self.view.frame.size.height - self.view.safeAreaInsets.top);
+    } else {
+        self.textView.frame = self.view.bounds;
+    }
+}
+
 @end

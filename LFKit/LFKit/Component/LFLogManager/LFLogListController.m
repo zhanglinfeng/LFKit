@@ -16,7 +16,8 @@ extern DDLogLevel ddLogLevel;
 
 @interface LFLogListController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray *logFiles;
+@property (nonatomic, strong) NSMutableArray *allLogFiles;
+@property (nonatomic, strong) NSArray *logPaths;
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
@@ -66,7 +67,28 @@ extern DDLogLevel ddLogLevel;
 
 //读取日志的文件个数
 - (void)loadLogFiles {
-    self.logFiles = [[LFLogManager shareInstance] getLogFiles];
+    
+    self.allLogFiles = [[NSMutableArray alloc] init];;
+    self.logPaths = [LFLogManager shareInstance].dicFileLogger.allKeys;
+    for (NSString *path in self.logPaths) {
+        NSArray *strArray = [path componentsSeparatedByString:@"/"];
+        NSString *title = @"日志列表";
+        if (strArray.count > 0) {
+            title = [strArray lastObject];
+        }
+        title = [NSString stringWithFormat:@"自定义日志%@",title];
+        NSArray *arrayFile = [[LFLogManager shareInstance] getLogFilesWithPath:path];
+        if (arrayFile.count > 0) {
+            NSDictionary *dic = @{@"title":title,@"data":arrayFile};
+            [self.allLogFiles addObject:dic];
+        }
+    }
+    
+    NSArray *all = [[LFLogManager shareInstance] getAllLogFiles];
+    if (all.count > 0) {
+        NSDictionary *dicAll = @{@"title":@"所有日志",@"data":all};
+        [self.allLogFiles addObject:dicAll];
+    }
 }
 
 //时间格式
@@ -86,28 +108,26 @@ extern DDLogLevel ddLogLevel;
 
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section==0) {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section < self.allLogFiles.count) {
         return 40;
     }
     return 10;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 3;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.allLogFiles.count + 2 ;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return self.logFiles.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section < self.allLogFiles.count) {
+        NSDictionary *dic = self.allLogFiles[section];
+        NSArray * arrayfile = dic[@"data"];
+        return arrayfile.count;
     }
     
     return 1;
@@ -116,9 +136,12 @@ extern DDLogLevel ddLogLevel;
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 30)];
-    if (section==0) {
+    if (section < self.allLogFiles.count) {
+        NSDictionary *dic = self.allLogFiles[section];
+        NSString *title = dic[@"title"];
+
         UILabel *myLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, [[UIScreen mainScreen] bounds].size.width, 30)];
-        myLabel.text=@"日记列表";
+        myLabel.text = title;
         [headView addSubview:myLabel];
     }
     
@@ -127,16 +150,19 @@ extern DDLogLevel ddLogLevel;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mycell"];
-    if (indexPath.section == 0) {
-        DDLogFileInfo *logFileInfo = (DDLogFileInfo *)self.logFiles[indexPath.row];
+    if (indexPath.section < self.allLogFiles.count) {
+        NSDictionary *dic = self.allLogFiles[indexPath.section];
+        NSArray *arrayFile = dic[@"data"];
+        DDLogFileInfo *logFileInfo = (DDLogFileInfo *)arrayFile[indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = [self.dateFormatter stringFromDate:logFileInfo.creationDate];
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == self.allLogFiles.count) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.text = @"清理旧的记录";
+        cell.textLabel.text = @"清理所有日志";
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -167,9 +193,11 @@ extern DDLogLevel ddLogLevel;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == 0) {
-        DDLogFileInfo *logFileInfo = (DDLogFileInfo *)self.logFiles[indexPath.row];
+    if (indexPath.section < self.allLogFiles.count) {
+        NSDictionary *dic = self.allLogFiles[indexPath.section];
+        NSArray *arrayFile = dic[@"data"];
+        DDLogFileInfo *logFileInfo = (DDLogFileInfo *)arrayFile[indexPath.row];
+
         NSData *logData = [NSData dataWithContentsOfFile:logFileInfo.filePath];
         NSString *logText = [[NSString alloc] initWithData:logData encoding:NSUTF8StringEncoding];
         LFLogDetailController *vc = [[LFLogDetailController alloc] init];
@@ -177,20 +205,62 @@ extern DDLogLevel ddLogLevel;
         vc.logDate = [self.dateFormatter stringFromDate:logFileInfo.creationDate];
         [self.navigationController pushViewController:vc animated:YES];
         
-    }  else if (indexPath.section == 1) {
-        for (DDLogFileInfo *logFileInfo in self.logFiles) {
-            //除了当前 其它进行清除
-//            if (logFileInfo.isArchived) {
+    } else if (indexPath.section == self.allLogFiles.count) {
+        
+        for (NSDictionary *dic in self.allLogFiles) {
+            NSArray *arrayFile = dic[@"data"];
+            for (DDLogFileInfo *logFileInfo in arrayFile) {
+                //除了当前 其它进行清除
+                //            if (logFileInfo.isArchived) {
                 [[NSFileManager defaultManager] removeItemAtPath:logFileInfo.filePath error:nil];
-//            }
+                //            }
+            }
         }
         
         [self loadLogFiles];
         [self.tableView reloadData];
-    }  else if (indexPath.section == 2) {
+    }  else if (indexPath.section == self.allLogFiles.count + 1) {
         LFSelectLogLevelVC *vc = [[LFSelectLogLevelVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+//设Cell可编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+    
+}
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+//设置进入编辑状态时，Cell不会缩进
+- (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+//点击删除
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+
+    NSDictionary *dic = self.allLogFiles[indexPath.section];
+    NSArray *arrayFile = dic[@"data"];
+    DDLogFileInfo *logFileInfo = arrayFile[indexPath.row];
+    [[NSFileManager defaultManager] removeItemAtPath:logFileInfo.filePath error:nil];
+    
+    //注意：一定是先更新数据，再执行删除的动画或者其他操作，否则会出现崩溃
+    [self loadLogFiles];
+
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationTop];
+    
+}
+
+
 
 @end

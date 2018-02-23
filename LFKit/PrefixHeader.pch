@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  LFKit
+//
+//  Created by 张林峰 on 2018/2/9.
+//  Copyright © 2018年 张林峰. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <CocoaLumberjack/DDLog.h>
+extern DDLogLevel ddLogLevel;
+
+#define LFLOG_LEVEL1 (1 << 5)
+#define LFLOG_LEVEL2 (1 << 6)
+#define LFLog1(frmt, ...) LOG_MAYBE(YES, ddLogLevel, (1 << 0), LFLOG_LEVEL1, __PRETTY_FUNCTION__,frmt, ## __VA_ARGS__)
+#define LFLog2(frmt, ...) LOG_MAYBE(YES, ddLogLevel, (1 << 1), LFLOG_LEVEL2, __PRETTY_FUNCTION__,frmt, ## __VA_ARGS__)
+
+
+#define XXLOG_LEVEL1 (1 << 7)
+#define XXLOG_LEVEL2 (1 << 8)
+#define XXLog1(frmt, ...) LOG_MAYBE(YES, ddLogLevel, (1 << 0), XXLOG_LEVEL1, __PRETTY_FUNCTION__,frmt, ## __VA_ARGS__)
+#define XXLog2(frmt, ...) LOG_MAYBE(YES, ddLogLevel, (1 << 1), XXLOG_LEVEL2, __PRETTY_FUNCTION__,frmt, ## __VA_ARGS__)
+
+#endif /* PrefixHeader_pch */

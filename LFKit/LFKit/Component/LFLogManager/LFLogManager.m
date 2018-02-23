@@ -7,7 +7,8 @@
 //
 
 #import "LFLogManager.h"
-#import "CocoaLumberjack.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import <CocoaLumberjack/DDContextFilterLogFormatter.h>
 
 //异常捕获导入
 #include <execinfo.h>
@@ -20,16 +21,12 @@
 NSString * const UncaughtExceptionHandlerSignalKey = @"UncaughtExceptionHandlerSignalKey";
 NSString * const UncaughtExceptionHandlerAddressesKey = @"UncaughtExceptionHandlerAddressesKey";
 
-#ifndef ddlogLevelCreated
-#define ddlogLevelCreated
+
 #ifdef DEBUG
 DDLogLevel ddLogLevel = DDLogLevelInfo;
 #else
 DDLogLevel ddLogLevel = DDLogLevelError;
 #endif
-#endif
-
-
 
 
 #pragma mark - 日志格式
@@ -80,6 +77,35 @@ DDLogLevel ddLogLevel = DDLogLevelError;
 
 
 
+
+#pragma mark - 白名单日志格式
+
+@interface LFWhiteListLogFormatter : DDContextWhitelistFilterLogFormatter
+{
+    NSDateFormatter *threadUnsafeDateFormatter;
+}
+
+@end
+
+@implementation LFWhiteListLogFormatter
+- (id)init {
+    if((self = [super init])) {
+        threadUnsafeDateFormatter = [[NSDateFormatter alloc] init];
+        [threadUnsafeDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS"];
+    }
+    return self;
+}
+
+- (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
+    
+    NSString *dateAndTime = [threadUnsafeDateFormatter stringFromDate:(logMessage->_timestamp)];
+    NSString *logMsg = logMessage->_message;
+    
+    return [NSString stringWithFormat:@"%@\n%@\n", dateAndTime, logMsg];
+}
+
+
+@end
 
 
 
@@ -216,29 +242,30 @@ void SignalHandler(int signal) {
 
 
 + (instancetype)shareInstance {
-    static id shareInstance = nil;
+    static LFLogManager *shareInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shareInstance = [[[self class] alloc]init];
+        [shareInstance configureLog];
+        [LFExceptionHandler installExceptionHandler];
     });
     return shareInstance;
 }
 
-+ (void)install {
+- (void)configureLog {
+    _dicFileLogger = [[NSMutableDictionary alloc] init];
+    self.maximumFileSize = 1024 * 1024;
+    self.rollingFrequency = 60 * 60 * 24;
+    self.maximumNumberOfLogFiles = 7;
+    
     BOOL isSetLevel = [[NSUserDefaults standardUserDefaults] boolForKey:isSetLevelKey];
     if (isSetLevel) {
         ddLogLevel = [[NSUserDefaults standardUserDefaults] integerForKey:DefaultLogLevelKey];
     }
     
-    [[LFLogManager shareInstance] configureLog];
-    [LFExceptionHandler installExceptionHandler];
-}
-
-- (void)configureLog
-{
 #ifdef DEBUG
     //发送日志语句到苹果的日志系统，以便它们显示在Console.app上
-//    [DDLog addLogger:[DDASLLogger sharedInstance] withLevel:DDLogLevelDebug];
+    //    [DDLog addLogger:[DDASLLogger sharedInstance] withLevel:DDLogLevelDebug];
     //发送日志语句到Xcode控制台
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 #endif
@@ -247,13 +274,62 @@ void SignalHandler(int signal) {
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     //自定义log格式
     [DDTTYLogger sharedInstance].logFormatter = [[LFLogFormatter alloc] init];
-    //log文件
-    [DDLog addLogger:self.fileLogger withLevel:DDLogLevelAll];
+    
 }
 
-- (NSArray *)getLogFiles {
+/**默认安装*/
+- (void)install {
+    self.fileLogger = [[DDFileLogger alloc] init];
+    self.fileLogger.rollingFrequency = self.rollingFrequency; // 24 hour rolling
+    self.fileLogger.logFileManager.maximumNumberOfLogFiles = self.maximumNumberOfLogFiles;
+    self.fileLogger.maximumFileSize = self.maximumFileSize;
+    
+    //log文件
+    [DDLog addLogger:self.fileLogger withLevel:DDLogLevelAll];
+
+}
+
+/**自定义等级安装，分文件保存日志*/
+- (void)installWithLevels:(NSArray<NSNumber*>*)levels path:(NSString *)path {
+    if ([self.dicFileLogger.allKeys containsObject:path] || levels.count < 1 || path.length < 1) {
+        return;
+    }
+    
+    DDLogFileManagerDefault *fileManager = [[DDLogFileManagerDefault alloc] initWithLogsDirectory:path];
+    
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] initWithLogFileManager:fileManager];
+    fileLogger.rollingFrequency = self.rollingFrequency; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = self.maximumNumberOfLogFiles;
+    fileLogger.maximumFileSize = self.maximumFileSize;
+    
+    LFWhiteListLogFormatter *formatter = [[LFWhiteListLogFormatter alloc] init];
+    for (NSNumber *number in levels) {
+        [formatter addToWhitelist:number.integerValue];
+    }
+    [fileLogger setLogFormatter:formatter];
+    //log文件
+    [DDLog addLogger:fileLogger withLevel:DDLogLevelAll];
+    
+    [_dicFileLogger setObject:fileLogger forKey:path];
+}
+
+
+
+
+/**获取日志文件，数组中元素DDLogFileInfo*/
+- (NSArray *)getLogFilesWithPath:(NSString *)path {
+    DDFileLogger *fileLogger = [self.dicFileLogger objectForKey:path];
+    return fileLogger.logFileManager.sortedLogFileInfos;
+}
+
+/**获取所有日志文件，数组中元素DDLogFileInfo*/
+- (NSArray *)getAllLogFiles {
+    if (!self.fileLogger) {
+        return nil;
+    }
     return self.fileLogger.logFileManager.sortedLogFileInfos;
 }
+
 
 - (void)setLogLevel:(NSInteger)level {
     ddLogLevel = level;
@@ -261,19 +337,6 @@ void SignalHandler(int signal) {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:isSetLevelKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-}
-
-- (DDFileLogger *)fileLogger
-{
-    if (!_fileLogger) {
-        DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
-        fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-        fileLogger.maximumFileSize = 1024*1024;
-        _fileLogger = fileLogger;
-    }
-    
-    return _fileLogger;
 }
 
 @end
