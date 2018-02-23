@@ -277,6 +277,16 @@ void SignalHandler(int signal) {
     
 }
 
++ (void)install {
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    fileLogger.maximumFileSize = 1024 * 1024;
+    [LFLogManager shareInstance].fileLogger = fileLogger;
+    //log文件
+    [DDLog addLogger:fileLogger withLevel:DDLogLevelAll];
+}
+
 /**默认安装*/
 - (void)install {
     self.fileLogger = [[DDFileLogger alloc] init];
@@ -327,6 +337,11 @@ void SignalHandler(int signal) {
     if (!self.fileLogger) {
         return nil;
     }
+    return self.fileLogger.logFileManager.sortedLogFileInfos;
+}
+
+//已弃用
+- (NSArray *)getLogFiles {
     return self.fileLogger.logFileManager.sortedLogFileInfos;
 }
 

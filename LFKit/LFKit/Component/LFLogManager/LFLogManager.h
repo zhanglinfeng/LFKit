@@ -6,6 +6,10 @@
 //  Copyright © 2016年 张林峰. All rights reserved.
 //
 
+
+// 过期提醒
+#define LFLogManagerDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
+
 #import <Foundation/Foundation.h>
 
 /**
@@ -33,6 +37,8 @@
 
 + (instancetype)shareInstance;
 
++ (void)install LFLogManagerDeprecated("类方法install已弃用，请使用实例方法install");
+
 /**一般安装（所有DDLog的日志）*/
 - (void)install;
 
@@ -44,6 +50,9 @@
 
 /**获取所有日志文件，数组中元素DDLogFileInfo*/
 - (NSArray *)getAllLogFiles;
+
+/**获取日志文件，数组中元素DDLogFileInfo*/
+- (NSArray *)getLogFiles LFLogManagerDeprecated("已弃用，请使用getAllLogFiles方法");
 
 /**设置打印级别*/
 - (void)setLogLevel:(NSInteger)level;

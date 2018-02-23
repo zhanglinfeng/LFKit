@@ -164,7 +164,7 @@ extern DDLogLevel ddLogLevel;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.text = @"清理所有日志";
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         if (ddLogLevel == DDLogLevelAll) {
             cell.textLabel.text = [NSString stringWithFormat:@"打印级别:DDLogLevelAll"];
