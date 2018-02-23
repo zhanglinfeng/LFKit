@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.1.5'
+  s.version          = '1.1.6'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
