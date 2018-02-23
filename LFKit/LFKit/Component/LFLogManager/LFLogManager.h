@@ -14,8 +14,25 @@
 
 /**
  用法：
- 1.app启动是调用[LFLogManager install];
- 2.PrefixHeader文件中加一句extern DDLogLevel ddLogLevel;（如果没有PrefixHeader则在所有要打印的类加这句）
+ 1.PrefixHeader文件中加一句extern DDLogLevel ddLogLevel;（如果没有PrefixHeader则在大家都引用的头文件加这句）
+ 2.app启动是调用[[LFLogManager shareInstance] install];
+ 
+ 
+ 如果要自定义打印级别和日志路径：
+ 1.PrefixHeader文件中
+ #import <CocoaLumberjack/DDLog.h>
+ extern DDLogLevel ddLogLevel;
+ #define XXLOG_LEVEL1 (1 << 5)
+ #define XXLOG_LEVEL2 (1 << 6)
+ #define XXLog1(frmt, ...) LOG_MAYBE(YES, ddLogLevel, (1 << 0), XXLOG_LEVEL1, __PRETTY_FUNCTION__,frmt, ## __VA_ARGS__)
+ #define XXLog2(frmt, ...) LOG_MAYBE(YES, ddLogLevel, (1 << 1), XXLOG_LEVEL2, __PRETTY_FUNCTION__,frmt, ## __VA_ARGS__)
+ 
+ 2.app启动是调用
+ //自定义log1
+ [[LFLogManager shareInstance] installWithLevels:@[@(LFLOG_LEVEL1),@(LFLOG_LEVEL2)] path:filePath];
+ 
+ //自定义log2（
+ [[LFLogManager shareInstance] installWithLevels:@[@(XXLOG_LEVEL1),@(XXLOG_LEVEL2)] path:filePath2];
  */
 
 /**日志管理（自己打印的日志+崩溃日志+设置打印级别）*/
