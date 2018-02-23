@@ -188,6 +188,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'LFFMDB' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFFMDB/*'
+    sss.dependency 'FMDB'
     end
 
   end
