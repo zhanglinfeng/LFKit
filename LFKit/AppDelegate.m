@@ -18,9 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
-    [LFLogManager shareInstance].maximumFileSize = 1024;
+    [LFLogManager shareInstance].maximumFileSize = 100;
     
-    [[LFLogManager shareInstance] install];
+//    [[LFLogManager shareInstance] install];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *baseDir = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;

@@ -21,22 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    for (NSInteger i = 0; i < 300; i++) {
-        DDLogError(@"1");
-        DDLogWarn(@"2");
-        DDLogInfo(@"3");
-        DDLogDebug(@"4");
-        DDLogVerbose(@"5");
-        LFLog1(@"aaa1");
-        LFLog2(@"aaa2");
-        XXLog1(@"xxx1");
-        XXLog2(@"xxx2");
-    }
-    
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"myCell"];
     [self loadData];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +49,19 @@
                    @{@"title":@"日志",@"action":^{
                        LFLogListController *vc = [[LFLogListController alloc] init];
                        [self.navigationController pushViewController:vc animated:YES];
+                   }},
+                   @{@"title":@"生成打印数据",@"action":^{
+//                       for (NSInteger i = 0; i < 100; i++) {
+                           DDLogError(@"1");
+                           DDLogWarn(@"2");
+                           DDLogInfo(@"3");
+                           DDLogDebug(@"4");
+                           DDLogVerbose(@"5");
+                           LFLog1(@"aaa1");
+                           LFLog2(@"aaa2");
+                           XXLog1(@"xxx1");
+                           XXLog2(@"xxx2");
+//                       }
                    }}
                    ];
     [_tableView reloadData];

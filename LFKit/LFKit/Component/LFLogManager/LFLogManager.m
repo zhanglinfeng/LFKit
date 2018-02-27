@@ -97,11 +97,14 @@ DDLogLevel ddLogLevel = DDLogLevelError;
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
-    
-    NSString *dateAndTime = [threadUnsafeDateFormatter stringFromDate:(logMessage->_timestamp)];
-    NSString *logMsg = logMessage->_message;
-    
-    return [NSString stringWithFormat:@"%@\n%@\n", dateAndTime, logMsg];
+    if ([self isOnWhitelist:logMessage->_context]) {
+        NSString *dateAndTime = [threadUnsafeDateFormatter stringFromDate:(logMessage->_timestamp)];
+        NSString *logMsg = logMessage->_message;
+        
+        return [NSString stringWithFormat:@"%@\n%@\n", dateAndTime, logMsg];
+    } else {
+        return nil;
+    }
 }
 
 
@@ -329,6 +332,7 @@ void SignalHandler(int signal) {
 /**获取日志文件，数组中元素DDLogFileInfo*/
 - (NSArray *)getLogFilesWithPath:(NSString *)path {
     DDFileLogger *fileLogger = [self.dicFileLogger objectForKey:path];
+    NSLog(@"当前日志路径%@",fileLogger.currentLogFileInfo.filePath);
     return fileLogger.logFileManager.sortedLogFileInfos;
 }
 
