@@ -48,6 +48,9 @@
     _arrayData = @[
                    @{@"title":@"日志",@"action":^{
                        LFLogListController *vc = [[LFLogListController alloc] init];
+                       [vc addButtonTitle:@"分享" callBackData:^(NSString *dataPath) {
+                           DDLogError(@"分享地址%@",dataPath);
+                       }];
                        [self.navigationController pushViewController:vc animated:YES];
                    }},
                    @{@"title":@"生成打印数据",@"action":^{

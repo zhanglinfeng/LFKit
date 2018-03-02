@@ -332,7 +332,6 @@ void SignalHandler(int signal) {
 /**获取日志文件，数组中元素DDLogFileInfo*/
 - (NSArray *)getLogFilesWithPath:(NSString *)path {
     DDFileLogger *fileLogger = [self.dicFileLogger objectForKey:path];
-    NSLog(@"当前日志路径%@",fileLogger.currentLogFileInfo.filePath);
     return fileLogger.logFileManager.sortedLogFileInfos;
 }
 

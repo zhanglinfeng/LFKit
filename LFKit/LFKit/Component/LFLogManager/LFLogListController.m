@@ -20,6 +20,8 @@ extern DDLogLevel ddLogLevel;
 @property (nonatomic, strong) NSArray *logPaths;
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSString *btTitle;
+@property (nonatomic, copy) void(^callBack)(NSString *dataPath);
 
 @end
 
@@ -52,7 +54,6 @@ extern DDLogLevel ddLogLevel;
     [super viewDidLayoutSubviews];
 //    NSLog(@"大视图3%@",self.view);
     if (@available(iOS 11.0, *)) {
-        
         self.tableView.frame = CGRectMake(0, self.view.safeAreaInsets.top, self.view.frame.size.width, self.view.frame.size.height - self.view.safeAreaInsets.top);
     } else {
         self.tableView.frame = self.view.bounds;
@@ -135,14 +136,27 @@ extern DDLogLevel ddLogLevel;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 30)];
+    UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     if (section < self.allLogFiles.count) {
         NSDictionary *dic = self.allLogFiles[section];
         NSString *title = dic[@"title"];
 
-        UILabel *myLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, [[UIScreen mainScreen] bounds].size.width, 30)];
+        UILabel *myLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, self.view.frame.size.width, 30)];
         myLabel.text = title;
         [headView addSubview:myLabel];
+        
+        if (self.title.length > 0 && self.callBack) {
+            
+        }
+        UIFont *btFont = [UIFont systemFontOfSize:15];
+        CGFloat w = [self.btTitle sizeWithAttributes:@{NSFontAttributeName : btFont}].width;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.titleLabel.font = btFont;
+        button.frame = CGRectMake(self.view.frame.size.width - w - 10, 10, w, 30);
+        [button setTitle:self.btTitle forState:UIControlStateNormal];
+        button.tag = section;
+        [button addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [headView addSubview:button];
     }
     
     return headView;
@@ -261,6 +275,26 @@ extern DDLogLevel ddLogLevel;
     
 }
 
+#pragma mark - 操作按钮
 
+/**给每个Section加个按钮，点击返回该Section日志路径。使用者可以在该回调实现其他功能，比如将该日志压缩成zip分享出去*/
+- (void)addButtonTitle:(NSString *)title callBackData:(void(^)(NSString *dataPath))callBack {
+    self.btTitle = title;
+    self.callBack = callBack;
+    [self.tableView reloadData];
+}
+
+- (void)clickBtn:(UIButton*)button {
+    NSDictionary *dic = self.allLogFiles[button.tag];
+    NSArray *arrayFile = dic[@"data"];
+    if (arrayFile.count > 0) {
+        DDLogFileInfo *logFileInfo = arrayFile[0];
+        NSString *path = [logFileInfo.filePath stringByDeletingLastPathComponent];
+        if (self.callBack) {
+            self.callBack(path);
+        }
+    }
+    
+}
 
 @end
