@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSArray *arrayImage; //图片链接数组，存放NSString类型
 @property (nonatomic, assign) NSInteger curPage;
 @property (nonatomic, strong) UIImage * placeholderImage;
+@property (nonatomic, assign) UIViewContentMode contentMode;
 @property (nonatomic, assign) BOOL removeTapEvent;
 @property (nonatomic, weak) id<LFCycleScrollViewDataSource> dataSource;
 @property (nonatomic, weak) id<LFCycleScrollViewDelegate> delegate;
