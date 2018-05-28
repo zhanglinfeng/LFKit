@@ -145,8 +145,9 @@ extern DDLogLevel ddLogLevel;
         myLabel.text = title;
         [headView addSubview:myLabel];
         
-        if (self.title.length > 0 && self.callBack) {
-            
+        
+        if (self.btTitle.length < 1) {
+            self.btTitle = @"分享";
         }
         UIFont *btFont = [UIFont systemFontOfSize:15];
         CGFloat w = [self.btTitle sizeWithAttributes:@{NSFontAttributeName : btFont}].width;
@@ -292,6 +293,25 @@ extern DDLogLevel ddLogLevel;
         NSString *path = [logFileInfo.filePath stringByDeletingLastPathComponent];
         if (self.callBack) {
             self.callBack(path);
+        } else {
+            NSURL *url = [NSURL fileURLWithPath:path];
+            NSArray *objectsToShare = @[url];
+            
+            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+            NSArray *excludedActivities = @[UIActivityTypePostToTwitter, UIActivityTypePostToFacebook,
+                                            UIActivityTypePostToWeibo,
+                                            UIActivityTypeMessage, UIActivityTypeMail,
+                                            UIActivityTypePrint, UIActivityTypeCopyToPasteboard,
+                                            UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,
+                                            UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,
+                                            UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo];
+            controller.excludedActivityTypes = excludedActivities;
+            
+            if ([(NSString *)[UIDevice currentDevice].model hasPrefix:@"iPad"]) {
+                controller.popoverPresentationController.sourceView = self.view;
+                controller.popoverPresentationController.sourceRect = CGRectMake([UIScreen mainScreen].bounds.size.width * 0.5, [UIScreen mainScreen].bounds.size.height, 10, 10);
+            }
+            [self presentViewController:controller animated:YES completion:nil];
         }
     }
     

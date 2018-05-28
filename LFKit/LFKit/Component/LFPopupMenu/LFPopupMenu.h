@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, strong) UIColor *fillColor;//带箭头框的填充色，默认白色
 @property (nonatomic, assign) BOOL needBorder;//是否要边框
 
-@property (nonatomic, strong) UIView *maskView;//半透明遮罩层,默认透明，可自行设置
+@property (nonatomic, strong) UIView *maskView;//半透明遮罩层,默认黑色半透明，可自行设置
 @property (nonatomic, strong) UIImage *imgBG;//背景图，设置了这个就不用画带箭头的框了。
 @property (nonatomic, assign) CGPoint anchorPoint;//设置背景图的情况使用，背景图的三角在背景图的位置比例，如左上角(0,0),右下角(1,1),下边中间(0.5,1)以此类推
 @property (nonatomic, strong) UIView *menuSuperView;//本菜单弹窗的父视图，默认在Window上

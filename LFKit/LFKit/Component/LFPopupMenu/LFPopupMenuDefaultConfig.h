@@ -14,7 +14,7 @@
 
 @interface LFPopupMenuDefaultConfig : NSObject <NSCopying>
 
-@property (nonatomic, assign) CGFloat rowHeight;//行高,默认60
+@property (nonatomic, assign) CGFloat rowHeight;//行高,默认50
 @property (nonatomic, assign) CGFloat arrowH;//箭头形高,默认9
 @property (nonatomic, assign) CGFloat arrowW;//箭头形宽,默认9
 @property (nonatomic, assign) CGFloat minWidth;//弹窗最小宽度，默认0
