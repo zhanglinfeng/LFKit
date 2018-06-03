@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
+		D127F68C20C244790040590D /* LFPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F68B20C244790040590D /* LFPhotoBrowser.m */; };
+		D127F68F20C25B380040590D /* LFPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F68E20C25B380040590D /* LFPhotoModel.m */; };
+		D127F69520C2A2660040590D /* LFBigImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F69420C2A2660040590D /* LFBigImageCell.m */; };
+		D127F69C20C2D8A00040590D /* LFPhotoBrowserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F69B20C2D8A00040590D /* LFPhotoBrowserTest.m */; };
+		D127F6A320C2D9290040590D /* HPImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D127F6A020C2D9280040590D /* HPImageCell.xib */; };
+		D127F6A420C2D9290040590D /* HPImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F6A220C2D9290040590D /* HPImageCell.m */; };
 		D12FBBE120146F1300814195 /* LFSegmentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D12FBBE020146F1300814195 /* LFSegmentScrollView.m */; };
 		D12FBBE420146F4000814195 /* LFSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D12FBBE320146F4000814195 /* LFSegmentView.m */; };
 		D12FBBE72014B91E00814195 /* LFSegmentTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12FBBE62014B91E00814195 /* LFSegmentTestVC.m */; };
@@ -113,6 +119,17 @@
 		1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.debug.xcconfig"; sourceTree = "<group>"; };
 		5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.release.xcconfig"; sourceTree = "<group>"; };
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D127F68A20C244790040590D /* LFPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoBrowser.h; sourceTree = "<group>"; };
+		D127F68B20C244790040590D /* LFPhotoBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoBrowser.m; sourceTree = "<group>"; };
+		D127F68D20C25B380040590D /* LFPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoModel.h; sourceTree = "<group>"; };
+		D127F68E20C25B380040590D /* LFPhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoModel.m; sourceTree = "<group>"; };
+		D127F69320C2A2660040590D /* LFBigImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBigImageCell.h; sourceTree = "<group>"; };
+		D127F69420C2A2660040590D /* LFBigImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBigImageCell.m; sourceTree = "<group>"; };
+		D127F69A20C2D8A00040590D /* LFPhotoBrowserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPhotoBrowserTest.h; sourceTree = "<group>"; };
+		D127F69B20C2D8A00040590D /* LFPhotoBrowserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFPhotoBrowserTest.m; sourceTree = "<group>"; };
+		D127F6A020C2D9280040590D /* HPImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HPImageCell.xib; sourceTree = "<group>"; };
+		D127F6A120C2D9280040590D /* HPImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPImageCell.h; sourceTree = "<group>"; };
+		D127F6A220C2D9290040590D /* HPImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPImageCell.m; sourceTree = "<group>"; };
 		D12FBBDF20146F1300814195 /* LFSegmentScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentScrollView.h; sourceTree = "<group>"; };
 		D12FBBE020146F1300814195 /* LFSegmentScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSegmentScrollView.m; sourceTree = "<group>"; };
 		D12FBBE220146F4000814195 /* LFSegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentView.h; sourceTree = "<group>"; };
@@ -306,6 +323,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D127F68920C2443C0040590D /* LFPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				D127F68A20C244790040590D /* LFPhotoBrowser.h */,
+				D127F68B20C244790040590D /* LFPhotoBrowser.m */,
+				D127F68D20C25B380040590D /* LFPhotoModel.h */,
+				D127F68E20C25B380040590D /* LFPhotoModel.m */,
+				D127F69320C2A2660040590D /* LFBigImageCell.h */,
+				D127F69420C2A2660040590D /* LFBigImageCell.m */,
+			);
+			path = LFPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		D127F69920C2D86F0040590D /* LFPhotoBrowserTest */ = {
+			isa = PBXGroup;
+			children = (
+				D127F6A120C2D9280040590D /* HPImageCell.h */,
+				D127F6A220C2D9290040590D /* HPImageCell.m */,
+				D127F6A020C2D9280040590D /* HPImageCell.xib */,
+				D127F69A20C2D8A00040590D /* LFPhotoBrowserTest.h */,
+				D127F69B20C2D8A00040590D /* LFPhotoBrowserTest.m */,
+			);
+			path = LFPhotoBrowserTest;
+			sourceTree = "<group>";
+		};
 		D12FBBDE20146ED300814195 /* LFSegment */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,8 +433,8 @@
 				D14ADE031FAC54D000951E26 /* ComponentListController.h */,
 				D14ADE041FAC54D000951E26 /* ComponentListController.m */,
 				D14ADE0A1FAC5D6200951E26 /* LFCameraViewController.h */,
-				D14ADE0B1FAC5D6200951E26 /* LFCameraViewController.m */,
 				D14ADE0C1FAC5D6200951E26 /* LFCameraViewController.xib */,
+				D14ADE0B1FAC5D6200951E26 /* LFCameraViewController.m */,
 				D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */,
 				D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */,
 				D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */,
@@ -409,6 +451,7 @@
 				D12FBBE62014B91E00814195 /* LFSegmentTestVC.m */,
 				D16C286D2015CAE300E3E4F7 /* LFBubbleViewTestVC.h */,
 				D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */,
+				D127F69920C2D86F0040590D /* LFPhotoBrowserTest */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -554,6 +597,7 @@
 		D1AC21F81FA328830039A2C2 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D127F68920C2443C0040590D /* LFPhotoBrowser */,
 				D1C1061720400C340078CB08 /* LFFMDB */,
 				D1554D6F2024255F00AEAB8D /* LFLogManager */,
 				D16C28702015EEFA00E3E4F7 /* LFBaseCardView */,
@@ -897,8 +941,6 @@
 				D1AC21BA1FA3258A0039A2C2 /* Sources */,
 				D1AC21BB1FA3258A0039A2C2 /* Frameworks */,
 				D1AC21BC1FA3258A0039A2C2 /* Resources */,
-				33A7E05F439178DE4EA78BB5 /* [CP] Embed Pods Frameworks */,
-				4CADBC1D7171A3CBF4DB21F2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1012,6 +1054,7 @@
 				D1D977432004C01E0053AE92 /* icon_menu_record_normal@3x.png in Resources */,
 				D1D977422004C01E0053AE92 /* icon_menu_record_normal@2x.png in Resources */,
 				D1D977472004C0250053AE92 /* icon_menu_live_normal@3x.png in Resources */,
+				D127F6A320C2D9290040590D /* HPImageCell.xib in Resources */,
 				D1D9773E2004C0160053AE92 /* icon_menu_shoot_normal@3x.png in Resources */,
 				D1D9774E2004C05E0053AE92 /* img_menu_frame_bg@3x.png in Resources */,
 				D1D9774A2004C02E0053AE92 /* icon_menu_album_normal@2x.png in Resources */,
@@ -1053,36 +1096,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		33A7E05F439178DE4EA78BB5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LFKit/Pods-LFKit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4CADBC1D7171A3CBF4DB21F2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LFKit/Pods-LFKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1102,9 +1115,11 @@
 				D1E5A7BE2025745200401E3B /* NSTimer+LF.m in Sources */,
 				D1E5A78520256E7100401E3B /* LFJsonUtil.m in Sources */,
 				D13B09361FF0F6E300D8BFE1 /* LFStarsViewVC.m in Sources */,
+				D127F6A420C2D9290040590D /* HPImageCell.m in Sources */,
 				D13B09321FF0E5DA00D8BFE1 /* LFStarsView.m in Sources */,
 				D1554D7D2024255F00AEAB8D /* LFSelectLogLevelVC.m in Sources */,
 				D1D9773A2004BABC0053AE92 /* LFPopupMenuTestVC.m in Sources */,
+				D127F69C20C2D8A00040590D /* LFPhotoBrowserTest.m in Sources */,
 				D1E5A78420256E7100401E3B /* LFEncryptDecryptUtil.m in Sources */,
 				D1E5A7C12025745200401E3B /* NSString+LF.m in Sources */,
 				D1E5A7C22025745200401E3B /* UIBarButtonItem+LF.m in Sources */,
@@ -1112,6 +1127,7 @@
 				D1E5A7BC2025745200401E3B /* UIImage+LF.m in Sources */,
 				D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */,
 				D16C28732015EF1700E3E4F7 /* LFBaseCardView.m in Sources */,
+				D127F68F20C25B380040590D /* LFPhotoModel.m in Sources */,
 				D14ADE051FAC54D000951E26 /* ComponentListController.m in Sources */,
 				D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */,
 				D142B0B71FC83ECD008C032A /* LFBadgeViewController.m in Sources */,
@@ -1133,6 +1149,7 @@
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
 				D142B0B11FC83857008C032A /* LFBadge.m in Sources */,
 				D1E5A7BD2025745200401E3B /* UITextField+LF.m in Sources */,
+				D127F69520C2A2660040590D /* LFBigImageCell.m in Sources */,
 				D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */,
 				D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,
@@ -1143,6 +1160,7 @@
 				D13B092E1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m in Sources */,
 				D1AC21C31FA3258A0039A2C2 /* AppDelegate.m in Sources */,
 				D12FBBE420146F4000814195 /* LFSegmentView.m in Sources */,
+				D127F68C20C244790040590D /* LFPhotoBrowser.m in Sources */,
 				D12FBBE72014B91E00814195 /* LFSegmentTestVC.m in Sources */,
 				D1E5A7BF2025745200401E3B /* UILabel+LF.m in Sources */,
 				D1E5A7B92025745200401E3B /* UIImageView+LF.m in Sources */,
@@ -1313,15 +1331,17 @@
 			baseConfigurationReference = 1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D975HMHLA6;
+				DEVELOPMENT_TEAM = PW34BQUQU8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LFKit/PrefixHeader.pch";
 				INFOPLIST_FILE = LFKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zlf.LFKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zlf.LFKit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1331,15 +1351,17 @@
 			baseConfigurationReference = 5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D975HMHLA6;
+				DEVELOPMENT_TEAM = PW34BQUQU8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LFKit/PrefixHeader.pch";
 				INFOPLIST_FILE = LFKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zlf.LFKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zlf.LFKit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

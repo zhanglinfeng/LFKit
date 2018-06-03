@@ -13,6 +13,7 @@
 #import "LFPopupMenuTestVC.h"
 #import "LFSegmentTestVC.h"
 #import "LFBubbleViewTestVC.h"
+#import "LFPhotoBrowserTest.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -72,6 +73,10 @@
                   }},
                   @{@"title":@"气泡",@"action":^{
                       LFBubbleViewTestVC *vc = [[LFBubbleViewTestVC alloc] init];
+                      [self.navigationController pushViewController:vc animated:YES];
+                  }},
+                  @{@"title":@"大图浏览",@"action":^{
+                      LFPhotoBrowserTest *vc = [[LFPhotoBrowserTest alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
                   }}
                    ];

@@ -4,4 +4,5 @@ target 'LFKit' do
 	pod 'YYWebImage'
     pod 'FMDB'
     pod 'CocoaLumberjack'
+    pod 'MBProgressHUD'
 end
