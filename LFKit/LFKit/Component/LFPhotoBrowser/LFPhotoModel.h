@@ -17,7 +17,11 @@
 @property (nonatomic, strong) NSString *bigImageUrl;
 
 #pragma mark - 获取asset对应的图片
-+ (void)requestImageForAsset:(PHAsset *)asset size:(CGSize)size resizeMode:(PHImageRequestOptionsResizeMode)resizeMode completion:(void (^)(UIImage *, NSDictionary *))completion;
++ (void)requestImageForAsset:(PHAsset *)asset
+                        size:(CGSize)size
+                  resizeMode:(PHImageRequestOptionsResizeMode)resizeMode
+              needThumbnails:(BOOL)needThumbnails
+                  completion:(void (^)(UIImage *image, NSDictionary *info))completion;
 
 + (void)requestImageForAsset:(PHAsset *)asset compressionQuality:(CGFloat)compressionQuality resizeMode:(PHImageRequestOptionsResizeMode)resizeMode completion:(void (^)(UIImage *image))completion;
 

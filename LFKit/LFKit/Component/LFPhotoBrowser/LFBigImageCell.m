@@ -76,13 +76,15 @@
         
     } else if (photo.asset) {
         [self.indicator startAnimating];
-        [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image, NSDictionary *info) {
+        [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
             self.imageBGView.image = image;
             [self resetSubviewSize];
             if (![[info objectForKey:PHImageResultIsDegradedKey] boolValue]) {
                 [self.indicator stopAnimating];
             }
         }];
+        
+        
     }
 }
 

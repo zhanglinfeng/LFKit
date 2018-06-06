@@ -106,10 +106,10 @@
         self.rightConstraint.constant = -self.redDotSize/2;
     } else {
         //其他字符串
-        self.leftConstraint.constant = 5;
-        self.topConstraint.constant = 1;
-        self.bottomConstraint.constant = -1;
-        self.rightConstraint.constant = -5;
+        self.leftConstraint.constant = self.lbText.font.pointSize/3.0f;
+        self.topConstraint.constant = self.lbText.font.pointSize/10.0f;
+        self.bottomConstraint.constant = -self.lbText.font.pointSize/10.0f;
+        self.rightConstraint.constant = -self.lbText.font.pointSize/3.0f;
     }
 }
 
@@ -179,8 +179,8 @@
 - (void)addTopRightConstraint {
     self.useRightTop = YES;
     self.widthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
-    if (![self.superview.constraints containsObject:self.widthConstraint]) {
-        [self.superview addConstraint:self.widthConstraint];
+    if (![self.constraints containsObject:self.widthConstraint]) {
+        [self addConstraint:self.widthConstraint];
     }
     
     [self.superview removeConstraints:self.arrayConstraint];

@@ -33,12 +33,17 @@
 		D14ADE121FAC5F8300951E26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE111FAC5F8300951E26 /* BaseViewController.m */; };
 		D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */; };
 		D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */; };
+		D14D71C720C7D60E00A10457 /* LFPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D14D71C620C7D60E00A10457 /* LFPhotoCollectionCell.m */; };
 		D1554D7D2024255F00AEAB8D /* LFSelectLogLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D732024255F00AEAB8D /* LFSelectLogLevelVC.m */; };
 		D1554D7E2024255F00AEAB8D /* LFLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D742024255F00AEAB8D /* LFLogManager.m */; };
 		D1554D802024255F00AEAB8D /* LFLogListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D792024255F00AEAB8D /* LFLogListController.m */; };
 		D1554D812024255F00AEAB8D /* LFLogDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1554D7B2024255F00AEAB8D /* LFLogDetailController.m */; };
 		D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */; };
 		D16C28732015EF1700E3E4F7 /* LFBaseCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D16C28722015EF1700E3E4F7 /* LFBaseCardView.m */; };
+		D16F2C4420C515030092EF4E /* LFPhotoAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = D16F2C4320C515030092EF4E /* LFPhotoAlbumController.m */; };
+		D16F2C4720C51A8D0092EF4E /* LFAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D16F2C4620C51A8D0092EF4E /* LFAlbumModel.m */; };
+		D16F2C4A20C530F90092EF4E /* LFThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D16F2C4920C530F90092EF4E /* LFThumbnailViewController.m */; };
+		D16F2C4D20C531750092EF4E /* LFPhotoAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D16F2C4C20C531750092EF4E /* LFPhotoAlbumCell.m */; };
 		D186290A1FA8777900780629 /* RotationMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D18628FC1FA8772B00780629 /* RotationMenu.m */; };
 		D186290B1FA8777900780629 /* LFBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC22521FA348170039A2C2 /* LFBubbleView.m */; };
 		D186290C1FA8777900780629 /* LFCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC223D1FA348170039A2C2 /* LFCamera.m */; };
@@ -162,6 +167,8 @@
 		D14ADE131FAC63AC00951E26 /* LFCameraResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFCameraResultViewController.h; sourceTree = "<group>"; };
 		D14ADE141FAC63AC00951E26 /* LFCameraResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCameraResultViewController.m; sourceTree = "<group>"; };
 		D14ADE151FAC63AC00951E26 /* LFCameraResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFCameraResultViewController.xib; sourceTree = "<group>"; };
+		D14D71C520C7D60E00A10457 /* LFPhotoCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoCollectionCell.h; sourceTree = "<group>"; };
+		D14D71C620C7D60E00A10457 /* LFPhotoCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoCollectionCell.m; sourceTree = "<group>"; };
 		D1554D722024255F00AEAB8D /* LFLogListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogListController.h; sourceTree = "<group>"; };
 		D1554D732024255F00AEAB8D /* LFSelectLogLevelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSelectLogLevelVC.m; sourceTree = "<group>"; };
 		D1554D742024255F00AEAB8D /* LFLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogManager.m; sourceTree = "<group>"; };
@@ -174,6 +181,14 @@
 		D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBubbleViewTestVC.m; sourceTree = "<group>"; };
 		D16C28712015EF1700E3E4F7 /* LFBaseCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBaseCardView.h; sourceTree = "<group>"; };
 		D16C28722015EF1700E3E4F7 /* LFBaseCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBaseCardView.m; sourceTree = "<group>"; };
+		D16F2C4220C515030092EF4E /* LFPhotoAlbumController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoAlbumController.h; sourceTree = "<group>"; };
+		D16F2C4320C515030092EF4E /* LFPhotoAlbumController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoAlbumController.m; sourceTree = "<group>"; };
+		D16F2C4520C51A8D0092EF4E /* LFAlbumModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAlbumModel.h; sourceTree = "<group>"; };
+		D16F2C4620C51A8D0092EF4E /* LFAlbumModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAlbumModel.m; sourceTree = "<group>"; };
+		D16F2C4820C530F90092EF4E /* LFThumbnailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFThumbnailViewController.h; sourceTree = "<group>"; };
+		D16F2C4920C530F90092EF4E /* LFThumbnailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFThumbnailViewController.m; sourceTree = "<group>"; };
+		D16F2C4B20C531750092EF4E /* LFPhotoAlbumCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoAlbumCell.h; sourceTree = "<group>"; };
+		D16F2C4C20C531750092EF4E /* LFPhotoAlbumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoAlbumCell.m; sourceTree = "<group>"; };
 		D17B2430202D930900E687D6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D18628FB1FA8772B00780629 /* RotationMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotationMenu.h; sourceTree = "<group>"; };
 		D18628FC1FA8772B00780629 /* RotationMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotationMenu.m; sourceTree = "<group>"; };
@@ -724,6 +739,16 @@
 			children = (
 				D1AC225F1FA348170039A2C2 /* LFImagePicker.h */,
 				D1AC22601FA348170039A2C2 /* LFImagePicker.m */,
+				D16F2C4520C51A8D0092EF4E /* LFAlbumModel.h */,
+				D16F2C4620C51A8D0092EF4E /* LFAlbumModel.m */,
+				D16F2C4220C515030092EF4E /* LFPhotoAlbumController.h */,
+				D16F2C4320C515030092EF4E /* LFPhotoAlbumController.m */,
+				D16F2C4820C530F90092EF4E /* LFThumbnailViewController.h */,
+				D16F2C4920C530F90092EF4E /* LFThumbnailViewController.m */,
+				D16F2C4B20C531750092EF4E /* LFPhotoAlbumCell.h */,
+				D16F2C4C20C531750092EF4E /* LFPhotoAlbumCell.m */,
+				D14D71C520C7D60E00A10457 /* LFPhotoCollectionCell.h */,
+				D14D71C620C7D60E00A10457 /* LFPhotoCollectionCell.m */,
 			);
 			path = LFImagePicker;
 			sourceTree = "<group>";
@@ -1125,6 +1150,7 @@
 				D1E5A7C22025745200401E3B /* UIBarButtonItem+LF.m in Sources */,
 				D1554D802024255F00AEAB8D /* LFLogListController.m in Sources */,
 				D1E5A7BC2025745200401E3B /* UIImage+LF.m in Sources */,
+				D14D71C720C7D60E00A10457 /* LFPhotoCollectionCell.m in Sources */,
 				D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */,
 				D16C28732015EF1700E3E4F7 /* LFBaseCardView.m in Sources */,
 				D127F68F20C25B380040590D /* LFPhotoModel.m in Sources */,
@@ -1134,6 +1160,8 @@
 				D186290A1FA8777900780629 /* RotationMenu.m in Sources */,
 				D1E5A7B72025745200401E3B /* UITabBarController+HideTabBar.m in Sources */,
 				D1E5A78620256E7100401E3B /* LFFileUtil.m in Sources */,
+				D16F2C4D20C531750092EF4E /* LFPhotoAlbumCell.m in Sources */,
+				D16F2C4A20C530F90092EF4E /* LFThumbnailViewController.m in Sources */,
 				D1E5A78820256E7100401E3B /* LFTimeUtil.m in Sources */,
 				D1554D7E2024255F00AEAB8D /* LFLogManager.m in Sources */,
 				D186290B1FA8777900780629 /* LFBubbleView.m in Sources */,
@@ -1148,7 +1176,9 @@
 				D186290D1FA8777900780629 /* LFCycleScrollView.m in Sources */,
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
 				D142B0B11FC83857008C032A /* LFBadge.m in Sources */,
+				D16F2C4720C51A8D0092EF4E /* LFAlbumModel.m in Sources */,
 				D1E5A7BD2025745200401E3B /* UITextField+LF.m in Sources */,
+				D16F2C4420C515030092EF4E /* LFPhotoAlbumController.m in Sources */,
 				D127F69520C2A2660040590D /* LFBigImageCell.m in Sources */,
 				D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */,
 				D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */,

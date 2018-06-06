@@ -13,7 +13,10 @@
 
 @interface LFImagePicker : NSObject
 
-//单选
+//原生相册单选
 - (void)pickSingleImageWithController:(UIViewController *)ctr allowsEditing:(BOOL)allowsEditing resultBlock:(void(^)(UIImage *image))resultBlock;
+
+//原生拍照
+- (void)pickImageFromCameraWithController:(UIViewController *)ctr allowsEditing:(BOOL)allowsEditing resultBlock:(void(^)(UIImage *image))resultBlock;
 
 @end

@@ -11,15 +11,14 @@
 @implementation LFPhotoModel
 
 #pragma mark - 获取asset对应的图片
-+ (void)requestImageForAsset:(PHAsset *)asset size:(CGSize)size resizeMode:(PHImageRequestOptionsResizeMode)resizeMode completion:(void (^)(UIImage *, NSDictionary *))completion
+
++ (void)requestImageForAsset:(PHAsset *)asset
+                        size:(CGSize)size
+                  resizeMode:(PHImageRequestOptionsResizeMode)resizeMode
+              needThumbnails:(BOOL)needThumbnails
+                  completion:(void (^)(UIImage *image, NSDictionary *info))completion
 {
-    //请求大图界面，当切换图片时，取消上一张图片的请求，对于iCloud端的图片，可以节省流量
     static PHImageRequestID requestID = -1;
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGFloat width = MIN([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
-    if (requestID >= 1 && size.width/width==scale) {
-        [[PHCachingImageManager defaultManager] cancelImageRequest:requestID];
-    }
     
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     /**
@@ -44,8 +43,13 @@
         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey];
         //不要该判断，即如果该图片在iCloud上时候，会先显示一张模糊的预览图，待加载完毕后会显示高清图
         // && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue]
+        BOOL isThumbnails = [[info objectForKey:PHImageResultIsDegradedKey] boolValue];
         if (downloadFinined && completion && image) {
-            completion(image, info);
+            if (needThumbnails) {
+                completion(image, info); //需要缩略图，返回第一次的回调
+            } else if (isThumbnails == NO){
+                completion(image, info); //不需求缩略图，仅返回第二次的回调
+            }
         }
     }];
 }
