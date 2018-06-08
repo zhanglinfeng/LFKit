@@ -25,4 +25,10 @@
 /**获取用户所有相册列表，包含视频*/
 + (NSArray<LFAlbumModel *> *)getPhotoAndVideoAlbumList;
 
+/**获取相册集中的图片Asset*/
++ (NSArray<PHAsset *> *)getImageAssetsInAssetCollection:(PHAssetCollection *)assetCollection ascending:(BOOL)ascending;
+
+/**获取相册集中的视频Asset*/
++ (NSArray<PHAsset *> *)getVideoAssetsInAssetCollection:(PHAssetCollection *)assetCollection ascending:(BOOL)ascending;
+
 @end

@@ -16,6 +16,21 @@
 @property (nonatomic, strong) NSString *smallImageUrl;
 @property (nonatomic, strong) NSString *bigImageUrl;
 
+/*
+ 当前媒体是否为视频
+ */
+- (BOOL)isVideo;
+
+/*
+ 获取视频媒体的时长
+ */
+- (NSInteger)fetchVideoLength;
+
+/*
+ 获取视频媒体的时长，用于显示
+ */
+- (NSString *)fetchVideoTimeString;
+
 #pragma mark - 获取asset对应的图片
 + (void)requestImageForAsset:(PHAsset *)asset
                         size:(CGSize)size

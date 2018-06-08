@@ -10,6 +10,25 @@
 
 @implementation LFPhotoModel
 
+- (BOOL)isVideo {
+    return self.asset.mediaType == PHAssetMediaTypeVideo;
+}
+
+- (NSInteger)fetchVideoLength {
+    if ([self isVideo] == NO) {
+        return 0;
+    }
+    return self.asset.duration;
+}
+
+- (NSString *)fetchVideoTimeString {
+    NSInteger second = [self fetchVideoLength];
+    NSInteger minutes = (second / 60) % 60;
+    NSInteger seconds = second % 60;
+    NSString *result = [NSString stringWithFormat:@"%02li:%02li",(long)minutes,(long)seconds];
+    return result;
+}
+
 #pragma mark - 获取asset对应的图片
 
 + (void)requestImageForAsset:(PHAsset *)asset
