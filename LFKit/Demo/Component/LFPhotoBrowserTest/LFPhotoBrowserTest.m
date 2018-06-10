@@ -12,6 +12,8 @@
 #import "UIImageView+YYWebImage.h"
 #import "LFPhotoModel.h"
 #import "LFPhotoBrowser.h"
+#import "LFPopupMenu.h"
+#import "LFImagePicker.h"
 
 static NSString *kHPImageCell = @"HPImageCell";
 
@@ -20,6 +22,7 @@ static NSString *kHPImageCell = @"HPImageCell";
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *arrayImage;
 @property (assign, nonatomic) BOOL isHiddenStatusBar;
+@property (nonatomic, strong) LFImagePicker *picker;
 
 @end
 
@@ -27,11 +30,17 @@ static NSString *kHPImageCell = @"HPImageCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *itemPick = [[UIBarButtonItem alloc] initWithTitle:@"选择" style:UIBarButtonItemStyleDone target:self action:@selector(select_Click)];
+    self.navigationItem.rightBarButtonItems = @[itemPick];
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.arrayImage = [[NSMutableArray alloc] init];
     [self loadCollectionView];
     [self loadData];
+    self.picker = [[LFImagePicker alloc] init];
 }
 
 -(BOOL)prefersStatusBarHidden {
@@ -45,7 +54,7 @@ static NSString *kHPImageCell = @"HPImageCell";
     layout.minimumInteritemSpacing = 1;
     layout.minimumLineSpacing = 1; //上下的间距 可以设置0看下效果
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    layout.itemSize = CGSizeMake((self.view.frame.size.width - 1)/2, (self.view.frame.size.width - 1)/2);
+    layout.itemSize = CGSizeMake((self.view.frame.size.width - 2)/3, (self.view.frame.size.width - 2)/3);
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
@@ -72,8 +81,12 @@ static NSString *kHPImageCell = @"HPImageCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     HPImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHPImageCell forIndexPath:indexPath];
     LFPhotoModel *photo = self.arrayImage[indexPath.item];
-
-    [cell.ivPicture yy_setImageWithURL:[NSURL URLWithString:photo.smallImageUrl] placeholder:[UIImage imageNamed:@"img_default"]];
+    if (photo.image) {
+        cell.ivPicture.image = photo.image;
+    } else {
+        [cell.ivPicture yy_setImageWithURL:[NSURL URLWithString:photo.smallImageUrl] placeholder:[UIImage imageNamed:@"img_default"]];
+    }
+    
     return cell;
 }
 
@@ -94,7 +107,7 @@ static NSString *kHPImageCell = @"HPImageCell";
     browser.isShowTopBar = YES;
     HPImageCell *cell = (HPImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
     CGRect rect = [self.collectionView convertRect:cell.frame toView:[UIApplication sharedApplication].keyWindow];
-    browser.beginRect = rect;
+//    browser.beginRect = rect;
     browser.beginImage = cell.ivPicture.image;
     [browser show];
     browser.didDismiss = ^{
@@ -144,6 +157,38 @@ static NSString *kHPImageCell = @"HPImageCell";
     [self.arrayImage addObjectsFromArray:@[model1,model2,model3,model4,model5,model6,model7,model8,model9]];
     [self.collectionView reloadData];
     
+}
+
+- (void)select_Click {
+    LFPopupMenuItem *item1 = [LFPopupMenuItem createWithTitle:@"拍照" image:nil];
+    LFPopupMenuItem *item2 = [LFPopupMenuItem createWithTitle:@"原生相册" image:nil];
+    LFPopupMenuItem *item3 = [LFPopupMenuItem createWithTitle:@"多选相册" image:nil];
+    LFPopupMenu *menu = [[LFPopupMenu alloc] init];
+    __weak typeof(self) weakSelf = self;
+    [menu configWithItems:@[item1,item2,item3]
+                   action:^(NSInteger index) {
+                       if (index == 0) {
+                           [weakSelf.picker pickImageFromCameraWithController:weakSelf allowsEditing:YES resultBlock:^(UIImage *image) {
+                               LFPhotoModel *photo = [[LFPhotoModel alloc] init];
+                               photo.image = image;
+                               [weakSelf.arrayImage addObject:photo];
+                               [weakSelf.collectionView reloadData];
+                           }];
+                       } else if (index == 1) {
+                           [weakSelf.picker pickSingleImageWithController:weakSelf allowsEditing:NO resultBlock:^(UIImage *image) {
+                               LFPhotoModel *photo = [[LFPhotoModel alloc] init];
+                               photo.image = image;
+                               [weakSelf.arrayImage addObject:photo];
+                               [weakSelf.collectionView reloadData];
+                           }];
+                       } else {
+                           [weakSelf.picker pickMultiImageWithController:weakSelf maxCount:9 dataType:LFPhotoDataTypeAll resultBlock:^(NSMutableArray<LFPhotoModel *> *arraySelectPhotoModel) {
+                               [weakSelf.arrayImage addObjectsFromArray:arraySelectPhotoModel];
+                               [weakSelf.collectionView reloadData];
+                           }];
+                       }
+                   }];
+    [menu showArrowInPoint:CGPointMake(self.view.frame.size.width - 25, self.navigationController.navigationBar.frame.size.height + self.navigationController.navigationBar.frame.origin.y)];
 }
 
 

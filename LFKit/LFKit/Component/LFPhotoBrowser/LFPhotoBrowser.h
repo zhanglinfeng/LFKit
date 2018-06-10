@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LFPhotoModel.h"
 
-@interface LFPhotoBrowser : UIView
+@interface LFPhotoBrowser : UIView <UICollectionViewDelegate,UICollectionViewDataSource>
 
 #pragma mark - 必传参
 @property (nonatomic, strong) NSArray <LFPhotoModel *>*arrayData;
@@ -24,13 +24,14 @@
 @property (nonatomic, assign) BOOL isSupportLandscape;//是否支持横屏，默认yes
 
 #pragma mark - 方便外面设置字体、图标，没事不需设置
+@property (strong, nonatomic) UIView *topBar;
 @property (nonatomic, strong) UIButton *btBack;
 @property (nonatomic, strong) UIButton *btSave;
 @property (nonatomic, strong) UILabel *lbTitle;
 
 @property (nonatomic, copy) void(^clickBlock)(NSInteger index);//单击事件，如果传了block，则优先使用block事件，否则根据isShowTopBar判断使用何种单击事件
 @property (nonatomic, copy) void(^didScrollBlock)(NSInteger index);
-@property (nonatomic, copy) void(^didDismiss)(void);//消失事件
+@property (nonatomic, copy) void(^didDismiss)(void);//消失事件（让状态栏显示会用到）
 
 //展示
 - (void)show;
@@ -39,6 +40,7 @@
 
 - (void)dismiss;
 
-
+//保存图片
+- (void)save;
 
 @end

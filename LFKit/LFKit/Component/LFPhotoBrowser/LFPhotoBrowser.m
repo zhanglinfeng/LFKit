@@ -15,10 +15,9 @@
 #define kItemMargin 20
 #define kLFBigImageCell @"LFBigImageCell"
 
-@interface LFPhotoBrowser () <UICollectionViewDelegate,UICollectionViewDataSource>
+@interface LFPhotoBrowser ()
 
 @property (strong, nonatomic) UICollectionView *collectionView;
-@property (strong, nonatomic) UIView *topBar;
 @property (strong, nonatomic) UIView *viewBG;//黑色背景，本视图的哥哥，作用是防止转屏看到下面的视图
 
 @end
@@ -39,6 +38,10 @@
     return self;
 }
 
+-(void)dealloc {
+    
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.collectionView.frame = CGRectMake(-kItemMargin/2, 0, self.bounds.size.width + kItemMargin, self.bounds.size.height);
@@ -48,8 +51,8 @@
 //    [self.collectionView setContentOffset:CGPointMake(self.currentIndex*self.collectionView.frame.size.width, 0) animated:NO];
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
     self.lbTitle.frame = _topBar.bounds;
-    self.btBack.frame = CGRectMake(12, 7, self.btBack.frame.size.width, self.btBack.frame.size.height);
-    self.btSave.frame = CGRectMake(_topBar.frame.size.width - 52, 7, self.btSave.frame.size.width, self.btSave.frame.size.height);
+    self.btBack.frame = CGRectMake(12, 17, self.btBack.frame.size.width, self.btBack.frame.size.height);
+    self.btSave.frame = CGRectMake(_topBar.frame.size.width - 52, 17, self.btSave.frame.size.width, self.btSave.frame.size.height);
     
 //    NSLog(@"self-layoutSubviews=%@",self);
 }
@@ -194,7 +197,7 @@
 
 -(UIView *)topBar {
     if (!_topBar) {
-        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44)];
+        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 64)];
         _topBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         self.lbTitle = [[UILabel alloc] initWithFrame:_topBar.bounds];
         self.lbTitle.textAlignment = NSTextAlignmentCenter;
@@ -202,14 +205,14 @@
         self.lbTitle.font = [UIFont systemFontOfSize:15];
         [_topBar addSubview:self.lbTitle];
         
-        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 7, 40, 30)];
+        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 17, 40, 30)];
         [self.btBack setTitle:@"关闭" forState:UIControlStateNormal];
         self.btBack.titleLabel.font = [UIFont systemFontOfSize:15];
         [self.btBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btBack addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [_topBar addSubview:self.btBack];
         
-        self.btSave = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 52, 7, 40, 30)];
+        self.btSave = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 52, 17, 40, 30)];
         [self.btSave setTitle:@"保存" forState:UIControlStateNormal];
         self.btSave.titleLabel.font = [UIFont systemFontOfSize:15];
         [self.btSave setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -225,14 +228,14 @@
 - (void)setTopBarHidden:(BOOL)hidden {
     if (hidden) {
         [UIView animateWithDuration:0.2 animations:^{
-            self.topBar.frame = CGRectMake(0, -44, self.bounds.size.width, 44);
+            self.topBar.frame = CGRectMake(0, -64, self.bounds.size.width, 64);
         } completion:^(BOOL finished) {
             self.topBar.hidden = YES;
         }];
     } else {
         self.topBar.hidden = NO;
         [UIView animateWithDuration:0.2 animations:^{
-            self.topBar.frame = CGRectMake(0, 0, self.bounds.size.width, 44);
+            self.topBar.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
         } completion:^(BOOL finished) {
             
         }];
@@ -384,6 +387,10 @@
 }
 
 - (void)dismiss {
+    if (self.didDismiss) {
+        self.didDismiss();
+    }
+    
     [self.viewBG removeFromSuperview];
     
     if (self.beginImage && self.beginRect.size.width > 0) {
@@ -416,9 +423,6 @@
         [self removeFromSuperview];
     }
     
-    if (self.didDismiss) {
-        self.didDismiss();
-    }
 }
 
 @end

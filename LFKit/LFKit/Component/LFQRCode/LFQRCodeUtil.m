@@ -89,7 +89,10 @@
     // Cleanup
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
-    return [UIImage imageWithCGImage:scaledImage];
+    CGColorSpaceRelease(cs);
+    UIImage *resultImage = [UIImage imageWithCGImage:scaledImage];
+    CGImageRelease(scaledImage);
+    return resultImage;
 }
 
 

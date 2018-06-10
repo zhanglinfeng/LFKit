@@ -76,7 +76,10 @@
         
     } else if (photo.asset) {
         [self.indicator startAnimating];
-        [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
+        [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:NO completion:^(UIImage *image, NSDictionary *info) {
+            if ([NSThread currentThread] != [NSThread mainThread]) {
+                NSLog(@"*********不在主线程3*********");
+            }
             self.imageBGView.image = image;
             [self resetSubviewSize];
             if (![[info objectForKey:PHImageResultIsDegradedKey] boolValue]) {

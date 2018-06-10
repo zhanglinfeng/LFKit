@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LFPhotoModel.h"
 
-typedef NS_ENUM (NSUInteger, ELPhotoDataType) {
+typedef NS_ENUM (NSUInteger, LFPhotoDataType) {
     LFPhotoDataTypeAll,    //选照片、视频
     LFPhotoDataTypeVideos, //只选视频
     LFPhotoDataTypePhotos  //只选照片
@@ -18,7 +18,7 @@ typedef NS_ENUM (NSUInteger, ELPhotoDataType) {
 /**相册列表*/
 @interface LFPhotoAlbumController : UIViewController
 
-@property (nonatomic, assign) ELPhotoDataType dataType;
+@property (nonatomic, assign) LFPhotoDataType dataType;
 
 //最大选择数
 @property (nonatomic, assign) NSInteger maxSelectCount;
@@ -27,7 +27,7 @@ typedef NS_ENUM (NSUInteger, ELPhotoDataType) {
 @property (nonatomic, strong) NSMutableArray<LFPhotoModel *> *arraySelectPhotos;
 
 //选则完成后回调
-@property (nonatomic, copy) void (^DoneBlock)(BOOL isOriginalPhoto);
+@property (nonatomic, copy) void (^DoneBlock)(NSMutableArray<LFPhotoModel *> *arraySelectPhotos, BOOL isOriginalPhoto);
 
 //取消选择后回调
 @property (nonatomic, copy) void (^CancelBlock)(void);

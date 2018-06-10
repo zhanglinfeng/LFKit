@@ -10,4 +10,11 @@
 
 @interface LFPhotoCollectionCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIButton *btnSelect;
+@property (nonatomic, strong) UIView *coverView;//蒙层,不可点时显示蒙层
+
+- (void)setIsVideo:(BOOL)isVideo;
+- (void)setTime:(NSString *)time;
+
 @end

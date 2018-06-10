@@ -24,6 +24,7 @@
 //选则完成后回调
 @property (nonatomic, copy) void (^DoneBlock)(BOOL isOriginalPhoto);
 
+
 //取消选择后回调
 @property (nonatomic, copy) void (^CancelBlock)(void);
 

@@ -11,6 +11,8 @@
 #import "LFPhotoCollectionCell.h"
 #import "LFAlbumModel.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "LFBigImageBrowser.h"
+#import "LFBigVideoController.h"
 
 @interface LFThumbnailViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -19,6 +21,7 @@
 @property (nonatomic, strong) UIView *viewBottomBar;
 @property (nonatomic, strong) UIButton *btnOriginal;
 @property (nonatomic, strong) UIButton *btnDone;
+@property (assign, nonatomic) BOOL isHiddenStatusBar;
 
 @end
 
@@ -46,6 +49,10 @@
     [self resetBottomBtnsStatus];
 }
 
+-(BOOL)prefersStatusBarHidden {
+    return self.isHiddenStatusBar;
+}
+
 - (void)dealloc {
 
 }
@@ -54,16 +61,16 @@
     [super viewDidLayoutSubviews];
 //    self.collectionView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44);
 //    self.viewBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
+    [self.btnDone sizeToFit];
+    CGFloat doneW = 70;
+    self.btnDone.frame = CGRectMake(self.view.frame.size.width - doneW - 12, 7, doneW, 30);
 }
 
 #pragma mark - 初始化
 //初始化导航
 - (void)initNavigation {
-
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(doCancel)];
     self.navigationItem.rightBarButtonItem = rightItem;
-    UIButton *btnLeft = self.navigationItem.leftBarButtonItem.customView;
-    [btnLeft addTarget:self action:@selector(back_Click) forControlEvents:UIControlEventTouchUpInside];
 }
 
 //初始化列表
@@ -110,8 +117,13 @@
     self.btnOriginal.backgroundColor = [UIColor clearColor];
     self.btnOriginal.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.btnOriginal setTitle:@"原图" forState:UIControlStateNormal];
-    [self.btnOriginal setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.btnOriginal addTarget:self action:@selector(btnPreview_Click:) forControlEvents:UIControlEventTouchUpInside];
+    [self.btnOriginal setImage:[UIImage imageNamed:@"photo_radio_normal"] forState:UIControlStateNormal];
+    [self.btnOriginal setImage:[UIImage imageNamed:@"photo_radio_normal"] forState:UIControlStateDisabled];
+    [self.btnOriginal setImage:[UIImage imageNamed:@"photo_radio_pressed"] forState:UIControlStateSelected];
+    [self.btnOriginal setTitleColor:LFAlbumMainColor forState:UIControlStateNormal];
+    [self.btnOriginal setTitleColor:LFAlbumMainColor forState:UIControlStateSelected];
+    [self.btnOriginal setTitleColor:LFAlbumDisabledColor forState:UIControlStateDisabled];
+    [self.btnOriginal addTarget:self action:@selector(userOriginal:) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBottomBar addSubview:self.btnOriginal];
     [self.viewBottomBar addConstraints:@[
                                          [NSLayoutConstraint constraintWithItem:self.btnOriginal attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeLeft multiplier:1 constant:12],
@@ -121,20 +133,22 @@
     
     //确定按钮
     self.btnDone = [[UIButton alloc] init];
-    self.btnDone.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.btnDone.translatesAutoresizingMaskIntoConstraints = NO;
     self.btnDone.titleLabel.font = [UIFont systemFontOfSize:16];
     self.btnDone.clipsToBounds = YES;
-    self.btnDone.backgroundColor = [UIColor blueColor];
+    self.btnDone.layer.cornerRadius = 4;
+    [self.btnDone setBackgroundImage:[LFAlbumModel imageWithColor:LFAlbumMainColor size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+    [self.btnDone setBackgroundImage:[LFAlbumModel imageWithColor:LFAlbumDisabledColor size:CGSizeMake(1, 1)] forState:UIControlStateDisabled];
     [self.btnDone setTitle:@"确定" forState:UIControlStateNormal];
-    [self.btnDone setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     [self.btnDone addTarget:self action:@selector(btnDone_Click:) forControlEvents:UIControlEventTouchUpInside];
     [self.viewBottomBar addSubview:self.btnDone];
-    [self.viewBottomBar addConstraints:@[
-                                         [NSLayoutConstraint constraintWithItem:self.btnDone attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeRight multiplier:1 constant:-12],
-                                         [NSLayoutConstraint constraintWithItem:self.btnDone attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeCenterY multiplier:1 constant:0],
-                                         ]];
-    [self.btnDone addConstraint:[NSLayoutConstraint constraintWithItem:self.btnDone attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44]];
+//    [self.viewBottomBar addConstraints:@[
+//                                         [NSLayoutConstraint constraintWithItem:self.btnDone attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeRight multiplier:1 constant:-12],
+//                                         [NSLayoutConstraint constraintWithItem:self.btnDone attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeCenterY multiplier:1 constant:0],
+//                                         ]];
+//    [self.btnDone addConstraint:[NSLayoutConstraint constraintWithItem:self.btnDone attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30]];
     
 }
 
@@ -168,15 +182,24 @@
     }
 
     if (!btn.selected) {
-        //添加图片到选中数组
         [btn.layer addAnimation:[self GetElasticityAnimation] forKey:nil];
         
         if (![LFPhotoModel judgeAssetisInLocalAblum:model.asset]) {
-            
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            hud.label.text = @"正在从iCloud中下载照片";
+            [LFPhotoModel requestImageForAsset:model.asset compressionQuality:0.5 resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [hud hideAnimated:YES];
+                    model.image = image;
+                    [self.arraySelectPhotos addObject:model];
+                    [self resetBottomBtnsStatus];
+                });
+                
+            }];
         } else {
-            
+            [self.arraySelectPhotos addObject:model];
         }
-        [self.arraySelectPhotos addObject:model];
+        
     } else {
         for (LFPhotoModel *sModel in _arraySelectPhotos) {
             if ([model.asset.localIdentifier isEqualToString:sModel.asset.localIdentifier]) {
@@ -190,14 +213,25 @@
     [self resetBottomBtnsStatus];
 }
 
-- (void)btnPreview_Click:(id)sender {
-    [self pushShowBigImgVCWithDataArray:self.arraySelectPhotos selectIndex:0];
+- (void)userOriginal:(UIButton *)button {
+    if (self.arraySelectPhotos.count < 1) {
+        return;
+    }
+    button.selected = !button.selected;
+    self.isSelectOriginalPhoto = button.selected;
+    
+    [LFPhotoModel getPhotosBytesWithArray:self.arraySelectPhotos completion:^(NSString *photosBytes) {
+        [button setTitle:[NSString stringWithFormat:@"原图(%@)", photosBytes] forState:UIControlStateSelected];
+        if ([NSThread currentThread] != [NSThread mainThread]) {
+            NSLog(@"*********不在主线程4*********");
+        }
+    }];
 }
 
 - (void)btnDone_Click:(id)sender
 {
     if (self.DoneBlock) {
-        self.DoneBlock(self.arraySelectPhotos);
+        self.DoneBlock(self.isSelectOriginalPhoto);
     }
 }
 
@@ -219,7 +253,8 @@
         self.btnOriginal.enabled = NO;
         self.btnDone.enabled = NO;
     }
-
+    [self.btnDone setTitle:[NSString stringWithFormat:@"确定(%@)",@(self.arraySelectPhotos.count)] forState:UIControlStateNormal];
+    [self.btnDone setTitle:[NSString stringWithFormat:@"确定(%@)",@(self.arraySelectPhotos.count)] forState:UIControlStateDisabled];
 }
 
 //按钮弹性动画
@@ -241,32 +276,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//跳转到大图
-- (void)pushShowBigImgVCWithDataArray:(NSMutableArray<LFPhotoModel *> *)dataArray selectIndex:(NSInteger)selectIndex {
-//    ELBigImageController *svc = [[ELBigImageController alloc] init];
-//    svc.arrayDataSources = dataArray;
-//    svc.arraySelectPhotos = self.arraySelectPhotos;
-//    svc.selectIndex    = selectIndex;
-//    svc.maxSelectCount = _maxSelectCount;
-//    svc.isSelectOriginalPhoto = self.isSelectOriginalPhoto;
-//    [svc setBackBlock:^(NSArray<ELPhotoModel *> *selectedPhotos) {
-//        [self.collectionView reloadData];
-//        [self resetBottomBtnsStatus];
-//    }];
-//    [svc setBtnDoneBlock:^(NSArray<ELPhotoModel *> *selectedPhotos) {
-//        [self btnDone_Click:nil];
-//    }];
-//    [self.navigationController pushViewController:svc animated:YES];
-}
-
 - (void)showVideo:(LFPhotoModel *)model {
-//    ELBigVideoController *bv = [[ELBigVideoController alloc] init];
-//    bv.videoModel = model;
-//    [bv setBtnDoneBlock:^(NSArray<ELPhotoModel *> *selectedPhotos) {
-//        self.arraySelectPhotos = [NSMutableArray arrayWithArray:selectedPhotos];
-//        [self btnDone_Click:nil]; //替换一下选取的数据，再抛出回调
-//    }];
-//    [self.navigationController pushViewController:bv animated:YES];
+    LFBigVideoController *bv = [[LFBigVideoController alloc] init];
+    bv.videoModel = model;
+    bv.selectVideoBlock = ^(LFPhotoModel *video) {
+        [self.arraySelectPhotos addObject:video];
+        if (self.DoneBlock) {
+            self.DoneBlock(self.arraySelectPhotos);
+        }
+    };
+    [self.navigationController pushViewController:bv animated:YES];
 }
 
 #pragma mark - UICollectionView
@@ -280,50 +299,71 @@
     return self.arrayDataSources.count;
 }
 
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *cellIdentifier = @"LFPhotoCollectionCell";
-//    ELPhotoModel *model = self.arrayDataSources[indexPath.row];
-//    ELPhotoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-//    CGSize size = cell.frame.size;
-//    size.width *= 2.5;
-//    size.height *= 2.5;
-//    [[ELPhotoTool shareInstance] requestImageForAsset:model.asset size:size resizeMode:PHImageRequestOptionsResizeModeExact needThumbnails:NO completion:^(UIImage *image, NSDictionary *info) {
-//        cell.imageView.image = image;
-//    }];
-//    //区分照片、视频数据
-//    BOOL isVideo = [model isVideo];
-//    [cell setIsVideo:isVideo];
-//    if (isVideo == NO) { //照片UI
-//        cell.btnSelect.selected = NO;
-//        for (ELPhotoModel *sModel in self.arraySelectPhotos) {
-//            if ([sModel.localIdentifier isEqualToString:model.localIdentifier]) {
-//                cell.btnSelect.selected = YES;
-//                break;
-//            }
-//        }
-//        cell.btnSelect.tag = indexPath.row;
-//        [cell.btnSelect addTarget:self action:@selector(cell_btn_Click:) forControlEvents:UIControlEventTouchUpInside];
-//    } else { //视频UI
-//        [cell setTime:[model fetchVideoTimeString]];
-//    }
-//    return cell;
-//}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"LFPhotoCollectionCell";
+    LFPhotoModel *model = self.arrayDataSources[indexPath.row];
+    LFPhotoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    CGSize size = cell.frame.size;
+    size.width *= 2.5;
+    size.height *= 2.5;
+    [LFPhotoModel requestImageForAsset:model.asset size:size resizeMode:PHImageRequestOptionsResizeModeExact needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
+        cell.imageView.image = image;
+        if ([NSThread currentThread] != [NSThread mainThread]) {
+            NSLog(@"*********不在主线程2*********");
+        }
+    }];
+    //区分照片、视频数据
+    BOOL isVideo = [model isVideo];
+    [cell setIsVideo:isVideo];
+    cell.coverView.hidden = YES;
+    if (isVideo == NO) { //照片UI
+        cell.btnSelect.selected = NO;
+        for (LFPhotoModel *sModel in self.arraySelectPhotos) {
+            if ([sModel.asset.localIdentifier isEqualToString:model.asset.localIdentifier]) {
+                cell.btnSelect.selected = YES;
+                break;
+            }
+        }
+        cell.btnSelect.tag = indexPath.row;
+        [cell.btnSelect addTarget:self action:@selector(cell_btn_Click:) forControlEvents:UIControlEventTouchUpInside];
+    } else { //视频UI
+        [cell setTime:[model fetchVideoTimeString]];
+        cell.coverView.hidden = self.arraySelectPhotos.count < 1;
+    }
+    return cell;
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    ELPhotoModel *model = self.arrayDataSources[indexPath.row];
-//    //选择视频
-//    if ([model isVideo]) {
-//        if (self.arraySelectPhotos.count > 0) {
-//            [self el_photo_alertTips:@"选择照片时不能选择视频"];
-//            return;
-//        }
-//        //去视频处理
-//        [self showVideo:model];
-//        return;
-//    }
-//    [self pushShowBigImgVCWithDataArray:self.arrayDataSources selectIndex:indexPath.item];
+    LFPhotoModel *model = self.arrayDataSources[indexPath.row];
+    //选择视频
+    if ([model isVideo] && self.arraySelectPhotos.count < 1) {
+        [self showVideo:model];
+    } else {
+        self.isHiddenStatusBar = YES;
+        [self setNeedsStatusBarAppearanceUpdate];
+        
+        LFBigImageBrowser *browser = [[LFBigImageBrowser alloc] init];
+        browser.ctr = self;
+        browser.arrayData = self.arrayDataSources;
+        browser.arraySelectPhotos = self.arraySelectPhotos;
+        browser.maxSelectCount = self.maxSelectCount;
+        browser.currentIndex = indexPath.item;
+        browser.isShowTopBar = YES;
+        [browser show];
+        
+        __weak LFBigImageBrowser *b_browser = browser;
+        __weak typeof(self) weakSelf = self;
+        browser.didDismiss = ^{
+            weakSelf.isSelectOriginalPhoto = b_browser.isSelectOriginalPhoto;
+            [weakSelf.collectionView reloadData];
+            [weakSelf resetBottomBtnsStatus];
+            weakSelf.isHiddenStatusBar = NO;
+            [weakSelf setNeedsStatusBarAppearanceUpdate];
+        };
+        browser.DoneBlock = self.DoneBlock;
+    }
 }
 
 @end

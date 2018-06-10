@@ -40,7 +40,7 @@
 }
 
 - (void)dealloc {
-    
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -77,18 +77,23 @@
 }
 
 - (void)pushToAllPhoto:(LFAlbumModel *)album {
+    __weak typeof(self) weakSelf = self;
     LFThumbnailViewController *tvc = [[LFThumbnailViewController alloc] init];
     tvc.title = album.title;
     tvc.maxSelectCount = self.maxSelectCount;
     tvc.assetCollection = album.assetCollection;
     tvc.arraySelectPhotos = self.arraySelectPhotos;
-    tvc.DoneBlock = self.DoneBlock;
+    tvc.DoneBlock = ^(BOOL isOriginalPhoto) {
+        if (weakSelf.DoneBlock) {
+            weakSelf.DoneBlock(weakSelf.arraySelectPhotos, isOriginalPhoto);
+        }
+    };
     tvc.CancelBlock = self.CancelBlock;
     [self.navigationController pushViewController:tvc animated:YES];
 }
 
 - (void)doCancel {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -107,13 +112,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"ELPhotoBrowserCell";
+    static NSString *cellIdentifier = @"LFPhotoAlbumCell";
     LFPhotoAlbumCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
+
     LFAlbumModel *albumModel= _arrayDataSources[indexPath.row];
-    
+
     [LFPhotoModel requestImageForAsset:albumModel.headImageAsset size:CGSizeMake(65*3, 65*3) resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
         cell.headImageView.image = image;
+        if ([NSThread currentThread] != [NSThread mainThread]) {
+            NSLog(@"*********不在主线程1*********");
+        }
     }];
     cell.labTitle.text = [NSString stringWithFormat:@"%@ (%ld)", albumModel.title,albumModel.count];
     return cell;
@@ -122,7 +130,7 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     LFAlbumModel *album = self.arrayDataSources[indexPath.row];
     [self pushToAllPhoto:album];
 }

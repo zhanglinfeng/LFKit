@@ -48,7 +48,7 @@
     
     option.resizeMode = resizeMode;//控制照片尺寸
     //option.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;//控制照片质量
-    option.networkAccessAllowed = YES;//YES;
+    option.networkAccessAllowed = YES;//YES会请求iCloud照片;
     
     /*
      info字典提供请求状态信息:
@@ -77,7 +77,7 @@
 {
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.resizeMode = resizeMode;//控制照片尺寸
-    option.networkAccessAllowed = YES;
+    option.networkAccessAllowed = YES;//YES会请求iCloud照片;
     
     [[PHCachingImageManager defaultManager] requestImageDataForAsset:asset options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];

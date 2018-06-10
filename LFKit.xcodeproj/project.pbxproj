@@ -63,6 +63,17 @@
 		D1AC21DB1FA3258A0039A2C2 /* LFKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC21DA1FA3258A0039A2C2 /* LFKitTests.m */; };
 		D1AC21E61FA3258A0039A2C2 /* LFKitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AC21E51FA3258A0039A2C2 /* LFKitUITests.m */; };
 		D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */; };
+		D1B0272120CCE2890037E80D /* LFBigImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B0272020CCE2890037E80D /* LFBigImageBrowser.m */; };
+		D1B0272620CCF1230037E80D /* photo_radio_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0272220CCF1230037E80D /* photo_radio_pressed@2x.png */; };
+		D1B0272720CCF1230037E80D /* photo_radio_pressed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0272320CCF1230037E80D /* photo_radio_pressed@3x.png */; };
+		D1B0272820CCF1230037E80D /* photo_radio_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0272420CCF1230037E80D /* photo_radio_normal@3x.png */; };
+		D1B0272920CCF1230037E80D /* photo_radio_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0272520CCF1230037E80D /* photo_radio_normal@2x.png */; };
+		D1B0272C20CCF8610037E80D /* Photo_video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0272A20CCF8610037E80D /* Photo_video@2x.png */; };
+		D1B0272D20CCF8610037E80D /* Photo_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0272B20CCF8610037E80D /* Photo_video@3x.png */; };
+		D1B0273020CD00260037E80D /* LFBigVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B0272F20CD00260037E80D /* LFBigVideoController.m */; };
+		D1B0273320CD01650037E80D /* LFPhotoNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B0273220CD01650037E80D /* LFPhotoNavController.m */; };
+		D1B0273620CD045C0037E80D /* photo_video_play_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0273420CD045B0037E80D /* photo_video_play_normal@3x.png */; };
+		D1B0273720CD045C0037E80D /* photo_video_play_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1B0273520CD045C0037E80D /* photo_video_play_normal@2x.png */; };
 		D1C106122040043F0078CB08 /* ToolListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C106112040043F0078CB08 /* ToolListController.m */; };
 		D1C1061C20400C340078CB08 /* LFModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C1061820400C340078CB08 /* LFModel.m */; };
 		D1C1061D20400C340078CB08 /* FMDatabase+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C1061B20400C340078CB08 /* FMDatabase+LF.m */; };
@@ -228,6 +239,20 @@
 		D1AC22601FA348170039A2C2 /* LFImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFImagePicker.m; sourceTree = "<group>"; };
 		D1AE0D1E1FB45E79004605E7 /* LFPopupMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPopupMenu.h; sourceTree = "<group>"; };
 		D1AE0D1F1FB45E79004605E7 /* LFPopupMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFPopupMenu.m; sourceTree = "<group>"; };
+		D1B0271F20CCE2890037E80D /* LFBigImageBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBigImageBrowser.h; sourceTree = "<group>"; };
+		D1B0272020CCE2890037E80D /* LFBigImageBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBigImageBrowser.m; sourceTree = "<group>"; };
+		D1B0272220CCF1230037E80D /* photo_radio_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_radio_pressed@2x.png"; sourceTree = "<group>"; };
+		D1B0272320CCF1230037E80D /* photo_radio_pressed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_radio_pressed@3x.png"; sourceTree = "<group>"; };
+		D1B0272420CCF1230037E80D /* photo_radio_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_radio_normal@3x.png"; sourceTree = "<group>"; };
+		D1B0272520CCF1230037E80D /* photo_radio_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_radio_normal@2x.png"; sourceTree = "<group>"; };
+		D1B0272A20CCF8610037E80D /* Photo_video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photo_video@2x.png"; sourceTree = "<group>"; };
+		D1B0272B20CCF8610037E80D /* Photo_video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photo_video@3x.png"; sourceTree = "<group>"; };
+		D1B0272E20CD00260037E80D /* LFBigVideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFBigVideoController.h; sourceTree = "<group>"; };
+		D1B0272F20CD00260037E80D /* LFBigVideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBigVideoController.m; sourceTree = "<group>"; };
+		D1B0273120CD01650037E80D /* LFPhotoNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoNavController.h; sourceTree = "<group>"; };
+		D1B0273220CD01650037E80D /* LFPhotoNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoNavController.m; sourceTree = "<group>"; };
+		D1B0273420CD045B0037E80D /* photo_video_play_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_video_play_normal@3x.png"; sourceTree = "<group>"; };
+		D1B0273520CD045C0037E80D /* photo_video_play_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_video_play_normal@2x.png"; sourceTree = "<group>"; };
 		D1C106102040043F0078CB08 /* ToolListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToolListController.h; sourceTree = "<group>"; };
 		D1C106112040043F0078CB08 /* ToolListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToolListController.m; sourceTree = "<group>"; };
 		D1C1061820400C340078CB08 /* LFModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFModel.m; sourceTree = "<group>"; };
@@ -737,6 +762,14 @@
 		D1AC225E1FA348170039A2C2 /* LFImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				D1B0273520CD045C0037E80D /* photo_video_play_normal@2x.png */,
+				D1B0273420CD045B0037E80D /* photo_video_play_normal@3x.png */,
+				D1B0272A20CCF8610037E80D /* Photo_video@2x.png */,
+				D1B0272B20CCF8610037E80D /* Photo_video@3x.png */,
+				D1B0272520CCF1230037E80D /* photo_radio_normal@2x.png */,
+				D1B0272420CCF1230037E80D /* photo_radio_normal@3x.png */,
+				D1B0272220CCF1230037E80D /* photo_radio_pressed@2x.png */,
+				D1B0272320CCF1230037E80D /* photo_radio_pressed@3x.png */,
 				D1AC225F1FA348170039A2C2 /* LFImagePicker.h */,
 				D1AC22601FA348170039A2C2 /* LFImagePicker.m */,
 				D16F2C4520C51A8D0092EF4E /* LFAlbumModel.h */,
@@ -749,6 +782,12 @@
 				D16F2C4C20C531750092EF4E /* LFPhotoAlbumCell.m */,
 				D14D71C520C7D60E00A10457 /* LFPhotoCollectionCell.h */,
 				D14D71C620C7D60E00A10457 /* LFPhotoCollectionCell.m */,
+				D1B0271F20CCE2890037E80D /* LFBigImageBrowser.h */,
+				D1B0272020CCE2890037E80D /* LFBigImageBrowser.m */,
+				D1B0272E20CD00260037E80D /* LFBigVideoController.h */,
+				D1B0272F20CD00260037E80D /* LFBigVideoController.m */,
+				D1B0273120CD01650037E80D /* LFPhotoNavController.h */,
+				D1B0273220CD01650037E80D /* LFPhotoNavController.m */,
 			);
 			path = LFImagePicker;
 			sourceTree = "<group>";
@@ -1062,11 +1101,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B0273720CD045C0037E80D /* photo_video_play_normal@2x.png in Resources */,
+				D1B0272C20CCF8610037E80D /* Photo_video@2x.png in Resources */,
 				D14ADE171FAC63AC00951E26 /* LFCameraResultViewController.xib in Resources */,
 				D1AC21CE1FA3258A0039A2C2 /* LaunchScreen.storyboard in Resources */,
+				D1B0272820CCF1230037E80D /* photo_radio_normal@3x.png in Resources */,
 				D13B09371FF0F6E300D8BFE1 /* LFStarsViewVC.xib in Resources */,
 				D1D9773F2004C0160053AE92 /* icon_menu_shoot_normal@2x.png in Resources */,
+				D1B0272720CCF1230037E80D /* photo_radio_pressed@3x.png in Resources */,
+				D1B0272920CCF1230037E80D /* photo_radio_normal@2x.png in Resources */,
 				D1D9774F2004C05E0053AE92 /* img_menu_frame_bg@2x.png in Resources */,
+				D1B0272620CCF1230037E80D /* photo_radio_pressed@2x.png in Resources */,
+				D1B0272D20CCF8610037E80D /* Photo_video@3x.png in Resources */,
 				D13B093C1FF0FA9200D8BFE1 /* star_gray.png in Resources */,
 				D14ADE0E1FAC5D6200951E26 /* LFCameraViewController.xib in Resources */,
 				D1AC21CB1FA3258A0039A2C2 /* Assets.xcassets in Resources */,
@@ -1080,6 +1126,7 @@
 				D1D977422004C01E0053AE92 /* icon_menu_record_normal@2x.png in Resources */,
 				D1D977472004C0250053AE92 /* icon_menu_live_normal@3x.png in Resources */,
 				D127F6A320C2D9290040590D /* HPImageCell.xib in Resources */,
+				D1B0273620CD045C0037E80D /* photo_video_play_normal@3x.png in Resources */,
 				D1D9773E2004C0160053AE92 /* icon_menu_shoot_normal@3x.png in Resources */,
 				D1D9774E2004C05E0053AE92 /* img_menu_frame_bg@3x.png in Resources */,
 				D1D9774A2004C02E0053AE92 /* icon_menu_album_normal@2x.png in Resources */,
@@ -1160,6 +1207,7 @@
 				D186290A1FA8777900780629 /* RotationMenu.m in Sources */,
 				D1E5A7B72025745200401E3B /* UITabBarController+HideTabBar.m in Sources */,
 				D1E5A78620256E7100401E3B /* LFFileUtil.m in Sources */,
+				D1B0273320CD01650037E80D /* LFPhotoNavController.m in Sources */,
 				D16F2C4D20C531750092EF4E /* LFPhotoAlbumCell.m in Sources */,
 				D16F2C4A20C530F90092EF4E /* LFThumbnailViewController.m in Sources */,
 				D1E5A78820256E7100401E3B /* LFTimeUtil.m in Sources */,
@@ -1168,6 +1216,7 @@
 				D1C1061C20400C340078CB08 /* LFModel.m in Sources */,
 				D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */,
 				D1E5A7CA2025CFFD00401E3B /* LFPopupMenuDefaultConfig.m in Sources */,
+				D1B0273020CD00260037E80D /* LFBigVideoController.m in Sources */,
 				D1E5A7BA2025745200401E3B /* UIView+LF.m in Sources */,
 				D1554D812024255F00AEAB8D /* LFLogDetailController.m in Sources */,
 				D186290C1FA8777900780629 /* LFCamera.m in Sources */,
@@ -1182,6 +1231,7 @@
 				D127F69520C2A2660040590D /* LFBigImageCell.m in Sources */,
 				D14ADE161FAC63AC00951E26 /* LFCameraResultViewController.m in Sources */,
 				D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */,
+				D1B0272120CCE2890037E80D /* LFBigImageBrowser.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,
 				D18629121FA8777900780629 /* LFPickerView.m in Sources */,
 				D1E5A7C42025745200401E3B /* UIViewController+FullScreenScroll.m in Sources */,

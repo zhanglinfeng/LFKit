@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
 
+#define LFAlbumMainColor [UIColor colorWithRed:87/255.0f green:185/255.0f blue:245/255.0f alpha:1]
+#define LFAlbumDisabledColor [UIColor colorWithRed:176/255.0f green:176/255.0f blue:176/255.0f alpha:1]
+
 @interface LFAlbumModel : NSObject
 
 @property (nonatomic, copy) NSString *title; //相册名字
@@ -30,5 +33,8 @@
 
 /**获取相册集中的视频Asset*/
 + (NSArray<PHAsset *> *)getVideoAssetsInAssetCollection:(PHAssetCollection *)assetCollection ascending:(BOOL)ascending;
+
+/**生成纯色图片*/
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 
 @end
