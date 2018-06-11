@@ -132,13 +132,13 @@
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.windowW]];
         }
     }
-    
+    __weak typeof(self) weakSelf = self;
     [self.superview layoutIfNeeded];
     [UIView animateWithDuration:0.2 animations:^{
-        _bgView.backgroundColor = self.hideMask ? [UIColor clearColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
-        [self.superview removeConstraint:self.topConstraint];
-        [self.superview addConstraint:self.bottomConstraint];
-        [self.superview layoutIfNeeded];
+        weakSelf.bgView.backgroundColor = weakSelf.hideMask ? [UIColor clearColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        [weakSelf.superview removeConstraint:weakSelf.topConstraint];
+        [weakSelf.superview addConstraint:weakSelf.bottomConstraint];
+        [weakSelf.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
         
     }];
@@ -153,29 +153,31 @@
 }
 
 - (void)dismissNormal {
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.alpha = 0;
-        _bgView.alpha = 0;
+        weakSelf.alpha = 0;
+        weakSelf.bgView.alpha = 0;
     } completion:^(BOOL finished) {
-        [_bgView removeFromSuperview];
-        [self removeFromSuperview];
-        if (self.dismissCompletion) {
-            self.dismissCompletion();
+        [weakSelf.bgView removeFromSuperview];
+        [weakSelf removeFromSuperview];
+        if (weakSelf.dismissCompletion) {
+            weakSelf.dismissCompletion();
         }
     }];
 }
 
 - (void)dismissFromBottom {
     [self.superview layoutIfNeeded];
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.superview removeConstraint:self.bottomConstraint];
-        [self.superview addConstraint:self.topConstraint];
-        [self.superview layoutIfNeeded];
+        [weakSelf.superview removeConstraint:weakSelf.bottomConstraint];
+        [weakSelf.superview addConstraint:weakSelf.topConstraint];
+        [weakSelf.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [_bgView removeFromSuperview];
-        [self removeFromSuperview];
-        if (self.dismissCompletion) {
-            self.dismissCompletion();
+        [weakSelf.bgView removeFromSuperview];
+        [weakSelf removeFromSuperview];
+        if (weakSelf.dismissCompletion) {
+            weakSelf.dismissCompletion();
         }
     }];
 }

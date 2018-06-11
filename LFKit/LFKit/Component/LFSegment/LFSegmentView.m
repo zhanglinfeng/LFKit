@@ -181,11 +181,12 @@
  */
 - (void)scrollIndicateView {
     CGSize titleSize = [_selectedButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: self.font}];
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:self.duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        if (self.indicateStyle == LFSegmentIndicateStyleAlignText) {
-            _indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame) + _textMargin, CGRectGetMinY(_indicateView.frame), titleSize.width, self.indicateHeight);
+        if (weakSelf.indicateStyle == LFSegmentIndicateStyleAlignText) {
+            weakSelf.indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame) + _textMargin, CGRectGetMinY(_indicateView.frame), titleSize.width, weakSelf.indicateHeight);
         } else {
-            _indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame), CGRectGetMinY(_indicateView.frame), CGRectGetWidth(_selectedButton.frame), self.indicateHeight);
+            weakSelf.indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame), CGRectGetMinY(_indicateView.frame), CGRectGetWidth(_selectedButton.frame), weakSelf.indicateHeight);
         }
     } completion:nil];
 }

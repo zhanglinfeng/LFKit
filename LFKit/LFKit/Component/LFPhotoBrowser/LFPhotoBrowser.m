@@ -122,7 +122,7 @@
         CGFloat page = scrollView.contentOffset.x/(scrollView.frame.size.width);
         NSString *str = [NSString stringWithFormat:@"%.0f", page];
         self.currentIndex = str.integerValue;
-        self.lbTitle.text = [NSString stringWithFormat:@"%zi/%zi",self.currentIndex+1,self.arrayData.count];
+        self.lbTitle.text = [NSString stringWithFormat:@"%li/%lu",(long)(self.currentIndex+1),(unsigned long)self.arrayData.count];
         if (self.didScrollBlock) {
             self.didScrollBlock(self.currentIndex);
         }
@@ -260,12 +260,13 @@
     }
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     
+    __weak typeof(self) weakSelf = self;
     CGRect screenBounds = [UIScreen mainScreen].bounds;
 //    NSLog(@"屏幕w=%f,h=%f",screenBounds.size.width,screenBounds.size.height);
     if (UIDeviceOrientationIsLandscape(orientation)) {
         [UIView animateWithDuration:0.3 delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 //            [[UIApplication sharedApplication] setStatusBarOrientation:(UIInterfaceOrientation)orientation];
-            self.transform = (orientation==UIDeviceOrientationLandscapeRight)?CGAffineTransformMakeRotation(M_PI*1.5):CGAffineTransformMakeRotation(M_PI/2);
+            weakSelf.transform = (orientation==UIDeviceOrientationLandscapeRight)?CGAffineTransformMakeRotation(M_PI*1.5):CGAffineTransformMakeRotation(M_PI/2);
 //            self.bounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
         
 //            [self setNeedsLayout];
@@ -273,22 +274,23 @@
 //            NSLog(@"11111=%@",self);
 //            NSLog(@"22222=%@",self.collectionView);
         } completion:^(BOOL finished) {
-            self.bounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
-            [self setTopBarHidden:_topBar.hidden];
-            [self setNeedsLayout];
-            [self layoutIfNeeded];
+            weakSelf.bounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
+            [weakSelf setTopBarHidden:_topBar.hidden];
+            [weakSelf setNeedsLayout];
+            [weakSelf layoutIfNeeded];
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
             layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
             layout.minimumLineSpacing = kItemMargin;
             layout.sectionInset = UIEdgeInsetsMake(0, kItemMargin/2, 0, kItemMargin/2);
-            layout.itemSize = CGSizeMake(self.collectionView.frame.size.width - kItemMargin, self.collectionView.frame.size.height);
-            self.collectionView.collectionViewLayout = layout;
-            [self.collectionView reloadData];
+            layout.itemSize = CGSizeMake(weakSelf.collectionView.frame.size.width - kItemMargin, weakSelf.collectionView.frame.size.height);
+            weakSelf.collectionView.collectionViewLayout = layout;
+            [weakSelf.collectionView reloadData];
         }];
     }else if (orientation==UIDeviceOrientationPortrait || orientation==UIDeviceOrientationPortraitUpsideDown){
+        
         [UIView animateWithDuration:0.3 delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 //            [[UIApplication sharedApplication] setStatusBarOrientation:(UIInterfaceOrientation)orientation];
-            self.transform = (orientation==UIDeviceOrientationPortrait)?CGAffineTransformIdentity:CGAffineTransformMakeRotation(M_PI);
+            weakSelf.transform = (orientation==UIDeviceOrientationPortrait)?CGAffineTransformIdentity:CGAffineTransformMakeRotation(M_PI);
 //            self.bounds = screenBounds;
             
 //            [self setNeedsLayout];
@@ -296,17 +298,17 @@
 //            NSLog(@"*11111=%@",self);
 //            NSLog(@"*22222=%@",self.collectionView);
         } completion:^(BOOL finished) {
-            self.bounds = screenBounds;
-            [self setTopBarHidden:_topBar.hidden];
-            [self setNeedsLayout];
-            [self layoutIfNeeded];
+            weakSelf.bounds = screenBounds;
+            [weakSelf setTopBarHidden:weakSelf.topBar.hidden];
+            [weakSelf setNeedsLayout];
+            [weakSelf layoutIfNeeded];
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
             layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
             layout.minimumLineSpacing = kItemMargin;
             layout.sectionInset = UIEdgeInsetsMake(0, kItemMargin/2, 0, kItemMargin/2);
-            layout.itemSize = CGSizeMake(self.collectionView.frame.size.width - kItemMargin, self.collectionView.frame.size.height);
-            self.collectionView.collectionViewLayout = layout;
-            [self.collectionView reloadData];
+            layout.itemSize = CGSizeMake(weakSelf.collectionView.frame.size.width - kItemMargin, weakSelf.collectionView.frame.size.height);
+            weakSelf.collectionView.collectionViewLayout = layout;
+            [weakSelf.collectionView reloadData];
         }];
     }
 }
@@ -322,7 +324,7 @@
     _currentIndex = currentIndex;
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:_currentIndex inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-    self.lbTitle.text = [NSString stringWithFormat:@"%zi/%zi",_currentIndex+1,self.arrayData.count];
+    self.lbTitle.text = [NSString stringWithFormat:@"%li/%lu",(long)(_currentIndex+1),(unsigned long)self.arrayData.count];
 }
 
 - (UIImage *)getCurrentImage {

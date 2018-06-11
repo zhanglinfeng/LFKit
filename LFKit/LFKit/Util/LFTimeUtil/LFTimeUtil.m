@@ -26,10 +26,10 @@
         seconds = minutes * 60 + seconds;
     }
     
-    format = [format stringByReplacingOccurrencesOfString:@"dd" withString:[NSString stringWithFormat:@"%02zi",day]];
-    format = [format stringByReplacingOccurrencesOfString:@"HH" withString:[NSString stringWithFormat:@"%02zi",hours]];
-    format = [format stringByReplacingOccurrencesOfString:@"mm" withString:[NSString stringWithFormat:@"%02zi",minutes]];
-    format = [format stringByReplacingOccurrencesOfString:@"ss" withString:[NSString stringWithFormat:@"%02zi",seconds]];
+    format = [format stringByReplacingOccurrencesOfString:@"dd" withString:[NSString stringWithFormat:@"%02li",(long)day]];
+    format = [format stringByReplacingOccurrencesOfString:@"HH" withString:[NSString stringWithFormat:@"%02li",(long)hours]];
+    format = [format stringByReplacingOccurrencesOfString:@"mm" withString:[NSString stringWithFormat:@"%02li",(long)minutes]];
+    format = [format stringByReplacingOccurrencesOfString:@"ss" withString:[NSString stringWithFormat:@"%02li",(long)seconds]];
     return format;
 }
 
@@ -89,13 +89,13 @@
             strBefore = [df stringFromDate:date];
         }
         else if (nHour > 0) {
-            strBefore = [NSString stringWithFormat:@"%zd小时前",nHour];
+            strBefore = [NSString stringWithFormat:@"%@小时前",@(nHour)];
         }
         else if (nMin > 0) {
-            strBefore = [NSString stringWithFormat:@"%zd分钟前",nMin];
+            strBefore = [NSString stringWithFormat:@"%@分钟前",@(nMin)];
         }
         else if (nSec > 0) {
-            strBefore = [NSString stringWithFormat:@"%zd秒前",nSec];
+            strBefore = [NSString stringWithFormat:@"%@秒前",@(nSec)];
         }
         else
             strBefore = @"0秒前";

@@ -61,11 +61,12 @@
 }
 
 - (void)moveToViewControllerAtIndex:(NSUInteger)index {
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:_segmentView.duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self setContentOffset:CGPointMake(index * self.frame.size.width, 0)];
+        [weakSelf setContentOffset:CGPointMake(index * weakSelf.frame.size.width, 0)];
     } completion:^(BOOL finished) {
-        if (self.selectedBlock) {
-            self.selectedBlock(index, _segmentView.selectedButton, self.currentViewController);
+        if (weakSelf.selectedBlock) {
+            weakSelf.selectedBlock(index, weakSelf.segmentView.selectedButton, weakSelf.currentViewController);
         }
     }];
     

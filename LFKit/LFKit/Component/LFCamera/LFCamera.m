@@ -209,13 +209,14 @@
         [self.device unlockForConfiguration];
         _focusView.center = point;
         _focusView.hidden = NO;
+        __weak typeof(self) weakSelf = self;
         [UIView animateWithDuration:0.3 animations:^{
-            _focusView.transform = CGAffineTransformMakeScale(1.25, 1.25);
+            weakSelf.focusView.transform = CGAffineTransformMakeScale(1.25, 1.25);
         }completion:^(BOOL finished) {
             [UIView animateWithDuration:0.5 animations:^{
-                _focusView.transform = CGAffineTransformIdentity;
+                weakSelf.focusView.transform = CGAffineTransformIdentity;
             } completion:^(BOOL finished) {
-                _focusView.hidden = YES;
+                weakSelf.focusView.hidden = YES;
             }];
         }];
     }

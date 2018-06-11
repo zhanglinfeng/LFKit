@@ -90,7 +90,7 @@
     if ([self isInt:_count]) {
         self.hidden = _count.integerValue == 0;
         if (_count.integerValue > self.maxCount) {
-            _count = [NSString stringWithFormat:@"%zi+",self.maxCount];
+            _count = [NSString stringWithFormat:@"%li+",(long)self.maxCount];
         }
     } else {
         self.hidden = _count == nil;
