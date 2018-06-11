@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.1.8'
+  s.version          = '1.1.9'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -150,11 +150,11 @@ Pod::Spec.new do |s|
     sss.source_files         = 'LFKit/LFKit/Component/LFCamera/*'
     end
 
-    # ss.subspec 'LFImagePicker' do |sss|
-    # sss.source_files         = 'LFKit/LFKit/Component/LFImagePicker/*.{h,m}'
-    # sss.resources = 'LFKit/LFKit/Component/LFImagePicker/Images/*.{png}'
-    # sss.dependency 'LFPhotoBrowser'
-    # end
+    ss.subspec 'LFImagePicker' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFImagePicker/*.{h,m}'
+    sss.resources = 'LFKit/LFKit/Component/LFImagePicker/Images/*.{png}'
+    sss.dependency 'LFKit/Component/LFPhotoBrowser'
+    end
 
     ss.subspec 'LFLocalMusicPicker' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFLocalMusicPicker/*'

@@ -89,13 +89,13 @@
             strBefore = [df stringFromDate:date];
         }
         else if (nHour > 0) {
-            strBefore = [NSString stringWithFormat:@"%@小时前",@(nHour)];
+            strBefore = [NSString stringWithFormat:@"%li小时前",(long)nHour];
         }
         else if (nMin > 0) {
-            strBefore = [NSString stringWithFormat:@"%@分钟前",@(nMin)];
+            strBefore = [NSString stringWithFormat:@"%li分钟前",(long)nMin];
         }
         else if (nSec > 0) {
-            strBefore = [NSString stringWithFormat:@"%@秒前",@(nSec)];
+            strBefore = [NSString stringWithFormat:@"%li秒前",(long)nSec];
         }
         else
             strBefore = @"0秒前";

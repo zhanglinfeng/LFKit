@@ -78,7 +78,7 @@ static void *btnActionKey = &btnActionKey;
 - (void)startWithTime:(NSInteger)second title:(NSString *)title subTitle:(NSString *)subTitle mainColor:(UIColor *)mColor grayColor:(UIColor *)gColor{
     
     self.backgroundColor = gColor;
-    NSString *time = [NSString stringWithFormat:@"%@",@(second)];
+    NSString *time = [NSString stringWithFormat:@"%li",(long)second];
     NSString *sTitle = [subTitle stringByReplacingOccurrencesOfString:@"ss" withString:time];
     [self setTitle:sTitle forState:UIControlStateNormal];
     

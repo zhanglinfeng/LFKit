@@ -184,9 +184,9 @@
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:self.duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (weakSelf.indicateStyle == LFSegmentIndicateStyleAlignText) {
-            weakSelf.indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame) + _textMargin, CGRectGetMinY(_indicateView.frame), titleSize.width, weakSelf.indicateHeight);
+            weakSelf.indicateView.frame = CGRectMake(CGRectGetMinX(weakSelf.selectedButton.frame) + weakSelf.textMargin, CGRectGetMinY(weakSelf.indicateView.frame), titleSize.width, weakSelf.indicateHeight);
         } else {
-            weakSelf.indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame), CGRectGetMinY(_indicateView.frame), CGRectGetWidth(_selectedButton.frame), weakSelf.indicateHeight);
+            weakSelf.indicateView.frame = CGRectMake(CGRectGetMinX(weakSelf.selectedButton.frame), CGRectGetMinY(weakSelf.indicateView.frame), CGRectGetWidth(weakSelf.selectedButton.frame), weakSelf.indicateHeight);
         }
     } completion:nil];
 }
