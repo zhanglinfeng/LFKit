@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "LFPhotoModel.h"
-#import "YYAnimatedImageView.h"
 
 @interface LFBigImageCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) YYAnimatedImageView *imageBGView;
 @property (nonatomic, strong) UIImage *placeholder;
 @property (nonatomic, strong) LFPhotoModel *photo;
 
 @property (nonatomic, copy)   void (^singleTapCallBack)(void);
+
+- (UIImage *)getImage;
 
 @end

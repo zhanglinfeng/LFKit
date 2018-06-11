@@ -9,9 +9,11 @@
 #import "LFBigImageCell.h"
 #import "UIImageView+YYWebImage.h"
 #import "MBProgressHUD.h"
+#import "YYAnimatedImageView.h"
 
 @interface LFBigImageCell ()<UIScrollViewDelegate>
 
+@property (nonatomic, strong) YYAnimatedImageView *imageBGView;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 @end
@@ -60,7 +62,7 @@
             // Set the annular determinate mode to show task progress.
             hud.mode = MBProgressHUDModeDeterminate;
             __block MBProgressHUD *bHud = hud;
-            
+            __weak typeof(self) weakself = self;
             NSURL *URL = [NSURL URLWithString:photo.bigImageUrl];
             [self.imageBGView yy_setImageWithURL:URL placeholder:self.placeholder options:YYWebImageOptionProgressiveBlur | YYWebImageOptionProgressive progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -68,7 +70,7 @@
                 });
             } transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self resetSubviewSize];
+                    [weakself resetSubviewSize];
                     [bHud hideAnimated:YES];
                 });
             }];
@@ -177,6 +179,10 @@
     ycenter = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : ycenter;
     
     [self.imageBGView setCenter:CGPointMake(xcenter, ycenter)];
+}
+
+- (UIImage *)getImage {
+    return self.imageBGView.image;
 }
 
 #pragma mark - 懒加载

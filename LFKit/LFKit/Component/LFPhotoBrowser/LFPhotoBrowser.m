@@ -329,7 +329,7 @@
     NSArray *visibleCells = [self.collectionView visibleCells];
     if (visibleCells.count > 0) {
         LFBigImageCell *cell = visibleCells[0];
-        return cell.imageBGView.image;
+        return [cell getImage];
     }
     return nil;
 }
