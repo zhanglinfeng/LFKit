@@ -15,6 +15,7 @@
 @property (nonatomic, strong) PHAsset *asset;
 @property (nonatomic, strong) NSString *smallImageUrl;
 @property (nonatomic, strong) NSString *bigImageUrl;
+@property (nonatomic, assign) BOOL isSelected;
 
 /*
  当前媒体是否为视频

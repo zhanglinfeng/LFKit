@@ -40,6 +40,10 @@
         self.clickBlock = ^(NSInteger index) {
             [weakSelf setBarHidden:!weakSelf.topBar.hidden];
         };
+        self.didScrollBlock = ^(NSInteger index) {
+            LFPhotoModel *photo = weakSelf.arrayData[index];
+            weakSelf.btSave.selected = photo.isSelected;
+        };
     }
     return self;
 }
@@ -128,6 +132,19 @@
 - (void)setArraySelectPhotos:(NSMutableArray<LFPhotoModel *> *)arraySelectPhotos {
     _arraySelectPhotos = arraySelectPhotos;
     self.btnOriginal.enabled = _arraySelectPhotos.count > 0;
+    [self resetBottomBtnsStatus];
+}
+
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    [super setCurrentIndex:currentIndex];
+    LFPhotoModel *photo = self.arrayData[currentIndex];
+    self.btSave.selected = photo.isSelected;
+    [self resetBottomBtnsStatus];
+}
+
+- (void)setIsSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    _isSelectOriginalPhoto = isSelectOriginalPhoto;
+    [self resetBottomBtnsStatus];
 }
 
 - (void)selectImage:(UIButton *)button {
@@ -152,16 +169,19 @@
                     [hud hideAnimated:YES];
                 });
                 model.image = image;
+                model.isSelected = YES;
                 [self.arraySelectPhotos addObject:model];
                 [self resetBottomBtnsStatus];
             }];
         } else {
+            model.isSelected = YES;
             [self.arraySelectPhotos addObject:model];
 
         }
     } else {
         for (LFPhotoModel *sModel in _arraySelectPhotos) {
             if ([model.asset.localIdentifier isEqualToString:sModel.asset.localIdentifier]) {
+                model.isSelected = NO;
                 [self.arraySelectPhotos removeObject:sModel];
                 break;
             }
@@ -191,6 +211,7 @@
     if (self.DoneBlock) {
         self.DoneBlock(self.isSelectOriginalPhoto);
     }
+    [self dismiss];
 }
 
 - (void)resetBottomBtnsStatus
@@ -202,6 +223,7 @@
         self.btnOriginal.enabled = NO;
         self.btnDone.enabled = NO;
     }
+    self.btnOriginal.selected = self.isSelectOriginalPhoto;
     [self.btnDone setTitle:[NSString stringWithFormat:@"确定(%@)",@(self.arraySelectPhotos.count)] forState:UIControlStateNormal];
     [self.btnDone setTitle:[NSString stringWithFormat:@"确定(%@)",@(self.arraySelectPhotos.count)] forState:UIControlStateDisabled];
 }

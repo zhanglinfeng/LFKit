@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.1.7'
+  s.version          = '1.1.8'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -189,6 +189,12 @@ Pod::Spec.new do |s|
     ss.subspec 'LFFMDB' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFFMDB/*'
     sss.dependency 'FMDB'
+    end
+
+    ss.subspec 'LFPhotoBrowser' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFPhotoBrowser/*.{h,m}'
+    sss.dependency 'YYWebImage'
+    sss.dependency 'MBProgressHUD'
     end
 
   end

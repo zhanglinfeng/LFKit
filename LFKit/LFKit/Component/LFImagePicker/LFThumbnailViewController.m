@@ -191,18 +191,21 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [hud hideAnimated:YES];
                     model.image = image;
+                    model.isSelected = YES;
                     [self.arraySelectPhotos addObject:model];
                     [self resetBottomBtnsStatus];
                 });
                 
             }];
         } else {
+            model.isSelected = YES;
             [self.arraySelectPhotos addObject:model];
         }
         
     } else {
         for (LFPhotoModel *sModel in _arraySelectPhotos) {
             if ([model.asset.localIdentifier isEqualToString:sModel.asset.localIdentifier]) {
+                model.isSelected = NO;
                 [self.arraySelectPhotos removeObject:sModel];
                 break;
             }
@@ -318,13 +321,7 @@
     [cell setIsVideo:isVideo];
     cell.coverView.hidden = YES;
     if (isVideo == NO) { //照片UI
-        cell.btnSelect.selected = NO;
-        for (LFPhotoModel *sModel in self.arraySelectPhotos) {
-            if ([sModel.asset.localIdentifier isEqualToString:model.asset.localIdentifier]) {
-                cell.btnSelect.selected = YES;
-                break;
-            }
-        }
+        cell.btnSelect.selected = model.isSelected;
         cell.btnSelect.tag = indexPath.row;
         [cell.btnSelect addTarget:self action:@selector(cell_btn_Click:) forControlEvents:UIControlEventTouchUpInside];
     } else { //视频UI
@@ -350,7 +347,9 @@
         browser.arraySelectPhotos = self.arraySelectPhotos;
         browser.maxSelectCount = self.maxSelectCount;
         browser.currentIndex = indexPath.item;
+        browser.isSelectOriginalPhoto = self.isSelectOriginalPhoto;
         browser.isShowTopBar = YES;
+        browser.DoneBlock = self.DoneBlock;
         [browser show];
         
         __weak LFBigImageBrowser *b_browser = browser;

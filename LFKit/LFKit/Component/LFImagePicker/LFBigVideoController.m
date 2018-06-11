@@ -152,7 +152,7 @@
 #pragma mark - Getter
 - (UIImageView *)maskView {
     if (!_maskView) {
-        _maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"elphoto_video_play_normal"]];
+        _maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo_video_play_normal"]];
         _maskView.backgroundColor = [UIColor clearColor];
         _maskView.contentMode = UIViewContentModeCenter;
         _maskView.userInteractionEnabled = YES;
