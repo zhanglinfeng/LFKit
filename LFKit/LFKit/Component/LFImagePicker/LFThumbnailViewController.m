@@ -176,7 +176,7 @@
         && btn.selected == NO) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text = [NSString stringWithFormat:@"最多只能选%zi张图片",self.maxSelectCount];
+        hud.label.text = [NSString stringWithFormat:@"最多只能选%li张图片",(long)self.maxSelectCount];
         [hud hideAnimated:YES afterDelay:3];
         return;
     }
@@ -285,7 +285,7 @@
     bv.selectVideoBlock = ^(LFPhotoModel *video) {
         [self.arraySelectPhotos addObject:video];
         if (self.DoneBlock) {
-            self.DoneBlock(self.arraySelectPhotos);
+            self.DoneBlock(self.isSelectOriginalPhoto);
         }
     };
     [self.navigationController pushViewController:bv animated:YES];

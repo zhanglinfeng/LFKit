@@ -275,7 +275,7 @@
 //            NSLog(@"22222=%@",self.collectionView);
         } completion:^(BOOL finished) {
             weakSelf.bounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
-            [weakSelf setTopBarHidden:_topBar.hidden];
+            [weakSelf setTopBarHidden:weakSelf.topBar.hidden];
             [weakSelf setNeedsLayout];
             [weakSelf layoutIfNeeded];
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];

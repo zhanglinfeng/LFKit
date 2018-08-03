@@ -123,7 +123,7 @@
             NSLog(@"*********不在主线程1*********");
         }
     }];
-    cell.labTitle.text = [NSString stringWithFormat:@"%@ (%ld)", albumModel.title,albumModel.count];
+    cell.labTitle.text = [NSString stringWithFormat:@"%@ (%li)", albumModel.title,(long)albumModel.count];
     return cell;
 }
 

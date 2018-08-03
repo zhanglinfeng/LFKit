@@ -154,7 +154,7 @@
         && button.selected == NO) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.label.text = [NSString stringWithFormat:@"最多只能选%zi张图片",self.maxSelectCount];
+        hud.label.text = [NSString stringWithFormat:@"最多只能选%li张图片",(long)self.maxSelectCount];
         [hud hideAnimated:YES afterDelay:3];
         return;
     }
