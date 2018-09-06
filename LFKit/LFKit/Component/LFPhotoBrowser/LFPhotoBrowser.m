@@ -54,6 +54,13 @@
     self.btBack.frame = CGRectMake(12, 17, self.btBack.frame.size.width, self.btBack.frame.size.height);
     self.btSave.frame = CGRectMake(_topBar.frame.size.width - 52, 17, self.btSave.frame.size.width, self.btSave.frame.size.height);
     
+    if (!self.topBar.hidden) {
+        CGFloat top = 0;
+        if (@available(iOS 11.0, *)) {
+            top = self.safeAreaInsets.top;
+        }
+        self.topBar.frame = CGRectMake(0, top, self.frame.size.width, 64);
+    }
 //    NSLog(@"self-layoutSubviews=%@",self);
 }
 
@@ -197,7 +204,11 @@
 
 -(UIView *)topBar {
     if (!_topBar) {
-        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 64)];
+        CGFloat top = 0;
+        if (@available(iOS 11.0, *)) {
+            top = self.safeAreaInsets.top;
+        }
+        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, 64)];
         _topBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         self.lbTitle = [[UILabel alloc] initWithFrame:_topBar.bounds];
         self.lbTitle.textAlignment = NSTextAlignmentCenter;
@@ -235,7 +246,11 @@
     } else {
         self.topBar.hidden = NO;
         [UIView animateWithDuration:0.2 animations:^{
-            self.topBar.frame = CGRectMake(0, 0, self.bounds.size.width, 64);
+            CGFloat top = 0;
+            if (@available(iOS 11.0, *)) {
+                top = self.safeAreaInsets.top;
+            }
+            self.topBar.frame = CGRectMake(0, top, self.bounds.size.width, 64);
         } completion:^(BOOL finished) {
             
         }];
