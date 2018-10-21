@@ -35,6 +35,6 @@
 - (void)setSelectedIndex:(NSInteger)index;
 
 /**调整线位置*/
-- (void)adjustLinePosition:(CGFloat)offsetX;
+- (void)adjustLinePosition:(CGFloat)offsetX fullWidth:(CGFloat)fWidth;
 
 @end

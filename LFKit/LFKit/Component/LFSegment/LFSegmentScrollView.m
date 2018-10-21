@@ -31,6 +31,14 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.contentSize = CGSizeMake(_viewControllers.count * self.frame.size.width, self.frame.size.height);
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        vc.view.frame = CGRectMake(vc.view.frame.origin.x, vc.view.frame.origin.y, vc.view.frame.size.width, self.frame.size.height);
+    }
+}
+
 -(void)setSegmentView:(LFSegmentView *)segmentView {
     _segmentView = segmentView;
     __weak typeof(self) weakSelf = self;
@@ -50,13 +58,18 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetX = scrollView.contentOffset.x;
-    [_segmentView adjustLinePosition:offsetX];
+    [_segmentView adjustLinePosition:offsetX fullWidth:self.frame.size.width];
 }
 
 #pragma mark - index
 
 - (void)setSelectedAtIndex:(NSUInteger)index {
-    [_segmentView setSelectedIndex:index];
+    if (_segmentView) {
+        [_segmentView setSelectedIndex:index];
+    } else {
+        [self moveToViewControllerAtIndex:index];
+    }
+    
     [self scrollViewDidScroll:self];
 }
 

@@ -75,9 +75,8 @@ static void *btnActionKey = &btnActionKey;
     }
 }
 
-- (void)startWithTime:(NSInteger)second title:(NSString *)title subTitle:(NSString *)subTitle mainColor:(UIColor *)mColor grayColor:(UIColor *)gColor{
-    
-    self.backgroundColor = gColor;
+- (void)startWithTime:(NSInteger)second title:(NSString *)title subTitle:(NSString *)subTitle {
+    self.enabled = NO;
     NSString *time = [NSString stringWithFormat:@"%li",(long)second];
     NSString *sTitle = [subTitle stringByReplacingOccurrencesOfString:@"ss" withString:time];
     [self setTitle:sTitle forState:UIControlStateNormal];
@@ -88,29 +87,27 @@ static void *btnActionKey = &btnActionKey;
     self.currentTime = @(second);
     NSDictionary *info = @{@"second":@(second),
                            @"title":title,
-                           @"subTitle":subTitle,
-                           @"mColor":mColor,
-                           @"gColor":gColor};
+                           @"subTitle":subTitle
+                           };
     
     [self.resendTimer invalidate];
     self.resendTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleTimer:) userInfo:info repeats:YES];
+    [self handleTimer:self.resendTimer];
 }
 
 - (void)handleTimer:(NSTimer *)timer {
     NSDictionary *info = timer.userInfo;
     if (self.currentTime.integerValue <= 0) { // 当i<=0了，停止Timer
         [self.resendTimer invalidate];
-        self.backgroundColor = info[@"mColor"];
         [self setTitle:info[@"title"] forState:UIControlStateNormal];
         self.enabled = YES;
     } else {
-        self.backgroundColor = info[@"gColor"];
-        self.currentTime = @(self.currentTime.integerValue - 1);
         NSString *title = info[@"subTitle"];
         NSString *time = [NSString stringWithFormat:@"%li",(long)self.currentTime.integerValue];
         title = [title stringByReplacingOccurrencesOfString:@"ss" withString:time];
         [self setTitle:title forState:UIControlStateNormal];
-        self.enabled = NO;
+        
+        self.currentTime = @(self.currentTime.integerValue - 1);
     }
 }
 
@@ -121,11 +118,12 @@ static void *btnActionKey = &btnActionKey;
     }
 }
 
-
-//- (void)addBlockAction:(LFBtnAction)action {
-//    self.btnAction = action;
-//    [self addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
-//}
+- (void)resetButton {
+    if (self.resendTimer && self.currentTime.integerValue > 0) {
+        self.currentTime = [NSNumber numberWithInteger:0];
+        [self handleTimer:self.resendTimer];
+    }
+}
 
 - (void)onClick {
     if (self.btnAction) {

@@ -86,6 +86,7 @@
     }
     self.contentView.contentSize = CGSizeMake(item_x, self.frame.size.height);
     [self addSubview:_contentView];
+    [self scrollIndicateView];
 }
 
 
@@ -108,11 +109,11 @@
 
 #pragma mark - 公有方法
 
-- (void)adjustLinePosition:(CGFloat)offsetX {
+- (void)adjustLinePosition:(CGFloat)offsetX fullWidth:(CGFloat)fWidth {
     NSInteger currentIndex = _selectedButton.tag;
     NSInteger targetIndex = currentIndex;
     //偏移量
-    CGFloat offset = offsetX - _selectedButton.tag * self.frame.size.width;
+    CGFloat offset = offsetX - _selectedButton.tag * fWidth;
     if (offset >= 0) {
         targetIndex += 1;
     } else {

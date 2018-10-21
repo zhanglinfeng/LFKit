@@ -8,7 +8,7 @@
 
 #import "LFBaseCardView.h"
 
-@interface LFBaseCardView ()
+@interface LFBaseCardView ()<UITextFieldDelegate>
 
 @property (nonatomic, assign) LFBaseCardAnimate animate;
 @property (nonatomic, strong) UIView *bgView;//黑色半透明背景
@@ -24,6 +24,8 @@
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.windowY = -1;
+        [self findTextField:self];
+        
     }
     return self;
 }
@@ -32,6 +34,7 @@
     [super awakeFromNib];
     self.translatesAutoresizingMaskIntoConstraints = NO;
     self.windowY = -1;
+    [self findTextField:self];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)gesture {
@@ -43,6 +46,7 @@
 
 - (void)showIn:(UIView *)superview animate:(LFBaseCardAnimate)animate {
     _animate = animate;
+    self.alpha = 1;
     _bgView = [[UIView alloc] initWithFrame:superview.bounds];
     _bgView.backgroundColor = self.hideMask ? [UIColor clearColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
     _bgView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -73,13 +77,12 @@
 
 - (void)normalAnimate {
     
-    BOOL hasTextField = [self hasTextFieldInView:self];
-    
     [self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     
     if (self.windowY == -1) {//默认上下居中
-        CGFloat offsetY = hasTextField ? -128 : 0;
-        [self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offsetY]];
+        CGFloat offsetY =  0;
+        self.cotCenter = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offsetY];
+        [self.superview addConstraint:self.cotCenter];
     } else {//写死Y的情况
        [self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1 constant:self.windowY]];
     }
@@ -182,6 +185,8 @@
     }];
 }
 
+#pragma mark - TextField相关
+
 - (BOOL)hasTextFieldInView:(UIView *)view {
     for (UIView *v in view.subviews) {
         if ([v isKindOfClass:[UITextField class]]) {
@@ -193,6 +198,32 @@
         }
     }
     return NO;
+}
+
+- (void)findTextField:(UIView *)view {
+    for (UIView *v in view.subviews) {
+        if ([v isKindOfClass:[UITextField class]]) {
+            ((UITextField *)v).delegate = self;
+        } else {
+            [self findTextField:v];
+        }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self.superview layoutIfNeeded];
+    [UIView animateWithDuration:0.2 animations:^{
+        self.cotCenter.constant = 0;
+        [self.superview layoutIfNeeded];
+    } completion:nil];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.superview layoutIfNeeded];
+    [UIView animateWithDuration:0.2 animations:^{
+        self.cotCenter.constant = -128;
+        [self.superview layoutIfNeeded];
+    } completion:nil];
 }
 
 @end

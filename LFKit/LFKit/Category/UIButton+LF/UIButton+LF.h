@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, LFButtonArrangeStyle) {
     LFButtonStyleImageBottom // image在下，label在上
 };
 
-#define kDefaultSubTitle @"ss秒后重试"
+#define kDefaultSubTitle @"ss秒后重新获取"
 
 typedef void(^LFBtnAction)(void);
 
@@ -39,11 +39,11 @@ typedef void(^LFBtnAction)(void);
  *    @param color     倒计时的颜色
  */
 
-- (void)startWithTime:(NSInteger)second title:(NSString *)title subTitle:(NSString *)subTitle mainColor:(UIColor *)mColor grayColor:(UIColor *)gColor;
+- (void)startWithTime:(NSInteger)second title:(NSString *)title subTitle:(NSString *)subTitle;
 
 - (void)removeTimer;
 
-
+- (void)resetButton;
 
 
 
