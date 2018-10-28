@@ -112,6 +112,10 @@
 		D1E5A7CA2025CFFD00401E3B /* LFPopupMenuDefaultConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7C92025CFFD00401E3B /* LFPopupMenuDefaultConfig.m */; };
 		D1E5A7CD2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7CC2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m */; };
 		D1E5A7D02025DC6C00401E3B /* LFSegmentDefaultConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E5A7CF2025DC6C00401E3B /* LFSegmentDefaultConfig.m */; };
+		D1F6B505218606F600E6ED1C /* NSArray+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6B4FD218606F600E6ED1C /* NSArray+LF.m */; };
+		D1F6B506218606F600E6ED1C /* NSDictionary+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6B4FE218606F600E6ED1C /* NSDictionary+LF.m */; };
+		D1F6B507218606F600E6ED1C /* NSMutableArray+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6B500218606F600E6ED1C /* NSMutableArray+LF.m */; };
+		D1F6B508218606F600E6ED1C /* NSMutableDictionary+LF.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F6B503218606F600E6ED1C /* NSMutableDictionary+LF.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +322,14 @@
 		D1E5A7CC2025D9BD00401E3B /* LFBubbleViewDefaultConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFBubbleViewDefaultConfig.m; sourceTree = "<group>"; };
 		D1E5A7CE2025DC6C00401E3B /* LFSegmentDefaultConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFSegmentDefaultConfig.h; sourceTree = "<group>"; };
 		D1E5A7CF2025DC6C00401E3B /* LFSegmentDefaultConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFSegmentDefaultConfig.m; sourceTree = "<group>"; };
+		D1F6B4FD218606F600E6ED1C /* NSArray+LF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LF.m"; sourceTree = "<group>"; };
+		D1F6B4FE218606F600E6ED1C /* NSDictionary+LF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+LF.m"; sourceTree = "<group>"; };
+		D1F6B4FF218606F600E6ED1C /* NSMutableDictionary+LF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+LF.h"; sourceTree = "<group>"; };
+		D1F6B500218606F600E6ED1C /* NSMutableArray+LF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+LF.m"; sourceTree = "<group>"; };
+		D1F6B501218606F600E6ED1C /* NSDictionary+LF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LF.h"; sourceTree = "<group>"; };
+		D1F6B502218606F600E6ED1C /* NSArray+LF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LF.h"; sourceTree = "<group>"; };
+		D1F6B503218606F600E6ED1C /* NSMutableDictionary+LF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+LF.m"; sourceTree = "<group>"; };
+		D1F6B504218606F600E6ED1C /* NSMutableArray+LF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+LF.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -679,6 +691,7 @@
 		D1AC21F91FA328830039A2C2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D1F6B4FC218606F600E6ED1C /* SafeValue */,
 				D1E5A7A72025745100401E3B /* NSDate+LF */,
 				D1E5A7892025745100401E3B /* NSLayoutConstraint+LFXIB */,
 				D1E5A7AA2025745100401E3B /* NSString+LF */,
@@ -1002,6 +1015,21 @@
 			path = "UIViewController+FullScreenScroll";
 			sourceTree = "<group>";
 		};
+		D1F6B4FC218606F600E6ED1C /* SafeValue */ = {
+			isa = PBXGroup;
+			children = (
+				D1F6B502218606F600E6ED1C /* NSArray+LF.h */,
+				D1F6B4FD218606F600E6ED1C /* NSArray+LF.m */,
+				D1F6B504218606F600E6ED1C /* NSMutableArray+LF.h */,
+				D1F6B500218606F600E6ED1C /* NSMutableArray+LF.m */,
+				D1F6B501218606F600E6ED1C /* NSDictionary+LF.h */,
+				D1F6B4FE218606F600E6ED1C /* NSDictionary+LF.m */,
+				D1F6B4FF218606F600E6ED1C /* NSMutableDictionary+LF.h */,
+				D1F6B503218606F600E6ED1C /* NSMutableDictionary+LF.m */,
+			);
+			path = SafeValue;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1217,12 +1245,15 @@
 				D1E5A78620256E7100401E3B /* LFFileUtil.m in Sources */,
 				D1B0273320CD01650037E80D /* LFPhotoNavController.m in Sources */,
 				D16F2C4D20C531750092EF4E /* LFPhotoAlbumCell.m in Sources */,
+				D1F6B508218606F600E6ED1C /* NSMutableDictionary+LF.m in Sources */,
 				D16F2C4A20C530F90092EF4E /* LFThumbnailViewController.m in Sources */,
 				D1E5A78820256E7100401E3B /* LFTimeUtil.m in Sources */,
 				D1554D7E2024255F00AEAB8D /* LFLogManager.m in Sources */,
 				D186290B1FA8777900780629 /* LFBubbleView.m in Sources */,
 				D1C1061C20400C340078CB08 /* LFModel.m in Sources */,
+				D1F6B506218606F600E6ED1C /* NSDictionary+LF.m in Sources */,
 				D14ADE0D1FAC5D6200951E26 /* LFCameraViewController.m in Sources */,
+				D1F6B507218606F600E6ED1C /* NSMutableArray+LF.m in Sources */,
 				D1E5A7CA2025CFFD00401E3B /* LFPopupMenuDefaultConfig.m in Sources */,
 				D1B0273020CD00260037E80D /* LFBigVideoController.m in Sources */,
 				D1E5A7BA2025745200401E3B /* UIView+LF.m in Sources */,
@@ -1241,6 +1272,7 @@
 				D1AE0D201FB45E79004605E7 /* LFPopupMenu.m in Sources */,
 				D1B0272120CCE2890037E80D /* LFBigImageBrowser.m in Sources */,
 				D186290F1FA8777900780629 /* LFLocalMusicPicker.m in Sources */,
+				D1F6B505218606F600E6ED1C /* NSArray+LF.m in Sources */,
 				D18629121FA8777900780629 /* LFPickerView.m in Sources */,
 				D1E5A7C42025745200401E3B /* UIViewController+FullScreenScroll.m in Sources */,
 				D1E5A7B62025745200401E3B /* NSLayoutConstraint+LFXIB.m in Sources */,
