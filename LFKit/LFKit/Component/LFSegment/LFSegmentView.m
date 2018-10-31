@@ -86,9 +86,13 @@
     }
     self.contentView.contentSize = CGSizeMake(item_x, self.frame.size.height);
     [self addSubview:_contentView];
-    [self scrollIndicateView];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self scrollIndicateView];
+    [self scrollSegementView];
+}
 
 #pragma mark - 按钮点击
 
