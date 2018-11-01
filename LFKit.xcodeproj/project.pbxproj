@@ -21,6 +21,7 @@
 		D1314AC6218AA7DF00307DEF /* LFEmptyIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1314AC2218AA7DE00307DEF /* LFEmptyIcon@2x.png */; };
 		D1314AC7218AA7DF00307DEF /* LFErrorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1314AC3218AA7DE00307DEF /* LFErrorIcon@2x.png */; };
 		D1314AC8218AA7DF00307DEF /* LFEmptyIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1314AC4218AA7DE00307DEF /* LFEmptyIcon@3x.png */; };
+		D1314AE0218AD62900307DEF /* LFErrorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1314ADE218AD56F00307DEF /* LFErrorCell.m */; };
 		D13B092B1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */; };
 		D13B092E1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B092D1FF0E1BF00D8BFE1 /* LFAnnulusProgress.m */; };
 		D13B09321FF0E5DA00D8BFE1 /* LFStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B09311FF0E5DA00D8BFE1 /* LFStarsView.m */; };
@@ -164,6 +165,8 @@
 		D1314AC2218AA7DE00307DEF /* LFEmptyIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LFEmptyIcon@2x.png"; sourceTree = "<group>"; };
 		D1314AC3218AA7DE00307DEF /* LFErrorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LFErrorIcon@2x.png"; sourceTree = "<group>"; };
 		D1314AC4218AA7DE00307DEF /* LFEmptyIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LFEmptyIcon@3x.png"; sourceTree = "<group>"; };
+		D1314ADD218AD56F00307DEF /* LFErrorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFErrorCell.h; sourceTree = "<group>"; };
+		D1314ADE218AD56F00307DEF /* LFErrorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFErrorCell.m; sourceTree = "<group>"; };
 		D13B09291FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAlignCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		D13B092A1FF0E10700D8BFE1 /* LFAlignCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAlignCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		D13B092C1FF0E1BF00D8BFE1 /* LFAnnulusProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAnnulusProgress.h; sourceTree = "<group>"; };
@@ -728,6 +731,8 @@
 				D1314AC1218AA7DE00307DEF /* LFErrorIcon@3x.png */,
 				D1AC222E1FA345250039A2C2 /* LFErrorView.h */,
 				D1AC222F1FA345250039A2C2 /* LFErrorView.m */,
+				D1314ADD218AD56F00307DEF /* LFErrorCell.h */,
+				D1314ADE218AD56F00307DEF /* LFErrorCell.m */,
 			);
 			path = LFErrorView;
 			sourceTree = "<group>";
@@ -1281,6 +1286,7 @@
 				D186290E1FA8777900780629 /* LFImagePicker.m in Sources */,
 				D142B0B11FC83857008C032A /* LFBadge.m in Sources */,
 				D16F2C4720C51A8D0092EF4E /* LFAlbumModel.m in Sources */,
+				D1314AE0218AD62900307DEF /* LFErrorCell.m in Sources */,
 				D1E5A7BD2025745200401E3B /* UITextField+LF.m in Sources */,
 				D16F2C4420C515030092EF4E /* LFPhotoAlbumController.m in Sources */,
 				D127F69520C2A2660040590D /* LFBigImageCell.m in Sources */,

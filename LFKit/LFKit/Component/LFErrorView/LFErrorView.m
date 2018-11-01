@@ -132,7 +132,6 @@
     }
     if (self.tapBlock) {
         self.tapBlock();
-        [self removeFromSuperview];
     }
 }
 
