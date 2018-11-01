@@ -25,6 +25,10 @@ Pod::Spec.new do |s|
     sss.source_files         = 'LFKit/LFKit/Category/NSLayoutConstraint+LFXIB/*'
     end
 
+    ss.subspec 'SafeValue' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/SafeValue/*'
+    end
+
     ss.subspec 'NSString+LF' do |sss|
     sss.source_files         = 'LFKit/LFKit/Category/NSString+LF/*'
     end
