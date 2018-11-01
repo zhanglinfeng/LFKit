@@ -45,6 +45,20 @@
 /**获取MD5*/
 - (NSString *)getMD5;
 
+#pragma mark - 数字相关
+
+/**保留count位小数(高保真)*/
+- (NSString *)lf_keepDecimalCount:(NSInteger)count;
+
+/**保留小数位数，一般的位数(高保真)*/
+- (NSString *)lf_keepDecimalNormal;
+
+/**浮点型转化为万*/
+- (NSString *)lf_flotToWanFormat;
+
+/**整型转化为万*/
+- (NSString *)lf_intToWanFormat;
+
 #pragma mark - 校验相关
 
 /**身份证号*/

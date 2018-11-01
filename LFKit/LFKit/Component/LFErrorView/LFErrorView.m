@@ -16,13 +16,12 @@
 
 @implementation LFErrorView
 
-- (instancetype)initWithIcon:(UIImage *)icon text:(NSString *)text btnTitle:(NSString*)btnTitle {
-    self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        
         self.itemSpace = 20;
         self.labelMargin = 40;
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor whiteColor];
         
         self.ivBackground = [[UIImageView alloc] init];
         self.ivBackground.backgroundColor = [UIColor clearColor];
@@ -30,9 +29,10 @@
         [self addSubview:self.ivBackground];
         
         self.blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+        self.blurView.hidden = YES;
         [self addSubview:self.blurView];
         
-        self.ivIcon = [[UIImageView alloc] initWithImage:icon];
+        self.ivIcon = [[UIImageView alloc] init];
         [self addSubview:self.ivIcon];
         
         self.lbText = [[UILabel alloc] init];
@@ -41,7 +41,7 @@
         self.lbText.textAlignment = NSTextAlignmentCenter;
         self.lbText.numberOfLines = 0;
         self.lbText.font = [UIFont systemFontOfSize:14];
-        self.lbText.text = text;
+        self.lbText.text = @"暂无数据";
         [self addSubview:self.lbText];
         
         self.button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 140, 32)];
@@ -49,20 +49,39 @@
         self.button.layer.borderColor = [UIColor darkGrayColor].CGColor;
         self.button.layer.borderWidth = 1.0f/[UIScreen mainScreen].scale;
         self.button.layer.cornerRadius = 5;
-        [self.button setTitle:btnTitle forState:UIControlStateNormal];
-        [self.button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [self.button addTarget:self action:@selector(tapAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.button];
         
-        if (btnTitle.length < 1) {
-            //点击手势
-            UITapGestureRecognizer *tapGestureRecognizer =
-            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
-            [self addGestureRecognizer:tapGestureRecognizer];
-            tapGestureRecognizer.cancelsTouchesInView = NO;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
-        }
+        [self.button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [self.button addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.button];
+        self.button.hidden = YES;
+        
+        //点击手势
+        UITapGestureRecognizer *tapGestureRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [self addGestureRecognizer:tapGestureRecognizer];
+        tapGestureRecognizer.cancelsTouchesInView = YES;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
     }
     return self;
+}
+
+/**展示空页面(有默认的文字和图片，show之后可以更改文字图片)*/
++ (LFErrorView *)showEmptyInView:(UIView *)supView frame:(CGRect)frame tapBlock:(void(^)(void))tapBlock {
+    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:frame];
+    errorView.ivIcon.image = [UIImage imageNamed:@"LFEmptyIcon"];
+    errorView.lbText.text = @"暂无数据";
+    errorView.tapBlock = tapBlock;
+    [supView addSubview:errorView];
+    return errorView;
+}
+
+/**展示错误页面(有默认的图片，show之后可以更改图片)*/
++ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message frame:(CGRect)frame tapBlock:(void(^)(void))tapBlock {
+    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:frame];
+    errorView.ivIcon.image = [UIImage imageNamed:@"LFErrorIcon"];
+    errorView.lbText.text = message;
+    errorView.tapBlock = tapBlock;
+    [supView addSubview:errorView];
+    return errorView;
 }
 
 - (void)layoutSubviews {
@@ -91,6 +110,7 @@
     if (self.button.currentTitle.length > 0) {
         itemTotalH = itemTotalH + self.labelMargin + self.button.frame.size.height;
     }
+    self.button.hidden = self.button.currentTitle.length < 1;
     
     self.ivIcon.frame = CGRectMake((self.frame.size.width - coverImageW)/2, (self.frame.size.height - itemTotalH)/2, coverImageW, coverImageH);
     
@@ -104,8 +124,13 @@
     self.button.frame = CGRectMake((self.frame.size.width - self.button.frame.size.width)/2, btY, self.button.frame.size.width, self.button.frame.size.height);
 }
 
-- (void)tapAction {
-    if (self.button.currentTitle.length > 0 && self.tapBlock) {
+- (void)tapAction:(id)sender {
+    if ([sender isKindOfClass:[UITapGestureRecognizer class]]) {
+        if (self.button.currentTitle.length > 0) {
+            return;
+        }
+    }
+    if (self.tapBlock) {
         self.tapBlock();
         [self removeFromSuperview];
     }

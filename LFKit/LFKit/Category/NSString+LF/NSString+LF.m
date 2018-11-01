@@ -160,6 +160,54 @@
             ];
 }
 
+#pragma mark - 数字相关
+
+/**保留count位小数(高保真)*/
+- (NSString *)lf_keepDecimalCount:(NSInteger)count {
+    NSDecimalNumberHandler *roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain
+                                                                                                      scale:count
+                                                                                           raiseOnExactness:NO
+                                                                                            raiseOnOverflow:NO
+                                                                                           raiseOnUnderflow:NO
+                                                                                        raiseOnDivideByZero:NO];
+    
+    NSDecimalNumber *tmp = [NSDecimalNumber decimalNumberWithString:self];
+    NSDecimalNumber *value = [tmp decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setAlwaysShowsDecimalSeparator:NO];
+    [formatter setMinimumFractionDigits:count];
+    
+    return [formatter stringFromNumber:value];
+}
+
+/**保留小数位数，一般的位数(高保真)*/
+- (NSString *)lf_keepDecimalNormal {
+    return [self lf_keepDecimalCount:2];
+}
+
+/**浮点型转化为万*/
+- (NSString *)lf_flotToWanFormat {
+    CGFloat value = self.floatValue;
+    if (value > 9999) {
+        CGFloat f = self.floatValue/10000;
+        return [[@(f).stringValue lf_keepDecimalCount:2] stringByAppendingString:@"万"];
+    } else {
+        return [self lf_keepDecimalCount:2];
+    }
+}
+
+/**整型转化为万*/
+- (NSString *)lf_intToWanFormat {
+    CGFloat value = self.floatValue;
+    if (value > 9999) {
+        CGFloat f = self.floatValue/10000;
+        return [[@(f).stringValue lf_keepDecimalCount:1] stringByAppendingString:@"万"];
+    } else {
+        return self;
+    }
+}
+
 #pragma mark - 校验相关
 
 /**身份证号*/
