@@ -94,7 +94,7 @@
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(lbX, i*self.rowHeight, self.frame.size.width - lbX - self.rightEdgeMargin, self.rowHeight)];
         lb.textColor = self.textColor;
         lb.text = item.title;
-        lb.font = [UIFont systemFontOfSize:15];
+        lb.font = self.textFont;
         [self.containerView addSubview:lb];
         
         UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, i*self.rowHeight, self.frame.size.width, self.rowHeight)];
@@ -172,6 +172,11 @@
 
 //显示菜单窗,无imgBG的情况下调用
 - (void)showArrowToView:(UIView*)view {
+    [self showArrowToView:view offset:2];
+}
+
+//显示菜单窗,无imgBG的情况下调用
+- (void)showArrowToView:(UIView*)view offset:(CGFloat)offset{
     CGRect pointViewRect = [view.superview convertRect:view.frame toView:self.menuSuperView];
     // 弹窗箭头指向的点
     CGPoint toPoint = CGPointMake(CGRectGetMidX(pointViewRect), 0);
@@ -184,9 +189,9 @@
     }
     
     if (self.isUp) {
-        toPoint.y = CGRectGetMaxY(pointViewRect) + 2;
+        toPoint.y = CGRectGetMaxY(pointViewRect) + offset;
     } else {
-        toPoint.y = CGRectGetMinY(pointViewRect) - 2;
+        toPoint.y = CGRectGetMinY(pointViewRect) - offset;
     }
     [self private_showArrowInPoint:toPoint];
 }

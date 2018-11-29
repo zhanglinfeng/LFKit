@@ -87,6 +87,14 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
  */
 - (void)showArrowToView:(UIView*)view;
 
+/**
+ 显示菜单窗，无imgBG的情况下调用（同上，只是加了偏移）
+ 
+ @param view 箭头对准的view
+ */
+- (void)showArrowToView:(UIView*)view offset:(CGFloat)offset;
+
+
 - (void)dismiss;
 
 @end
