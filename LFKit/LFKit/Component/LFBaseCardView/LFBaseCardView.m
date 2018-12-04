@@ -45,6 +45,9 @@
 }
 
 - (void)showIn:(UIView *)superview animate:(LFBaseCardAnimate)animate {
+    if (superview == nil) {
+        superview = [UIApplication sharedApplication].keyWindow;
+    }
     _animate = animate;
     self.alpha = 1;
     _bgView = [[UIView alloc] initWithFrame:superview.bounds];
