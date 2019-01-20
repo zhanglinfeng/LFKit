@@ -107,7 +107,7 @@ static NSString *kHPImageCell = @"HPImageCell";
     browser.isShowTopBar = YES;
     HPImageCell *cell = (HPImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
     CGRect rect = [self.collectionView convertRect:cell.frame toView:[UIApplication sharedApplication].keyWindow];
-//    browser.beginRect = rect;
+    browser.beginRect = rect;
     browser.beginImage = cell.ivPicture.image;
     [browser show];
     browser.didDismiss = ^{
