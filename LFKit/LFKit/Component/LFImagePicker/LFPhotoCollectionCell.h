@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LFPhotoModel.h"
 
 @interface LFPhotoCollectionCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *btnSelect;
 @property (nonatomic, strong) UIView *coverView;//蒙层,不可点时显示蒙层
+@property (nonatomic, strong) LFPhotoModel *photo;
+@property (nonatomic, strong) void(^selectBlock)(LFPhotoModel *photo, UIButton *button);
 
-- (void)setIsVideo:(BOOL)isVideo;
-- (void)setTime:(NSString *)time;
 
 @end

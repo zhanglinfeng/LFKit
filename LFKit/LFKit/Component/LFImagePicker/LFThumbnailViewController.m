@@ -167,13 +167,11 @@
 }
 
 #pragma mark - UIButton Action
-- (void)cell_btn_Click:(UIButton *)btn
+- (void)cell_btn_Click:(LFPhotoModel *)model button:(UIButton *)button
 {
-    LFPhotoModel *model = self.arrayDataSources[btn.tag];
-    //选择照片
 
     if (_arraySelectPhotos.count >= self.maxSelectCount
-        && btn.selected == NO) {
+        && button.isSelected == NO) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = [NSString stringWithFormat:@"最多只能选%li张图片",(long)self.maxSelectCount];
@@ -181,8 +179,8 @@
         return;
     }
 
-    if (!btn.selected) {
-        [btn.layer addAnimation:[self GetElasticityAnimation] forKey:nil];
+    if (!button.isSelected) {
+        [button.layer addAnimation:[self GetElasticityAnimation] forKey:nil];
         
         if (![LFPhotoModel judgeAssetisInLocalAblum:model.asset]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -212,7 +210,7 @@
         }
     }
 
-    btn.selected = !btn.selected;
+    button.selected = !button.selected;
     [self resetBottomBtnsStatus];
 }
 
@@ -307,27 +305,17 @@
     static NSString *cellIdentifier = @"LFPhotoCollectionCell";
     LFPhotoModel *model = self.arrayDataSources[indexPath.row];
     LFPhotoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    CGSize size = cell.frame.size;
-    size.width *= 2.5;
-    size.height *= 2.5;
-    [LFPhotoModel requestImageForAsset:model.asset size:size resizeMode:PHImageRequestOptionsResizeModeExact needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
-        cell.imageView.image = image;
-        if ([NSThread currentThread] != [NSThread mainThread]) {
-            NSLog(@"*********不在主线程2*********");
-        }
-    }];
-    //区分照片、视频数据
+    cell.photo = model;
     BOOL isVideo = [model isVideo];
-    [cell setIsVideo:isVideo];
-    cell.coverView.hidden = YES;
-    if (isVideo == NO) { //照片UI
-        cell.btnSelect.selected = model.isSelected;
-        cell.btnSelect.tag = indexPath.row;
-        [cell.btnSelect addTarget:self action:@selector(cell_btn_Click:) forControlEvents:UIControlEventTouchUpInside];
-    } else { //视频UI
-        [cell setTime:[model fetchVideoTimeString]];
+    if (isVideo) {
         cell.coverView.hidden = self.arraySelectPhotos.count < 1;
     }
+    
+    __weak typeof(self) weakSelf = self;
+    cell.selectBlock = ^(LFPhotoModel *photo, UIButton *button) {
+        [weakSelf cell_btn_Click:photo button:button];
+    };
+    
     return cell;
 }
 

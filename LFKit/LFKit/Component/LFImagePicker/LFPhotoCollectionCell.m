@@ -50,6 +50,7 @@
     self.btnSelect.backgroundColor = [UIColor clearColor];
     [self.btnSelect setImage:[UIImage imageNamed:@"photo_radio_normal"] forState:UIControlStateNormal];
     [self.btnSelect setImage:[UIImage imageNamed:@"photo_radio_pressed"] forState:UIControlStateSelected];
+    [self.btnSelect addTarget:self action:@selector(cell_btn_Click:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.btnSelect];
 
     self.coverView = [[UIView alloc] init];
@@ -58,14 +59,34 @@
     [self.contentView addSubview:self.coverView];
 }
 
-- (void)setIsVideo:(BOOL)isVideo {
-    self.btnSelect.hidden = isVideo;
+- (void)setPhoto:(LFPhotoModel *)photo {
+    _photo = photo;
+    CGSize size = self.frame.size;
+    size.width = size.width * [UIScreen mainScreen].scale * 2;
+    size.height = size.height *[UIScreen mainScreen].scale * 2;
+    [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeExact needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
+        self.imageView.image = image;
+        if ([NSThread currentThread] != [NSThread mainThread]) {
+            NSLog(@"*********不在主线程2*********");
+        }
+    }];
+    //区分照片、视频数据
+    BOOL isVideo = [photo isVideo];
     self.videoIcon.hidden = !isVideo;
     self.timeLabel.hidden = !isVideo;
+    self.coverView.hidden = YES;
+    if (isVideo == NO) { //照片UI
+        self.btnSelect.selected = photo.isSelected;
+    } else { //视频UI
+        self.timeLabel.text = [photo fetchVideoTimeString];
+        
+    }
 }
 
-- (void)setTime:(NSString *)time {
-    self.timeLabel.text = time;
+- (void)cell_btn_Click:(UIButton *)button {
+    if (self.selectBlock) {
+        self.selectBlock(self.photo, button);
+    }
 }
 
 #pragma mark - Getter

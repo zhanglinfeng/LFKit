@@ -50,24 +50,28 @@
     }
     _animate = animate;
     self.alpha = 1;
-    _bgView = [[UIView alloc] initWithFrame:superview.bounds];
-    _bgView.backgroundColor = self.hideMask ? [UIColor clearColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
-    _bgView.translatesAutoresizingMaskIntoConstraints = NO;
-    if (self.needTapGesture) {
-        //点击手势
-        UITapGestureRecognizer *tapGestureRecognizer =
-        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        tapGestureRecognizer.cancelsTouchesInView = NO;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
-        [_bgView addGestureRecognizer:tapGestureRecognizer];
-        
+    if (!self.hideMask) {
+        _bgView = [[UIView alloc] initWithFrame:superview.bounds];
+        _bgView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        _bgView.translatesAutoresizingMaskIntoConstraints = NO;
+        if (self.needTapGesture) {
+            //点击手势
+            UITapGestureRecognizer *tapGestureRecognizer =
+            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+            tapGestureRecognizer.cancelsTouchesInView = NO;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
+            [_bgView addGestureRecognizer:tapGestureRecognizer];
+            
+        }
+        [superview addSubview:_bgView];
+        [superview addConstraints:@[
+                                    [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeLeft multiplier:1 constant:0],
+                                    [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeRight multiplier:1 constant:0],
+                                    [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:0],
+                                    [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeBottom multiplier:1 constant:0]
+                                    ]];
     }
-    [superview addSubview:_bgView];
-    [superview addConstraints:@[
-                               [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeLeft multiplier:1 constant:0],
-                               [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeRight multiplier:1 constant:0],
-                               [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:0],
-                               [NSLayoutConstraint constraintWithItem:_bgView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeBottom multiplier:1 constant:0]
-                               ]];
+    
+    
     
     [superview addSubview:self];
     
@@ -141,7 +145,6 @@
     __weak typeof(self) weakSelf = self;
     [self.superview layoutIfNeeded];
     [UIView animateWithDuration:0.2 animations:^{
-        weakSelf.bgView.backgroundColor = weakSelf.hideMask ? [UIColor clearColor] : [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         [weakSelf.superview removeConstraint:weakSelf.topConstraint];
         [weakSelf.superview addConstraint:weakSelf.bottomConstraint];
         [weakSelf.superview layoutIfNeeded];
@@ -176,6 +179,7 @@
     [self.superview layoutIfNeeded];
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        weakSelf.bgView.alpha = 0;
         [weakSelf.superview removeConstraint:weakSelf.bottomConstraint];
         [weakSelf.superview addConstraint:weakSelf.topConstraint];
         [weakSelf.superview layoutIfNeeded];
