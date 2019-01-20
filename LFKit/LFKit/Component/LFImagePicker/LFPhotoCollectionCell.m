@@ -36,7 +36,7 @@
     self.imageView.frame = self.contentView.bounds;
     self.btnSelect.frame = CGRectMake(self.frame.size.width - 40, 0, 40, 40);
     self.videoIcon.frame = CGRectMake(6, self.frame.size.height - 9-8, 13, 9);
-    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.videoIcon.frame) + 2, CGRectGetMidY(self.videoIcon.frame) - 10, 180, 20);
+    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.videoIcon.frame) + 2, CGRectGetMidY(self.videoIcon.frame) - 10, self.frame.size.width - CGRectGetMaxX(self.videoIcon.frame) - 2 - 2, 20);
     self.coverView.frame = self.contentView.bounds;
 }
 
@@ -93,7 +93,7 @@
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.font = [UIFont systemFontOfSize:12];
-        _timeLabel.textAlignment = NSTextAlignmentRight;
+        _timeLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _timeLabel;
 }
