@@ -5,4 +5,5 @@ target 'LFKit' do
     pod 'FMDB'
     pod 'CocoaLumberjack'
     pod 'MBProgressHUD'
+    pod 'Masonry'
 end

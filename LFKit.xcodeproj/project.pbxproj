@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B205199E50ACC8D989F93925 /* libPods-LFKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */; };
+		D1023152221FEDEE0035346B /* LFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1023151221FEDEE0035346B /* LFAlertView.m */; };
+		D10B974A22214EEB0044C078 /* LFAlertViewTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D10B974822214EEB0044C078 /* LFAlertViewTestVC.m */; };
+		D10B974B22214EEB0044C078 /* LFAlertViewTestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D10B974922214EEB0044C078 /* LFAlertViewTestVC.xib */; };
 		D127F68C20C244790040590D /* LFPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F68B20C244790040590D /* LFPhotoBrowser.m */; };
 		D127F68F20C25B380040590D /* LFPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F68E20C25B380040590D /* LFPhotoModel.m */; };
 		D127F69520C2A2660040590D /* LFBigImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D127F69420C2A2660040590D /* LFBigImageCell.m */; };
@@ -144,6 +147,11 @@
 		1D919615463A4F0C9EC8B749 /* Pods-LFKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.debug.xcconfig"; sourceTree = "<group>"; };
 		5B2E01735C8A234634021AF1 /* Pods-LFKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFKit/Pods-LFKit.release.xcconfig"; sourceTree = "<group>"; };
 		725C3FB0F9CA066A6FF20F66 /* libPods-LFKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1023150221FEDEE0035346B /* LFAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAlertView.h; sourceTree = "<group>"; };
+		D1023151221FEDEE0035346B /* LFAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAlertView.m; sourceTree = "<group>"; };
+		D10B974722214EEB0044C078 /* LFAlertViewTestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAlertViewTestVC.h; sourceTree = "<group>"; };
+		D10B974822214EEB0044C078 /* LFAlertViewTestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAlertViewTestVC.m; sourceTree = "<group>"; };
+		D10B974922214EEB0044C078 /* LFAlertViewTestVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LFAlertViewTestVC.xib; sourceTree = "<group>"; };
 		D127F68A20C244790040590D /* LFPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoBrowser.h; sourceTree = "<group>"; };
 		D127F68B20C244790040590D /* LFPhotoBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFPhotoBrowser.m; sourceTree = "<group>"; };
 		D127F68D20C25B380040590D /* LFPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFPhotoModel.h; sourceTree = "<group>"; };
@@ -515,6 +523,9 @@
 				D16C286D2015CAE300E3E4F7 /* LFBubbleViewTestVC.h */,
 				D16C286E2015CAE300E3E4F7 /* LFBubbleViewTestVC.m */,
 				D127F69920C2D86F0040590D /* LFPhotoBrowserTest */,
+				D10B974722214EEB0044C078 /* LFAlertViewTestVC.h */,
+				D10B974822214EEB0044C078 /* LFAlertViewTestVC.m */,
+				D10B974922214EEB0044C078 /* LFAlertViewTestVC.xib */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -564,6 +575,8 @@
 			children = (
 				D16C28712015EF1700E3E4F7 /* LFBaseCardView.h */,
 				D16C28722015EF1700E3E4F7 /* LFBaseCardView.m */,
+				D1023150221FEDEE0035346B /* LFAlertView.h */,
+				D1023151221FEDEE0035346B /* LFAlertView.m */,
 			);
 			path = LFBaseCardView;
 			sourceTree = "<group>";
@@ -1164,6 +1177,7 @@
 				D1AC21CB1FA3258A0039A2C2 /* Assets.xcassets in Resources */,
 				D142B0B61FC83B00008C032A /* LFBadgeViewController.xib in Resources */,
 				D19B24AB20CE188E006820AA /* photo_radio_normal@2x.png in Resources */,
+				D10B974B22214EEB0044C078 /* LFAlertViewTestVC.xib in Resources */,
 				D19B24AE20CE188E006820AA /* photo_video_play_normal@2x.png in Resources */,
 				D13B093B1FF0FA9200D8BFE1 /* star_highlight.png in Resources */,
 				D1D9773B2004BABC0053AE92 /* LFPopupMenuTestVC.xib in Resources */,
@@ -1253,6 +1267,7 @@
 				D1E5A7C12025745200401E3B /* NSString+LF.m in Sources */,
 				D1E5A7C22025745200401E3B /* UIBarButtonItem+LF.m in Sources */,
 				D1554D802024255F00AEAB8D /* LFLogListController.m in Sources */,
+				D1023152221FEDEE0035346B /* LFAlertView.m in Sources */,
 				D1E5A7BC2025745200401E3B /* UIImage+LF.m in Sources */,
 				D14D71C720C7D60E00A10457 /* LFPhotoCollectionCell.m in Sources */,
 				D16C286F2015CAE300E3E4F7 /* LFBubbleViewTestVC.m in Sources */,
@@ -1307,6 +1322,7 @@
 				D1E5A7BF2025745200401E3B /* UILabel+LF.m in Sources */,
 				D1E5A7B92025745200401E3B /* UIImageView+LF.m in Sources */,
 				D1E5A7C02025745200401E3B /* NSDate+LF.m in Sources */,
+				D10B974A22214EEB0044C078 /* LFAlertViewTestVC.m in Sources */,
 				D1C106122040043F0078CB08 /* ToolListController.m in Sources */,
 				D12FBBE120146F1300814195 /* LFSegmentScrollView.m in Sources */,
 				D1E5A7C32025745200401E3B /* UIButton+LF.m in Sources */,

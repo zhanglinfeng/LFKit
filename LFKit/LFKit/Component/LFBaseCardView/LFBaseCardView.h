@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, LFBaseCardAnimate) {
 @property (nonatomic, assign) CGFloat windowY;//窗口的y位置，不设置则上下居中(如果有键盘，会自动去掉键盘大小后，再上下居中)
 @property (nonatomic, assign) CGFloat windowW;//窗口的宽度（不设置则需要由控制器子视图的约束来确定窗口大小）
 @property (nonatomic, assign) CGFloat windowH;//窗口的高度(不设置则需要由控制器子视图的约束来确定窗口大小）
+@property (nonatomic, assign) CGFloat maxHeight;//窗口最大高度
 @property (nonatomic, assign) BOOL isFullWidth;//是否宽度全屏（针对横屏也要宽度全屏）
 @property (nonatomic, assign) BOOL isFullHeight;//是否高度全屏
 @property (nonatomic, assign) BOOL hideMask;//半透明背景遮罩层，

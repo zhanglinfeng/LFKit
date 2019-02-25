@@ -190,6 +190,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'LFBaseCardView' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFBaseCardView/*'
+    sss.dependency 'Masonry'
     end
 
     ss.subspec 'LFFMDB' do |sss|

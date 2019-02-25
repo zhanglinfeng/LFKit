@@ -14,6 +14,7 @@
 #import "LFSegmentTestVC.h"
 #import "LFBubbleViewTestVC.h"
 #import "LFPhotoBrowserTest.h"
+#import "LFAlertViewTestVC.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -77,6 +78,10 @@
                   }},
                   @{@"title":@"大图浏览",@"action":^{
                       LFPhotoBrowserTest *vc = [[LFPhotoBrowserTest alloc] init];
+                      [self.navigationController pushViewController:vc animated:YES];
+                  }},
+                  @{@"title":@"自定义alert",@"action":^{
+                      LFAlertViewTestVC *vc = [[LFAlertViewTestVC alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
                   }}
                    ];

@@ -99,6 +99,10 @@
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.windowW]];
     }
     
+    if (self.maxHeight) {
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.maxHeight]];
+    }
+    
     self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8f, 0.8f);
     [UIView animateWithDuration:0.2 // 动画时长
                           delay:0.0 // 动画延迟
