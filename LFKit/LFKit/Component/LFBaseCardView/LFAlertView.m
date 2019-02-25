@@ -36,6 +36,18 @@
         self.layer.cornerRadius = 10;
         
         [self initUI];
+//        [self setNeedsLayout];
+        
+        CGFloat txtHeight = 0;
+        if (self.alertMessage.length > 0) {
+            [self layoutIfNeeded];
+            [self.tvMessage sizeToFit];
+            txtHeight = self.tvMessage.frame.size.height;
+        }
+
+        [self.tvMessage mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_lessThanOrEqualTo(txtHeight);
+        }];
     }
     return self;
 }
@@ -61,6 +73,7 @@
     self.tvMessage.textAlignment = NSTextAlignmentCenter;
     self.tvMessage.font = [UIFont systemFontOfSize:13];
     self.tvMessage.text = self.alertMessage;
+    self.tvMessage.editable = NO;
     self.tvMessage.bounces = NO;
     [self addSubview:self.tvMessage];
     [self.tvMessage mas_makeConstraints:^(MASConstraintMaker *make) {
