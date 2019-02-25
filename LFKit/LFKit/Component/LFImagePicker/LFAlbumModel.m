@@ -32,7 +32,17 @@
                 }
             }
         } else {
-            // Fallback on earlier versions
+            if(collection.assetCollectionSubtype != PHAssetCollectionSubtypeSmartAlbumVideos){
+                NSArray<PHAsset *> *assets = [self getImageAssetsInAssetCollection:collection ascending:NO];
+                if (assets.count > 0) {
+                    LFAlbumModel *album = [[LFAlbumModel alloc] init];
+                    album.title = collection.localizedTitle;
+                    album.count = assets.count;
+                    album.headImageAsset = assets.firstObject;
+                    album.assetCollection = collection;
+                    [photoAlbumList addObject:album];
+                }
+            }
         }
     }];
     

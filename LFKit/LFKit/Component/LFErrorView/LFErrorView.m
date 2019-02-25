@@ -65,8 +65,8 @@
 }
 
 /**展示空页面(有默认的文字和图片，show之后可以更改文字图片)*/
-+ (LFErrorView *)showEmptyInView:(UIView *)supView frame:(CGRect)frame tapBlock:(void(^)(void))tapBlock {
-    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:frame];
++ (LFErrorView *)showEmptyInView:(UIView *)supView tapBlock:(void(^)(void))tapBlock {
+    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:supView.bounds];
     errorView.ivIcon.image = [UIImage imageNamed:@"LFEmptyIcon"];
     errorView.lbText.text = @"暂无数据";
     errorView.tapBlock = tapBlock;
@@ -75,8 +75,8 @@
 }
 
 /**展示错误页面(有默认的图片，show之后可以更改图片)*/
-+ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message frame:(CGRect)frame tapBlock:(void(^)(void))tapBlock {
-    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:frame];
++ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message tapBlock:(void(^)(void))tapBlock {
+    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:supView.bounds];
     errorView.ivIcon.image = [UIImage imageNamed:@"LFErrorIcon"];
     errorView.lbText.text = message;
     errorView.tapBlock = tapBlock;
@@ -138,6 +138,29 @@
 - (void)setNeedBlurEffect:(BOOL)needBlurEffect {
     _needBlurEffect = needBlurEffect;
     self.blurView.hidden = !_needBlurEffect;
+}
+
+@end
+
+
+@implementation UIView (LF)
+
+- (LFErrorView *)showEmptyView:(void(^)(void))tapBlock {
+    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:self.bounds];
+    errorView.ivIcon.image = [UIImage imageNamed:@"LFEmptyIcon"];
+    errorView.lbText.text = @"暂无数据";
+    errorView.tapBlock = tapBlock;
+    [self addSubview:errorView];
+    return errorView;
+}
+
+- (LFErrorView *)showErrorView:(void(^)(void))tapBlock {
+    LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:self.bounds];
+    errorView.ivIcon.image = [UIImage imageNamed:@"LFErrorIcon"];
+    errorView.lbText.text = @"网络不给力，请稍后再试";
+    errorView.tapBlock = tapBlock;
+    [self addSubview:errorView];
+    return errorView;
 }
 
 @end

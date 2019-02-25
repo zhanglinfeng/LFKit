@@ -21,11 +21,22 @@
 @property (nonatomic, assign) CGFloat labelMargin;//label与父视图边距，默认40
 @property (nonatomic, copy) void(^tapBlock)(void);//有按钮文字则是点击按钮的事件，没按钮则是点击整个页面的事件,点击了本页面会自动消失
 
+
+
+
 /**展示空页面(如果有颜色、字体、间距等样式调整，可建一个子类，重写该方法)*/
-+ (LFErrorView *)showEmptyInView:(UIView *)supView frame:(CGRect)frame tapBlock:(void(^)(void))tapBlock;
++ (LFErrorView *)showEmptyInView:(UIView *)supView tapBlock:(void(^)(void))tapBlock;
 
 /**展示错误页面(如果有颜色、字体、间距等样式调整，可建一个子类，重写该方法)*/
-+ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message frame:(CGRect)frame tapBlock:(void(^)(void))tapBlock;
++ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message tapBlock:(void(^)(void))tapBlock;
 
+
+@end
+
+@interface UIView (LF)
+
+- (LFErrorView *)showEmptyView:(void(^)(void))tapBlock;
+
+- (LFErrorView *)showErrorView:(void(^)(void))tapBlock;
 
 @end
