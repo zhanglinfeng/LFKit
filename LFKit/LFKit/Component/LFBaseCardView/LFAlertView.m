@@ -46,7 +46,7 @@
         }
 
         [self.tvMessage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_lessThanOrEqualTo(txtHeight);
+            make.height.mas_equalTo(txtHeight).priorityLow();
         }];
     }
     return self;

@@ -146,6 +146,11 @@
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.windowW]];
         }
     }
+    
+    if (self.maxHeight) {
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.maxHeight]];
+    }
+    
     __weak typeof(self) weakSelf = self;
     [self.superview layoutIfNeeded];
     [UIView animateWithDuration:0.2 animations:^{
