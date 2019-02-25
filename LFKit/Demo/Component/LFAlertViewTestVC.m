@@ -87,17 +87,8 @@
 }
 - (IBAction)tfAlert1:(id)sender {
     
-    LFAlertView *alert = [[LFAlertView alloc] initWithTitle:@"提示" message:@"温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示" style:LFAlertViewAlert];
-    UITextField *tf = [[UITextField alloc] init];
-    tf.borderStyle = UITextBorderStyleNone;
-    tf.layer.borderWidth = 1/[UIScreen mainScreen].scale;
-    tf.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    tf.textColor = [UIColor blackColor];
-    tf.font = [UIFont systemFontOfSize:13];
-    tf.backgroundColor = [UIColor whiteColor];
-    tf.placeholder = @"请输入密码";
-    
-    alert.textFieldArray = @[tf];
+    LFAlertView *alert = [[LFAlertView alloc] initWithTitle:@"提示" message:@"温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示" style:LFAlertViewAlert];    
+    alert.placeholderArray = @[@"请输入密码"];
     alert.buttonTitleArray = @[@"cancel",@"ok"];
     alert.clickBlock = ^(UIButton * _Nonnull button) {
         NSLog(@"点击了%@",button.currentTitle);
@@ -109,25 +100,8 @@
 
 - (IBAction)tfAlert2:(id)sender {
     LFAlertView *alert = [[LFAlertView alloc] initWithTitle:@"提示" message:@"温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示" style:LFAlertViewAlert];
-    UITextField *tf = [[UITextField alloc] init];
-    tf.borderStyle = UITextBorderStyleNone;
-    tf.layer.borderWidth = 1/[UIScreen mainScreen].scale;
-    tf.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    tf.textColor = [UIColor blackColor];
-    tf.font = [UIFont systemFontOfSize:13];
-    tf.backgroundColor = [UIColor whiteColor];
-    tf.placeholder = @"请输入账号";
-    
-    UITextField *tf2 = [[UITextField alloc] init];
-    tf2.borderStyle = UITextBorderStyleNone;
-    tf2.layer.borderWidth = 1/[UIScreen mainScreen].scale;
-    tf2.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    tf2.textColor = [UIColor blackColor];
-    tf2.font = [UIFont systemFontOfSize:13];
-    tf2.backgroundColor = [UIColor whiteColor];
-    tf2.placeholder = @"请输入密码";
-    
-    alert.textFieldArray = @[tf,tf2];
+
+    alert.placeholderArray = @[@"请输入账号2",@"请输入密码2"];
     alert.buttonTitleArray = @[@"cancel",@"ok"];
     alert.clickBlock = ^(UIButton * _Nonnull button) {
         NSLog(@"点击了%@",button.currentTitle);

@@ -174,6 +174,24 @@
     }
 }
 
+- (void)setPlaceholderArray:(NSArray<NSString *> *)placeholderArray {
+    NSMutableArray *mArray = [NSMutableArray new];
+    for (NSString *str in placeholderArray) {
+        UITextField *tf = [[UITextField alloc] init];
+        tf.borderStyle = UITextBorderStyleNone;
+        tf.layer.borderWidth = 1/[UIScreen mainScreen].scale;
+        tf.layer.borderColor = [UIColor grayColor].CGColor;
+        tf.textColor = [UIColor blackColor];
+        tf.font = [UIFont systemFontOfSize:13];
+        tf.backgroundColor = [UIColor whiteColor];
+        tf.placeholder = str;
+        tf.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 6, 20)];
+        tf.leftViewMode = UITextFieldViewModeAlways;
+        [mArray addObject:tf];
+    }
+    self.textFieldArray = mArray;
+}
+
 - (void)setButtonArray:(NSArray<UIButton *> *)buttonArray {
     _buttonArray = buttonArray;
     

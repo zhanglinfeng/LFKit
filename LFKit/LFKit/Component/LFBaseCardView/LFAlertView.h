@@ -19,7 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *lbTitle;
 @property (nonatomic, strong) UITextView *tvMessage;
+
+//textFieldArray和placeholderArray 二选一，设置placeholderArray的话则生成默认的textFieldArray，需要自定义输入框样式则设置buttonArray；placeholderArray可以是@[@"",@""]等空字符串的数组
 @property (nonatomic, strong) NSArray<UITextField *>* textFieldArray;
+@property (nonatomic, strong) NSArray<NSString *>* placeholderArray;
 
 //buttonArray和buttonTitle 二选一，设置buttonTitle的话则生成默认的buttonArray，需要自定义按钮样式则设置buttonArray；取消按钮放在数组第一个位置。
 @property (nonatomic, strong) NSArray<UIButton *>* buttonArray;
