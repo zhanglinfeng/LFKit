@@ -306,7 +306,8 @@
 - (void)setButtonTitleArray:(NSArray<NSString *> *)buttonTitleArray {
     _buttonTitleArray = buttonTitleArray;
     if (buttonTitleArray.count == 1) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitleColor:[UIColor colorWithRed:0 green:122/255.0f blue:255/255.0f alpha:1] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor clearColor];
         btn.titleLabel.font = [UIFont systemFontOfSize:16];
         [btn setTitle:buttonTitleArray[0] forState:UIControlStateNormal];
@@ -315,13 +316,15 @@
         NSMutableArray *mArray = [NSMutableArray new];
         for (NSInteger i = 0; i < buttonTitleArray.count; i++) {
             if (i == 0) {
-                UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [btn setTitleColor:[UIColor colorWithRed:0 green:122/255.0f blue:255/255.0f alpha:1] forState:UIControlStateNormal];
                 btn.backgroundColor = [UIColor whiteColor];
                 btn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
                 [btn setTitle:buttonTitleArray[0] forState:UIControlStateNormal];
                 [mArray addObject:btn];
             } else {
-                UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [btn setTitleColor:[UIColor colorWithRed:0 green:122/255.0f blue:255/255.0f alpha:1] forState:UIControlStateNormal];
                 btn.backgroundColor = [UIColor clearColor];
                 btn.titleLabel.font = [UIFont systemFontOfSize:16];
                 [btn setTitle:buttonTitleArray[i] forState:UIControlStateNormal];
@@ -353,18 +356,19 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    cell.textLabel.textColor = [UIColor colorWithRed:0 green:122/255.0f blue:255/255.0f alpha:1];
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     if (indexPath.row < _buttonArray.count - 1) {
         UIButton *btn = _buttonArray[indexPath.row + 1];
         NSString *title = btn.currentTitle;
         cell.textLabel.text = title;
+        cell.textLabel.textColor = [btn titleColorForState:UIControlStateNormal];
     } else {
         if (self.alertStyle == LFAlertViewAlert) {
             UIButton *btn = _buttonArray[0];
             NSString *title = btn.currentTitle;
             cell.textLabel.text = title;
-            cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+            cell.textLabel.textColor = [btn titleColorForState:UIControlStateNormal];
         }
         
     }
@@ -380,6 +384,13 @@
     
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    NSInteger maxRow = self.alertStyle == LFAlertViewAlert ? _buttonArray.count : _buttonArray.count - 1;
+    if (indexPath.row == maxRow - 1) {
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, cell.bounds.size.width)];
+        }
+        
     }
     return cell;
 }

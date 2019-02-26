@@ -70,7 +70,7 @@
 }
 
 - (IBAction)sheet2:(id)sender {
-    LFAlertView *alert = [[LFAlertView alloc] initWithTitle:@"提示" message:nil style:LFAlertViewActionSheet];
+    LFAlertView *alert = [[LFAlertView alloc] initWithTitle:nil message:@"提示提示提示提示提示提示提示提示提示提示提示提示提示提示提示提示提示提示提示" style:LFAlertViewActionSheet];
     alert.buttonTitleArray = @[@"Cancel",@"ok"];
     alert.clickBlock = ^(UIButton * _Nonnull button) {
         NSLog(@"点击了%@",button.currentTitle);
