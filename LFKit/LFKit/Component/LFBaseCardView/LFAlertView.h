@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-- (instancetype)initWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message style:(LFAlertViewStyle)style;
+- (instancetype _Nullable)initWithTitle:(NSString *_Nullable)title message:(NSString *_Nullable)message style:(LFAlertViewStyle)style;
 
 - (void)show;
 

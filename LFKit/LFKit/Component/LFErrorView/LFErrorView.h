@@ -33,7 +33,7 @@
 
 @end
 
-@interface UIView (LF)
+@interface UIView (ErrorView)
 
 - (LFErrorView *)showEmptyView:(void(^)(void))tapBlock;
 

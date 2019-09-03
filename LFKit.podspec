@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name             = 'LFKit'
   s.version          = '1.2.0'
   s.summary          = '常用工具组件'
-  s.description      = '常用工具组件'
+  s.description      = '常用工具组件，包含一些常用category，工具类，一些好用的UI组件'
 
   s.homepage         = 'https://github.com/zhanglinfeng/LFKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

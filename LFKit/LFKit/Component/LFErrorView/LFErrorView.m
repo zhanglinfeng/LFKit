@@ -143,7 +143,7 @@
 @end
 
 
-@implementation UIView (LF)
+@implementation UIView (ErrorView)
 
 - (LFErrorView *)showEmptyView:(void(^)(void))tapBlock {
     LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:self.bounds];

@@ -153,7 +153,7 @@
             make.top.equalTo(self.viewLine.mas_bottom);
         }
         make.left.right.bottom.equalTo(self).offset(0);
-        make.height.equalTo(@(_buttonArray.count * 44));
+        make.height.equalTo(@(self.buttonArray.count * 44));
     }];
 }
 
@@ -234,8 +234,8 @@
     [self addSubview:self.viewLine];
     [self.viewLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
-        if (_textFieldArray.count > 0) {
-            UITextField *tfLast = _textFieldArray[_textFieldArray.count - 1];
+        if (self.textFieldArray.count > 0) {
+            UITextField *tfLast = self.textFieldArray[self.textFieldArray.count - 1];
             make.top.equalTo(tfLast.mas_bottom).offset(15);
         } else {
             make.top.equalTo(self.tvMessage.mas_bottom).offset(20);
@@ -277,7 +277,7 @@
                 make.top.equalTo(self.viewLine.mas_bottom);
             }
             make.left.right.equalTo(self).offset(0);
-            make.height.equalTo(@((_buttonArray.count - 1) * 56));
+            make.height.equalTo(@((self.buttonArray.count - 1) * 56));
         }];
         
         //取消按钮
