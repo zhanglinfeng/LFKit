@@ -11,10 +11,11 @@
 #import "LFBadgeViewController.h"
 #import "LFStarsViewVC.h"
 #import "LFPopupMenuTestVC.h"
-#import "LFSegmentTestVC.h"
+#import "LFSegmentExample.h"
 #import "LFBubbleViewTestVC.h"
 #import "LFPhotoBrowserTest.h"
 #import "LFAlertViewTestVC.h"
+#import "LFTextViewExampleVC.h"
 
 @interface ComponentListController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -69,7 +70,7 @@
                       [self.navigationController pushViewController:vc animated:YES];
                   }},
                   @{@"title":@"分页控制器",@"action":^{
-                      LFSegmentTestVC *vc = [[LFSegmentTestVC alloc] init];
+                      LFSegmentExample *vc = [[LFSegmentExample alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
                   }},
                   @{@"title":@"气泡",@"action":^{
@@ -83,7 +84,12 @@
                   @{@"title":@"自定义alert",@"action":^{
                       LFAlertViewTestVC *vc = [[LFAlertViewTestVC alloc] init];
                       [self.navigationController pushViewController:vc animated:YES];
+                  }},
+                  @{@"title":@"UITextView扩展",@"action":^{
+                      LFTextViewExampleVC *vc = [[LFTextViewExampleVC alloc] init];
+                      [self.navigationController pushViewController:vc animated:YES];
                   }}
+                  
                    ];
     [_tableView reloadData];
 }

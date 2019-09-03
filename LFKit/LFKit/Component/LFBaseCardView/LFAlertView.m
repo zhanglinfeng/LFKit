@@ -408,7 +408,7 @@
     if (btn) {
         self.clickBlock(btn);
     }
-    [self dismiss];
+    [self dismiss:nil];
 }
 
 #pragma mark - Action
@@ -417,14 +417,14 @@
     if (self.clickBlock) {
         self.clickBlock(self.btnOK);
     }
-    [self dismiss];
+    [self dismiss:nil];
 }
 
 - (void)clickCancel {
     if (self.clickBlock) {
         self.clickBlock(self.btnCancel);
     }
-    [self dismiss];
+    [self dismiss:nil];
 }
 
 @end

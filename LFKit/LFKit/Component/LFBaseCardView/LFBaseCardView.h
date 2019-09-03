@@ -11,8 +11,8 @@
 typedef NS_ENUM(NSInteger, LFBaseCardAnimate) {
     LFBaseCardAnimateNormal,//中间
     LFBaseCardAnimateFromBottom,//从底部滑出并贴着底部
+    LFBaseCardAnimateFromTop,//从顶部滑出并贴着顶部
     LFBaseCardAnimateFromBottomToCenter,//从底部到中间(待实现)
-    LFBaseCardAnimateFromTop,//从顶部滑出并贴着顶部(待实现)
     LFBaseCardAnimateFromTopToCenter//从顶部到中间(待实现)
 };
 
@@ -32,6 +32,6 @@ typedef NS_ENUM(NSInteger, LFBaseCardAnimate) {
 
 - (void)showIn:(UIView *)superview animate:(LFBaseCardAnimate)animate;
 
-- (void)dismiss;
+- (void)dismiss:(void(^)(void))completion;
 
 @end

@@ -26,14 +26,14 @@
         return nil;
     }
     self.duration = 0.3;
-    self.indicateStyle = [LFSegmentDefaultConfig sharedInstance].indicateStyle;
-    self.font = [LFSegmentDefaultConfig sharedInstance].font;
-    self.selectedColor = [LFSegmentDefaultConfig sharedInstance].selectedColor;
-    self.normalColor = [LFSegmentDefaultConfig sharedInstance].normalColor;
-    self.indicateColor = [LFSegmentDefaultConfig sharedInstance].indicateColor;
-    self.indicateHeight = [LFSegmentDefaultConfig sharedInstance].indicateHeight;
-    self.minItemSpace = [LFSegmentDefaultConfig sharedInstance].minItemSpace;
     
+    self.selectedColor = [UIColor redColor];
+    self.normalColor = [UIColor grayColor];
+    self.indicateColor = self.selectedColor;
+    self.indicateHeight = 2;
+    self.minItemSpace = 10;
+    self.font = [UIFont systemFontOfSize:16];
+        
     _titles = titles;
     _buttons = [NSMutableArray array];
     self.textMargin = [self calculateSpace];
@@ -56,11 +56,13 @@
     
     CGFloat lineHeight = 1/[UIScreen mainScreen].scale;
     _bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - lineHeight, self.frame.size.width, lineHeight)];
-    _bottomLine.backgroundColor = [UIColor grayColor];
+    _bottomLine.backgroundColor = [UIColor lightGrayColor];
     [self addSubview:_bottomLine];
     
     _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height -self.indicateHeight, 0, self.indicateHeight)];
     _indicateView.backgroundColor = self.indicateColor;
+    _indicateView.clipsToBounds = YES;
+    _indicateView.layer.cornerRadius = 1;
     [_contentView addSubview:_indicateView];
     CGFloat item_x = 0;
     for (int i = 0; i < _titles.count; i++) {
@@ -86,12 +88,7 @@
     }
     self.contentView.contentSize = CGSizeMake(item_x, self.frame.size.height);
     [self addSubview:_contentView];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
     [self scrollIndicateView];
-    [self scrollSegementView];
 }
 
 #pragma mark - 按钮点击
@@ -100,6 +97,8 @@
     if (button != _selectedButton) {
         button.selected = YES;
         _selectedButton.selected = NO;
+        _selectedButton.titleLabel.font = self.font;
+        button.titleLabel.font = self.selectedFont;
         _selectedButton = button;
         _currentIndex = _selectedButton.tag;
         [self scrollIndicateView];
@@ -113,13 +112,14 @@
 
 #pragma mark - 公有方法
 
-- (void)adjustLinePosition:(CGFloat)offsetX fullWidth:(CGFloat)fWidth {
+- (void)adjustLinePosition:(CGFloat)offsetX containerWidth:(CGFloat)cWidth {
     NSInteger currentIndex = _selectedButton.tag;
     NSInteger targetIndex = currentIndex;
     //偏移量
-    CGFloat offset = offsetX - _selectedButton.tag * fWidth;
+    CGFloat offset = offsetX - _selectedButton.tag * cWidth;
     if (offset >= 0) {
         targetIndex += 1;
+        
     } else {
         targetIndex -= 1;
     }

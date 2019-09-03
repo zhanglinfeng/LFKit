@@ -41,7 +41,7 @@
     if (self.tapBlankBlock) {
         self.tapBlankBlock();
     }
-    [self dismiss];
+    [self dismiss:nil];
 }
 
 - (void)showIn:(UIView *)superview animate:(LFBaseCardAnimate)animate {
@@ -162,15 +162,17 @@
     }];
 }
 
-- (void)dismiss {
+- (void)dismiss:(void(^)(void))completion {
     if (_animate == LFBaseCardAnimateNormal) {
-        [self dismissNormal];
+        [self dismissNormal:completion];
     } else if (_animate == LFBaseCardAnimateFromBottom) {
-        [self dismissFromBottom];
+        [self dismissFromBottom:completion];
+    } else if (_animate == LFBaseCardAnimateFromTop) {
+        [self dismissFromTop:completion];
     }
 }
 
-- (void)dismissNormal {
+- (void)dismissNormal:(void(^)(void))completion {
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         weakSelf.alpha = 0;
@@ -181,14 +183,16 @@
         if (weakSelf.dismissCompletion) {
             weakSelf.dismissCompletion();
         }
+        if (completion) {
+            completion();
+        }
     }];
 }
 
-- (void)dismissFromBottom {
+- (void)dismissFromBottom:(void(^)(void))completion {
     [self.superview layoutIfNeeded];
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        weakSelf.bgView.alpha = 0;
         [weakSelf.superview removeConstraint:weakSelf.bottomConstraint];
         [weakSelf.superview addConstraint:weakSelf.topConstraint];
         [weakSelf.superview layoutIfNeeded];
@@ -197,6 +201,28 @@
         [weakSelf removeFromSuperview];
         if (weakSelf.dismissCompletion) {
             weakSelf.dismissCompletion();
+        }
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
+- (void)dismissFromTop:(void(^)(void))completion {
+    [self.superview layoutIfNeeded];
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [weakSelf.superview removeConstraint:weakSelf.topConstraint];
+        [weakSelf.superview addConstraint:weakSelf.bottomConstraint];
+        [weakSelf.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [weakSelf.bgView removeFromSuperview];
+        [weakSelf removeFromSuperview];
+        if (weakSelf.dismissCompletion) {
+            weakSelf.dismissCompletion();
+        }
+        if (completion) {
+            completion();
         }
     }];
 }
