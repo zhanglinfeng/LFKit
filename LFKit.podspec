@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LFKit'
-  s.version          = '1.1.9'
+  s.version          = '1.2.0'
   s.summary          = '常用工具组件'
   s.description      = '常用工具组件'
 
@@ -81,6 +81,10 @@ Pod::Spec.new do |s|
 
     ss.subspec 'NSDate+LF' do |sss|
     sss.source_files         = 'LFKit/LFKit/Category/NSDate+LF/*'
+    end
+
+    ss.subspec 'UITextView+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UITextView+LF/*'
     end
 
   end
