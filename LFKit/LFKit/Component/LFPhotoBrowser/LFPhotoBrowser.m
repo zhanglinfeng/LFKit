@@ -365,7 +365,6 @@
     self.center = CGPointMake(window.bounds.size.width*0.5, window.bounds.size.height *0.5);
     self.bounds = CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height);
     [window addSubview:self];
-    NSLog(@"self-show=%@",self);
     //转场动画
     CGFloat delay = 0;
     if (self.beginImage && self.beginRect.size.width > 0) {

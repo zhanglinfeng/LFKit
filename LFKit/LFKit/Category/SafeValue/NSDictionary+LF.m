@@ -7,6 +7,8 @@
 //
 
 #import "NSDictionary+LF.h"
+#import "NSMutableDictionary+LF.h"
+#import "NSArray+LF.h"
 
 @implementation NSDictionary (LF)
 
@@ -160,6 +162,101 @@
     }
     
     return tempArray;
+}
+
+/**返回一个用于url参数的string
+ 如key1=value1&key2=value2
+ */
+- (NSString *)getURLArgumentsString {
+    //所有key
+    NSArray *allkeys = [self allKeys];
+    
+    //遍历所有key 进行拼接
+    __block NSMutableString *paramStr = [NSMutableString string];
+    [allkeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
+        //该key对应的值
+        NSString *value = [self lf_stringForKey:key];
+        [paramStr appendString:key];
+        [paramStr appendString:@"="];
+        [paramStr appendString:value];
+        if (idx != allkeys.count - 1)
+        {
+            [paramStr appendString:@"&"];
+        }
+    }];
+    
+    return paramStr;
+}
+
+/**
+ 改变字典中某些key的名字
+ 
+ @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"},...]
+ @return 结果
+ */
+- (NSMutableDictionary *)changeKeyName:(NSDictionary *)param {
+    NSMutableDictionary *dicTemp = [NSMutableDictionary new];
+    NSArray *allkeys = [self allKeys];
+    NSArray *paramKeys = param.allKeys;
+    for (NSString *key in allkeys) {
+        if ([paramKeys containsObject:key]) {
+            [dicTemp lf_setObject:self[key] forKey:param[key]];
+        } else {
+            [dicTemp lf_setObject:self[key] forKey:key];
+        }
+    }
+    return dicTemp;
+}
+
+/**
+ 改变数组中的字典中某些key的名字
+ @param array 数据源
+ @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"},...]
+ @return 结果
+ */
++ (NSMutableArray *)changeKeyNameFromArray:(NSArray *)array param:(NSDictionary *)param {
+    NSMutableArray *temp = [NSMutableArray new];
+    for (NSDictionary *dic in array) {
+        NSMutableDictionary *dicTemp = [dic changeKeyName:param];
+        [temp addObject:dicTemp];
+    }
+    return temp;
+}
+
+
+/**
+ 从字典中提取数据组成列表需要的结构（基本多个section的列表需要用到）
+ 
+ @param ktArray @[@{@"数据节点1的key":"需要设置的title"},@{@"数据节点2的key":"需要设置的title"},...]
+ @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"}]
+ @return 结果 例如:
+ @[
+ @{
+ @"title":str1;
+ @"data":@[dic1,dic2];
+ },
+ @{
+ @"title":str2;
+ @"data":@[dic3,dic4];
+ }
+ ]
+ */
+- (NSMutableArray *)getArrayWithKeyTitles:(NSArray *)ktArray param:(NSDictionary *)param {
+    NSMutableArray *temp = [NSMutableArray new];
+    for (NSDictionary *dic in ktArray) {
+        NSMutableDictionary *dicTemp = [NSMutableDictionary new];
+        NSString *key = [dic.allKeys lf_objectAtIndex:0];
+        NSArray *array = [self lf_arrayForKey:key];
+        if (array.count < 1) {
+            continue;
+        }
+        //格式化数组中字典的key为统一值
+        NSMutableArray *formatterArray = [NSDictionary changeKeyNameFromArray:array param:param];
+        [dicTemp setObject:formatterArray forKey:@"data"];
+        [dicTemp setObject:[dic lf_stringForKey:key] forKey:@"title"];
+        [temp addObject:dicTemp];
+    }
+    return temp;
 }
 
 @end

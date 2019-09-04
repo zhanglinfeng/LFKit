@@ -11,6 +11,6 @@
 @interface UIColor (LF)
 
 /**获取图片某位置的颜色*/
-+ (UIColor *)colorFromImage:(UIImage *)image atPoint:(CGPoint)point;
++ (UIColor *)lf_colorFromImage:(UIImage *)image atPoint:(CGPoint)point;
 
 @end

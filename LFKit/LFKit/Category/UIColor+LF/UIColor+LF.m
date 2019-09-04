@@ -11,7 +11,7 @@
 @implementation UIColor (LF)
 
 /**获取图片某位置的颜色*/
-+ (UIColor *)colorFromImage:(UIImage *)image atPoint:(CGPoint)point {
++ (UIColor *)lf_colorFromImage:(UIImage *)image atPoint:(CGPoint)point {
     UIColor* color = nil;
     CGImageRef inImage =image.CGImage;
     // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
