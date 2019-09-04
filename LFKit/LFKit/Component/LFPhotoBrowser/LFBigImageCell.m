@@ -57,7 +57,10 @@
                 if (cachedImg) {
                     self.placeholder = cachedImg;
                 }
+            } else if (photo.smallImage){
+                self.placeholder = photo.smallImage;
             }
+            
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
             // Set the annular determinate mode to show task progress.
             hud.mode = MBProgressHUDModeDeterminate;
@@ -77,8 +80,15 @@
         }
         
     } else if (photo.asset) {
+        
+        // 如果有小图，先显示，防止拿相册图比较慢
+        if (photo.smallImage) {
+            self.imageBGView.image = photo.smallImage;
+            [self resetSubviewSize];
+        }
+        
         [self.indicator startAnimating];
-        [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:NO completion:^(UIImage *image, NSDictionary *info) {
+        [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
             if ([NSThread currentThread] != [NSThread mainThread]) {
                 NSLog(@"*********不在主线程3*********");
             }

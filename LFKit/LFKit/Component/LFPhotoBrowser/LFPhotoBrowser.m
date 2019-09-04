@@ -369,6 +369,10 @@
     //转场动画
     CGFloat delay = 0;
     if (self.beginImage && self.beginRect.size.width > 0) {
+        // 这2行防止转场动画消失后，cell中图片加载完成前出现的黑屏闪一下
+        LFPhotoModel *photo = self.arrayData[self.currentIndex];
+        photo.smallImage = self.beginImage;
+        
         delay = 0.3;
         UIImageView *tempView = [[UIImageView alloc] init];
         tempView.contentMode = UIViewContentModeScaleAspectFill;

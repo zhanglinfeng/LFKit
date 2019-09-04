@@ -12,6 +12,7 @@
 @interface LFPhotoModel : NSObject
 
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIImage *smallImage;
 @property (nonatomic, strong) PHAsset *asset;
 @property (nonatomic, strong) NSString *smallImageUrl;
 @property (nonatomic, strong) NSString *bigImageUrl;
