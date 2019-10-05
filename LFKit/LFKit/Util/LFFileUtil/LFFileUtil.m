@@ -18,7 +18,11 @@
     NSString* document=[documents objectAtIndex:0];
     
     //获取文件目录
-    return [document stringByAppendingPathComponent:name];
+    NSString *path = [document stringByAppendingPathComponent:name];
+    
+    [LFFileUtil creatDirectory:path];
+    
+    return path;
 }
 
 /**获取Temp文件目录*/
