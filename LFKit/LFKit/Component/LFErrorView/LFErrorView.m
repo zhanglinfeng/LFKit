@@ -163,4 +163,12 @@
     return errorView;
 }
 
+- (void)hideErrorView {
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[LFErrorView class]]) {
+            [obj removeFromSuperview];
+        }
+    }];
+}
+
 @end

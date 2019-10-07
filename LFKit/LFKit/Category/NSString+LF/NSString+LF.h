@@ -59,6 +59,9 @@
 /**整型转化为万*/
 - (NSString *)lf_intToWanFormat;
 
+/** 字节转KB或M */
++ (NSString *)lf_sizeWithByte:(long long)byte;
+
 #pragma mark - 校验相关
 
 /**身份证号*/

@@ -208,6 +208,22 @@
     }
 }
 
+/** 字节转KB或M或G */
++ (NSString *)lf_sizeWithByte:(long long)byte {
+    if (byte >= 1024*1024*1024) {
+        CGFloat f = byte/(1024.0*1024.0*1024.0);
+        return [NSString stringWithFormat:@"%@G",[@(f).stringValue lf_keepDecimalCount:1]];
+    } else if (byte >= 1024*1024) {
+        CGFloat f = byte/(1024.0*1024.0);
+        return [NSString stringWithFormat:@"%@M",[@(f).stringValue lf_keepDecimalCount:1]];
+    } else if (byte > 999) {
+        CGFloat f = byte/1024.0;
+        return [NSString stringWithFormat:@"%@KB",[@(f).stringValue lf_keepDecimalCount:1]];
+    } else {
+        return [NSString stringWithFormat:@"%lldB",byte];
+    }
+}
+
 #pragma mark - 校验相关
 
 /**身份证号*/

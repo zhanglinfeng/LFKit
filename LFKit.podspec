@@ -140,6 +140,7 @@ Pod::Spec.new do |s|
 
     ss.subspec 'LFErrorView' do |sss|
     sss.source_files         = 'LFKit/LFKit/Component/LFErrorView/*'
+    sss.resources = 'LFKit/LFKit/Component/LFErrorView/*.{png}'
     end
 
     ss.subspec 'LFPickerView' do |sss|

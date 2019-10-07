@@ -7,6 +7,7 @@
 //
 
 #import "LFFileUtil.h"
+#include <sys/mount.h>
 
 @implementation LFFileUtil
 
@@ -73,7 +74,7 @@
 }
 
 /**移动文件*/
-+ (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath {
++ (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (srcPath.length < 1) {
@@ -87,9 +88,63 @@
     //如果不存在则创建目录
     [self creatDirectory:[dstPath stringByDeletingLastPathComponent]];
     
-    NSError *error;
-    BOOL moveSuccess = [fileManager moveItemAtPath:srcPath toPath:dstPath error:&error];
+    BOOL moveSuccess = [fileManager moveItemAtPath:srcPath toPath:dstPath error:error];
     return moveSuccess;
+}
+
+/**拷贝文件*/
++ (BOOL)copyItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if (srcPath.length < 1) {
+        return NO;
+    }
+    BOOL srcExisted = [fileManager fileExistsAtPath:srcPath isDirectory:nil];
+    if (!srcExisted) {
+        return NO;
+    }
+    
+    //如果不存在则创建目录
+    [self creatDirectory:[dstPath stringByDeletingLastPathComponent]];
+    
+    
+    BOOL copySuccess = [fileManager copyItemAtPath:srcPath toPath:dstPath error:error];
+    return copySuccess;
+}
+
+/** 磁盘剩余空间 */
++ (long long)freeDiskSpaceInBytes {
+    struct statfs buf;
+    long long freespace = -1;
+    if(statfs("/var", &buf) >= 0){
+        freespace = (long long)(buf.f_bsize * buf.f_bfree);
+    }
+    return freespace;
+}
+
+/** 获取文件或者文件夹大小(单位：B) */ 
++ (unsigned long long)sizeAtPath:(NSString *)path {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    BOOL isDir = YES;
+    if (![fm fileExistsAtPath:path isDirectory:&isDir]) {
+        return 0;
+    };
+    unsigned long long fileSize = 0;
+    // directory
+    if (isDir) {
+        NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:path];
+        while (enumerator.nextObject) {
+            // 下面注释掉的代码作用：不递归遍历子文件夹
+            // if ([enumerator.fileAttributes.fileType isEqualToString:NSFileTypeDirectory]) {
+            //      [enumerator skipDescendants];
+            // }
+            fileSize += enumerator.fileAttributes.fileSize;
+        }
+    } else {
+        // file
+        fileSize = [fm attributesOfItemAtPath:path error:nil].fileSize;
+    }
+    return fileSize;
 }
 
 

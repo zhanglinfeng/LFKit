@@ -9,12 +9,26 @@
 #import "LFPopupMenu.h"
 #import "LFPopupMenuDefaultConfig.h"
 
+@interface LFPopupMenuItem ()
+
+@property (nonatomic, copy) void(^actionBlock)(void);
+
+@end
+
 @implementation LFPopupMenuItem
 
 + (LFPopupMenuItem *)createWithTitle:(NSString *)title image:(UIImage *)image {
     LFPopupMenuItem *item = [[LFPopupMenuItem alloc] init];
     item.title = title;
     item.image = image;
+    return item;
+}
+
++ (LFPopupMenuItem *)createWithTitle:(NSString *)title image:(UIImage *)image  action:(void(^)(void))action {
+    LFPopupMenuItem *item = [[LFPopupMenuItem alloc] init];
+    item.title = title;
+    item.image = image;
+    item.actionBlock = action;
     return item;
 }
 
@@ -71,6 +85,10 @@
     return self;
 }
 
+- (void)dealloc {
+    
+}
+
 - (void)configWithItems:(NSArray<LFPopupMenuItem *>*)items action:(void(^)(NSInteger index))action {
     self.menuItems = items;
     self.action = action;
@@ -111,6 +129,46 @@
     }
 }
 
+- (void)configWithItems:(NSArray<LFPopupMenuItem *>*)items {
+    self.menuItems = items;
+    [self adjustMaxWidth];
+    self.containerView.frame = CGRectMake(0, self.arrowH, self.frame.size.width, self.frame.size.height - self.arrowH);
+    if (self.imgBG) {
+        self.ivBG = [[UIImageView alloc] initWithFrame:self.bounds];
+        self.ivBG.image = self.imgBG;
+        [self insertSubview:self.ivBG atIndex:0];
+    }
+    
+    for (NSInteger i = 0; i < self.menuItems.count; i++) {
+        LFPopupMenuItem *item = self.menuItems[i];
+        CGFloat imgH = item.image.size.height;
+        CGFloat imgW = item.image.size.width;
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(self.leftEdgeMargin, (self.rowHeight - imgH)/2 + self.rowHeight*i, imgW, imgH)];
+        iv.image = item.image;
+        [self.containerView addSubview:iv];
+        
+        CGFloat lbX = imgW > 0 ? (self.leftEdgeMargin + imgW + self.textMargin) : self.leftEdgeMargin;
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(lbX, i*self.rowHeight, self.frame.size.width - lbX - self.rightEdgeMargin, self.rowHeight)];
+        lb.textColor = self.textColor;
+        lb.text = item.title;
+        lb.font = self.textFont;
+        [self.containerView addSubview:lb];
+        
+        UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, i*self.rowHeight, self.frame.size.width, self.rowHeight)];
+        bt.backgroundColor = [UIColor clearColor];
+        bt.tag = i;
+        [bt addTarget:self action:@selector(selectItem:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.containerView addSubview:bt];
+        
+        if (i > 0) {
+            UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(self.lineMargin, i*self.rowHeight, self.frame.size.width - self.lineMargin, 1.0f/[UIScreen mainScreen].scale)];
+            viewLine.backgroundColor = self.lineColor;
+            [self.containerView addSubview:viewLine];
+        }
+    }
+}
+
 /**完全自定义菜单弹窗*/
 - (void)configWithCustomView:(UIView *)customView{
     self.containerView.frame = CGRectMake(self.containerView.frame.origin.x, self.containerView.frame.origin.y, customView.frame.size.width, customView.frame.size.height);
@@ -129,9 +187,17 @@
 - (void)selectItem:(UIButton *)button {
     if (self.action) {
         self.action(button.tag);
+    } else {
+        LFPopupMenuItem *item = self.menuItems[button.tag];
+        if (item.actionBlock) {
+            item.actionBlock();
+        }
     }
     
     [self dismiss];
+    if (self.selectDismiss) {
+        self.selectDismiss();
+    }
 }
 
 #pragma mark - 公有方法
@@ -197,11 +263,18 @@
 }
 
 - (void)dismiss {
+    [self.maskView removeFromSuperview];
+    [self removeFromSuperview];
     if (self.dismissComplete) {
         self.dismissComplete();
     }
-    [self.maskView removeFromSuperview];
-    [self removeFromSuperview];
+}
+
+- (void)clickOtherDismiss {
+    [self dismiss];
+    if (self.otherDismiss) {
+        self.otherDismiss();
+    }
 }
 
 #pragma mark - 私有方法
@@ -345,7 +418,7 @@
     
     //点击手势
     UITapGestureRecognizer *tapGestureRecognizer =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickOtherDismiss)];
     tapGestureRecognizer.cancelsTouchesInView = NO;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
     [self.maskView addGestureRecognizer:tapGestureRecognizer];
     

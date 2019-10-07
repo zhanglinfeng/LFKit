@@ -20,7 +20,10 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, strong) UIImage *image;
 
 /** 生成选项对象，标题和图片至少要传一个参数*/
-+ (LFPopupMenuItem *)createWithTitle:(NSString *)title image:(UIImage *)image;
++ (LFPopupMenuItem *)createWithTitle:(NSString *)title image:(UIImage *)image NS_DEPRECATED_IOS(2_0, 2_0, "该方法已废弃，建议使用+ (LFPopupMenuItem *)createWithTitle:(NSString *)title image:(UIImage *)image action:(void(^)(void))action");
+
+/** 生成选项对象，标题和图片至少要传一个参数*/
++ (LFPopupMenuItem *)createWithTitle:(NSString *)title image:(UIImage *)image action:(void(^)(void))action;
 
 @end
 
@@ -54,7 +57,16 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
 @property (nonatomic, strong) UIView *menuSuperView;//本菜单弹窗的父视图，默认在Window上
 @property (nonatomic, assign) PopupMenuDirection direction;
 
-@property (nonatomic, copy) void(^dismissComplete)(void);//消失的回调
+@property (nonatomic, copy) void(^dismissComplete)(void);//所以消失的回调
+@property (nonatomic, copy) void(^selectDismiss)(void);//选择后消失的回调
+@property (nonatomic, copy) void(^otherDismiss)(void);//点其他区域消失的回调
+
+/**
+ 配置选项，注意：设置上面属性之后调用
+ 
+ @param items 含文字和标题的对象数组
+ */
+- (void)configWithItems:(NSArray<LFPopupMenuItem *>*)items;
 
 /**
  配置选项，注意：设置上面属性之后调用
@@ -62,7 +74,7 @@ typedef NS_ENUM(NSInteger, PopupMenuDirection) {
  @param items 含文字和标题的对象数组
  @param action 点击回调，根据index判断点击的第几个
  */
-- (void)configWithItems:(NSArray<LFPopupMenuItem *>*)items action:(void(^)(NSInteger index))action;
+- (void)configWithItems:(NSArray<LFPopupMenuItem *>*)items action:(void(^)(NSInteger index))action NS_DEPRECATED_IOS(2_0, 2_0, "该方法已废弃，建议使用- (void)configWithItems:(NSArray<LFPopupMenuItem *>*)items");
 
 /**完全自定义菜单弹窗*/
 - (void)configWithCustomView:(UIView *)customView;

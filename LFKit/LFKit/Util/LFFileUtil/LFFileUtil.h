@@ -29,6 +29,15 @@
 + (BOOL)deleteItemAtPath:(NSString *)path;
 
 /**移动文件*/
-+ (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath;
++ (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error;
+
+/**拷贝文件*/
++ (BOOL)copyItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error;
+
+/** 磁盘剩余空间 */
++ (long long)freeDiskSpaceInBytes;
+
+/** 获取文件或者文件夹大小(单位：B) */
++ (unsigned long long)sizeAtPath:(NSString *)path;
 
 @end
