@@ -34,6 +34,9 @@
 /**NSDate 转 时间戳（毫秒）*/ 
 + (NSString *)getTimestampStringFromDate:(NSDate *)date;
 
+/**获取当前时间戳 （以毫秒为单位）*/
++(NSString *)getNowTimeTimestamp;
+
 /**时间戳（毫秒）转n小时、分钟、秒前 或者yyyy-MM-dd HH:mm:ss*/
 + (NSString *)getBeforeTimeFromDate:(NSString*)strDate;
 

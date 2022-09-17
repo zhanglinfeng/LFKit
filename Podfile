@@ -6,4 +6,5 @@ target 'LFKit' do
     pod 'CocoaLumberjack'
     pod 'MBProgressHUD'
     pod 'Masonry'
+    pod 'LFKit', :path=> "./"
 end
