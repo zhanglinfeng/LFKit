@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, TriangleDirection) {
 /**获取图片某位置的颜色*/
 - (UIColor *)colorAtPoint:(CGPoint)point;
 
-/**压缩图片到指定内存大小*/
+/**压缩图片到指定内存大小kb*/
 - (UIImage *)compressToByte:(NSUInteger)maxLength;
 
 /**压缩图片到指定尺寸*/

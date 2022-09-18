@@ -98,15 +98,18 @@
 #pragma mark - 内部方法
 //跳到原生相册
 - (void)presentToPhotoLibraryWithCtr:(UIViewController *)ctr allowsEditing:(BOOL)allowsEditing {
-    UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-    pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    pickerImage.delegate = self;
-    pickerImage.allowsEditing = allowsEditing;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        pickerImage.allowsEditing = NO;
-    }
-    [ctr presentViewController:pickerImage animated:YES completion:^{
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+        pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        pickerImage.delegate = self;
+        pickerImage.allowsEditing = allowsEditing;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            pickerImage.allowsEditing = NO;
+        }
+        [ctr presentViewController:pickerImage animated:YES completion:^{
+        }];
+    });
+    
 }
 
 - (void)presentToCustomLibraryWithCtr:(UIViewController *)ctr maxCount:(NSInteger)maxCount dataType:(LFPhotoDataType)type resultBlock:(void(^)(NSMutableArray<LFPhotoModel *> *arraySelectPhotoModel))resultBlock {
