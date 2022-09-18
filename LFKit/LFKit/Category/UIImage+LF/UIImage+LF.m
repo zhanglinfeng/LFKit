@@ -24,6 +24,26 @@
     return myImage;
 }
 
+/**生成纯色带圆角图片*/
++ (UIImage *)lf_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius {
+//    size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // 添加圆角
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, size.width, size.height) cornerRadius:cornerRadius];
+    CGContextAddPath(context, path.CGPath);
+    CGContextClip(context);
+    
+    // 填充颜色
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *myImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return myImage;
+}
+
 /**生成渐变色图片*/
 + (UIImage *)imageWithRect:(CGSize)size StartColor:(UIColor *)startColor endColor:(UIColor *)endColor StartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     

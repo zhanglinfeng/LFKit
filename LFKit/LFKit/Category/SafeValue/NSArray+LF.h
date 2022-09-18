@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSArray (LF)
 
 /**安全取值*/
-- (id)lf_objectAtIndex:(NSUInteger)index;
+- (id)lf_objectAtIndex:(NSInteger)index;
 
 /**转成可变型数据，包括里面的字典、数组*/
 - (NSMutableArray *)lf_Mutable;

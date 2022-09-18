@@ -11,9 +11,9 @@
 
 @interface NSMutableArray (LF)
 
-- (void)lf_removeObjectAtIndex:(NSUInteger)index;
-- (void)lf_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
-- (void)lf_insertObject:(id)anObject atIndex:(NSUInteger)index;
+- (void)lf_removeObjectAtIndex:(NSInteger)index;
+- (void)lf_replaceObjectAtIndex:(NSInteger)index withObject:(id)anObject;
+- (void)lf_insertObject:(id)anObject atIndex:(NSInteger)index;
 
 /**加一个不重复的元素*/
 - (void)addDifferentObject:(id)anObject;

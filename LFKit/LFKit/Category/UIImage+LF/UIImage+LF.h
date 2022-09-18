@@ -20,6 +20,9 @@ typedef NS_ENUM(NSInteger, TriangleDirection) {
 /**生成纯色图片*/
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 
+/**生成纯色带圆角图片*/
++ (UIImage *)lf_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius;
+
 /**生成渐变色图片*/
 + (UIImage *)imageWithRect:(CGSize)size StartColor:(UIColor *)startColor endColor:(UIColor *)endColor StartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 

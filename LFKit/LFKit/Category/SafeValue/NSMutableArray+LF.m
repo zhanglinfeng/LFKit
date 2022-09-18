@@ -10,19 +10,19 @@
 
 @implementation NSMutableArray (LF)
 
-- (void)lf_removeObjectAtIndex:(NSUInteger)index {
+- (void)lf_removeObjectAtIndex:(NSInteger)index {
     if (index < self.count && index > -1) {
         [self removeObjectAtIndex:index];
     }
 }
 
-- (void)lf_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
+- (void)lf_replaceObjectAtIndex:(NSInteger)index withObject:(id)anObject {
     if (index < self.count && index > -1) {
         [self replaceObjectAtIndex:index withObject:anObject];
     }
 }
 
-- (void)lf_insertObject:(id)anObject atIndex:(NSUInteger)index {
+- (void)lf_insertObject:(id)anObject atIndex:(NSInteger)index {
     if (index < self.count && index > -1) {
         [self insertObject:anObject atIndex:index];
     }

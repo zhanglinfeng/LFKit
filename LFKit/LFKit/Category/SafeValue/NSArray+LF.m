@@ -10,7 +10,7 @@
 
 @implementation NSArray (LF)
 
-- (id)lf_objectAtIndex:(NSUInteger)index {
+- (id)lf_objectAtIndex:(NSInteger)index {
     if (index < self.count && index > -1) {
         return [self objectAtIndex:index];
     } else {
