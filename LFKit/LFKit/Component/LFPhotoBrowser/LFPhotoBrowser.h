@@ -20,7 +20,7 @@
 @property (nonatomic, strong) UIImage *placeholder;
 @property (nonatomic) CGRect beginRect;//外面列表中cell转换到window的rect，用于做转场动画（不传则没有转场动画）
 @property (nonatomic, strong) UIImage *beginImage;//外面列表中被点击的图片，用于做转场动画（不传则没有转场动画）
-@property (nonatomic, assign) BOOL isShowTopBar;//yes单击显示头部bar，no单击大图浏览器消失，默认为no
+//@property (nonatomic, assign) BOOL isShowTopBar;//yes单击显示头部bar，no单击大图浏览器消失，默认为no
 @property (nonatomic, assign) BOOL isSupportLandscape;//是否支持横屏，默认yes
 
 #pragma mark - 方便外面设置字体、图标，没事不需设置

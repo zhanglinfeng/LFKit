@@ -102,11 +102,11 @@
         if (weakSelf.clickBlock) {
             weakSelf.clickBlock(indexPath.item);
         } else {
-            if (weakSelf.isShowTopBar) {
-                [weakSelf setTopBarHidden:!weakSelf.topBar.hidden];
-            } else {
+//            if (weakSelf.isShowTopBar) {
+//                [weakSelf setTopBarHidden:!weakSelf.topBar.hidden];
+//            } else {
                 [weakSelf dismiss];
-            }
+//            }
         }
     };
     return cell;
@@ -116,11 +116,11 @@
     if (self.clickBlock) {
         self.clickBlock(indexPath.item);
     } else {
-        if (self.isShowTopBar) {
-            [self setTopBarHidden:!self.topBar.hidden];
-        } else {
+//        if (self.isShowTopBar) {
+//            [self setTopBarHidden:!self.topBar.hidden];
+//        } else {
             [self dismiss];
-        }
+//        }
     }
 }
 
@@ -216,12 +216,12 @@
         self.lbTitle.font = [UIFont systemFontOfSize:15];
         [_topBar addSubview:self.lbTitle];
         
-        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 17, 40, 30)];
-        [self.btBack setTitle:@"关闭" forState:UIControlStateNormal];
-        self.btBack.titleLabel.font = [UIFont systemFontOfSize:15];
-        [self.btBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.btBack addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-        [_topBar addSubview:self.btBack];
+//        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 17, 40, 30)];
+//        [self.btBack setTitle:@"关闭" forState:UIControlStateNormal];
+//        self.btBack.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [self.btBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [self.btBack addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+//        [_topBar addSubview:self.btBack];
         
         self.btSave = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 52, 17, 40, 30)];
         [self.btSave setTitle:@"保存" forState:UIControlStateNormal];
@@ -229,7 +229,7 @@
         [self.btSave setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btSave addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
         [_topBar addSubview:self.btSave];
-        _topBar.hidden = YES;
+//        _topBar.hidden = YES;
     }
     return _topBar;
 }
@@ -290,7 +290,7 @@
 //            NSLog(@"22222=%@",self.collectionView);
         } completion:^(BOOL finished) {
             weakSelf.bounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
-            [weakSelf setTopBarHidden:weakSelf.topBar.hidden];
+//            [weakSelf setTopBarHidden:weakSelf.topBar.hidden];
             [weakSelf setNeedsLayout];
             [weakSelf layoutIfNeeded];
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -314,7 +314,7 @@
 //            NSLog(@"*22222=%@",self.collectionView);
         } completion:^(BOOL finished) {
             weakSelf.bounds = screenBounds;
-            [weakSelf setTopBarHidden:weakSelf.topBar.hidden];
+//            [weakSelf setTopBarHidden:weakSelf.topBar.hidden];
             [weakSelf setNeedsLayout];
             [weakSelf layoutIfNeeded];
             UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -330,10 +330,10 @@
 
 #pragma mark - 外部方法
 
--(void)setIsShowTopBar:(BOOL)isShowTopBar {
-    _isShowTopBar = isShowTopBar;
-    self.topBar.hidden = !isShowTopBar;
-}
+//-(void)setIsShowTopBar:(BOOL)isShowTopBar {
+//    _isShowTopBar = isShowTopBar;
+//    self.topBar.hidden = !isShowTopBar;
+//}
 
 - (void)setCurrentIndex:(NSInteger)currentIndex {
     _currentIndex = currentIndex;

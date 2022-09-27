@@ -41,6 +41,9 @@
 + (NSString *)getBeforeTimeFromDate:(NSString*)strDate;
 
 /**  时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/
-- (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
++ (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
+
+/**时间字符串转xx小时前、昨天HH:mm、前天HH:mm、MM月dd日、yyyy年MM月dd日*/
++ (NSString *)getShowTimeFromTimeStr:(NSString*)str;
 
 @end

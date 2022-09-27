@@ -9,11 +9,10 @@
 #import "LFBigImageCell.h"
 #import "UIImageView+YYWebImage.h"
 #import "MBProgressHUD.h"
-#import "YYAnimatedImageView.h"
 
 @interface LFBigImageCell ()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) YYAnimatedImageView *imageBGView;
+@property (nonatomic, strong) UIImageView *imageBGView;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 @end
@@ -224,10 +223,10 @@
     return _scrollView;
 }
 
-- (YYAnimatedImageView *)imageBGView
+- (UIImageView *)imageBGView
 {
     if (!_imageBGView) {
-        _imageBGView = [[YYAnimatedImageView alloc] init];
+        _imageBGView = [[UIImageView alloc] init];
         _imageBGView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _imageBGView;

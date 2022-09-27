@@ -118,7 +118,7 @@
 }
 
 /**  时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/
-- (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp {
++ (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp {
     if (timestamp.length < 1 || !timestamp) return @"";
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue] / 1000];
@@ -159,20 +159,84 @@
     }
 }
 
-- (BOOL)isToday:(NSDate*)date {
+/**时间字符串转xx小时前、昨天HH:mm、前天HH:mm、MM月dd日、yyyy年MM月dd日*/
++ (NSString *)getShowTimeFromTimeStr:(NSString*)str {
+    static NSDateFormatter *dateFormatter1;
+    static NSDateFormatter *dateFormatter2;
+    static NSDateFormatter *dateFormatter3;
+    static NSDateFormatter *dateFormatter4;
+    static NSDateFormatter *dateFormatter5;
+    
+    //NSDateFormatter是很耗性能的，这里只创建一次，特别列表里有转换时开销太大
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter1 = [[NSDateFormatter alloc] init];
+        [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        dateFormatter2 = [[NSDateFormatter alloc] init];
+        [dateFormatter2 setDateFormat:@"昨天HH:mm"];
+        dateFormatter3 = [[NSDateFormatter alloc] init];
+        [dateFormatter3 setDateFormat:@"前天HH:mm"];
+        dateFormatter4 = [[NSDateFormatter alloc] init];
+        [dateFormatter4 setDateFormat:@"MM月dd日"];
+        dateFormatter5 = [[NSDateFormatter alloc] init];
+        [dateFormatter5 setDateFormat:@"yyyy-MM-dd"];
+    });
+    NSDate *date = [dateFormatter1 dateFromString:str];
+    
+    NSString * strBefore = @"";
+    if (date && (id)date != [NSNull null]) {
+        NSInteger interval = -(NSInteger)[date timeIntervalSinceNow];
+        NSInteger nDay = interval / (60 * 60 * 24);
+        NSInteger nHour = interval / (60 * 60);
+        NSInteger nMin = interval / 60;
+        NSInteger nSec = interval;
+        
+        if (nDay > 0) {
+            if ([self isYesterday:date]) {
+                strBefore = [dateFormatter2 stringFromDate:date];
+            } else if ([self isQiantian:date]) {
+                strBefore = [dateFormatter3 stringFromDate:date];
+            } else if ([self isSameYear:[NSDate date] date2:date]) {
+                strBefore = [dateFormatter4 stringFromDate:date];
+            } else {
+                strBefore = [dateFormatter5 stringFromDate:date];
+            }
+        }
+        else if (nHour > 0) {
+            strBefore = [NSString stringWithFormat:@"%li小时前",(long)nHour];
+        }
+        else if (nMin > 0) {
+            strBefore = [NSString stringWithFormat:@"%li分钟前",(long)nMin];
+        }
+        else if (nSec > 10) {
+            strBefore = [NSString stringWithFormat:@"%li秒前",(long)nSec];
+        }
+        else
+            strBefore = @"刚刚";
+    }
+    return strBefore;
+}
+
++ (BOOL)isQiantian:(NSDate*)date {
+    NSTimeInterval aTimeInterval = [date timeIntervalSinceReferenceDate] + 86400 * 2;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+    return [self isToday:newDate];
+}
+
++ (BOOL)isToday:(NSDate*)date {
     if (fabs(date.timeIntervalSinceNow) >= 60 * 60 * 24) return NO;
     NSInteger day = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date] day];
     NSInteger nowDay = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate new]] day];
     return nowDay == day;
 }
 
-- (BOOL)isYesterday:(NSDate*)date {
++ (BOOL)isYesterday:(NSDate*)date {
     NSTimeInterval aTimeInterval = [date timeIntervalSinceReferenceDate] + 86400 * 1;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return [self isToday:newDate];
 }
 
-- (BOOL)isSameYear:(NSDate *)date1 date2:(NSDate*)date2 {
++ (BOOL)isSameYear:(NSDate *)date1 date2:(NSDate*)date2 {
     NSInteger year1 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date1] year];
     NSInteger year2 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date2] year];
     if (year1 != year2) {

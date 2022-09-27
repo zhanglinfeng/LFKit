@@ -336,7 +336,7 @@
         browser.maxSelectCount = self.maxSelectCount;
         browser.currentIndex = indexPath.item;
         browser.isSelectOriginalPhoto = self.isSelectOriginalPhoto;
-        browser.isShowTopBar = YES;
+//        browser.isShowTopBar = YES;
         browser.DoneBlock = self.DoneBlock;
         [browser show];
         
