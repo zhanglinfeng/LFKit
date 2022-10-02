@@ -27,9 +27,8 @@
     }
     self.duration = 0.3;
     
-    self.selectedColor = [UIColor redColor];
-    self.normalColor = [UIColor grayColor];
-    self.indicateColor = self.selectedColor;
+    _selectedColor = [UIColor redColor];
+    _normalColor = [UIColor grayColor];
     self.indicateHeight = 2;
     self.minItemSpace = 10;
     self.font = [UIFont systemFontOfSize:16];
@@ -60,7 +59,7 @@
     [self addSubview:_bottomLine];
     
     _indicateView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height -self.indicateHeight, 0, self.indicateHeight)];
-    _indicateView.backgroundColor = self.indicateColor;
+    _indicateView.backgroundColor = self.indicateColor ? self.indicateColor : self.selectedColor;
     _indicateView.clipsToBounds = YES;
     _indicateView.layer.cornerRadius = 1;
     [_contentView addSubview:_indicateView];
@@ -233,6 +232,32 @@
     for (NSInteger i = 0; i < _buttons.count; i++) {
         NSString *title = _titles[i];
         UIButton *button = _buttons[i];
+        if (i == self.currentIndex) {
+            [button.titleLabel setFont:self.selectedFont];
+        } else {
+            [button.titleLabel setFont:self.font];
+        }
+        
+        CGSize titleSize = [title sizeWithAttributes:@{NSFontAttributeName:_font}];
+        button.frame = CGRectMake(item_x, 0, self.textMargin * 2 + titleSize.width, self.frame.size.height);
+        item_x += self.textMargin * 2 + titleSize.width;
+    }
+}
+
+- (void)setSelectedFont:(UIFont *)selectedFont {
+    _selectedFont = selectedFont;
+    self.textMargin = [self calculateSpace];
+    
+    CGFloat item_x = 0;
+    for (NSInteger i = 0; i < _buttons.count; i++) {
+        NSString *title = _titles[i];
+        UIButton *button = _buttons[i];
+        if (i == self.currentIndex) {
+            [button.titleLabel setFont:self.selectedFont];
+        } else {
+            [button.titleLabel setFont:self.font];
+        }
+        
         CGSize titleSize = [title sizeWithAttributes:@{NSFontAttributeName:_font}];
         button.frame = CGRectMake(item_x, 0, self.textMargin * 2 + titleSize.width, self.frame.size.height);
         item_x += self.textMargin * 2 + titleSize.width;
@@ -241,6 +266,9 @@
 
 -(void)setSelectedColor:(UIColor *)selectedColor {
     _selectedColor = selectedColor;
+    if (!self.indicateColor) {
+        self.indicateColor = selectedColor;
+    }
     for (NSInteger i = 0; i < _buttons.count; i++) {
         UIButton *button = _buttons[i];
         [button setTitleColor:_selectedColor

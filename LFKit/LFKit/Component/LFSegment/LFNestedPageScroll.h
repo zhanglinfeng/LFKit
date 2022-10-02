@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** 横向滚动的嵌套页面
+/** 横向滚动的嵌套页面（嵌套的是view，如果要嵌套控制器推荐用LFNestPageController）
  搭配使用组合：
  1.LFNestedPageScroll单独使用
  2.LFSegmentView + LFNestedPageScroll

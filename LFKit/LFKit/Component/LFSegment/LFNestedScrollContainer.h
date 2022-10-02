@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** 最外层的嵌套滑动容器 */
+/** 最外层的嵌套滑动容器（嵌套的是view，如果要嵌套控制器，推荐用LFNestPageContainer） */
 @interface LFNestedScrollContainer : UIScrollView
 
 @property (nonatomic, copy) void(^scrollViewDidScrollBlock)(UIScrollView *scrollView);
