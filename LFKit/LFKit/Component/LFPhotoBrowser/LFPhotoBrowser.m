@@ -168,6 +168,10 @@
 - (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (!error) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        //下面的1行代码必须要写，如果不写就会导致指示器的背景永远都会有一层透明度为0.5的背景
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.8f];
+        hud.contentColor = [UIColor whiteColor];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = @"图片已保存到手机相册";
         hud.removeFromSuperViewOnHide = YES;
@@ -175,6 +179,10 @@
         
     } else {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+        //下面的1行代码必须要写，如果不写就会导致指示器的背景永远都会有一层透明度为0.5的背景
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.8f];
+        hud.contentColor = [UIColor whiteColor];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = @"保存失败";
         hud.removeFromSuperViewOnHide = YES;

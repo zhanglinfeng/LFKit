@@ -173,6 +173,10 @@
     if (_arraySelectPhotos.count >= self.maxSelectCount
         && button.isSelected == NO) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //下面的1行代码必须要写，如果不写就会导致指示器的背景永远都会有一层透明度为0.5的背景
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.8f];
+        hud.contentColor = [UIColor whiteColor];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = [NSString stringWithFormat:@"最多只能选%li张图片",(long)self.maxSelectCount];
         [hud hideAnimated:YES afterDelay:3];
@@ -184,6 +188,10 @@
         
         if (![LFPhotoModel judgeAssetisInLocalAblum:model.asset]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            //下面的1行代码必须要写，如果不写就会导致指示器的背景永远都会有一层透明度为0.5的背景
+            hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+            hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.8f];
+            hud.contentColor = [UIColor whiteColor];
             hud.label.text = @"正在从iCloud中下载照片";
             [LFPhotoModel requestImageForAsset:model.asset compressionQuality:0.5 resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image) {
                 dispatch_async(dispatch_get_main_queue(), ^{

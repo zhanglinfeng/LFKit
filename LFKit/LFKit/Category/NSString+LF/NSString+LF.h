@@ -45,6 +45,12 @@
 /**获取MD5*/
 - (NSString *)getMD5;
 
+/**拼接前缀（防重复拼接）*/
+- (NSString *)lf_addPrefix:(NSString *)prefix;
+
+/**拼接后缀（防重复拼接）*/
+- (NSString *)lf_addSuffix:(NSString *)suffix;
+
 #pragma mark - 数字相关
 
 /**保留count位小数(高保真)*/

@@ -117,6 +117,10 @@
     
     if (self.playUrl.length == 0 || self.playUrl == nil) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //下面的1行代码必须要写，如果不写就会导致指示器的背景永远都会有一层透明度为0.5的背景
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.8f];
+        hud.contentColor = [UIColor whiteColor];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = @"不支持该视频格式";
         [hud hideAnimated:YES afterDelay:3];

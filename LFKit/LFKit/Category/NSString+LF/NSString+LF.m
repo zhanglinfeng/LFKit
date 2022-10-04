@@ -160,6 +160,20 @@
             ];
 }
 
+/**拼接前缀（防重复拼接）*/
+- (NSString *)lf_addPrefix:(NSString *)prefix {
+    NSString *temp = [self stringByReplacingOccurrencesOfString:prefix withString:@""];
+    temp = [NSString stringWithFormat:@"%@%@", prefix, temp];
+    return temp;
+}
+
+/**拼接后缀（防重复拼接）*/
+- (NSString *)lf_addSuffix:(NSString *)suffix {
+    NSString *temp = [self stringByReplacingOccurrencesOfString:suffix withString:@""];
+    temp = [NSString stringWithFormat:@"%@%@", temp, suffix];
+    return temp;
+}
+
 #pragma mark - 数字相关
 
 /**保留count位小数(高保真)*/
