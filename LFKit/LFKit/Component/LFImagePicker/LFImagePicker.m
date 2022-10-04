@@ -113,39 +113,41 @@
 }
 
 - (void)presentToCustomLibraryWithCtr:(UIViewController *)ctr maxCount:(NSInteger)maxCount dataType:(LFPhotoDataType)type resultBlock:(void(^)(NSMutableArray<LFPhotoModel *> *arraySelectPhotoModel))resultBlock {
-    LFPhotoAlbumController *mCtrl = [[LFPhotoAlbumController alloc] init];
-    mCtrl.maxSelectCount = maxCount;
-    mCtrl.arraySelectPhotos = [NSMutableArray array]; //每次选取照片都是全新创建
-    mCtrl.dataType = type;
-    LFPhotoNavController *nav = [[LFPhotoNavController alloc] initWithRootViewController:mCtrl];
-    nav.navbarStyle = LFPhotoNavBarStyleLightContent;
-    nav.modalPresentationStyle = UIModalPresentationCustom;
-    [ctr presentViewController:nav animated:YES completion:nil];
-    __weak LFPhotoNavController *b_nav = nav;
-    mCtrl.DoneBlock = ^(NSMutableArray<LFPhotoModel *> *arraySelectPhotos, BOOL isOriginalPhoto) {
-        
-        NSInteger n = 0;
-        __block NSInteger m = n;
-        
-        for (int i = 0; i < arraySelectPhotos.count; i++) {
-            CGFloat scale = isOriginalPhoto ? 1 : 0.5;
-            LFPhotoModel *model = arraySelectPhotos[i];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LFPhotoAlbumController *mCtrl = [[LFPhotoAlbumController alloc] init];
+        mCtrl.maxSelectCount = maxCount;
+        mCtrl.arraySelectPhotos = [NSMutableArray array]; //每次选取照片都是全新创建
+        mCtrl.dataType = type;
+        LFPhotoNavController *nav = [[LFPhotoNavController alloc] initWithRootViewController:mCtrl];
+        nav.navbarStyle = LFPhotoNavBarStyleLightContent;
+        nav.modalPresentationStyle = UIModalPresentationCustom;
+        [ctr presentViewController:nav animated:YES completion:nil];
+        __weak LFPhotoNavController *b_nav = nav;
+        mCtrl.DoneBlock = ^(NSMutableArray<LFPhotoModel *> *arraySelectPhotos, BOOL isOriginalPhoto) {
             
-            [LFPhotoModel requestImageForAsset:model.asset compressionQuality:scale resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image) {
-                m++;
-                if (image) {
-                    model.image =image;
-                };
-                if (m == arraySelectPhotos.count) {
-                    if (resultBlock) {
-                        resultBlock(arraySelectPhotos);
+            NSInteger n = 0;
+            __block NSInteger m = n;
+            
+            for (int i = 0; i < arraySelectPhotos.count; i++) {
+                CGFloat scale = isOriginalPhoto ? 1 : 0.5;
+                LFPhotoModel *model = arraySelectPhotos[i];
+                
+                [LFPhotoModel requestImageForAsset:model.asset compressionQuality:scale resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image) {
+                    m++;
+                    if (image) {
+                        model.image =image;
+                    };
+                    if (m == arraySelectPhotos.count) {
+                        if (resultBlock) {
+                            resultBlock(arraySelectPhotos);
+                        }
+                        [b_nav dismissViewControllerAnimated:YES completion:nil];
                     }
-                    [b_nav dismissViewControllerAnimated:YES completion:nil];
-                }
-            }];
-            
-        }
-    };
+                }];
+                
+            }
+        };
+    });
 }
 
 #pragma mark - 权限

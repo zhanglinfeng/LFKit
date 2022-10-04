@@ -54,23 +54,28 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
+    
     if (self.topBar.hidden) {
-        self.topBar.frame = CGRectMake(0, -44, self.bounds.size.width, 44);
-        self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 44);
+        self.topBar.frame = CGRectMake(0, -64, self.bounds.size.width, 64);
+        self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 64);
     } else {
-        self.topBar.frame = CGRectMake(0, 0, self.bounds.size.width, 44);
-        self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height - 44, self.bounds.size.width, 44);
+        CGFloat top = 0;
+        if (@available(iOS 11.0, *)) {
+            top = self.safeAreaInsets.top;
+        }
+        self.topBar.frame = CGRectMake(0, top, self.bounds.size.width, 64);
+        self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height - 64, self.bounds.size.width, 64);
     }
     [self.btnOriginal sizeToFit];
     [self.btnDone sizeToFit];
-    self.btnOriginal.frame = CGRectMake(12, 0, self.btnOriginal.frame.size.width, 44);
+    self.btnOriginal.frame = CGRectMake(12, 0, self.btnOriginal.frame.size.width, 64);
     CGFloat doneW = 70;
-    self.btnDone.frame = CGRectMake(self.bounds.size.width - doneW - 12, 7, doneW, 30);
+    self.btnDone.frame = CGRectMake(self.bounds.size.width - doneW - 12, 15, doneW, 30);
 }
 
 //初始化底部条
 - (void)initBottomBar {
-    self.viewBottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 44, self.frame.size.width, 44)];
+    self.viewBottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 64, self.frame.size.width, 64)];
     self.viewBottomBar.backgroundColor = [UIColor whiteColor];
     self.viewBottomBar.layer.shadowColor = [UIColor blackColor].CGColor;
     self.viewBottomBar.layer.shadowOffset = CGSizeMake(0, 1);
@@ -110,9 +115,10 @@
 
 - (void)setBarHidden:(BOOL)hidden {
     if (hidden) {
+        
         [UIView animateWithDuration:0.2 animations:^{
-            self.topBar.frame = CGRectMake(0, -44, self.bounds.size.width, 44);
-            self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 44);
+            self.topBar.frame = CGRectMake(0, -64, self.bounds.size.width, 64);
+            self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 64);
         } completion:^(BOOL finished) {
             self.topBar.hidden = YES;
             self.viewBottomBar.hidden = YES;
@@ -120,9 +126,13 @@
     } else {
         self.topBar.hidden = NO;
         self.viewBottomBar.hidden = NO;
+        CGFloat top = 0;
+        if (@available(iOS 11.0, *)) {
+            top = self.safeAreaInsets.top;
+        }
         [UIView animateWithDuration:0.2 animations:^{
-            self.topBar.frame = CGRectMake(0, 0, self.bounds.size.width, 44);
-            self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height - 44, self.bounds.size.width, 44);
+            self.topBar.frame = CGRectMake(0, top, self.bounds.size.width, 64);
+            self.viewBottomBar.frame = CGRectMake(0, self.bounds.size.height - 64, self.bounds.size.width, 64);
         } completion:^(BOOL finished) {
 
         }];
@@ -151,7 +161,7 @@
     button.selected = !button.selected;
     
     if (self.arraySelectPhotos.count >= self.maxSelectCount
-        && button.selected == NO) {
+        && button.selected) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.label.text = [NSString stringWithFormat:@"最多只能选%li张图片",(long)self.maxSelectCount];
@@ -200,10 +210,10 @@
     [LFPhotoModel getPhotosBytesWithArray:self.arraySelectPhotos completion:^(NSString *photosBytes) {
         [button setTitle:[NSString stringWithFormat:@"原图(%@)", photosBytes] forState:UIControlStateSelected];
         [button sizeToFit];
-        button.frame = CGRectMake(12, 0, button.frame.size.width, 44);
+        button.frame = CGRectMake(12, 0, button.frame.size.width, 64);
     }];
     [button sizeToFit];
-    button.frame = CGRectMake(12, 0, button.frame.size.width, 44);
+    button.frame = CGRectMake(12, 0, button.frame.size.width, 64);
 }
 
 - (void)btnDone_Click:(id)sender

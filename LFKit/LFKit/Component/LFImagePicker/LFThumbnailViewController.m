@@ -63,7 +63,7 @@
 //    self.viewBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
     [self.btnDone sizeToFit];
     CGFloat doneW = 70;
-    self.btnDone.frame = CGRectMake(self.view.frame.size.width - doneW - 12, 7, doneW, 30);
+    self.btnDone.frame = CGRectMake(self.view.frame.size.width - doneW - 12, 15, doneW, 30);
 }
 
 #pragma mark - 初始化
@@ -98,7 +98,7 @@
 
 //初始化底部条
 - (void)initBottomBar {
-    self.viewBottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
+    self.viewBottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 64, self.view.frame.size.width, 64)];
     self.viewBottomBar.backgroundColor = [UIColor whiteColor];
     self.viewBottomBar.layer.shadowColor = [UIColor blackColor].CGColor;
     self.viewBottomBar.layer.shadowOffset = CGSizeMake(0, 1);
@@ -109,7 +109,7 @@
                                 [NSLayoutConstraint constraintWithItem:self.viewBottomBar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1 constant:0],
                                 [NSLayoutConstraint constraintWithItem:self.viewBottomBar attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0]
                                 ]];
-    [self.viewBottomBar addConstraint:[NSLayoutConstraint constraintWithItem:self.viewBottomBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44]];
+    [self.viewBottomBar addConstraint:[NSLayoutConstraint constraintWithItem:self.viewBottomBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:64]];
     
     //原图
     self.btnOriginal = [[UIButton alloc] init];
@@ -129,7 +129,7 @@
                                          [NSLayoutConstraint constraintWithItem:self.btnOriginal attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeLeft multiplier:1 constant:12],
                                          [NSLayoutConstraint constraintWithItem:self.btnOriginal attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.viewBottomBar attribute:NSLayoutAttributeCenterY multiplier:1 constant:0],
                                          ]];
-    [self.btnOriginal addConstraint:[NSLayoutConstraint constraintWithItem:self.btnOriginal attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:44]];
+    [self.btnOriginal addConstraint:[NSLayoutConstraint constraintWithItem:self.btnOriginal attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:64]];
     
     //确定按钮
     self.btnDone = [[UIButton alloc] init];

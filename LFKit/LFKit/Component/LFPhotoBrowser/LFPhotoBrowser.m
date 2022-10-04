@@ -216,12 +216,12 @@
         self.lbTitle.font = [UIFont systemFontOfSize:15];
         [_topBar addSubview:self.lbTitle];
         
-//        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 17, 40, 30)];
-//        [self.btBack setTitle:@"关闭" forState:UIControlStateNormal];
-//        self.btBack.titleLabel.font = [UIFont systemFontOfSize:15];
-//        [self.btBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [self.btBack addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-//        [_topBar addSubview:self.btBack];
+        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 17, 40, 30)];
+        [self.btBack setTitle:@"关闭" forState:UIControlStateNormal];
+        self.btBack.titleLabel.font = [UIFont systemFontOfSize:15];
+        [self.btBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.btBack addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_topBar addSubview:self.btBack];
         
         self.btSave = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 52, 17, 40, 30)];
         [self.btSave setTitle:@"保存" forState:UIControlStateNormal];
