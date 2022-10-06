@@ -29,6 +29,23 @@
     }
 }
 
+- (NSString *)lf_stringForKey:(NSString *)key defaultValue:(NSString *)defaultValue {
+    id tmpValue = [self objectForKey:key];
+    if (tmpValue == nil || tmpValue == [NSNull null]) {
+        return defaultValue;
+    }
+    if ([tmpValue isKindOfClass:[NSString class]]) {
+        return tmpValue;
+    } else {
+        @try {
+            return [NSString stringWithFormat:@"%@",tmpValue];
+        }
+        @catch (NSException *exception) {
+            return defaultValue;
+        }
+    }
+}
+
 - (NSInteger)lf_integerForKey:(NSString *)key {
     id tmpValue = [self objectForKey:key];
     if (tmpValue == nil || tmpValue == [NSNull null]) {
@@ -226,10 +243,12 @@
 
 /**
  从字典中提取数据组成列表需要的结构（基本多个section的列表需要用到）
- 
- @param ktArray @[@{@"数据节点1的key":"需要设置的title"},@{@"数据节点2的key":"需要设置的title"},...]
- @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"}]
- @return 结果 例如:
+ 例如将
+ @{
+    @"aa": @[dic1, dic2],
+    @"bb": @[dic1, dic2],
+ }
+ 转化为
  @[
  @{
  @"title":str1;
@@ -240,6 +259,11 @@
  @"data":@[dic3,dic4];
  }
  ]
+ 
+ @param ktArray @[@{@"aa":"需要设置的title"},@{@"bb":"需要设置的title"},...]
+ @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"}]
+ @return 结果 例如:
+ 
  */
 - (NSMutableArray *)getArrayWithKeyTitles:(NSArray *)ktArray param:(NSDictionary *)param {
     NSMutableArray *temp = [NSMutableArray new];
@@ -251,8 +275,11 @@
             continue;
         }
         //格式化数组中字典的key为统一值
-        NSMutableArray *formatterArray = [NSDictionary changeKeyNameFromArray:array param:param];
-        [dicTemp setObject:formatterArray forKey:@"data"];
+        if (param) {
+            array = [NSDictionary changeKeyNameFromArray:array param:param];
+        }
+        
+        [dicTemp setObject:array forKey:@"data"];
         [dicTemp setObject:[dic lf_stringForKey:key] forKey:@"title"];
         [temp addObject:dicTemp];
     }

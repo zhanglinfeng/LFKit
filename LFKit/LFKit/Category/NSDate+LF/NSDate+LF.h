@@ -20,4 +20,7 @@
 - (NSDate *)lf_dateByAddingMonths:(NSInteger)months;
 - (NSDate *)lf_dateByAddingYears:(NSInteger)years;
 
+/** 获取年龄*/
+- (NSInteger)lf_getAge;
+
 @end

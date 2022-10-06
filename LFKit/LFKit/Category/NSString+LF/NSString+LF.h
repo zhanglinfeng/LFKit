@@ -51,6 +51,11 @@
 /**拼接后缀（防重复拼接）*/
 - (NSString *)lf_addSuffix:(NSString *)suffix;
 
+/**去掉前缀*/
+- (NSString *)lf_deletePrefix:(NSString *)prefix;
+/**去掉后缀*/
+- (NSString *)lf_deleteSuffix:(NSString *)suffix;
+
 #pragma mark - 数字相关
 
 /**保留count位小数(高保真)*/

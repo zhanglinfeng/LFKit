@@ -71,6 +71,7 @@
     
     if (_format) {//日期picker
         self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height - 40)];
+        self.datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
         [self.datePicker addTarget:self action:@selector(datePickerDateChange:) forControlEvents:UIControlEventValueChanged];
         self.datePicker.backgroundColor =[UIColor whiteColor];
         [self addSubview:self.datePicker];
@@ -171,7 +172,7 @@
 
 // 每列宽度
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return pickerView.frame.size.width/2;
+    return pickerView.frame.size.width/_component;
 }
 // 返回选中的行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component

@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDictionary (LF)
 
 - (NSString *)lf_stringForKey:(NSString *)key;
+
+- (NSString *)lf_stringForKey:(NSString *)key defaultValue:(NSString *)defaultValue;
+
 - (NSInteger)lf_integerForKey:(NSString *)key;
 - (float)lf_floatForKey:(NSString *)key;
 - (BOOL)lf_boolForKey:(NSString *)key;
@@ -49,10 +52,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  从字典中提取数据组成列表需要的结构（基本多个section的列表需要用到）
- 
- @param ktArray @[@{@"数据节点1的key":"需要设置的title"},@{@"数据节点2的key":"需要设置的title"},...]
- @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"}]
- @return 结果 例如:
+ 例如将
+ @{
+    @"aa": @[dic1, dic2],
+    @"bb": @[dic1, dic2],
+ }
+ 转化为
  @[
  @{
  @"title":str1;
@@ -63,6 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
  @"data":@[dic3,dic4];
  }
  ]
+ 
+ @param ktArray @[@{@"aa":"需要设置的title"},@{@"bb":"需要设置的title"},...]
+ @param param 字典数组@[@{@"原始key1":@"新key1",@"原始key2":@"新key2"}]
+ @return 结果 例如:
+ 
  */
 - (NSMutableArray *)getArrayWithKeyTitles:(NSArray *)ktArray param:(NSDictionary *)param;
 
