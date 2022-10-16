@@ -14,6 +14,7 @@
 - (void)lf_removeObjectAtIndex:(NSInteger)index;
 - (void)lf_replaceObjectAtIndex:(NSInteger)index withObject:(id)anObject;
 - (void)lf_insertObject:(id)anObject atIndex:(NSInteger)index;
+- (void)lf_addObject:(id)anObject;
 
 /**加一个不重复的元素*/
 - (void)addDifferentObject:(id)anObject;

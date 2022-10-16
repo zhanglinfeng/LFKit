@@ -14,6 +14,10 @@
 /**获取Document文件目录*/
 +(NSString*)getDocumentFilePathWithName:(NSString*)name
 {
+    //    需要保存由"应用程序本身"产生的文件或者数据，例如：游戏进度、涂鸦软件的绘图
+    //    目录中的文件会被自动保存在 iCloud
+    //    注意：不要保存从网络上下载的文件，否则会无法上架！
+    
     //得到文件沙盒document路径
     NSArray* documents=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* document=[documents objectAtIndex:0];
@@ -28,6 +32,7 @@
 
 /**获取Temp文件目录*/
 +(NSString*)getTempFilePathWithName:(NSString*)name {
+//    重新启动手机，tmp 目录会被清空，系统磁盘空间不足时，系统也会自动清理
     //得到文件沙盒tmp路径
     NSString *tempPath = NSTemporaryDirectory();
     //获取文件目录
@@ -36,7 +41,8 @@
 
 /**获取Home文件目录*/
 + (NSString*)getHomeFilePathWithName:(NSString*)name {
-    //得到文件沙盒tmp路径
+    
+    //得到文件沙盒Home路径
     NSString *tempPath = NSHomeDirectory();
     //获取文件目录
     return [tempPath stringByAppendingPathComponent:name];
@@ -44,6 +50,7 @@
 
 /**获取Cache文件目录*/
 + (NSString*)getCacheFilePathWithName:(NSString*)name {
+    // 系统不会清理 cache 目录中的文件，要求程序开发时，"必须提供 cache 目录的清理解决方案"
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachesDir = [paths objectAtIndex:0];
     return [cachesDir stringByAppendingPathComponent:name];

@@ -17,19 +17,28 @@
 }
 
 - (void)lf_replaceObjectAtIndex:(NSInteger)index withObject:(id)anObject {
-    if (index < self.count && index > -1) {
+    if (index < self.count && index > -1 && anObject) {
         [self replaceObjectAtIndex:index withObject:anObject];
     }
 }
 
 - (void)lf_insertObject:(id)anObject atIndex:(NSInteger)index {
-    if (index < self.count && index > -1) {
+    if (index < self.count + 1 && index > -1 && anObject) {
         [self insertObject:anObject atIndex:index];
+    }
+}
+
+- (void)lf_addObject:(id)anObject {
+    if (anObject) {
+        [self addObject:anObject];
     }
 }
 
 /**加一个不重复的元素*/
 - (void)addDifferentObject:(id)anObject {
+    if (!anObject) {
+        return;
+    }
     if (![self containsObject:anObject]) {
         [self addObject:anObject];
     }
@@ -37,6 +46,9 @@
 
 /**加一个主键不重复的元素，如果元素是字符串key可以不用传；如果元素是字典，则传主键*/
 - (void)addObject:(id)anObject withKey:(NSString *)key {
+    if (!anObject) {
+        return;
+    }
     if (self.count < 1) {
         [self addObject:anObject];
     } else {

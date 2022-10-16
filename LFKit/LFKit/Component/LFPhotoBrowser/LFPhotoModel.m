@@ -10,6 +10,21 @@
 
 @implementation LFPhotoModel
 
+/** 字符串数组转大图浏览组件所需数据模型 */
++ (NSMutableArray *)getDatasFromStringArray:(NSArray *)array {
+    if (array.count < 1) {
+        return nil;
+    }
+    NSMutableArray *mArray = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < array.count; i++) {
+        NSString *str = array[i];
+        LFPhotoModel *model = [[LFPhotoModel alloc] init];
+        model.bigImageUrl = str;
+        [mArray addObject:model];
+    }
+    return  mArray;
+}
+
 - (BOOL)isVideo {
     return self.asset.mediaType == PHAssetMediaTypeVideo;
 }

@@ -19,6 +19,7 @@
 //如果show了之后要改下面属性值，需调用一下layoutSubviews
 @property (nonatomic, assign) CGFloat itemSpace;//每个子控件间距，默认20
 @property (nonatomic, assign) CGFloat labelMargin;//label与父视图边距，默认40
+@property (nonatomic, assign) CGFloat iconTop; // 图片距离顶部。 如果这个数字超过图片上下居中时距顶部的距离，则上下居中。
 @property (nonatomic, copy) void(^tapBlock)(void);//有按钮文字则是点击按钮的事件，没按钮则是点击整个页面的事件
 
 

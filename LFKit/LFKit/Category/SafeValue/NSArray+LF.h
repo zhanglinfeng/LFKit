@@ -24,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**主键去重复，如果元素是字符串key可不传；如果元素是字典，则传主键*/
 - (NSMutableArray *)lf_removeDuplicatesWithKey:(NSString *)key;
 
+/** 查找数组中指定键值对的字典*/
+- (NSDictionary *)lf_itemWithKey:(NSString *)key value:(NSString *)value;
+
 @end
 
 NS_ASSUME_NONNULL_END

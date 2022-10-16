@@ -110,4 +110,14 @@
     return arrayResult;
 }
 
+/** 查找数组中指定键值对的字典*/
+- (NSDictionary *)lf_itemWithKey:(NSString *)key value:(NSString *)value {
+    for (NSInteger i = 0; i < self.count; i++) {
+        NSDictionary *dic = self[i];
+        if ([dic[key] isEqualToString:value]){
+            return dic;
+        }
+    }
+}
+
 @end

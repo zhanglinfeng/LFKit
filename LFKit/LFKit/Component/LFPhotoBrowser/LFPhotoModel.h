@@ -18,6 +18,9 @@
 @property (nonatomic, strong) NSString *bigImageUrl;
 @property (nonatomic, assign) BOOL isSelected;
 
+/** 字符串数组转大图浏览组件所需数据模型 */
++ (NSMutableArray *)getDatasFromStringArray:(NSArray *)array;
+
 /*
  当前媒体是否为视频
  */

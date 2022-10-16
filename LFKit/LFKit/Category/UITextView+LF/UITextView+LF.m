@@ -71,6 +71,7 @@ static NSString *textDidChangeKey = @"textDidChangeKey";
     self.placeholderLabel.text = placeholder;
     self.placeholderLabel.hidden = self.text.length > 0;
     objc_setAssociatedObject(self, &placeholderKey, placeholder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextViewTextDidChangeNotification object:self];
 }
 
@@ -99,6 +100,8 @@ static NSString *textDidChangeKey = @"textDidChangeKey";
 - (void)setMaxCount:(NSNumber *)maxCount {
     self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(self.text.length),maxCount];
     objc_setAssociatedObject(self, &maxCountKey, maxCount, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextViewTextDidChangeNotification object:self];
 }
 
 - (NSNumber *)maxCount {
@@ -125,7 +128,6 @@ static NSString *textDidChangeKey = @"textDidChangeKey";
 
 - (void)setIsLimit:(NSNumber *)isLimit {
     objc_setAssociatedObject(self, &isLimitKey, isLimit, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextViewTextDidChangeNotification object:self];
 }
 
 - (NSNumber *)isLimit {
@@ -137,7 +139,7 @@ static NSString *textDidChangeKey = @"textDidChangeKey";
 }
 
 - (NSDictionary *)insetDic {
-    return objc_getAssociatedObject(self, &insetDicKey) == nil ? @{@"top":@(6),@"left":@(5),@"bottom":@(5),@"right":@(5)} : objc_getAssociatedObject(self, &placeholderColorKey);
+    return objc_getAssociatedObject(self, &insetDicKey) == nil ? @{@"top":@(8),@"left":@(8),@"bottom":@(8),@"right":@(8)} : objc_getAssociatedObject(self, &placeholderColorKey);
 }
 
 - (void)setTextDidChangeBlock:(TextDidChange)textDidChangeBlock {
@@ -187,23 +189,21 @@ static NSString *textDidChangeKey = @"textDidChangeKey";
     
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    [self textViewChanged:nil];
-    
-    CGFloat top = ((NSNumber *)self.insetDic[@"top"]).floatValue;
-    CGFloat left = ((NSNumber *)self.insetDic[@"left"]).floatValue;
-    CGFloat bottom = ((NSNumber *)self.insetDic[@"bottom"]).floatValue;
-    CGFloat right = ((NSNumber *)self.insetDic[@"right"]).floatValue;
-    if (self.placeholder) {
-        [self.placeholderLabel sizeToFit];
-        self.placeholderLabel.frame = CGRectMake(top, left, self.placeholderLabel.frame.size.width, self.placeholderLabel.frame.size.height);
-    }
-    if (self.maxCount) {
-        [self.countLabel sizeToFit];
-        self.countLabel.frame = CGRectMake(self.frame.size.width - self.countLabel.frame.size.width - right, self.frame.size.height - self.countLabel.frame.size.height - bottom, self.countLabel.frame.size.width, self.countLabel.frame.size.height);
-    }
+- (void)lf_layoutSubviews {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        CGFloat top = ((NSNumber *)self.insetDic[@"top"]).floatValue;
+        CGFloat left = ((NSNumber *)self.insetDic[@"left"]).floatValue;
+        CGFloat bottom = ((NSNumber *)self.insetDic[@"bottom"]).floatValue;
+        CGFloat right = ((NSNumber *)self.insetDic[@"right"]).floatValue;
+        if (self.placeholder) {
+            [self.placeholderLabel sizeToFit];
+            self.placeholderLabel.frame = CGRectMake(left, top, self.placeholderLabel.frame.size.width, self.placeholderLabel.frame.size.height);
+        }
+        if (self.maxCount) {
+            [self.countLabel sizeToFit];
+            self.countLabel.frame = CGRectMake(self.frame.size.width - self.countLabel.frame.size.width - right, self.frame.size.height - self.countLabel.frame.size.height - bottom, self.countLabel.frame.size.width, self.countLabel.frame.size.height);
+        }
+    });
 }
 
 @end

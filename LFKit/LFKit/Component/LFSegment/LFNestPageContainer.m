@@ -7,7 +7,6 @@
 
 #import "LFNestPageContainer.h"
 #import "LFNestPageController.h"
-#import "LFSegmentView.h"
 
 @interface LFNestPageContainer ()<UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
@@ -97,6 +96,12 @@
     self.segmentHeight = self.segmentView.frame.size.height;
     [self addSubview:self.segmentView];
     [self updateSubViewLayout];
+    __weak typeof(self) weakSelf = self;
+    if ([self.segmentView isKindOfClass:[LFSegmentView class]]) {
+        ((LFSegmentView *)self.segmentView).selectedBlock = ^(NSInteger index, UIButton * _Nullable button) {
+            [weakSelf.pageCtrl scrollToIndex:index animated:YES];
+        };
+    }
 }
 
 /** 设置嵌套的控制器*/
@@ -123,8 +128,11 @@
                 }
                 
             }
+            if (weakSelf.absoluteSegmentView) {
+                [weakSelf.absoluteSegmentView setSelectedIndex:index];
+            }
         };
-        self.pageCtrl.scrollViewDidScroll = ^(UIScrollView *scrollView) {
+        self.pageCtrl.scrollViewDidScroll = ^(UIScrollView *scrollView, CGFloat pageOffset) {
 //                CGFloat offsetX = scrollView.contentOffset.x;
 //                offsetX = offsetX - weakSelf.pageCtrl.startOffset;
             CGFloat offsetX = weakSelf.pageCtrl.pageOffset;
@@ -133,6 +141,12 @@
                     [((LFSegmentView *)weakSelf.segmentView) adjustLinePosition:offsetX containerWidth:weakSelf.frame.size.width];
                 }
                 
+            }
+            if (weakSelf.absoluteSegmentView) {
+                [self.absoluteSegmentView adjustLinePosition:offsetX containerWidth:weakSelf.frame.size.width];
+            }
+            if (self.pageControllerDidScrollBlock) {
+                self.pageControllerDidScrollBlock(pageOffset);
             }
         };
         [self setupPageCtrl:self.pageCtrl];

@@ -35,6 +35,7 @@
         self.list = list;
         self.selectedIndex = index;
         self.scrollEnabled = YES;
+        self.canSwipeBack = YES;
     }
     return self;
 }
@@ -56,6 +57,7 @@
     [self updateList:self.list index:self.selectedIndex];
     
     self.scrollView = [self fetchPageCtrlScrollView];
+    self.scrollView.delegate = self;
     [self configGesture];
 }
 
@@ -217,16 +219,15 @@
     if (self.isTapSwitch) {
         return;
     }
-//    CGFloat offsetX = scrollView.contentOffset.x;
-//    if (_segmentView) {
-//        [_segmentView adjustLinePosition:offsetX containerWidth:self.view.frame.size.width];
-//    }
+    
+    // 必须滑动之后再设置弹性，因为设置早了会导致没法滑动
+    self.scrollView.bounces = NO;
+
     CGPoint p = [self.selectedViewController.view.superview convertPoint:self.selectedViewController.view.frame.origin toView:self.view];
     
     self.pageOffset = self.selectedIndex * self.view.frame.size.width - p.x;
-//    NSLog(@"偏移contentOffset=%f===pageOffset=%f",offsetX, self.pageOffset);
     if (self.scrollViewDidScroll) {
-        self.scrollViewDidScroll(scrollView);
+        self.scrollViewDidScroll(scrollView, self.pageOffset);
     }
 }
 
@@ -367,11 +368,11 @@
         case UIGestureRecognizerStateBegan:
         {
             if (ABS(translationP.x) <= ABS(translationP.y)) {
-//                NSLog(@"垂直方向");
+                NSLog(@"垂直方向");
             } else if (translationP.x <= 0 && velocityP.x < 0) {
-//                NSLog(@"向左");
+                NSLog(@"向左");
             } else {
-//                NSLog(@"向右");
+                NSLog(@"向右");
             }
         }
             break;

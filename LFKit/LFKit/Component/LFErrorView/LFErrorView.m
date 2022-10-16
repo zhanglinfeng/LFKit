@@ -21,6 +21,7 @@
     if (self) {
         self.itemSpace = 20;
         self.labelMargin = 40;
+        self.iconTop = 300;
         self.backgroundColor = [UIColor whiteColor];
         
         self.ivBackground = [[UIImageView alloc] init];
@@ -59,7 +60,7 @@
         UITapGestureRecognizer *tapGestureRecognizer =
         [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
         [self addGestureRecognizer:tapGestureRecognizer];
-        tapGestureRecognizer.cancelsTouchesInView = YES;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
+        tapGestureRecognizer.cancelsTouchesInView = NO;//为yes只响应优先级最高的事件，Button高于手势，textfield高于手势，textview高于手势，手势高于tableview。为no同时都响应，默认为yes
     }
     return self;
 }
@@ -112,7 +113,7 @@
     }
     self.button.hidden = self.button.currentTitle.length < 1;
     
-    self.ivIcon.frame = CGRectMake((self.frame.size.width - coverImageW)/2, (self.frame.size.height - itemTotalH)/2, coverImageW, coverImageH);
+    self.ivIcon.frame = CGRectMake((self.frame.size.width - coverImageW)/2, MIN(self.iconTop, (self.frame.size.height - itemTotalH)/2), coverImageW, coverImageH);
     
     self.lbText.frame = CGRectMake(self.labelMargin, CGRectGetMaxY(self.ivIcon.frame) + self.itemSpace, self.frame.size.width - self.labelMargin*2, lbH);
     

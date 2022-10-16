@@ -30,7 +30,7 @@
     _selectedColor = [UIColor redColor];
     _normalColor = [UIColor grayColor];
     self.indicateHeight = 2;
-    self.minItemSpace = 10;
+    self.minItemSpace = 20;
     self.font = [UIFont systemFontOfSize:16];
         
     _titles = titles;
@@ -74,6 +74,10 @@
         [button setTitle:title forState:UIControlStateNormal];
         [button setTitleColor:self.normalColor forState:UIControlStateNormal];
         [button setTitleColor:self.selectedColor forState:UIControlStateSelected];
+        button.layer.shadowColor = [UIColor blackColor].CGColor;
+        button.layer.shadowOffset =  CGSizeMake(1, 1);
+        button.layer.shadowOpacity = 0; // 要设置为1.因为默认是0表示透明
+        
         [button addTarget:self action:@selector(didClickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_contentView addSubview:button];
         
@@ -148,6 +152,9 @@
 
 //计算item间距
 - (CGFloat)calculateSpace {
+    if (self.itemSpace > 0) {
+        return self.itemSpace / 2;
+    }
     CGFloat space = 0;
     CGFloat totalWidth = 0;
     
@@ -303,11 +310,25 @@
     _minItemSpace = minItemSpace;
     self.textMargin = [self calculateSpace];
     
+    CGFloat item_x = 0;
+    for (NSInteger i = 0; i < _buttons.count; i++) {
+        NSString *title = _titles[i];
+        UIButton *button = _buttons[i];
+        CGSize titleSize = [title sizeWithAttributes:@{NSFontAttributeName: self.font}];
+        button.frame = CGRectMake(item_x, 0, self.textMargin * 2 + titleSize.width, self.frame.size.height);
+        item_x += self.textMargin * 2 + titleSize.width;
+    }
+    
     if (_indicateStyle == LFSegmentIndicateStyleAlignFull) {
         _indicateView.frame = CGRectMake(_selectedButton.frame.origin.x, self.frame.size.height - _indicateHeight, CGRectGetWidth(_selectedButton.frame), _indicateHeight);
     } else {
         _indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame) + _textMargin, CGRectGetMinY(_indicateView.frame), CGRectGetWidth(_selectedButton.frame) - self.textMargin*2, self.indicateHeight);
     }
+}
+
+- (void)setItemSpace:(CGFloat)itemSpace {
+    _itemSpace = itemSpace;
+    self.textMargin = [self calculateSpace];
     
     CGFloat item_x = 0;
     for (NSInteger i = 0; i < _buttons.count; i++) {
@@ -317,6 +338,12 @@
         button.frame = CGRectMake(item_x, 0, self.textMargin * 2 + titleSize.width, self.frame.size.height);
         item_x += self.textMargin * 2 + titleSize.width;
     }
+    
+    if (_indicateStyle == LFSegmentIndicateStyleAlignFull) {
+        _indicateView.frame = CGRectMake(_selectedButton.frame.origin.x, self.frame.size.height - _indicateHeight, CGRectGetWidth(_selectedButton.frame), _indicateHeight);
+    } else {
+        _indicateView.frame = CGRectMake(CGRectGetMinX(_selectedButton.frame) + _textMargin, CGRectGetMinY(_indicateView.frame), CGRectGetWidth(_selectedButton.frame) - self.textMargin*2, self.indicateHeight);
+    }
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
@@ -324,6 +351,15 @@
     if (backgroundImage) {
         self.ivbackground.image = backgroundImage;
         self.contentView.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)setNeedShadow:(BOOL)needShadow {
+    _needShadow = needShadow;
+    
+    for (NSInteger i = 0; i < _buttons.count; i++) {
+        UIButton *button = _buttons[i];
+        button.layer.shadowOpacity = needShadow ? 1 : 0;
     }
 }
 

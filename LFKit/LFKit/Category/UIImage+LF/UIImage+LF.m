@@ -13,7 +13,6 @@
 
 /**生成纯色图片*/
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size{
-    size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -47,7 +46,7 @@
 /**生成渐变色图片*/
 + (UIImage *)imageWithRect:(CGSize)size StartColor:(UIColor *)startColor endColor:(UIColor *)endColor StartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
     
-    size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
+//    size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
     CIFilter *ciFilter = [CIFilter filterWithName:@"CILinearGradient"];
     
     /*
@@ -80,7 +79,7 @@
 
 + (UIImage *)imageWithRect:(CGSize)size color:(UIColor *)color direction:(TriangleDirection)direction {
     
-    size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
+//    size = CGSizeMake(size.width*[UIScreen mainScreen].scale, size.height*[UIScreen mainScreen].scale);
     
     CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
     UIImage *myImage = [UIImage imageWithColor:color size:size];

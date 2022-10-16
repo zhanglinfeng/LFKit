@@ -27,6 +27,7 @@ static void *tapViewBlockKey = &tapViewBlockKey;
 
 /**添加点击事件*/
 - (void)addTapBlock{
+    self.userInteractionEnabled = YES; // label默认是NO，所以要设置为yes
     UITapGestureRecognizer *tapGestureRecognizer =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [self addGestureRecognizer:tapGestureRecognizer];

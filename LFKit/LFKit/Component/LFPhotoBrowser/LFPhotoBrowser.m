@@ -50,16 +50,16 @@
 //    NSLog(@"当前第%zi",self.currentIndex);
 //    [self.collectionView setContentOffset:CGPointMake(self.currentIndex*self.collectionView.frame.size.width, 0) animated:NO];
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-    self.lbTitle.frame = _topBar.bounds;
-    self.btBack.frame = CGRectMake(12, 17, self.btBack.frame.size.width, self.btBack.frame.size.height);
-    self.btSave.frame = CGRectMake(_topBar.frame.size.width - 52, 17, self.btSave.frame.size.width, self.btSave.frame.size.height);
+    self.lbTitle.frame = CGRectMake(0, 0, self.topBar.frame.size.width, self.btBack.frame.size.height);
+    self.btBack.frame = CGRectMake(12, 0, self.btBack.frame.size.width, self.btBack.frame.size.height);
+    self.btSave.frame = CGRectMake(_topBar.frame.size.width - 52, 0, self.btSave.frame.size.width, self.btSave.frame.size.height);
     
     if (!self.topBar.hidden) {
         CGFloat top = 0;
         if (@available(iOS 11.0, *)) {
             top = self.safeAreaInsets.top;
         }
-        self.topBar.frame = CGRectMake(0, top, self.frame.size.width, 64);
+        self.topBar.frame = CGRectMake(0, top, self.frame.size.width, 44);
     }
 //    NSLog(@"self-layoutSubviews=%@",self);
 }
@@ -78,6 +78,12 @@
     self.collectionView.dataSource = self;
     self.collectionView.bounces = YES;
     self.collectionView.pagingEnabled = YES;
+    
+//如果为YES，就会等待用户下一步动作，如果用户移动手指到一定距离，就会把这个操作作为滚动来处理并开始滚动，同时发送一个touchesCancelled:withEvent:消息给内容控件，由控件自行处理。如果为NO，就不会等待用户下一步动作，并始终不会触发scrollView的滚动了。
+    self.collectionView.canCancelContentTouches = YES;
+    
+//    这个标志默认是YES，使用上面的150ms的timer，如果设置为NO，touch事件立即传递给subView，不会有150ms的等待。
+//    self.collectionView.delaysContentTouches = NO;
     [self addSubview:self.collectionView];
     [self.collectionView registerClass:[LFBigImageCell class] forCellWithReuseIdentifier:kLFBigImageCell];
 }
@@ -216,24 +222,35 @@
         if (@available(iOS 11.0, *)) {
             top = self.safeAreaInsets.top;
         }
-        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, 64)];
-        _topBar.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        _topBar = [[UIView alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, 44)];
+        _topBar.backgroundColor = [UIColor clearColor];
         self.lbTitle = [[UILabel alloc] initWithFrame:_topBar.bounds];
         self.lbTitle.textAlignment = NSTextAlignmentCenter;
         self.lbTitle.textColor = [UIColor whiteColor];
         self.lbTitle.font = [UIFont systemFontOfSize:15];
+        self.lbTitle.shadowColor = [UIColor blackColor];
         [_topBar addSubview:self.lbTitle];
         
-        self.btBack = [[UIButton alloc] initWithFrame:CGRectMake(12, 17, 40, 30)];
+        self.btBack = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.btBack.frame = CGRectMake(12, 17, 40, 30);
         [self.btBack setTitle:@"关闭" forState:UIControlStateNormal];
         self.btBack.titleLabel.font = [UIFont systemFontOfSize:15];
         [self.btBack setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.btBack.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.btBack.layer.shadowOffset =  CGSizeMake(1, 1);
+        self.btBack.layer.shadowOpacity = 1; // 要设置为1.因为默认是0表示透明
+        self.btBack.layer.masksToBounds = NO;
         [self.btBack addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [_topBar addSubview:self.btBack];
         
-        self.btSave = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 52, 17, 40, 30)];
+        self.btSave = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.btSave.frame = CGRectMake(self.frame.size.width - 52, 17, 40, 30);
         [self.btSave setTitle:@"保存" forState:UIControlStateNormal];
         self.btSave.titleLabel.font = [UIFont systemFontOfSize:15];
+        self.btSave.layer.masksToBounds = NO;
+        self.btSave.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.btSave.layer.shadowOffset =  CGSizeMake(1, 1);
+        self.btSave.layer.shadowOpacity = 1; // 要设置为1.因为默认是0表示透明
         [self.btSave setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btSave addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
         [_topBar addSubview:self.btSave];
@@ -247,7 +264,7 @@
 - (void)setTopBarHidden:(BOOL)hidden {
     if (hidden) {
         [UIView animateWithDuration:0.2 animations:^{
-            self.topBar.frame = CGRectMake(0, -64, self.bounds.size.width, 64);
+            self.topBar.frame = CGRectMake(0, -44, self.bounds.size.width, 44);
         } completion:^(BOOL finished) {
             self.topBar.hidden = YES;
         }];
@@ -258,7 +275,7 @@
             if (@available(iOS 11.0, *)) {
                 top = self.safeAreaInsets.top;
             }
-            self.topBar.frame = CGRectMake(0, top, self.bounds.size.width, 64);
+            self.topBar.frame = CGRectMake(0, top, self.bounds.size.width, 44);
         } completion:^(BOOL finished) {
             
         }];

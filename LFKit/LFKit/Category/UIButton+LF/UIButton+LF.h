@@ -26,6 +26,8 @@ typedef void(^LFBtnAction)(void);
 @property (nonatomic, strong) NSTimer *resendTimer;//定时器
 @property (nonatomic, copy) LFBtnAction btnAction;
 
+@property (nonatomic, strong) CAShapeLayer *shapeLayer;
+
 
 /** 设置图文排列样式及间距 **/
 - (void)setArrangeStyle:(LFButtonArrangeStyle)style space:(CGFloat)space;
@@ -44,6 +46,12 @@ typedef void(^LFBtnAction)(void);
 - (void)removeTimer;
 
 - (void)resetButton;
+
+/** 开始加载动画 */
+- (void)lf_showLoading;
+
+/** 停止加载动画 */
+- (void)lf_stopLoading;
 
 
 

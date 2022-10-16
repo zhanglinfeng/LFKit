@@ -28,6 +28,9 @@ typedef  void(^TextDidChange)(NSString *text, BOOL isOut);
 
 @property (nonatomic, copy) TextDidChange textDidChangeBlock; //获取当前文字、是否超出字数(如果超出会回调2次，截取前一次截取后一次)
 
+/**在持有本组件的控制器或者视图里调用，必须调用 */
+- (void)lf_layoutSubviews;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void (^selectChanged) (NSInteger originIndex, NSInteger index);
 
-@property (nonatomic,copy) void (^scrollViewDidScroll) (UIScrollView *scrollView);
+@property (nonatomic,copy) void (^scrollViewDidScroll) (UIScrollView *scrollView, CGFloat pageOffset);
 
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
 

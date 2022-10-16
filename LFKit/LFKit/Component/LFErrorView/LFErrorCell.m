@@ -46,4 +46,10 @@
     self.errorView.lbText.text = errorMessage;
 }
 
+- (void)setIconTop:(CGFloat)iconTop {
+    _iconTop = iconTop;
+    self.errorView.iconTop = _iconTop;
+    [self.errorView layoutSubviews];
+}
+
 @end

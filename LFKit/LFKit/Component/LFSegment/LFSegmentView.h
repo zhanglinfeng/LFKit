@@ -28,8 +28,8 @@ typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
 @property (nonatomic, strong, nullable) UIColor *normalColor;//未选中的字体颜色，默认灰色
 @property (nonatomic, strong, nullable) UIColor *indicateColor;//指示线颜色,默认和字体颜色一样
 @property (nonatomic, assign) CGFloat indicateHeight;//指示线高，默认2
-@property (nonatomic, assign) CGFloat minItemSpace;//最小间距，默认10
-
+@property (nonatomic, assign) CGFloat minItemSpace;//最小间距，默认20
+@property (nonatomic, assign) CGFloat itemSpace;// 间距，优先用itemSpace，没传就用minItemSpace
 @property (nonatomic, strong, nullable) UIImage *backgroundImage;//背景图
 @property (nonatomic, readonly) UIView * _Nonnull indicateView; //指示杆
 @property (nonatomic, readonly) UIView * _Nonnull bottomLine; //底部分割线
@@ -38,12 +38,12 @@ typedef NS_ENUM(NSUInteger, LFSegmentIndicateStyle) {
 @property (nonatomic, strong, readonly) UIScrollView * _Nonnull contentView;
 @property (nonatomic, readonly) NSUInteger currentIndex;
 @property (nonatomic, assign) NSTimeInterval duration;  //滑动时间，默认0.3
+@property (nonatomic, assign) BOOL needShadow; // 文字是否加阴影
 @property (nonatomic, copy) void(^ _Nullable selectedBlock)(NSInteger index, UIButton * _Nullable button);
 
 - (instancetype _Nullable )initWithFrame:(CGRect)frame titles:(NSArray <NSString *>*_Nonnull)titles;
 
 - (void)setSelectedIndex:(NSInteger)index;
-
 
 /**
  调整线位置
