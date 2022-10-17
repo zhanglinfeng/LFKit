@@ -25,7 +25,6 @@
     if (self) {
         [self addSubview:self.scrollView];
         [self.scrollView addSubview:self.imageBGView];
-        [self addSubview:self.indicator];
         [self resetSubviewSize];
     }
     return self;
@@ -85,7 +84,7 @@
             self.imageBGView.image = photo.smallImage;
             [self resetSubviewSize];
         }
-        
+        [self addSubview:self.indicator];
         [self.indicator startAnimating];
         [LFPhotoModel requestImageForAsset:photo.asset size:size resizeMode:PHImageRequestOptionsResizeModeFast needThumbnails:YES completion:^(UIImage *image, NSDictionary *info) {
             if ([NSThread currentThread] != [NSThread mainThread]) {
@@ -95,6 +94,7 @@
             [self resetSubviewSize];
             if (![[info objectForKey:PHImageResultIsDegradedKey] boolValue]) {
                 [self.indicator stopAnimating];
+                [self.indicator removeFromSuperview];
             }
         }];
         
