@@ -87,6 +87,12 @@ Pod::Spec.new do |s|
     sss.source_files         = 'LFKit/LFKit/Category/UITextView+LF/*'
     end
 
+    ss.subspec 'UIViewController+LF' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Category/UIViewController+LF/*'
+    end
+
+    
+
   end
 
   s.subspec 'Util' do |ss|
@@ -207,6 +213,14 @@ Pod::Spec.new do |s|
     sss.source_files         = 'LFKit/LFKit/Component/LFPhotoBrowser/*.{h,m}'
     sss.dependency 'YYWebImage'
     sss.dependency 'MBProgressHUD'
+    end
+
+    ss.subspec 'LFPicturesCollectionView' do |sss|
+    sss.source_files         = 'LFKit/LFKit/Component/LFPicturesCollectionView/*'
+    sss.resources = 'LFKit/LFKit/Component/LFPicturesCollectionView/*.{png}'
+    sss.dependency 'LFKit/Component/LFPhotoBrowser'
+    sss.dependency 'LFKit/Category/UIViewController+LF'
+    sss.dependency 'Masonry'
     end
 
   end

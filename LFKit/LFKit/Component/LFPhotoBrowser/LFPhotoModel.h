@@ -16,6 +16,8 @@
 @property (nonatomic, strong) PHAsset *asset;
 @property (nonatomic, strong) NSString *smallImageUrl;
 @property (nonatomic, strong) NSString *bigImageUrl;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat width;
 @property (nonatomic, assign) BOOL isSelected;
 
 /** 字符串数组转大图浏览组件所需数据模型 */
