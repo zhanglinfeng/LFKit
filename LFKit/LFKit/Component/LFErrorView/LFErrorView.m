@@ -66,7 +66,7 @@
 }
 
 /**展示空页面(有默认的文字和图片，show之后可以更改文字图片)*/
-+ (LFErrorView *)showEmptyInView:(UIView *)supView tapBlock:(void(^)(void))tapBlock {
++ (LFErrorView *)showEmptyInView:(UIView *)supView tapBlock:(void(^)(LFErrorView *errorView))tapBlock {
     LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:supView.bounds];
     errorView.ivIcon.image = [UIImage imageNamed:@"LFEmptyIcon"];
     errorView.lbText.text = @"暂无数据";
@@ -76,7 +76,7 @@
 }
 
 /**展示错误页面(有默认的图片，show之后可以更改图片)*/
-+ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message tapBlock:(void(^)(void))tapBlock {
++ (LFErrorView *)showErrorInView:(UIView *)supView message:(NSString *)message tapBlock:(void(^)(LFErrorView *errorView))tapBlock {
     LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:supView.bounds];
     errorView.ivIcon.image = [UIImage imageNamed:@"LFErrorIcon"];
     errorView.lbText.text = message;
@@ -132,7 +132,7 @@
         }
     }
     if (self.tapBlock) {
-        self.tapBlock();
+        self.tapBlock(self);
     }
 }
 
@@ -146,7 +146,7 @@
 
 @implementation UIView (ErrorView)
 
-- (LFErrorView *)showEmptyView:(void(^)(void))tapBlock {
+- (LFErrorView *)showEmptyView:(void(^)(LFErrorView *errorView))tapBlock {
     LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:self.bounds];
     errorView.ivIcon.image = [UIImage imageNamed:@"LFEmptyIcon"];
     errorView.lbText.text = @"暂无数据";
@@ -155,7 +155,7 @@
     return errorView;
 }
 
-- (LFErrorView *)showErrorView:(void(^)(void))tapBlock {
+- (LFErrorView *)showErrorView:(void(^)(LFErrorView *errorView))tapBlock {
     LFErrorView *errorView = [[LFErrorView alloc] initWithFrame:self.bounds];
     errorView.ivIcon.image = [UIImage imageNamed:@"LFErrorIcon"];
     errorView.lbText.text = @"网络不给力，请稍后再试";

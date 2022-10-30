@@ -104,6 +104,14 @@
     }
 }
 
+- (void)setAbsoluteSegmentView:(LFSegmentView *)absoluteSegmentView {
+    _absoluteSegmentView = absoluteSegmentView;
+    __weak typeof(self) weakSelf = self;
+    _absoluteSegmentView.selectedBlock = ^(NSInteger index, UIButton * _Nullable button) {
+        [weakSelf.pageCtrl scrollToIndex:index animated:YES];
+    };
+}
+
 /** 设置嵌套的控制器*/
 - (void)setupControllers:(NSArray <UIViewController*>*)list currentIndex:(NSInteger)index {
     if (list.count < 1) {
@@ -178,6 +186,16 @@
     CGRect rect = CGRectMake(0, y, self.frame.size.width, self.frame.size.height - segmentViewSize.height - self.topOffset);
     self.pageCtrl.view.frame = rect;
 }
+
+- (void)setPageScrollEnabled:(BOOL)pageScrollEnabled {
+    _pageScrollEnabled = pageScrollEnabled;
+    if (self.pageCtrl) {
+        self.pageCtrl.scrollEnabled = _pageScrollEnabled;
+    }
+}
+
+#pragma mark - KVO
+
 - (void)addPageCtrlObserve:(NSInteger)index{
     //处理监听事件
     UIScrollView *scroll = [self.pageCtrl fetchSubCtrlScrollView:index];

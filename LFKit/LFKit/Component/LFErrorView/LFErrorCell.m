@@ -7,11 +7,8 @@
 //
 
 #import "LFErrorCell.h"
-#import "LFErrorView.h"
 
 @interface LFErrorCell ()
-
-@property (nonatomic, strong) LFErrorView *errorView;
 
 @end
 

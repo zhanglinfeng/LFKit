@@ -159,7 +159,7 @@
     }
 }
 
-/**时间字符串转xx小时前、昨天HH:mm、前天HH:mm、MM月dd日、yyyy年MM月dd日*/
+/**时间字符串yyyy-MM-dd HH:mm:ss转xx小时前、昨天HH:mm、前天HH:mm、MM月dd日、yyyy年MM月dd日*/
 + (NSString *)getShowTimeFromTimeStr:(NSString*)str {
     static NSDateFormatter *dateFormatter1;
     static NSDateFormatter *dateFormatter2;

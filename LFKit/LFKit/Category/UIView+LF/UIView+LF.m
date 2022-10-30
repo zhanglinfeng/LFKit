@@ -41,4 +41,17 @@ static void *tapViewBlockKey = &tapViewBlockKey;
     }
 }
 
+/*!移除某一约束*/
+- (void)lf_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute {
+    for (NSLayoutConstraint *constraint in self.constraints) {
+        if (constraint.firstItem == firstItem && constraint.firstAttribute == firstAttribute) {
+            if ([constraint respondsToSelector:@selector(setActive:)]) {
+                constraint.active = NO;
+            } else {
+                [self removeConstraint:constraint];
+            }
+        }
+    }
+}
+
 @end

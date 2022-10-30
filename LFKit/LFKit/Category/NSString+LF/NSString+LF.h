@@ -56,6 +56,12 @@
 /**去掉后缀*/
 - (NSString *)lf_deleteSuffix:(NSString *)suffix;
 
+/**或运算，如果自己为空，就用另一个字符串*/
+- (NSString *)lf_or:(NSString *)str;
+
+/**去掉字符串两端的空白字符*/
+- (NSString *)lf_trim;
+
 #pragma mark - 数字相关
 
 /**保留count位小数(高保真)*/

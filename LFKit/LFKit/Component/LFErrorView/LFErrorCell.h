@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LFErrorView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LFErrorCell : UITableViewCell
+
+@property (nonatomic, strong) LFErrorView *errorView;
 
 @property (nonatomic, strong) UIImage *errorImage;
 @property (nonatomic, strong) NSString *errorMessage;

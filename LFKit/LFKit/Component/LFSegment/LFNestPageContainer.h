@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL canSwipeBack; // 是否允许侧滑返回
 @property (nonatomic, assign) CGFloat topOffset; // 悬浮距上距离
 @property (nonatomic, assign) BOOL needRefreshSubList; // 有头部时候是否需要子列表刷新功能
-@property (nonatomic, assign) BOOL pageScrollEnabled; // 列表容器是否支持滑动，默认yes
+@property (nonatomic, assign) BOOL pageScrollEnabled; // 列表容器是否支持左右滑动，默认yes（有时子页面含有进度条之类的可滑动的，可以禁止这个来解决手势冲突）
 
 /** 放在本容器之外的LFSegmentView，传给本容器可以自动处理联动 */
 @property (nonatomic, strong) LFSegmentView *absoluteSegmentView;

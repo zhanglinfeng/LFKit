@@ -14,4 +14,7 @@ typedef void(^LFTapViewBlock)(UITapGestureRecognizer *gesture);
 
 @property (nonatomic, copy) LFTapViewBlock tapViewBlock;//点击事件
 
+/*!移除某一约束*/
+- (void)lf_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute;
+
 @end

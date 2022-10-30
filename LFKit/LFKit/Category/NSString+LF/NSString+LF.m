@@ -194,6 +194,26 @@
     }
 }
 
+/**或运算，如果自己为空，就用另一个字符串*/
+- (NSString *)lf_or:(NSString *)str {
+    if (self.length < 0) {
+        return str;
+    } else {
+        return self;
+    }
+}
+
+/**去掉字符串两端的空白字符*/
+- (NSString *)lf_trim {
+    if(nil == self){
+        return nil;
+    }
+    NSString *s = [NSString stringWithString:self];
+    NSString *trimmedString = [s stringByTrimmingCharactersInSet:
+                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return trimmedString;
+}
+
 #pragma mark - 数字相关
 
 /**保留count位小数(高保真)*/
