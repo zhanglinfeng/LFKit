@@ -15,12 +15,15 @@
 - (NSInteger)lf_day;
 - (BOOL)lf_isToday;
 - (BOOL)lf_isYesterday;
-- (BOOL)lf_isSameYearAsDate:(NSDate *) aDate;
+- (BOOL)lf_isSameYearAsDate:(NSDate *)aDate;
 - (NSDate *)lf_dateByAddingDays:(NSInteger)days;
 - (NSDate *)lf_dateByAddingMonths:(NSInteger)months;
 - (NSDate *)lf_dateByAddingYears:(NSInteger)years;
 
 /** 获取年龄*/
 - (NSInteger)lf_getAge;
+
+/**从fromDate到toDate的天数*/
++ (NSInteger)lf_daysFrom:(NSDate *)fromDate to:(NSDate *)toDate;
 
 @end

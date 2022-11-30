@@ -32,7 +32,7 @@
     return [added lf_isToday];
 }
 
-- (BOOL)lf_isSameYearAsDate:(NSDate *) aDate {
+- (BOOL)lf_isSameYearAsDate:(NSDate *)aDate {
     if (self.lf_year != aDate.lf_year) {
         return NO;
     }
@@ -81,6 +81,16 @@
     }
       
     return iAge;
+}
+
+/**从fromDate到toDate的天数*/
++ (NSInteger)lf_daysFrom:(NSDate *)fromDate to:(NSDate *)toDate {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+         NSDateComponents *comp = [calendar components:NSCalendarUnitDay
+                                                  fromDate:fromDate
+                                                    toDate:toDate
+                                                   options:NSCalendarWrapComponents];
+         return comp.day;
 }
 
 @end
