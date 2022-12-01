@@ -151,10 +151,10 @@
                 
             }
             if (weakSelf.absoluteSegmentView) {
-                [self.absoluteSegmentView adjustLinePosition:offsetX containerWidth:weakSelf.frame.size.width];
+                [weakSelf.absoluteSegmentView adjustLinePosition:offsetX containerWidth:weakSelf.frame.size.width];
             }
-            if (self.pageControllerDidScrollBlock) {
-                self.pageControllerDidScrollBlock(pageOffset);
+            if (weakSelf.pageControllerDidScrollBlock) {
+                weakSelf.pageControllerDidScrollBlock(pageOffset);
             }
         };
         [self setupPageCtrl:self.pageCtrl];

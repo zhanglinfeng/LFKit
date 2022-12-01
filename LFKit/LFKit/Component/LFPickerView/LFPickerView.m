@@ -71,7 +71,10 @@
     
     if (_format) {//日期picker
         self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height - 40)];
-        self.datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        if (@available(iOS 13.4, *)) {
+            self.datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
+        
         [self.datePicker addTarget:self action:@selector(datePickerDateChange:) forControlEvents:UIControlEventValueChanged];
         self.datePicker.backgroundColor =[UIColor whiteColor];
         [self addSubview:self.datePicker];
@@ -79,8 +82,6 @@
         self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height - 40)];
         self.pickerView.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.pickerView];
-        NSLog(@"self.frame.size.height = %f",self.frame.size.height);
-        NSLog(@"self.pickerHeight = %f",self.pickerHeight);
     }
 }
 
