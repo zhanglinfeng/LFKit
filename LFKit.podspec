@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   # s.prefix_header_file = "xxx/xxx-prefix.pch"
   s.ios.deployment_target = '8.0'
-
+  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
   s.subspec 'Category' do |ss|
   # ss.dependency 'CocoaLumberjack/Default'
   # ss.source_files         = 'LFKit/LFKit/Category/*'
