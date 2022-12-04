@@ -9,6 +9,7 @@
 #import <LFKit/LFPhotoBrowser.h>
 #import "LFPicCollectionCell.h"
 #import <LFKit/UIViewController+LF.h>
+#import <objc/message.h>
 
 @interface LFPicturesCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -35,15 +36,10 @@
         SEL sel = NSSelectorFromString(@"_setRowAlignmentsOptions:");
         if ([self.collectionViewLayout respondsToSelector:sel]) {
             
-            void (*action)(id, SEL, NSDictionary*) = (void (*)(id, SEL, NSDictionary*)) objc_msgSend;
-            action(self.collectionViewLayout, sel, @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),
-                                                     @"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),
-                                                     @"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
-            
-//            ((void(*)(id,SEL,NSDictionary*))objc_msgSend)(self.collectionViewLayout,sel,
-//                                                          @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),
-//                                                            @"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),
-//                                                            @"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
+            ((void(*)(id,SEL,NSDictionary*))objc_msgSend)(self.collectionViewLayout,sel,
+                                                          @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),
+                                                            @"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),
+                                                            @"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
         }
 
     
