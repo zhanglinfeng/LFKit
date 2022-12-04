@@ -9,6 +9,7 @@
 #import <LFKit/LFPhotoBrowser.h>
 #import "LFPicCollectionCell.h"
 #import "UIViewController+LF.h"
+#import <objc/message.h>
 
 @interface LFEditPicsCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
