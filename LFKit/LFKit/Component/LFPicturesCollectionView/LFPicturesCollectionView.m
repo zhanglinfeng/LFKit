@@ -34,10 +34,16 @@
     //设置cell对齐方式
         SEL sel = NSSelectorFromString(@"_setRowAlignmentsOptions:");
         if ([self.collectionViewLayout respondsToSelector:sel]) {
-            ((void(*)(id,SEL,NSDictionary*))objc_msgSend)(self.collectionViewLayout,sel,
-                                                          @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),
-                                                            @"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),
-                                                            @"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
+            
+            void (*action)(id, SEL, NSDictionary*) = (void (*)(id, SEL, NSDictionary*)) objc_msgSend;
+            action(self.collectionViewLayout, sel, @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),
+                                                     @"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),
+                                                     @"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
+            
+//            ((void(*)(id,SEL,NSDictionary*))objc_msgSend)(self.collectionViewLayout,sel,
+//                                                          @{@"UIFlowLayoutCommonRowHorizontalAlignmentKey":@(NSTextAlignmentLeft),
+//                                                            @"UIFlowLayoutLastRowHorizontalAlignmentKey" : @(NSTextAlignmentLeft),
+//                                                            @"UIFlowLayoutRowVerticalAlignmentKey" : @(NSTextAlignmentCenter)});
         }
 
     
