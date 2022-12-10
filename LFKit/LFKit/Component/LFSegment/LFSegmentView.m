@@ -120,6 +120,7 @@
     NSInteger targetIndex = currentIndex;
     //偏移量
     CGFloat offset = offsetX - _selectedButton.tag * cWidth;
+    offset = offset * (self.frame.size.width / cWidth);
     if (offset >= 0) {
         targetIndex += 1;
         

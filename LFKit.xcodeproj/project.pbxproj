@@ -546,6 +546,10 @@
 				"${PODS_ROOT}/../LFKit/LFKit/Component/LFImagePicker/Images/Photo_video@3x.png",
 				"${PODS_ROOT}/../LFKit/LFKit/Component/LFImagePicker/Images/photo_video_play_normal@2x.png",
 				"${PODS_ROOT}/../LFKit/LFKit/Component/LFImagePicker/Images/photo_video_play_normal@3x.png",
+				"${PODS_ROOT}/../LFKit/LFKit/Component/LFPicturesCollectionView/lf_addPhoto@2x.png",
+				"${PODS_ROOT}/../LFKit/LFKit/Component/LFPicturesCollectionView/lf_addPhoto@3x.png",
+				"${PODS_ROOT}/../LFKit/LFKit/Component/LFPicturesCollectionView/lf_close@2x.png",
+				"${PODS_ROOT}/../LFKit/LFKit/Component/LFPicturesCollectionView/lf_close@3x.png",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -561,6 +565,10 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Photo_video@3x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/photo_video_play_normal@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/photo_video_play_normal@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lf_addPhoto@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lf_addPhoto@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lf_close@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lf_close@3x.png",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
