@@ -10,6 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol LFPicturesCollectionViewDelegate <NSObject>
+
+@optional
+
+// 可选外部实现。外部不实现就用内部的大图浏览
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 /**显示单图或多图的照片墙*/
 @interface LFPicturesCollectionView : UICollectionView
 
@@ -24,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat minHeight; // 最小高度
 @property (nonatomic, assign) CGFloat minWidth; // 最小宽度
 @property (nonatomic, assign) NSInteger maxCount; // 最大张数,默认9
+@property (nonatomic, assign) BOOL needSave; // 是否需要保存
+@property (nonatomic, weak) id<LFPicturesCollectionViewDelegate> picDelegate;
 
 /**获取图片大小*/
 - (CGSize)getPicSize;

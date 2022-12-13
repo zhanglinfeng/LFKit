@@ -125,16 +125,22 @@
     return cell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    LFPhotoBrowser *browser= [[LFPhotoBrowser alloc] init];
-    browser.ctr = [UIViewController lf_currentViewController];
-    browser.arrayData = self.dataArray ;
-    browser.currentIndex = indexPath.item;
-    LFPicCollectionCell *cell = (LFPicCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    CGRect rect = [self convertRect:cell.frame toView:[UIApplication sharedApplication].keyWindow];
-    browser.beginRect = rect;
-    browser.beginImage = cell.imageView.image;
-    [browser show];
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.picDelegate) {
+        [self.picDelegate collectionView:collectionView didSelectItemAtIndexPath:indexPath];
+    } else {
+        LFPhotoBrowser *browser= [[LFPhotoBrowser alloc] init];
+        browser.ctr = [UIViewController lf_currentViewController];
+        browser.arrayData = self.dataArray ;
+        browser.currentIndex = indexPath.item;
+        browser.btSave.hidden = !self.needSave;
+        LFPicCollectionCell *cell = (LFPicCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        CGRect rect = [self convertRect:cell.frame toView:[UIApplication sharedApplication].keyWindow];
+        browser.beginRect = rect;
+        browser.beginImage = cell.imageView.image;
+        [browser show];
+    }
+    
 }
 
 //设置每个UICollectionViewCell的大小
